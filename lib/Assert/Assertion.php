@@ -19,10 +19,19 @@ namespace Assert;
 class Assertion
 {
     const INVALID_INTEGER = 10;
+    const INVALID_DOUBLE  = 11;
 
+    /**
+     * Assert that value is a php integer'ish.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\InvalidArgumentException
+     */
     static public function integer($value, $message = null)
     {
-        if (!is_int($value)) {
+        if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
             throw new InvalidArgumentException($message, self::INVALID_INTEGER);
         }
     }
