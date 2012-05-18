@@ -1,0 +1,32 @@
+# Assert
+
+A simple php library which contains assertions and guard methods.
+There is usually lots of duplicate code necessary for this kind of code
+and php's assert() method is not desired here, because its clumsy to
+work with inline. This library is similar to the assert functionality of PHPUnit.
+
+Idea is to reduce the 
+
+Rule of engagement:
+
+If any of the assertions fails a subclass of `InvalidArgumentException` is thrown.
+You can pass next argument to control the message, the message code is encoded in the
+assertion itself.
+
+    <?php
+    Assert\Assert::true($value);
+    Assert\Assert::false($value);
+    Assert\Assert::integer($value);
+    Assert\Assert::double($value);
+    Assert\Assert::boolean($value);
+    Assert\Assert::scalar($value);
+    Assert\Assert::instanceOf($value, $className);
+    Assert\Assert::subclassOf($value, $className);
+    Assert\Assert::notEmpty($value);
+    Assert\Assert::notNull($value);
+    Assert\Assert::regexp($value);
+    Assert\Assert::numeric($value);
+    Assert\Assert::keyIsset($array, $key);
+    Assert\Assert::keyExists($array, $key);
+    Assert\Assert::arrayx($array);
+
