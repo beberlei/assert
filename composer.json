@@ -1,0 +1,9 @@
+{
+    "name": "beberlei/assert",
+    "description": "Assertion library",
+    "autoload": {
+        "psr-0": {
+            "Assert": "lib/"
+        }
+    }
+}
