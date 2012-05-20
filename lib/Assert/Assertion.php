@@ -174,11 +174,11 @@ class Assertion
      * @return void
      * @throws Assert\InvalidArgumentException
      */
-    static public function maxLength($value, $minLength, $message = null)
+    static public function maxLength($value, $maxLength, $message = null)
     {
         self::string($value, $message);
 
-        if (strlen($value) > $minLength) {
+        if (strlen($value) > $maxLength) {
             throw new InvalidArgumentException($message, self::INVALID_MAX_LENGTH);
         }
     }

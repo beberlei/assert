@@ -150,10 +150,22 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::betweenLength("foo", 0, 2);
     }
 
+    public function testValidBetweenLength()
+    {
+        Assertion::betweenLength("foo", 0, 3);
+    }
+
     public function testInvalidStartsWith()
     {
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING_START);
         Assertion::startsWith("foo", "bar");
+    }
+
+    public function testValidStartsWith()
+    {
+        Assertion::startsWith("foo", "foo");
+        Assertion::startsWith("foo", "fo");
+        Assertion::startsWith("foo", "f");
     }
 
     public function testInvalidContains()
@@ -162,10 +174,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::contains("foo", "bar");
     }
 
+    public function testValidContains()
+    {
+        Assertion::contains("foo", "foo");
+        Assertion::contains("foo", "oo");
+    }
+
     public function testInvalidChoice()
     {
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_CHOICE);
         Assertion::choice("foo", array("bar", "baz"));
+    }
+
+    public function testValidChoice()
+    {
+        Assertion::choice("foo", array("foo"));
     }
 
     public function testInvalidNumeric()
@@ -174,10 +197,22 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric("foo");
     }
 
+    public function testValidNumeric()
+    {
+        Assertion::numeric("1");
+        Assertion::numeric(1);
+        Assertion::numeric(1.23);
+    }
+
     public function testInvalidKeyExists()
     {
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_KEY_EXISTS);
         Assertion::keyExists(array("foo" => "bar"), "baz");
+    }
+
+    public function testValidKeyExists()
+    {
+        Assertion::keyExists(array("foo" => "bar"), "foo");
     }
 
     public function testInvalidnotBlank()
@@ -186,10 +221,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notBlank("");
     }
 
+    public function testValidNotBlank()
+    {
+        Assertion::notBlank("foo");
+    }
+
     public function testInvalidInstanceOf()
     {
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_INSTANCE_OF);
         Assertion::isInstanceOf(new \stdClass, 'PDO');
+    }
+
+    public function testValidInstanceOf()
+    {
+        Assertion::isInstanceOf(new \stdClass, 'stdClass');
     }
 
     public function testInvalidSubclassOf()
@@ -197,5 +242,15 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_SUBCLASS_OF);
         Assertion::subclassOf(new \stdClass, 'PDO');
     }
+
+    public function testValidSubclassOf()
+    {
+        Assertion::subclassOf(new ChildStdClass, 'stdClass');
+    }
+}
+
+class ChildStdClass extends \stdClass
+{
+
 }
 
