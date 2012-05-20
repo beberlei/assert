@@ -2,7 +2,7 @@
 
 Travis Status: [![Build Status](https://secure.travis-ci.org/beberlei/assert.png?branch=master)](http://travis-ci.org/beberlei/assert)
 
-A simple php library which contains assertions and guard methods for input validation (not filtering!) in business-model, libraries and application low-level code.
+A simple php library which contains assertions and guard methods for input validation (not filtering!) in business-model, libraries, pre/post conditions and application low-level code.
 
 Idea is to reduce the amount of code for implementing assertions in your model and also simplify the code paths to implement assertions. When assertions fail, an exception is thrown, removing the necessity for if-clauses in your code.
 
