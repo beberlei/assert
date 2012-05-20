@@ -98,5 +98,62 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notEmpty(true);
         Assertion::notEmpty( array("foo") );
     }
+
+    public function testNotNull()
+    {
+        Assertion::notNull("1");
+        Assertion::notNull(1);
+        Assertion::notNull(0);
+        Assertion::notNull(array());
+        Assertion::notNull(false);
+    }
+
+    public function testInvalidNotNull()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::VALUE_NULL);
+        Assertion::notNull(null);
+    }
+
+    public function testInvalidRegex()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_REGEX);
+        Assertion::regex("foo", "(bar)");
+    }
+
+    public function testInvalidRegexValueNotString()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING);
+        Assertion::regex(array("foo"), "(bar)");
+    }
+
+    public function testInvalidMinLength()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MIN_LENGTH);
+        Assertion::minLength("foo", 4);
+    }
+
+    public function testInvalidMaxLength()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MAX_LENGTH);
+        Assertion::maxLength("foo", 2);
+    }
+
+    public function testInvalidBetweenLengthMin()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MIN_LENGTH);
+        Assertion::betweenLength("foo", 4, 100);
+    }
+
+    public function testInvalidBetweenLengthMax()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MAX_LENGTH);
+        Assertion::betweenLength("foo", 0, 2);
+    }
+
+    public function testInvalidStartsWith()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING_START);
+        Assertion::startsWith("foo", "bar");
+    }
 }
 
