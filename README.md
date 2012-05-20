@@ -1,17 +1,10 @@
 # Assert
 
-A simple php library which contains assertions and guard methods for input validation (not filtering!)
-in business-model, libraries and application low-level code.
+A simple php library which contains assertions and guard methods for input validation (not filtering!) in business-model, libraries and application low-level code.
 
-Idea is to reduce the amount of code for implementing assertions
-in your model and also simplify the code paths to implement assertions.
-When assertions fail, an exception is thrown, removing the necessity for if-clauses
-in your code.
+Idea is to reduce the amount of code for implementing assertions in your model and also simplify the code paths to implement assertions. When assertions fail, an exception is thrown, removing the necessity for if-clauses in your code.
 
-The library is not using Symfony or Zend Validators for a reason: The checks
-have to be low-level, fast, non-object-oriented code to be used everywhere necessary. Using
-any of the two libraries requires instantiation of several objects, using a locale component,
-translations, you name it. Its too much bloat.
+The library is not using Symfony or Zend Validators for a reason: The checks have to be low-level, fast, non-object-oriented code to be used everywhere necessary. Using any of the two libraries requires instantiation of several objects, using a locale component, translations, you name it. Its too much bloat.
 
 ## Example usages
 
@@ -45,14 +38,11 @@ translations, you name it. Its too much bloat.
     Assertion::email($value);
     Assertion::alnum($value);
 
-Remember: When a configuration parameter is necessary, it is always passed AFTER
-the value. The value is always the first parameter.
+Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.
 
 ## Exception & Error Handling
 
-If any of the assertions fails a subclass of `InvalidArgumentException` is thrown.
-You can pass a last argument to any assertion to
-control the message. Every exception contains a message code by default.
+If any of the assertions fails a subclass of `InvalidArgumentException` is thrown. You can pass a last argument to any assertion to control the message. Every exception contains a message code by default.
 
     <?php
     use Assert\Assertion;
@@ -73,3 +63,4 @@ Using Composer:
             "beberlei/assert": "*"
         }
     }
+
