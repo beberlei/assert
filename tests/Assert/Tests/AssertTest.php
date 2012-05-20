@@ -260,6 +260,30 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::range(2, 1, 2);
         Assertion::range(2, 0, 100);
     }
+
+    public function testInvalidEmail()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_EMAIL);
+        Assertion::email("foo");
+    }
+
+    public function testValidEmail()
+    {
+        Assertion::email("123hello+world@email.provider.com");
+    }
+
+    public function testInvalidDigit()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_DIGIT);
+        Assertion::digit(-1);
+    }
+
+    public function testValidDigit()
+    {
+        Assertion::digit(1);
+        Assertion::digit(0);
+        Assertion::digit("0");
+    }
 }
 
 class ChildStdClass extends \stdClass

@@ -21,6 +21,7 @@ namespace Assert;
 class Assertion
 {
     const INVALID_INTEGER         = 10;
+    const INVALID_DIGIT           = 11;
     const INVALID_INTEGERISH      = 12;
     const INVALID_BOOLEAN         = 13;
     const VALUE_EMPTY             = 14;
@@ -39,6 +40,11 @@ class Assertion
     const INVALID_INSTANCE_OF     = 28;
     const INVALID_SUBCLASS_OF     = 29;
     const INVALID_RANGE           = 30;
+    const INVALID_DIRECTORY       = 101;
+    const INVALID_FILE            = 102;
+    const INVALID_READABLE        = 103;
+    const INVALID_WRITEABLE       = 104;
+    const INVALID_EMAIL           = 201;
 
     /**
      * Assert that value is a php integer.
@@ -52,6 +58,21 @@ class Assertion
     {
         if ( ! is_int($value)) {
             throw new InvalidArgumentException($message, self::INVALID_INTEGER);
+        }
+    }
+
+    /**
+     * Validates if an integer or integerish is a digit.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\InvalidArgumentException
+     */
+    static public function digit($value, $message = null)
+    {
+        if ( ! ctype_digit((string)$value)) {
+            throw new InvalidArgumentException($message, self::INVALID_DIGIT);
         }
     }
 
@@ -369,6 +390,67 @@ class Assertion
 
         if ($value < $minValue || $value > $maxValue) {
             throw new InvalidArgumentException($message, self::INVALID_RANGE);
+        }
+    }
+
+    static public function file($value, $message = null)
+    {
+        self::string($value, $message);
+
+        if ( ! is_file($value)) {
+            throw new InvalidArgumentException($message, self::INVALID_FILE);
+        }
+    }
+
+    static public function directory($value, $message = null)
+    {
+        self::string($value, $message);
+
+        if ( ! is_dir($value)) {
+            throw new InvalidArgumentException($message, self::INVALID_DIRECTORY);
+        }
+    }
+
+    static public function readable($value, $message = null)
+    {
+        self::string($value, $message);
+
+        if ( ! is_readable($value)) {
+            throw new InvalidArgumentException($message, self::INVALID_READABLE);
+        }
+    }
+
+    static public function writeable($value, $message = null)
+    {
+        self::string($value, $message);
+
+        if ( ! is_writeable($value)) {
+            throw new InvalidArgumentException($message, self::INVALID_WRITEABLE);
+        }
+    }
+
+    /**
+     * Assert that value is an email adress (using
+     * input_filter/FILTER_VALIDATE_EMAIL).
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\InvalidArgumentException
+     */
+    static public function email($value, $message = null)
+    {
+        self::string($value, $message);
+
+        if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException($message, self::INVALID_EMAIL);
+        } else {
+            $host = substr($value, strpos($value, '@') + 1);
+
+            if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
+                // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
+                throw new InvalidArgumentException($message, self::INVALID_EMAIL);
+            }
         }
     }
 }
