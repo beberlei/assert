@@ -24,6 +24,21 @@ Using Composer:
     <?php
     use Assert\Assertion;
 
+    function duplicateFile($file, $times)
+    {
+        Assertion::file($file);
+        Assertion::digit($times);
+
+        for ($i = 0; $i < $times; $i++) {
+            copy($file, $file . $i);
+        }
+    }
+
+## List of assertions
+
+    <?php
+    use Assert\Assertion;
+
     Assertion::integer($value);
     Assertion::digit($value);
     Assertion::integerish($value);
