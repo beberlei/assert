@@ -13,7 +13,7 @@
 
 namespace Assert;
 
-class InvalidArgumentException extends \InvalidArgumentException
+class AssertionFailedException extends \InvalidArgumentException
 {
 }
 

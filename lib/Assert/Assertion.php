@@ -53,12 +53,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function integer($value, $message = null)
     {
         if ( ! is_int($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_INTEGER);
+            throw new AssertionFailedException($message, self::INVALID_INTEGER);
         }
     }
 
@@ -68,12 +68,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function digit($value, $message = null)
     {
         if ( ! ctype_digit((string)$value)) {
-            throw new InvalidArgumentException($message, self::INVALID_DIGIT);
+            throw new AssertionFailedException($message, self::INVALID_DIGIT);
         }
     }
 
@@ -83,12 +83,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function integerish($value, $message = null)
     {
         if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_INTEGERISH);
+            throw new AssertionFailedException($message, self::INVALID_INTEGERISH);
         }
     }
 
@@ -98,12 +98,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function boolean($value, $message = null)
     {
         if ( ! is_bool($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_BOOLEAN);
+            throw new AssertionFailedException($message, self::INVALID_BOOLEAN);
         }
     }
 
@@ -113,12 +113,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function notEmpty($value, $message = null)
     {
         if (empty($value)) {
-            throw new InvalidArgumentException($message, self::VALUE_EMPTY);
+            throw new AssertionFailedException($message, self::VALUE_EMPTY);
         }
     }
 
@@ -128,12 +128,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function notNull($value, $message = null)
     {
         if ($value === null) {
-            throw new InvalidArgumentException($message, self::VALUE_NULL);
+            throw new AssertionFailedException($message, self::VALUE_NULL);
         }
     }
 
@@ -143,12 +143,12 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function string($value, $message = null)
     {
         if ( ! is_string($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_STRING);
+            throw new AssertionFailedException($message, self::INVALID_STRING);
         }
     }
 
@@ -159,14 +159,14 @@ class Assertion
      * @param string $regex
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function regex($value, $regex, $message = null)
     {
         self::string($value, $message);
 
         if ( ! preg_match($regex, $value)) {
-            throw new InvalidArgumentException($message, self::INVALID_REGEX );
+            throw new AssertionFailedException($message, self::INVALID_REGEX );
         }
     }
 
@@ -177,14 +177,14 @@ class Assertion
      * @param string $minLength
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function minLength($value, $minLength, $message = null)
     {
         self::string($value, $message);
 
         if (strlen($value) < $minLength) {
-            throw new InvalidArgumentException($message, self::INVALID_MIN_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH);
         }
     }
 
@@ -195,14 +195,14 @@ class Assertion
      * @param integer $minLength
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function maxLength($value, $maxLength, $message = null)
     {
         self::string($value, $message);
 
         if (strlen($value) > $maxLength) {
-            throw new InvalidArgumentException($message, self::INVALID_MAX_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MAX_LENGTH);
         }
     }
 
@@ -214,18 +214,18 @@ class Assertion
      * @param integer $maxLength
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function betweenLength($value, $minLength, $maxLength, $message = null)
     {
         self::string($value, $message);
 
         if (strlen($value) < $minLength) {
-            throw new InvalidArgumentException($message, self::INVALID_MIN_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH);
         }
 
         if (strlen($value) > $maxLength) {
-            throw new InvalidArgumentException($message, self::INVALID_MAX_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MAX_LENGTH);
         }
     }
 
@@ -236,14 +236,14 @@ class Assertion
      * @param string $needle
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function startsWith($string, $needle, $message = null)
     {
         self::string($string);
 
         if (strpos($string, $needle) !== 0) {
-            throw new InvalidArgumentException($message, self::INVALID_STRING_START);
+            throw new AssertionFailedException($message, self::INVALID_STRING_START);
         }
     }
 
@@ -254,14 +254,14 @@ class Assertion
      * @param string $needle
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function contains($string, $needle, $message = null)
     {
         self::string($string);
 
         if (strpos($string, $needle) === false) {
-            throw new InvalidArgumentException($message, self::INVALID_STRING_CONTAINS);
+            throw new AssertionFailedException($message, self::INVALID_STRING_CONTAINS);
         }
     }
 
@@ -272,12 +272,12 @@ class Assertion
      * @param array $choices
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function choice($value, array $choices, $message = null)
     {
         if ( ! in_array($value, $choices, true)) {
-            throw new InvalidArgumentException($message, self::INVALID_CHOICE);
+            throw new AssertionFailedException($message, self::INVALID_CHOICE);
         }
     }
 
@@ -287,12 +287,12 @@ class Assertion
      * @param mixed $value
      * @param string $message;
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function numeric($value, $message = null)
     {
         if ( ! is_numeric($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_NUMERIC);
+            throw new AssertionFailedException($message, self::INVALID_NUMERIC);
         }
     }
 
@@ -302,12 +302,12 @@ class Assertion
      * @param mixed $value
      * @param string $message;
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function isArray($value, $message = null)
     {
         if ( ! is_array($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_ARRAY);
+            throw new AssertionFailedException($message, self::INVALID_ARRAY);
         }
     }
 
@@ -318,14 +318,14 @@ class Assertion
      * @param string|integer $key
      * @param string $message;
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function keyExists($value, $key, $message = null)
     {
         self::isArray($value);
 
         if ( ! array_key_exists($key, $value)) {
-            throw new InvalidArgumentException($message, self::INVALID_KEY_EXISTS);
+            throw new AssertionFailedException($message, self::INVALID_KEY_EXISTS);
         }
     }
 
@@ -335,12 +335,12 @@ class Assertion
      * @param mixed $value
      * @param string $message;
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function notBlank($value, $message = null)
     {
         if (false === $value || (empty($value) && '0' != $value)) {
-            throw new InvalidArgumentException($message, self::INVALID_NOT_BLANK);
+            throw new AssertionFailedException($message, self::INVALID_NOT_BLANK);
         }
     }
 
@@ -351,12 +351,12 @@ class Assertion
      * @param string $className
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function isInstanceOf($value, $className, $message = null)
     {
         if ( ! ($value instanceof $className)) {
-            throw new InvalidArgumentException($message, self::INVALID_INSTANCE_OF);
+            throw new AssertionFailedException($message, self::INVALID_INSTANCE_OF);
         }
     }
 
@@ -367,12 +367,12 @@ class Assertion
      * @param string $className
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function subclassOf($value, $className, $message = null)
     {
         if ( ! is_subclass_of($value, $className)) {
-            throw new InvalidArgumentException($message, self::INVALID_SUBCLASS_OF);
+            throw new AssertionFailedException($message, self::INVALID_SUBCLASS_OF);
         }
     }
 
@@ -383,14 +383,14 @@ class Assertion
      * @param integer $minValue
      * @param integer $maxValue
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function range($value, $minValue, $maxValue, $message = null)
     {
         self::integer($value);
 
         if ($value < $minValue || $value > $maxValue) {
-            throw new InvalidArgumentException($message, self::INVALID_RANGE);
+            throw new AssertionFailedException($message, self::INVALID_RANGE);
         }
     }
 
@@ -399,7 +399,7 @@ class Assertion
         self::string($value, $message);
 
         if ( ! is_file($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_FILE);
+            throw new AssertionFailedException($message, self::INVALID_FILE);
         }
     }
 
@@ -408,7 +408,7 @@ class Assertion
         self::string($value, $message);
 
         if ( ! is_dir($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_DIRECTORY);
+            throw new AssertionFailedException($message, self::INVALID_DIRECTORY);
         }
     }
 
@@ -417,7 +417,7 @@ class Assertion
         self::string($value, $message);
 
         if ( ! is_readable($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_READABLE);
+            throw new AssertionFailedException($message, self::INVALID_READABLE);
         }
     }
 
@@ -426,7 +426,7 @@ class Assertion
         self::string($value, $message);
 
         if ( ! is_writeable($value)) {
-            throw new InvalidArgumentException($message, self::INVALID_WRITEABLE);
+            throw new AssertionFailedException($message, self::INVALID_WRITEABLE);
         }
     }
 
@@ -437,20 +437,20 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function email($value, $message = null)
     {
         self::string($value, $message);
 
         if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException($message, self::INVALID_EMAIL);
+            throw new AssertionFailedException($message, self::INVALID_EMAIL);
         } else {
             $host = substr($value, strpos($value, '@') + 1);
 
             if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
                 // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
-                throw new InvalidArgumentException($message, self::INVALID_EMAIL);
+                throw new AssertionFailedException($message, self::INVALID_EMAIL);
             }
         }
     }
@@ -461,7 +461,7 @@ class Assertion
      * @param mixed $value
      * @param string $message
      * @return void
-     * @throws Assert\InvalidArgumentException
+     * @throws Assert\AssertionFailedException
      */
     static public function alnum($value, $message = null)
     {

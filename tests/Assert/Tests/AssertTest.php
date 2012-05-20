@@ -22,7 +22,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidInteger($nonInteger)
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_INTEGER);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTEGER);
         Assertion::integer($nonInteger);
     }
 
@@ -55,7 +55,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidIntegerish($nonInteger)
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_INTEGERISH);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTEGERISH);
         Assertion::integerish($nonInteger);
     }
 
@@ -67,7 +67,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidBoolean()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_BOOLEAN);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BOOLEAN);
         Assertion::boolean(1);
     }
 
@@ -87,7 +87,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidNotEmpty($value)
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::VALUE_EMPTY);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_EMPTY);
         Assertion::notEmpty($value);
     }
 
@@ -110,43 +110,43 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidNotNull()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::VALUE_NULL);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NULL);
         Assertion::notNull(null);
     }
 
     public function testInvalidRegex()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_REGEX);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_REGEX);
         Assertion::regex("foo", "(bar)");
     }
 
     public function testInvalidRegexValueNotString()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
         Assertion::regex(array("foo"), "(bar)");
     }
 
     public function testInvalidMinLength()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MIN_LENGTH);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN_LENGTH);
         Assertion::minLength("foo", 4);
     }
 
     public function testInvalidMaxLength()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MAX_LENGTH);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_LENGTH);
         Assertion::maxLength("foo", 2);
     }
 
     public function testInvalidBetweenLengthMin()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MIN_LENGTH);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN_LENGTH);
         Assertion::betweenLength("foo", 4, 100);
     }
 
     public function testInvalidBetweenLengthMax()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_MAX_LENGTH);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_LENGTH);
         Assertion::betweenLength("foo", 0, 2);
     }
 
@@ -157,7 +157,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidStartsWith()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING_START);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_START);
         Assertion::startsWith("foo", "bar");
     }
 
@@ -170,7 +170,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidContains()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING_CONTAINS);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_CONTAINS);
         Assertion::contains("foo", "bar");
     }
 
@@ -182,7 +182,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidChoice()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_CHOICE);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);
         Assertion::choice("foo", array("bar", "baz"));
     }
 
@@ -193,7 +193,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidNumeric()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_NUMERIC);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NUMERIC);
         Assertion::numeric("foo");
     }
 
@@ -206,7 +206,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidKeyExists()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_KEY_EXISTS);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_KEY_EXISTS);
         Assertion::keyExists(array("foo" => "bar"), "baz");
     }
 
@@ -217,7 +217,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidnotBlank()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_NOT_BLANK);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_BLANK);
         Assertion::notBlank("");
     }
 
@@ -228,7 +228,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidInstanceOf()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_INSTANCE_OF);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INSTANCE_OF);
         Assertion::isInstanceOf(new \stdClass, 'PDO');
     }
 
@@ -239,7 +239,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidSubclassOf()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_SUBCLASS_OF);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SUBCLASS_OF);
         Assertion::subclassOf(new \stdClass, 'PDO');
     }
 
@@ -250,7 +250,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidRange()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_RANGE);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_RANGE);
         Assertion::range(1, 2, 3);
     }
 
@@ -263,7 +263,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidEmail()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_EMAIL);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EMAIL);
         Assertion::email("foo");
     }
 
@@ -274,7 +274,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidDigit()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_DIGIT);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DIGIT);
         Assertion::digit(-1);
     }
 
