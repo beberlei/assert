@@ -8,6 +8,16 @@ Idea is to reduce the amount of code for implementing assertions in your model a
 
 The library is not using Symfony or Zend Validators for a reason: The checks have to be low-level, fast, non-object-oriented code to be used everywhere necessary. Using any of the two libraries requires instantiation of several objects, using a locale component, translations, you name it. Its too much bloat.
 
+## Installation
+
+Using Composer:
+
+    {
+        "require": {
+            "beberlei/assert": "*"
+        }
+    }
+
 ## Example usages
 
     <?php
@@ -54,15 +64,5 @@ If any of the assertions fails a subclass of `InvalidArgumentException` is throw
         Assertion::integer($value, "The pressure of gas is measured in integers.");
     } catch(InvalidArgumentException $e) {
         // error handling
-    }
-
-## Installation
-
-Using Composer:
-
-    {
-        "require": {
-            "beberlei/assert": "*"
-        }
     }
 
