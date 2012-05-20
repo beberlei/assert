@@ -43,6 +43,7 @@ translations, you name it. Its too much bloat.
     Assertion::readable($value);
     Assertion::writeable($value);
     Assertion::email($value);
+    Assertion::alnum($value);
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER
 the value. The value is always the first parameter.

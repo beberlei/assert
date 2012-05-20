@@ -284,6 +284,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::digit(0);
         Assertion::digit("0");
     }
+
+    public function testValidAlnum()
+    {
+        Assertion::alnum("a");
+        Assertion::alnum("a1");
+    }
 }
 
 class ChildStdClass extends \stdClass

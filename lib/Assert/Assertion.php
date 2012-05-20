@@ -40,6 +40,7 @@ class Assertion
     const INVALID_INSTANCE_OF     = 28;
     const INVALID_SUBCLASS_OF     = 29;
     const INVALID_RANGE           = 30;
+    const INVALID_ALNUM           = 31;
     const INVALID_DIRECTORY       = 101;
     const INVALID_FILE            = 102;
     const INVALID_READABLE        = 103;
@@ -452,6 +453,19 @@ class Assertion
                 throw new InvalidArgumentException($message, self::INVALID_EMAIL);
             }
         }
+    }
+
+    /**
+     * Assert that value is alphanumeric.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\InvalidArgumentException
+     */
+    static public function alnum($value, $message = null)
+    {
+        self::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]?)$)', $message);
     }
 }
 
