@@ -247,6 +247,19 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::subclassOf(new ChildStdClass, 'stdClass');
     }
+
+    public function testInvalidRange()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_RANGE);
+        Assertion::range(1, 2, 3);
+    }
+
+    public function testValidRange()
+    {
+        Assertion::range(1, 1, 2);
+        Assertion::range(2, 1, 2);
+        Assertion::range(2, 0, 100);
+    }
 }
 
 class ChildStdClass extends \stdClass

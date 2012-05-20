@@ -23,6 +23,7 @@ translations, you name it. Its too much bloat.
 
     Assertion::integer($value);
     Assertion::integerish($value);
+    Assertion::range($value, $minValue, $maxValue);
     Assertion::boolean($value);
     Assertion::notEmpty($value);
     Assertion::notNull($value);

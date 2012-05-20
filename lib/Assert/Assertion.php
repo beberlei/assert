@@ -38,6 +38,7 @@ class Assertion
     const INVALID_NOT_BLANK       = 27;
     const INVALID_INSTANCE_OF     = 28;
     const INVALID_SUBCLASS_OF     = 29;
+    const INVALID_RANGE           = 30;
 
     /**
      * Assert that value is a php integer.
@@ -350,6 +351,24 @@ class Assertion
     {
         if ( ! is_subclass_of($value, $className)) {
             throw new InvalidArgumentException($message, self::INVALID_SUBCLASS_OF);
+        }
+    }
+
+    /**
+     * Assert that value is in range of integers.
+     *
+     * @param mixed $value
+     * @param integer $minValue
+     * @param integer $maxValue
+     * @return void
+     * @throws Assert\InvalidArgumentException
+     */
+    static public function range($value, $minValue, $maxValue, $message = null)
+    {
+        self::integer($value);
+
+        if ($value < $minValue || $value > $maxValue) {
+            throw new InvalidArgumentException($message, self::INVALID_RANGE);
         }
     }
 }
