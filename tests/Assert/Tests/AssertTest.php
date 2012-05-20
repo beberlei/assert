@@ -155,5 +155,47 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING_START);
         Assertion::startsWith("foo", "bar");
     }
+
+    public function testInvalidContains()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_STRING_CONTAINS);
+        Assertion::contains("foo", "bar");
+    }
+
+    public function testInvalidChoice()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_CHOICE);
+        Assertion::choice("foo", array("bar", "baz"));
+    }
+
+    public function testInvalidNumeric()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_NUMERIC);
+        Assertion::numeric("foo");
+    }
+
+    public function testInvalidKeyExists()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_KEY_EXISTS);
+        Assertion::keyExists(array("foo" => "bar"), "baz");
+    }
+
+    public function testInvalidnotBlank()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_NOT_BLANK);
+        Assertion::notBlank("");
+    }
+
+    public function testInvalidInstanceOf()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_INSTANCE_OF);
+        Assertion::isInstanceOf(new \stdClass, 'PDO');
+    }
+
+    public function testInvalidSubclassOf()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_SUBCLASS_OF);
+        Assertion::subclassOf(new \stdClass, 'PDO');
+    }
 }
 

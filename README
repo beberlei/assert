@@ -17,8 +17,8 @@ any of the two libraries requires instantiation of several objects, using a loca
 translations, you name it. Its too much bloat.
 
 If any of the assertions fails a subclass of `InvalidArgumentException` is thrown.
-You can pass next argument to control the message, the message code is encoded in the
-assertion itself.
+You can pass a last argument to any assertion to
+control the message. Every exception contains a message code by default.
 
 Example usages:
 
@@ -38,10 +38,9 @@ Example usages:
     Assertion::contains($value, $needle);
     Assertion::choice($value, $choices);
     Assertion::numeric($value);
-    Assertion::keyIsset($value, $key);
     Assertion::keyExists($value, $key);
     Assertion::notBlank($value);
-    Assertion::instanceOf($value, $className);
+    Assertion::isInstanceOf($value, $className);
     Assertion::subclassOf($value, $className);
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER
