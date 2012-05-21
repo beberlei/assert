@@ -41,10 +41,12 @@ class Assertion
     const INVALID_SUBCLASS_OF     = 29;
     const INVALID_RANGE           = 30;
     const INVALID_ALNUM           = 31;
+    const INVALID_TRUE            = 32;
     const INVALID_DIRECTORY       = 101;
     const INVALID_FILE            = 102;
     const INVALID_READABLE        = 103;
     const INVALID_WRITEABLE       = 104;
+    const INVALID_CLASS           = 105;
     const INVALID_EMAIL           = 201;
 
     /**
@@ -466,6 +468,36 @@ class Assertion
     static public function alnum($value, $message = null)
     {
         self::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]?)$)', $message);
+    }
+
+    /**
+     * Assert that the value is boolean True.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\AssertionFailedException
+     */
+    static public function true($value, $message = null)
+    {
+        if ($value !== true) {
+            throw new AssertionFailedException($message);
+        }
+    }
+
+    /**
+     * Assert that the class exists.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\AssertionFailedException
+     */
+    static public function classExists($value, $message = null)
+    {
+        if ( ! class_exists($value)) {
+            throw new AssertionFailedException($message, self::INVALID_CLASS);
+        }
     }
 }
 
