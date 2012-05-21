@@ -290,6 +290,28 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::alnum("a");
         Assertion::alnum("a1");
     }
+
+    public function testValidTrue()
+    {
+        Assertion::true(1 == 1);
+    }
+
+    public function testInvalidTrue()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_TRUE);
+        Assertion::true(false);
+    }
+
+    public function testInvalidClass()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CLASS);
+        Assertion::classExists("Foo");
+    }
+
+    public function testValidClass()
+    {
+        Assertion::classExists("\\Exception");
+    }
 }
 
 class ChildStdClass extends \stdClass
