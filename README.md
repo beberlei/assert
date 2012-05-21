@@ -78,6 +78,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::keyExists($value, $key);
     Assertion::notBlank($value);
     Assertion::isInstanceOf($value, $className);
+    Assertion::classExists($value);
     Assertion::subclassOf($value, $className);
     Assertion::directory($value);
     Assertion::file($value);
@@ -85,6 +86,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::writeable($value);
     Assertion::email($value);
     Assertion::alnum($value);
+    Assertion::true($value);
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.
 
