@@ -34,6 +34,26 @@ Using Composer:
         }
     }
 
+Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob-storage/blob/master/lib/Beberlei/AzureBlobStorage/BlobClient.php#L571):
+
+    public function putBlob($containerName = '', $blobName = '', $localFileName = '', $metadata = array(), $leaseId = null, $additionalHeaders = array())
+    {
+        Assertion::notEmpty($containerName, 'Container name is not specified');
+        self::assertValidContainerName($containerName);
+        Assertion::notEmpty($blobName, 'Blob name is not specified.');
+        Assertion::notEmpty($localFileName, 'Local file name is not specified.');
+        Assertion::file($localFileName, 'Local file name is not specified.');
+        self::assertValidRootContainerBlobName($containerName, $blobName);
+
+        // Check file size
+        if (filesize($localFileName) >= self::MAX_BLOB_SIZE) {
+            return $this->putLargeBlob($containerName, $blobName, $localFileName, $metadata, $leaseId, $additionalHeaders);
+        }
+
+        // Put the data to Windows Azure Storage
+        return $this->putBlobData($containerName, $blobName, file_get_contents($localFileName), $metadata, $leaseId, $additionalHeaders);
+    }
+
 ## List of assertions
 
     <?php
