@@ -481,7 +481,7 @@ class Assertion
     static public function true($value, $message = null)
     {
         if ($value !== true) {
-            throw new AssertionFailedException($message);
+            throw new AssertionFailedException($message, self::INVALID_TRUE);
         }
     }
 
