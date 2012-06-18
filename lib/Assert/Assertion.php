@@ -191,10 +191,10 @@ class Assertion
     }
 
     /**
-     * Assert that string value is at least of a minimum length.
+     * Assert that string value is not longer than a maximum length.
      *
      * @param mixed $value
-     * @param integer $minLength
+     * @param integer $maxLength
      * @param string $message
      * @return void
      * @throws Assert\AssertionFailedException
@@ -234,7 +234,7 @@ class Assertion
     /**
      * Assert that string starts with a sequence of chars.
      *
-     * @param mixed $value
+     * @param mixed $string
      * @param string $needle
      * @param string $message
      * @return void
@@ -252,7 +252,7 @@ class Assertion
     /**
      * Assert that string contains a sequence of chars.
      *
-     * @param mixed $value
+     * @param mixed $string
      * @param string $needle
      * @param string $message
      * @return void
