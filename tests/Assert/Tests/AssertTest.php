@@ -335,6 +335,24 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EQ);
         Assertion::eq("2", 1);
     }
+
+    public function testMin()
+    {
+        Assertion::min(1, 1);
+        Assertion::min(2, 1);
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN);
+        Assertion::min(0, 1);
+    }
+
+    public function testMax()
+    {
+        Assertion::max(1, 1);
+        Assertion::max(0, 1);
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX);
+        Assertion::max(2, 1);
+    }
 }
 
 class ChildStdClass extends \stdClass

@@ -44,6 +44,8 @@ class Assertion
     const INVALID_TRUE            = 32;
     const INVALID_EQ              = 33;
     const INVALID_SAME            = 34;
+    const INVALID_MIN             = 35;
+    const INVALID_MAX             = 36;
     const INVALID_DIRECTORY       = 101;
     const INVALID_FILE            = 102;
     const INVALID_READABLE        = 103;
@@ -439,6 +441,24 @@ class Assertion
 
         if ($value < $minValue || $value > $maxValue) {
             throw new AssertionFailedException($message, self::INVALID_RANGE, $propertyPath);
+        }
+    }
+
+    static public function min($value, $minValue, $message = null, $propertyPath = null)
+    {
+        self::integer($value);
+
+        if ($value < $minValue) {
+            throw new AssertionFailedException($message, self::INVALID_MIN, $propertyPath);
+        }
+    }
+
+    static public function max($value, $maxValue, $message = null, $propertyPath = null)
+    {
+        self::integer($value);
+
+        if ($value > $maxValue) {
+            throw new AssertionFailedException($message, self::INVALID_MAX, $propertyPath);
         }
     }
 
