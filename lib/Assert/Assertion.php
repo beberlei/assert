@@ -565,5 +565,20 @@ class Assertion
             throw new AssertionFailedException($message, self::INVALID_CLASS, $propertyPath);
         }
     }
+
+    static public function __callStatic($method, $args)
+    {
+        if (strpos($method, "nullOr") === 0) {
+            $method = substr($method, 6);
+
+            if ($args[0] === null) {
+                return;
+            }
+
+            return call_user_func_array(array(get_called_class(), $method), $args);
+        }
+
+        throw new \BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+    }
 }
 

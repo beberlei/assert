@@ -353,6 +353,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX);
         Assertion::max(2, 1);
     }
+
+    public function testNullOr()
+    {
+        Assertion::nullOrMax(null, 1);
+        Assertion::nullOrMax(null, 2);
+    }
 }
 
 class ChildStdClass extends \stdClass
