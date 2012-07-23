@@ -93,10 +93,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function integer($value, $message = null)
+    static public function integer($value, $message = null, $propertyPath = null)
     {
         if ( ! is_int($value)) {
-            throw new AssertionFailedException($message, self::INVALID_INTEGER);
+            throw new AssertionFailedException($message, self::INVALID_INTEGER, $propertyPath);
         }
     }
 
@@ -108,10 +108,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function digit($value, $message = null)
+    static public function digit($value, $message = null, $propertyPath = null)
     {
         if ( ! ctype_digit((string)$value)) {
-            throw new AssertionFailedException($message, self::INVALID_DIGIT);
+            throw new AssertionFailedException($message, self::INVALID_DIGIT, $propertyPath);
         }
     }
 
@@ -123,10 +123,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function integerish($value, $message = null)
+    static public function integerish($value, $message = null, $propertyPath = null)
     {
         if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
-            throw new AssertionFailedException($message, self::INVALID_INTEGERISH);
+            throw new AssertionFailedException($message, self::INVALID_INTEGERISH, $propertyPath);
         }
     }
 
@@ -138,10 +138,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function boolean($value, $message = null)
+    static public function boolean($value, $message = null, $propertyPath = null)
     {
         if ( ! is_bool($value)) {
-            throw new AssertionFailedException($message, self::INVALID_BOOLEAN);
+            throw new AssertionFailedException($message, self::INVALID_BOOLEAN, $propertyPath);
         }
     }
 
@@ -153,10 +153,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function notEmpty($value, $message = null)
+    static public function notEmpty($value, $message = null, $propertyPath = null)
     {
         if (empty($value)) {
-            throw new AssertionFailedException($message, self::VALUE_EMPTY);
+            throw new AssertionFailedException($message, self::VALUE_EMPTY, $propertyPath);
         }
     }
 
@@ -168,10 +168,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function notNull($value, $message = null)
+    static public function notNull($value, $message = null, $propertyPath = null)
     {
         if ($value === null) {
-            throw new AssertionFailedException($message, self::VALUE_NULL);
+            throw new AssertionFailedException($message, self::VALUE_NULL, $propertyPath);
         }
     }
 
@@ -183,10 +183,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function string($value, $message = null)
+    static public function string($value, $message = null, $propertyPath = null)
     {
         if ( ! is_string($value)) {
-            throw new AssertionFailedException($message, self::INVALID_STRING);
+            throw new AssertionFailedException($message, self::INVALID_STRING, $propertyPath);
         }
     }
 
@@ -199,12 +199,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function regex($value, $regex, $message = null)
+    static public function regex($value, $regex, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
         if ( ! preg_match($regex, $value)) {
-            throw new AssertionFailedException($message, self::INVALID_REGEX );
+            throw new AssertionFailedException($message, self::INVALID_REGEX , $propertyPath);
         }
     }
 
@@ -217,12 +217,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function minLength($value, $minLength, $message = null)
+    static public function minLength($value, $minLength, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
         if (strlen($value) < $minLength) {
-            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH, $propertyPath);
         }
     }
 
@@ -235,12 +235,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function maxLength($value, $maxLength, $message = null)
+    static public function maxLength($value, $maxLength, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
         if (strlen($value) > $maxLength) {
-            throw new AssertionFailedException($message, self::INVALID_MAX_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
 
@@ -254,12 +254,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function betweenLength($value, $minLength, $maxLength, $message = null)
+    static public function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
         if (strlen($value) < $minLength) {
-            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH);
+            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH, $propertyPath);
         }
 
         if (strlen($value) > $maxLength) {
@@ -276,12 +276,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function startsWith($string, $needle, $message = null)
+    static public function startsWith($string, $needle, $message = null, $propertyPath = null)
     {
         self::string($string);
 
         if (strpos($string, $needle) !== 0) {
-            throw new AssertionFailedException($message, self::INVALID_STRING_START);
+            throw new AssertionFailedException($message, self::INVALID_STRING_START, $propertyPath);
         }
     }
 
@@ -294,12 +294,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function contains($string, $needle, $message = null)
+    static public function contains($string, $needle, $message = null, $propertyPath = null)
     {
         self::string($string);
 
         if (strpos($string, $needle) === false) {
-            throw new AssertionFailedException($message, self::INVALID_STRING_CONTAINS);
+            throw new AssertionFailedException($message, self::INVALID_STRING_CONTAINS, $propertyPath);
         }
     }
 
@@ -312,10 +312,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function choice($value, array $choices, $message = null)
+    static public function choice($value, array $choices, $message = null, $propertyPath = null)
     {
         if ( ! in_array($value, $choices, true)) {
-            throw new AssertionFailedException($message, self::INVALID_CHOICE);
+            throw new AssertionFailedException($message, self::INVALID_CHOICE, $propertyPath);
         }
     }
 
@@ -324,7 +324,7 @@ class Assertion
      *
      * @throws Assert\AssertionFailedException
      */
-    static public function inArray($value, array $choices, $message = null)
+    static public function inArray($value, array $choices, $message = null, $propertyPath = null)
     {
         self::choice($value, $choices, $message);
     }
@@ -337,10 +337,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function numeric($value, $message = null)
+    static public function numeric($value, $message = null, $propertyPath = null)
     {
         if ( ! is_numeric($value)) {
-            throw new AssertionFailedException($message, self::INVALID_NUMERIC);
+            throw new AssertionFailedException($message, self::INVALID_NUMERIC, $propertyPath);
         }
     }
 
@@ -352,10 +352,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function isArray($value, $message = null)
+    static public function isArray($value, $message = null, $propertyPath = null)
     {
         if ( ! is_array($value)) {
-            throw new AssertionFailedException($message, self::INVALID_ARRAY);
+            throw new AssertionFailedException($message, self::INVALID_ARRAY, $propertyPath);
         }
     }
 
@@ -368,12 +368,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function keyExists($value, $key, $message = null)
+    static public function keyExists($value, $key, $message = null, $propertyPath = null)
     {
         self::isArray($value);
 
         if ( ! array_key_exists($key, $value)) {
-            throw new AssertionFailedException($message, self::INVALID_KEY_EXISTS);
+            throw new AssertionFailedException($message, self::INVALID_KEY_EXISTS, $propertyPath);
         }
     }
 
@@ -385,10 +385,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function notBlank($value, $message = null)
+    static public function notBlank($value, $message = null, $propertyPath = null)
     {
         if (false === $value || (empty($value) && '0' != $value)) {
-            throw new AssertionFailedException($message, self::INVALID_NOT_BLANK);
+            throw new AssertionFailedException($message, self::INVALID_NOT_BLANK, $propertyPath);
         }
     }
 
@@ -401,10 +401,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function isInstanceOf($value, $className, $message = null)
+    static public function isInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! ($value instanceof $className)) {
-            throw new AssertionFailedException($message, self::INVALID_INSTANCE_OF);
+            throw new AssertionFailedException($message, self::INVALID_INSTANCE_OF, $propertyPath);
         }
     }
 
@@ -417,10 +417,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function subclassOf($value, $className, $message = null)
+    static public function subclassOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! is_subclass_of($value, $className)) {
-            throw new AssertionFailedException($message, self::INVALID_SUBCLASS_OF);
+            throw new AssertionFailedException($message, self::INVALID_SUBCLASS_OF, $propertyPath);
         }
     }
 
@@ -433,16 +433,16 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function range($value, $minValue, $maxValue, $message = null)
+    static public function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
     {
         self::integer($value);
 
         if ($value < $minValue || $value > $maxValue) {
-            throw new AssertionFailedException($message, self::INVALID_RANGE);
+            throw new AssertionFailedException($message, self::INVALID_RANGE, $propertyPath);
         }
     }
 
-    static public function file($value, $message = null)
+    static public function file($value, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
@@ -451,7 +451,7 @@ class Assertion
         }
     }
 
-    static public function directory($value, $message = null)
+    static public function directory($value, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
@@ -460,16 +460,16 @@ class Assertion
         }
     }
 
-    static public function readable($value, $message = null)
+    static public function readable($value, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
         if ( ! is_readable($value)) {
-            throw new AssertionFailedException($message, self::INVALID_READABLE);
+            throw new AssertionFailedException($message, self::INVALID_READABLE, $propertyPath);
         }
     }
 
-    static public function writeable($value, $message = null)
+    static public function writeable($value, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
@@ -487,12 +487,12 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function email($value, $message = null)
+    static public function email($value, $message = null, $propertyPath = null)
     {
         self::string($value, $message);
 
         if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new AssertionFailedException($message, self::INVALID_EMAIL);
+            throw new AssertionFailedException($message, self::INVALID_EMAIL, $propertyPath);
         } else {
             $host = substr($value, strpos($value, '@') + 1);
 
@@ -511,7 +511,7 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function alnum($value, $message = null)
+    static public function alnum($value, $message = null, $propertyPath = null)
     {
         self::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]?)$)', $message);
     }
@@ -524,10 +524,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function true($value, $message = null)
+    static public function true($value, $message = null, $propertyPath = null)
     {
         if ($value !== true) {
-            throw new AssertionFailedException($message, self::INVALID_TRUE);
+            throw new AssertionFailedException($message, self::INVALID_TRUE, $propertyPath);
         }
     }
 
@@ -539,10 +539,10 @@ class Assertion
      * @return void
      * @throws Assert\AssertionFailedException
      */
-    static public function classExists($value, $message = null)
+    static public function classExists($value, $message = null, $propertyPath = null)
     {
         if ( ! class_exists($value)) {
-            throw new AssertionFailedException($message, self::INVALID_CLASS);
+            throw new AssertionFailedException($message, self::INVALID_CLASS, $propertyPath);
         }
     }
 }
