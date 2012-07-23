@@ -42,12 +42,48 @@ class Assertion
     const INVALID_RANGE           = 30;
     const INVALID_ALNUM           = 31;
     const INVALID_TRUE            = 32;
+    const INVALID_EQ              = 33;
+    const INVALID_SAME            = 34;
     const INVALID_DIRECTORY       = 101;
     const INVALID_FILE            = 102;
     const INVALID_READABLE        = 103;
     const INVALID_WRITEABLE       = 104;
     const INVALID_CLASS           = 105;
     const INVALID_EMAIL           = 201;
+
+    /**
+     * Assert that two values are equal (using == ).
+     *
+     * @param mixed $value
+     * @param mixed $value2
+     * @param string $message
+     * @param string $propertyPath
+     *
+     * @throws AssertionFailedException
+     */
+    static public function eq($value, $value2, $message = null, $propertyPath = null)
+    {
+        if ($value != $value2) {
+            throw new AssertionFailedException($message, self::INVALID_EQ, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that two values are the same (using ===).
+     *
+     * @param mixed $value
+     * @param mixed $value2
+     * @param string $message
+     * @param string $propertyPath
+     *
+     * @throws AssertionFailedException
+     */
+    static public function same($value, $value2, $message = null, $propertyPath = null)
+    {
+        if ($value !== $value2) {
+            throw new AssertionFailedException($message, self::INVALID_SAME, $propertyPath);
+        }
+    }
 
     /**
      * Assert that value is a php integer.
@@ -281,6 +317,16 @@ class Assertion
         if ( ! in_array($value, $choices, true)) {
             throw new AssertionFailedException($message, self::INVALID_CHOICE);
         }
+    }
+
+    /**
+     * Alias of {@see choice()}
+     *
+     * @throws Assert\AssertionFailedException
+     */
+    static public function inArray($value, array $choices, $message = null)
+    {
+        self::choice($value, $choices, $message);
     }
 
     /**

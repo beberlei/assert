@@ -191,6 +191,11 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::choice("foo", array("foo"));
     }
 
+    public function testValidInarray()
+    {
+        Assertion::inArray("foo", array("foo"));
+    }
+
     public function testInvalidNumeric()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NUMERIC);
@@ -311,6 +316,24 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testValidClass()
     {
         Assertion::classExists("\\Exception");
+    }
+
+    public function testSame()
+    {
+        Assertion::same(1,1);
+        Assertion::same("foo","foo");
+        Assertion::same($obj = new \stdClass(), $obj);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SAME);
+        Assertion::same(new \stdClass(), new \stdClass());
+    }
+
+    public function testEq()
+    {
+        Assertion::eq(1,"1");
+        Assertion::eq("foo",true);
+        Assertion::eq($obj = new \stdClass(), $obj);
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EQ);
+        Assertion::eq("2", 1);
     }
 }
 
