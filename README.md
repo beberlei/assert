@@ -74,6 +74,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::isArray($value);
     Assertion::contains($value, $needle);
     Assertion::choice($value, $choices);
+    Assertion::inArray($value, $choices);
     Assertion::numeric($value);
     Assertion::keyExists($value, $key);
     Assertion::notBlank($value);
@@ -87,6 +88,8 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::email($value);
     Assertion::alnum($value);
     Assertion::true($value);
+    Assertion::min($value, $min);
+    Assertion::max($value, $max);
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.
 
