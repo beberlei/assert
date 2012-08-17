@@ -359,6 +359,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::nullOrMax(null, 1);
         Assertion::nullOrMax(null, 2);
     }
+
+    public function testLength()
+    {
+        Assertion::length("asdf", 4);
+        Assertion::length("", 0);
+    }
+
+    public function testLengthFailed()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
+        Assertion::length("asdf", 3);
+    }
 }
 
 class ChildStdClass extends \stdClass

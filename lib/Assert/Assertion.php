@@ -46,6 +46,7 @@ class Assertion
     const INVALID_SAME            = 34;
     const INVALID_MIN             = 35;
     const INVALID_MAX             = 36;
+    const INVALID_LENGTH          = 37;
     const INVALID_DIRECTORY       = 101;
     const INVALID_FILE            = 102;
     const INVALID_READABLE        = 103;
@@ -211,10 +212,29 @@ class Assertion
     }
 
     /**
+     * Assert that string has a given length.
+     *
+     * @param mixed $value
+     * @param int $length
+     * @param string $message
+     * @param string $message
+     *
+     * @throws Assert\AssertionFailedException
+     */
+    static public function length($value, $length, $message = null, $propertyPath = null)
+    {
+        self::string($value, $message);
+
+        if (strlen($value) != $length) {
+            throw new AssertionFailedException($message, self::INVALID_LENGTH, $propertyPath);
+        }
+    }
+
+    /**
      * Assert that string value is at least of a minimum length.
      *
      * @param mixed $value
-     * @param string $minLength
+     * @param int $minLength
      * @param string $message
      * @return void
      * @throws Assert\AssertionFailedException
