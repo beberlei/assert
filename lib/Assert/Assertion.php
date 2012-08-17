@@ -576,6 +576,7 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
      * @throws Assert\AssertionFailedException
      */
@@ -586,6 +587,9 @@ class Assertion
         }
     }
 
+    /**
+     * static call handler to implement "null or assertion" delegation.
+     */
     static public function __callStatic($method, $args)
     {
         if (strpos($method, "nullOr") === 0) {
