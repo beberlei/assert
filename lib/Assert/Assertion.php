@@ -553,7 +553,11 @@ class Assertion
      */
     static public function alnum($value, $message = null, $propertyPath = null)
     {
-        self::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]?)$)', $message);
+        try {
+            self::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)');
+        } catch(AssertionFailedException $e) {
+            throw new AssertionFailedException($message, self::INVALID_ALNUM, $propertyPath);
+        }
     }
 
     /**

@@ -294,6 +294,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::alnum("a");
         Assertion::alnum("a1");
+        Assertion::alnum("aasdf1234");
+        Assertion::alnum("a1b2c3");
+    }
+
+    public function testInvalidAlnum()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_ALNUM);
+        Assertion::alnum("1a");
     }
 
     public function testValidTrue()
