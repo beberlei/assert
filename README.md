@@ -99,7 +99,7 @@ Remember: When a configuration parameter is necessary, it is always passed AFTER
 
 ## Exception & Error Handling
 
-If any of the assertions fails a subclass of `InvalidArgumentException` is thrown. You can pass a last argument to any assertion to control the message. Every exception contains a message code by default.
+If any of the assertions fails a `Assert\AssertionFailedException` is thrown. You can pass a last argument to any assertion to control the message. Every exception contains a message code by default.
 
     <?php
     use Assert\Assertion;
@@ -107,7 +107,21 @@ If any of the assertions fails a subclass of `InvalidArgumentException` is throw
 
     try {
         Assertion::integer($value, "The pressure of gas is measured in integers.");
-    } catch(InvalidArgumentException $e) {
+    } catch(AssertionFailedException $e) {
         // error handling
     }
+
+``Assert\AssertionFailedException`` is just an interface and the default implementation is ``Assert\InvalidArgumentException`` which extends the SPL ``InvalidArgumentException``. You can change the exception being used on a package based level. To shield your library from bugs or misinterpretations inside Assert you should introduce a library/project based assertion
+subclass, where you can override the exception thrown as well:
+
+```php
+namespace MyProject;
+
+use Assert\Assertion as BaseAssertion;
+
+class Assertion extends BaseAssertion
+{
+    protected static $exceptionClass = 'MyProject\AssertionFailedException';
+}
+```
 

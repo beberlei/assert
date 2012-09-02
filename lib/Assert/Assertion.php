@@ -56,6 +56,24 @@ class Assertion
     const INVALID_EMAIL           = 201;
 
     /**
+     * Exception to throw when an assertion failed.
+     *
+     * @var string
+     */
+    static protected $exceptionClass = 'Assert\InvalidArgumentException';
+
+    /**
+     * Helper method that handles building the assertion failure exceptions.
+     * They are returned from this method so that the stack trace still shows
+     * the assertions method.
+     */
+    static protected function createException($message, $code, $propertyPath)
+    {
+        $exceptionClass = static::$exceptionClass;
+        return new $exceptionClass($message, $code, $propertyPath);
+    }
+
+    /**
      * Assert that two values are equal (using == ).
      *
      * @param mixed $value
@@ -68,7 +86,7 @@ class Assertion
     static public function eq($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value != $value2) {
-            throw new AssertionFailedException($message, self::INVALID_EQ, $propertyPath);
+            throw static::createException($message, static::INVALID_EQ, $propertyPath);
         }
     }
 
@@ -85,7 +103,7 @@ class Assertion
     static public function same($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value !== $value2) {
-            throw new AssertionFailedException($message, self::INVALID_SAME, $propertyPath);
+            throw static::createException($message, static::INVALID_SAME, $propertyPath);
         }
     }
 
@@ -100,7 +118,7 @@ class Assertion
     static public function integer($value, $message = null, $propertyPath = null)
     {
         if ( ! is_int($value)) {
-            throw new AssertionFailedException($message, self::INVALID_INTEGER, $propertyPath);
+            throw static::createException($message, static::INVALID_INTEGER, $propertyPath);
         }
     }
 
@@ -115,7 +133,7 @@ class Assertion
     static public function digit($value, $message = null, $propertyPath = null)
     {
         if ( ! ctype_digit((string)$value)) {
-            throw new AssertionFailedException($message, self::INVALID_DIGIT, $propertyPath);
+            throw static::createException($message, static::INVALID_DIGIT, $propertyPath);
         }
     }
 
@@ -130,7 +148,7 @@ class Assertion
     static public function integerish($value, $message = null, $propertyPath = null)
     {
         if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
-            throw new AssertionFailedException($message, self::INVALID_INTEGERISH, $propertyPath);
+            throw static::createException($message, static::INVALID_INTEGERISH, $propertyPath);
         }
     }
 
@@ -145,7 +163,7 @@ class Assertion
     static public function boolean($value, $message = null, $propertyPath = null)
     {
         if ( ! is_bool($value)) {
-            throw new AssertionFailedException($message, self::INVALID_BOOLEAN, $propertyPath);
+            throw static::createException($message, static::INVALID_BOOLEAN, $propertyPath);
         }
     }
 
@@ -160,7 +178,7 @@ class Assertion
     static public function notEmpty($value, $message = null, $propertyPath = null)
     {
         if (empty($value)) {
-            throw new AssertionFailedException($message, self::VALUE_EMPTY, $propertyPath);
+            throw static::createException($message, static::VALUE_EMPTY, $propertyPath);
         }
     }
 
@@ -175,7 +193,7 @@ class Assertion
     static public function notNull($value, $message = null, $propertyPath = null)
     {
         if ($value === null) {
-            throw new AssertionFailedException($message, self::VALUE_NULL, $propertyPath);
+            throw static::createException($message, static::VALUE_NULL, $propertyPath);
         }
     }
 
@@ -190,7 +208,7 @@ class Assertion
     static public function string($value, $message = null, $propertyPath = null)
     {
         if ( ! is_string($value)) {
-            throw new AssertionFailedException($message, self::INVALID_STRING, $propertyPath);
+            throw static::createException($message, static::INVALID_STRING, $propertyPath);
         }
     }
 
@@ -205,10 +223,10 @@ class Assertion
      */
     static public function regex($value, $regex, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if ( ! preg_match($regex, $value)) {
-            throw new AssertionFailedException($message, self::INVALID_REGEX , $propertyPath);
+            throw static::createException($message, static::INVALID_REGEX , $propertyPath);
         }
     }
 
@@ -224,10 +242,10 @@ class Assertion
      */
     static public function length($value, $length, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if (strlen($value) != $length) {
-            throw new AssertionFailedException($message, self::INVALID_LENGTH, $propertyPath);
+            throw static::createException($message, static::INVALID_LENGTH, $propertyPath);
         }
     }
 
@@ -242,10 +260,10 @@ class Assertion
      */
     static public function minLength($value, $minLength, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if (strlen($value) < $minLength) {
-            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH, $propertyPath);
+            throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
     }
 
@@ -260,10 +278,10 @@ class Assertion
      */
     static public function maxLength($value, $maxLength, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if (strlen($value) > $maxLength) {
-            throw new AssertionFailedException($message, self::INVALID_MAX_LENGTH, $propertyPath);
+            throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
 
@@ -279,14 +297,14 @@ class Assertion
      */
     static public function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if (strlen($value) < $minLength) {
-            throw new AssertionFailedException($message, self::INVALID_MIN_LENGTH, $propertyPath);
+            throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
 
         if (strlen($value) > $maxLength) {
-            throw new AssertionFailedException($message, self::INVALID_MAX_LENGTH);
+            throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
 
@@ -301,10 +319,10 @@ class Assertion
      */
     static public function startsWith($string, $needle, $message = null, $propertyPath = null)
     {
-        self::string($string);
+        static::string($string);
 
         if (strpos($string, $needle) !== 0) {
-            throw new AssertionFailedException($message, self::INVALID_STRING_START, $propertyPath);
+            throw static::createException($message, static::INVALID_STRING_START, $propertyPath);
         }
     }
 
@@ -319,10 +337,10 @@ class Assertion
      */
     static public function contains($string, $needle, $message = null, $propertyPath = null)
     {
-        self::string($string);
+        static::string($string);
 
         if (strpos($string, $needle) === false) {
-            throw new AssertionFailedException($message, self::INVALID_STRING_CONTAINS, $propertyPath);
+            throw static::createException($message, static::INVALID_STRING_CONTAINS, $propertyPath);
         }
     }
 
@@ -338,7 +356,7 @@ class Assertion
     static public function choice($value, array $choices, $message = null, $propertyPath = null)
     {
         if ( ! in_array($value, $choices, true)) {
-            throw new AssertionFailedException($message, self::INVALID_CHOICE, $propertyPath);
+            throw static::createException($message, static::INVALID_CHOICE, $propertyPath);
         }
     }
 
@@ -349,7 +367,7 @@ class Assertion
      */
     static public function inArray($value, array $choices, $message = null, $propertyPath = null)
     {
-        self::choice($value, $choices, $message);
+        static::choice($value, $choices, $message);
     }
 
     /**
@@ -363,7 +381,7 @@ class Assertion
     static public function numeric($value, $message = null, $propertyPath = null)
     {
         if ( ! is_numeric($value)) {
-            throw new AssertionFailedException($message, self::INVALID_NUMERIC, $propertyPath);
+            throw static::createException($message, static::INVALID_NUMERIC, $propertyPath);
         }
     }
 
@@ -378,7 +396,7 @@ class Assertion
     static public function isArray($value, $message = null, $propertyPath = null)
     {
         if ( ! is_array($value)) {
-            throw new AssertionFailedException($message, self::INVALID_ARRAY, $propertyPath);
+            throw static::createException($message, static::INVALID_ARRAY, $propertyPath);
         }
     }
 
@@ -393,10 +411,10 @@ class Assertion
      */
     static public function keyExists($value, $key, $message = null, $propertyPath = null)
     {
-        self::isArray($value);
+        static::isArray($value);
 
         if ( ! array_key_exists($key, $value)) {
-            throw new AssertionFailedException($message, self::INVALID_KEY_EXISTS, $propertyPath);
+            throw static::createException($message, static::INVALID_KEY_EXISTS, $propertyPath);
         }
     }
 
@@ -411,7 +429,7 @@ class Assertion
     static public function notBlank($value, $message = null, $propertyPath = null)
     {
         if (false === $value || (empty($value) && '0' != $value)) {
-            throw new AssertionFailedException($message, self::INVALID_NOT_BLANK, $propertyPath);
+            throw static::createException($message, static::INVALID_NOT_BLANK, $propertyPath);
         }
     }
 
@@ -427,7 +445,7 @@ class Assertion
     static public function isInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! ($value instanceof $className)) {
-            throw new AssertionFailedException($message, self::INVALID_INSTANCE_OF, $propertyPath);
+            throw static::createException($message, static::INVALID_INSTANCE_OF, $propertyPath);
         }
     }
 
@@ -443,7 +461,7 @@ class Assertion
     static public function subclassOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! is_subclass_of($value, $className)) {
-            throw new AssertionFailedException($message, self::INVALID_SUBCLASS_OF, $propertyPath);
+            throw static::createException($message, static::INVALID_SUBCLASS_OF, $propertyPath);
         }
     }
 
@@ -458,64 +476,64 @@ class Assertion
      */
     static public function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
     {
-        self::integer($value);
+        static::integer($value);
 
         if ($value < $minValue || $value > $maxValue) {
-            throw new AssertionFailedException($message, self::INVALID_RANGE, $propertyPath);
+            throw static::createException($message, static::INVALID_RANGE, $propertyPath);
         }
     }
 
     static public function min($value, $minValue, $message = null, $propertyPath = null)
     {
-        self::integer($value);
+        static::integer($value);
 
         if ($value < $minValue) {
-            throw new AssertionFailedException($message, self::INVALID_MIN, $propertyPath);
+            throw static::createException($message, static::INVALID_MIN, $propertyPath);
         }
     }
 
     static public function max($value, $maxValue, $message = null, $propertyPath = null)
     {
-        self::integer($value);
+        static::integer($value);
 
         if ($value > $maxValue) {
-            throw new AssertionFailedException($message, self::INVALID_MAX, $propertyPath);
+            throw static::createException($message, static::INVALID_MAX, $propertyPath);
         }
     }
 
     static public function file($value, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if ( ! is_file($value)) {
-            throw new AssertionFailedException($message, self::INVALID_FILE);
+            throw static::createException($message, static::INVALID_FILE);
         }
     }
 
     static public function directory($value, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if ( ! is_dir($value)) {
-            throw new AssertionFailedException($message, self::INVALID_DIRECTORY);
+            throw static::createException($message, static::INVALID_DIRECTORY);
         }
     }
 
     static public function readable($value, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if ( ! is_readable($value)) {
-            throw new AssertionFailedException($message, self::INVALID_READABLE, $propertyPath);
+            throw static::createException($message, static::INVALID_READABLE, $propertyPath);
         }
     }
 
     static public function writeable($value, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if ( ! is_writeable($value)) {
-            throw new AssertionFailedException($message, self::INVALID_WRITEABLE);
+            throw static::createException($message, static::INVALID_WRITEABLE);
         }
     }
 
@@ -530,16 +548,16 @@ class Assertion
      */
     static public function email($value, $message = null, $propertyPath = null)
     {
-        self::string($value, $message);
+        static::string($value, $message);
 
         if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new AssertionFailedException($message, self::INVALID_EMAIL, $propertyPath);
+            throw static::createException($message, static::INVALID_EMAIL, $propertyPath);
         } else {
             $host = substr($value, strpos($value, '@') + 1);
 
             if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
                 // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
-                throw new AssertionFailedException($message, self::INVALID_EMAIL);
+                throw static::createException($message, static::INVALID_EMAIL);
             }
         }
     }
@@ -555,9 +573,9 @@ class Assertion
     static public function alnum($value, $message = null, $propertyPath = null)
     {
         try {
-            self::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)');
+            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)');
         } catch(AssertionFailedException $e) {
-            throw new AssertionFailedException($message, self::INVALID_ALNUM, $propertyPath);
+            throw static::createException($message, static::INVALID_ALNUM, $propertyPath);
         }
     }
 
@@ -572,7 +590,7 @@ class Assertion
     static public function true($value, $message = null, $propertyPath = null)
     {
         if ($value !== true) {
-            throw new AssertionFailedException($message, self::INVALID_TRUE, $propertyPath);
+            throw static::createException($message, static::INVALID_TRUE, $propertyPath);
         }
     }
 
@@ -587,7 +605,7 @@ class Assertion
     static public function false($value, $message = null, $propertyPath = null)
     {
         if ($value !== false) {
-            throw new AssertionFailedException($message, self::INVALID_FALSE, $propertyPath);
+            throw static::createException($message, static::INVALID_FALSE, $propertyPath);
         }
     }
 
@@ -603,7 +621,7 @@ class Assertion
     static public function classExists($value, $message = null, $propertyPath = null)
     {
         if ( ! class_exists($value)) {
-            throw new AssertionFailedException($message, self::INVALID_CLASS, $propertyPath);
+            throw static::createException($message, static::INVALID_CLASS, $propertyPath);
         }
     }
 

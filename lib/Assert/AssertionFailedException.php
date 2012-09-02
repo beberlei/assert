@@ -13,28 +13,9 @@
 
 namespace Assert;
 
-class AssertionFailedException extends \InvalidArgumentException
+interface AssertionFailedException
 {
-    private $propertyPath;
-
-    public function __construct($message, $code, $propertyPath = null)
-    {
-        parent::__construct($message, $code);
-        $this->propertyPath = $propertyPath;
-    }
-
-    /**
-     * User controlled way to define a sub-property causing
-     * the failure of a currently asserted objects.
-     *
-     * Useful to transport information about the nature of the error
-     * back to higher layers.
-     *
-     * @return string
-     */
-    public function getPropertyPath()
-    {
-        return $this->propertyPath;
-    }
+    public function __construct($message, $code, $propertyPath = null);
+    public function getPropertyPath();
 }
 
