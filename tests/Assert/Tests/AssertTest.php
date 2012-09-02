@@ -315,6 +315,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::true(false);
     }
 
+    public function testValidFalse()
+    {
+        Assertion::false(1 == 0);
+    }
+
+    public function testInvalidFalse()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_FALSE);
+        Assertion::false(true);
+    }
+
     public function testInvalidClass()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CLASS);

@@ -47,6 +47,7 @@ class Assertion
     const INVALID_MIN             = 35;
     const INVALID_MAX             = 36;
     const INVALID_LENGTH          = 37;
+    const INVALID_FALSE           = 38;
     const INVALID_DIRECTORY       = 101;
     const INVALID_FILE            = 102;
     const INVALID_READABLE        = 103;
@@ -572,6 +573,21 @@ class Assertion
     {
         if ($value !== true) {
             throw new AssertionFailedException($message, self::INVALID_TRUE, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the value is boolean False.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @return void
+     * @throws Assert\AssertionFailedException
+     */
+    static public function false($value, $message = null, $propertyPath = null)
+    {
+        if ($value !== false) {
+            throw new AssertionFailedException($message, self::INVALID_FALSE, $propertyPath);
         }
     }
 

@@ -89,6 +89,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::email($value);
     Assertion::alnum($value);
     Assertion::true($value);
+    Assertion::false($value);
     Assertion::min($value, $min);
     Assertion::max($value, $max);
     Assertion::eq($actual, $expected);
