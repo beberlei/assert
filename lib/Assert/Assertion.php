@@ -516,7 +516,7 @@ class Assertion
         static::string($value, $message);
 
         if ( ! is_dir($value)) {
-            throw static::createException($message, static::INVALID_DIRECTORY);
+            throw static::createException($message, static::INVALID_DIRECTORY, $propertyPath);
         }
     }
 
