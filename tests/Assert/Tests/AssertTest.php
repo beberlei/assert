@@ -132,10 +132,25 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::minLength("foo", 4);
     }
 
+    public function testValidMinLength()
+    {
+        Assertion::minLength("foo", 3);
+        Assertion::minLength("foo", 1);
+        Assertion::minLength("foo", 0);
+        Assertion::minLength("", 0);
+    }
+
     public function testInvalidMaxLength()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_LENGTH);
         Assertion::maxLength("foo", 2);
+    }
+
+    public function testValidMaxLength()
+    {
+        Assertion::maxLength("foo", 10);
+        Assertion::maxLength("foo", 3);
+        Assertion::maxLength("", 0);
     }
 
     public function testInvalidBetweenLengthMin()
@@ -191,7 +206,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::choice("foo", array("foo"));
     }
 
-    public function testValidInarray()
+    public function testInvalidInArray()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);
+        Assertion::inArray("bar", array("baz"));
+    }
+
+    public function testValidInArray()
     {
         Assertion::inArray("foo", array("foo"));
     }
@@ -209,6 +230,35 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric(1.23);
     }
 
+    static public function dataInvalidArray()
+    {
+        return array(
+            array(null),
+            array(false),
+            array("test"),
+            array(1),
+            array(1.23),
+            array(new \StdClass),
+            array(fopen('php://memory', 'r')),
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalidArray
+     */
+    public function testInvalidArray($value)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_ARRAY);
+        Assertion::isArray($value);
+    }
+
+    public function testValidArray()
+    {
+        Assertion::isArray(array());
+        Assertion::isArray(array(1,2,3));
+        Assertion::isArray(array(array(),array()));
+    }
+
     public function testInvalidKeyExists()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_KEY_EXISTS);
@@ -220,7 +270,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::keyExists(array("foo" => "bar"), "foo");
     }
 
-    public function testInvalidnotBlank()
+    public function testInvalidNotBlank()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_BLANK);
         Assertion::notBlank("");
@@ -416,6 +466,30 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::directory(__DIR__ . '/does-not-exist');
     }
 
+    public function testReadable()
+    {
+        Assertion::readable(__FILE__);
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_READABLE);
+        Assertion::readable(__DIR__ . '/does-not-exist');
+    }
+
+    public function testWriteable()
+    {
+        Assertion::writeable(sys_get_temp_dir());
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_WRITEABLE);
+        Assertion::writeable(__DIR__ . '/does-not-exist');
+    }
+
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage No assertion
+     */
+    public function testFailedNullOrMethodCall()
+    {
+        Assertion::NullOrAssertionDoesNotExist();
+    }
 }
 
 class ChildStdClass extends \stdClass

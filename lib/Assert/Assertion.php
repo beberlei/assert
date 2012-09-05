@@ -257,7 +257,7 @@ class Assertion
     }
 
     /**
-     * Assert that string value is at least of a minimum length.
+     * Assert that a string is at least $minLength chars long.
      *
      * @param mixed $value
      * @param int $minLength
@@ -276,7 +276,7 @@ class Assertion
     }
 
     /**
-     * Assert that string value is not longer than a maximum length.
+     * Assert that string value is not longer than $maxLength chars.
      *
      * @param mixed $value
      * @param integer $maxLength
@@ -380,7 +380,7 @@ class Assertion
      */
     static public function inArray($value, array $choices, $message = null, $propertyPath = null)
     {
-        static::choice($value, $choices, $message);
+        static::choice($value, $choices, $message, $propertyPath);
     }
 
     /**
