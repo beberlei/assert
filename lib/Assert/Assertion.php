@@ -504,9 +504,10 @@ class Assertion
     static public function file($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
+        static::notEmpty($value, $message);
 
         if ( ! is_file($value)) {
-            throw static::createException($message, static::INVALID_FILE);
+            throw static::createException($message, static::INVALID_FILE, $propertyPath);
         }
     }
 
