@@ -1,8 +1,15 @@
 <?xml version="1.0" ?>
-<phpunit bootstrap="tests/bootstrap.php">
+<phpunit bootstrap="tests/bootstrap.php" backupGlobals="false">
     <testsuites>
         <testsuite name="Assertion">
-            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./lib/</directory>
+        </whitelist>
+    </filter>
+
 </phpunit>
