@@ -80,8 +80,8 @@ class Assertion
      * @param mixed $value2
      * @param string $message
      * @param string $propertyPath
-     *
-     * @throws AssertionFailedException
+     * @return void
+     * @throws \Assert\AssertionFailedException
      */
     static public function eq($value, $value2, $message = null, $propertyPath = null)
     {
@@ -97,8 +97,8 @@ class Assertion
      * @param mixed $value2
      * @param string $message
      * @param string $propertyPath
-     *
-     * @throws AssertionFailedException
+     * @return void
+     * @throws \Assert\AssertionFailedException
      */
     static public function same($value, $value2, $message = null, $propertyPath = null)
     {
@@ -112,8 +112,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function integer($value, $message = null, $propertyPath = null)
     {
@@ -127,8 +128,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function digit($value, $message = null, $propertyPath = null)
     {
@@ -139,11 +141,11 @@ class Assertion
 
     /**
      * Assert that value is a php integer'ish.
-     *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function integerish($value, $message = null, $propertyPath = null)
     {
@@ -157,8 +159,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function boolean($value, $message = null, $propertyPath = null)
     {
@@ -172,8 +175,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function notEmpty($value, $message = null, $propertyPath = null)
     {
@@ -187,8 +191,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function notNull($value, $message = null, $propertyPath = null)
     {
@@ -202,8 +207,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function string($value, $message = null, $propertyPath = null)
     {
@@ -218,8 +224,9 @@ class Assertion
      * @param mixed $value
      * @param string $regex
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function regex($value, $regex, $message = null, $propertyPath = null)
     {
@@ -236,9 +243,9 @@ class Assertion
      * @param mixed $value
      * @param int $length
      * @param string $message
-     * @param string $message
-     *
-     * @throws Assert\AssertionFailedException
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
      */
     static public function length($value, $length, $message = null, $propertyPath = null)
     {
@@ -255,8 +262,9 @@ class Assertion
      * @param mixed $value
      * @param int $minLength
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function minLength($value, $minLength, $message = null, $propertyPath = null)
     {
@@ -273,8 +281,9 @@ class Assertion
      * @param mixed $value
      * @param integer $maxLength
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function maxLength($value, $maxLength, $message = null, $propertyPath = null)
     {
@@ -292,8 +301,9 @@ class Assertion
      * @param integer $minLength
      * @param integer $maxLength
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
     {
@@ -314,8 +324,9 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function startsWith($string, $needle, $message = null, $propertyPath = null)
     {
@@ -332,8 +343,9 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function contains($string, $needle, $message = null, $propertyPath = null)
     {
@@ -350,8 +362,9 @@ class Assertion
      * @param mixed $value
      * @param array $choices
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function choice($value, array $choices, $message = null, $propertyPath = null)
     {
@@ -363,7 +376,7 @@ class Assertion
     /**
      * Alias of {@see choice()}
      *
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function inArray($value, array $choices, $message = null, $propertyPath = null)
     {
@@ -375,8 +388,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message;
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function numeric($value, $message = null, $propertyPath = null)
     {
@@ -390,8 +404,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message;
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function isArray($value, $message = null, $propertyPath = null)
     {
@@ -406,8 +421,9 @@ class Assertion
      * @param mixed $value
      * @param string|integer $key
      * @param string $message;
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function keyExists($value, $key, $message = null, $propertyPath = null)
     {
@@ -423,8 +439,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message;
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function notBlank($value, $message = null, $propertyPath = null)
     {
@@ -439,8 +456,9 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function isInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
@@ -455,8 +473,9 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function subclassOf($value, $className, $message = null, $propertyPath = null)
     {
@@ -471,8 +490,10 @@ class Assertion
      * @param mixed $value
      * @param integer $minValue
      * @param integer $maxValue
+     * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
     {
@@ -483,6 +504,16 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that a value is at least as big as a given limit
+     *
+     * @param mixed $value
+     * @param mixed $minValue
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
     static public function min($value, $minValue, $message = null, $propertyPath = null)
     {
         static::integer($value);
@@ -492,6 +523,16 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that a number is smaller as a given limit
+     *
+     * @param mixed $value
+     * @param mixed $maxValue
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
     static public function max($value, $maxValue, $message = null, $propertyPath = null)
     {
         static::integer($value);
@@ -501,6 +542,15 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that a file exists
+     *
+     * @param string $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
     static public function file($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
@@ -511,6 +561,15 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that a directory exists
+     *
+     * @param string $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
     static public function directory($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
@@ -520,6 +579,15 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that the value is something readable
+     *
+     * @param string $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
     static public function readable($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
@@ -529,12 +597,21 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that the value is something writeable
+     *
+     * @param string $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
     static public function writeable($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
         if ( ! is_writeable($value)) {
-            throw static::createException($message, static::INVALID_WRITEABLE);
+            throw static::createException($message, static::INVALID_WRITEABLE, $propertyPath);
         }
     }
 
@@ -544,8 +621,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function email($value, $message = null, $propertyPath = null)
     {
@@ -558,7 +636,7 @@ class Assertion
 
             if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
                 // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
-                throw static::createException($message, static::INVALID_EMAIL);
+                throw static::createException($message, static::INVALID_EMAIL, $propertyPath);
             }
         }
     }
@@ -568,8 +646,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function alnum($value, $message = null, $propertyPath = null)
     {
@@ -585,8 +664,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function true($value, $message = null, $propertyPath = null)
     {
@@ -600,8 +680,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string $message
+     * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function false($value, $message = null, $propertyPath = null)
     {
@@ -617,7 +698,7 @@ class Assertion
      * @param string $message
      * @param string $propertyPath
      * @return void
-     * @throws Assert\AssertionFailedException
+     * @throws \Assert\AssertionFailedException
      */
     static public function classExists($value, $message = null, $propertyPath = null)
     {
