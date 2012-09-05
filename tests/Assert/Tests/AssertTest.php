@@ -390,6 +390,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
         Assertion::length("asdf", 3);
     }
+
+    public function testDirectory()
+    {
+        Assertion::directory(__DIR__);
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DIRECTORY);
+        Assertion::directory(__DIR__ . '/does-not-exist');
+    }
 }
 
 class ChildStdClass extends \stdClass
