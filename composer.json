@@ -5,6 +5,9 @@
         {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
     ],
     "keywords": ["assert", "assertion", "validation"],
+    "required": {
+        "ext-mbstring": "*"
+    },
     "autoload": {
         "psr-0": {
             "Assert": "lib/"
