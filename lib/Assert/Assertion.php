@@ -63,13 +63,6 @@ class Assertion
     static protected $exceptionClass = 'Assert\InvalidArgumentException';
 
     /**
-     * The encoding used for the multibyte string operations
-     *
-     * @var string
-     */
-    static protected $encoding = 'utf8';
-
-    /**
      * Helper method that handles building the assertion failure exceptions.
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
@@ -78,16 +71,6 @@ class Assertion
     {
         $exceptionClass = static::$exceptionClass;
         return new $exceptionClass($message, $code, $propertyPath);
-    }
-
-    /**
-     * Sets the internal encoding used for the checks
-     *
-     * @param $encoding
-     */
-    static public function setEncoding($encoding)
-    {
-        static::$encoding = $encoding;
     }
 
     /**
@@ -268,7 +251,7 @@ class Assertion
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, static::$encoding) != $length) {
+        if (mb_strlen($value, 'utf8') != $length) {
             throw static::createException($message, static::INVALID_LENGTH, $propertyPath);
         }
     }
@@ -287,7 +270,7 @@ class Assertion
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, static::$encoding) < $minLength) {
+        if (mb_strlen($value, 'utf8') < $minLength) {
             throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
     }
@@ -306,7 +289,7 @@ class Assertion
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, static::$encoding) > $maxLength) {
+        if (mb_strlen($value, 'utf8') > $maxLength) {
             throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
@@ -326,11 +309,11 @@ class Assertion
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, static::$encoding) < $minLength) {
+        if (mb_strlen($value, 'utf8') < $minLength) {
             throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
 
-        if (mb_strlen($value, static::$encoding) > $maxLength) {
+        if (mb_strlen($value, 'utf8') > $maxLength) {
             throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
@@ -349,7 +332,7 @@ class Assertion
     {
         static::string($string);
 
-        if (mb_strpos($string, $needle, null, static::$encoding) !== 0) {
+        if (mb_strpos($string, $needle, null, 'utf8') !== 0) {
             throw static::createException($message, static::INVALID_STRING_START, $propertyPath);
         }
     }
@@ -368,7 +351,7 @@ class Assertion
     {
         static::string($string);
 
-        if (mb_strpos($string, $needle, null, static::$encoding) === false) {
+        if (mb_strpos($string, $needle, null, 'utf8') === false) {
             throw static::createException($message, static::INVALID_STRING_CONTAINS, $propertyPath);
         }
     }
