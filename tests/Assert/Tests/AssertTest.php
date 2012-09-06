@@ -179,6 +179,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::startsWith("foo", "bar");
     }
 
+    public function testInvalidStartsWithDueToWrongEncoding()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_START);
+        Assertion::startsWith("址", "址址", null, null, 'ASCII');
+    }
+
     public function testValidStartsWith()
     {
         Assertion::startsWith("foo", "foo");
@@ -459,6 +465,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
         Assertion::length("asdf", 3);
+    }
+
+    public function testLengthFailedForWrongEncoding()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
+        Assertion::length("址", 1, null, null, 'ASCII');
+    }
+
+    public function testLengthValidForGivenEncoding()
+    {
+        Assertion::length("址", 1, null, null, 'utf8');
     }
 
     public function testFile()
