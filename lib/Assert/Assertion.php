@@ -242,16 +242,17 @@ class Assertion
      *
      * @param mixed $value
      * @param int $length
+     * @param string $encoding
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function length($value, $length, $message = null, $propertyPath = null)
+    static public function length($value, $length, $encoding = 'utf8', $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, 'utf8') != $length) {
+        if (mb_strlen($value, $encoding) != $length) {
             throw static::createException($message, static::INVALID_LENGTH, $propertyPath);
         }
     }
@@ -261,16 +262,17 @@ class Assertion
      *
      * @param mixed $value
      * @param int $minLength
+     * @param string $encoding
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function minLength($value, $minLength, $message = null, $propertyPath = null)
+    static public function minLength($value, $minLength, $encoding = 'uft8', $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, 'utf8') < $minLength) {
+        if (mb_strlen($value, $encoding) < $minLength) {
             throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
     }
@@ -280,16 +282,17 @@ class Assertion
      *
      * @param mixed $value
      * @param integer $maxLength
+     * @param string $encoding
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function maxLength($value, $maxLength, $message = null, $propertyPath = null)
+    static public function maxLength($value, $maxLength, $encoding = 'utf8', $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, 'utf8') > $maxLength) {
+        if (mb_strlen($value, $encoding) > $maxLength) {
             throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
@@ -300,20 +303,21 @@ class Assertion
      * @param mixed $value
      * @param integer $minLength
      * @param integer $maxLength
+     * @param string $encoding
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
+    static public function betweenLength($value, $minLength, $maxLength, $encoding = 'utf8', $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
-        if (mb_strlen($value, 'utf8') < $minLength) {
+        if (mb_strlen($value, $encoding) < $minLength) {
             throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
 
-        if (mb_strlen($value, 'utf8') > $maxLength) {
+        if (mb_strlen($value, $encoding) > $maxLength) {
             throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
@@ -323,16 +327,17 @@ class Assertion
      *
      * @param mixed $string
      * @param string $needle
+     * @param string $encoding
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function startsWith($string, $needle, $message = null, $propertyPath = null)
+    static public function startsWith($string, $needle, $encoding = 'utf8', $message = null, $propertyPath = null)
     {
         static::string($string);
 
-        if (mb_strpos($string, $needle, null, 'utf8') !== 0) {
+        if (mb_strpos($string, $needle, null, $encoding) !== 0) {
             throw static::createException($message, static::INVALID_STRING_START, $propertyPath);
         }
     }
@@ -342,16 +347,17 @@ class Assertion
      *
      * @param mixed $string
      * @param string $needle
+     * @param string $encoding
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function contains($string, $needle, $message = null, $propertyPath = null)
+    static public function contains($string, $needle, $encoding = 'utf8', $message = null, $propertyPath = null)
     {
         static::string($string);
 
-        if (mb_strpos($string, $needle, null, 'utf8') === false) {
+        if (mb_strpos($string, $needle, null, $encoding) === false) {
             throw static::createException($message, static::INVALID_STRING_CONTAINS, $propertyPath);
         }
     }
