@@ -99,7 +99,7 @@ Remember: When a configuration parameter is necessary, it is always passed AFTER
 
 ## Exception & Error Handling
 
-If any of the assertions fails a `Assert\AssertionFailedException` is thrown. You can pass a last argument to any assertion to control the message. Every exception contains a message code by default.
+If any of the assertions fails a `Assert\AssertionFailedException` is thrown. You can pass an argument called ```$message``` to any assertion to control the exception message. Every exception contains a message code by default.
 
     <?php
     use Assert\Assertion;
