@@ -138,6 +138,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::minLength("foo", 1);
         Assertion::minLength("foo", 0);
         Assertion::minLength("", 0);
+        Assertion::minLength("址址", 2);
     }
 
     public function testInvalidMaxLength()
@@ -151,6 +152,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::maxLength("foo", 10);
         Assertion::maxLength("foo", 3);
         Assertion::maxLength("", 0);
+        Assertion::maxLength("址址", 2);
     }
 
     public function testInvalidBetweenLengthMin()
@@ -168,6 +170,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testValidBetweenLength()
     {
         Assertion::betweenLength("foo", 0, 3);
+        Assertion::betweenLength("址址", 2, 2);
     }
 
     public function testInvalidStartsWith()
@@ -176,11 +179,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::startsWith("foo", "bar");
     }
 
+    public function testInvalidStartsWithDueToWrongEncoding()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_START);
+        Assertion::startsWith("址", "址址", null, null, 'ASCII');
+    }
+
     public function testValidStartsWith()
     {
         Assertion::startsWith("foo", "foo");
         Assertion::startsWith("foo", "fo");
         Assertion::startsWith("foo", "f");
+        Assertion::startsWith("址foo", "址");
     }
 
     public function testInvalidContains()
@@ -435,10 +445,37 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::length("", 0);
     }
 
+    public function dataLengthUtf8Characters()
+    {
+        return array(
+            array("址", 1),
+            array("ل", 1),
+        );
+    }
+
+    /**
+     * @dataProvider dataLengthUtf8Characters
+     */
+    public function testLenghtUtf8Characters($value, $expected)
+    {
+        Assertion::length($value, $expected);
+    }
+
     public function testLengthFailed()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
         Assertion::length("asdf", 3);
+    }
+
+    public function testLengthFailedForWrongEncoding()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
+        Assertion::length("址", 1, null, null, 'ASCII');
+    }
+
+    public function testLengthValidForGivenEncoding()
+    {
+        Assertion::length("址", 1, null, null, 'utf8');
     }
 
     public function testFile()
