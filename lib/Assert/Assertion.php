@@ -268,7 +268,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function minLength($value, $minLength, $encoding = 'uft8', $message = null, $propertyPath = null)
+    static public function minLength($value, $minLength, $encoding = 'utf8', $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 

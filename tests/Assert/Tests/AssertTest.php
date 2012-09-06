@@ -452,7 +452,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testLenghtUtf8Characters($value, $expected)
     {
-        Assertion::length($value, $expected, "expected lenght of value '{$value}' is '{$expected}'");
+        Assertion::length($value, $expected);
     }
 
     public function testLengthFailed()
