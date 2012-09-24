@@ -350,18 +350,42 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::digit("0");
     }
 
-    public function testValidAlnum()
+	public function dataValidAlnum()
+	{
+		return array(
+			array("a"), 
+			array("a1"),
+			array("aaaadf2143"),
+			array("a1b2c3"), 
+			array("8a91ffd925a11f6e3fc666d83e6de9de2b6ae5b1")
+		); 
+ 	}
+
+	/**
+      * @dataProvider dataValidAlnum
+      */
+    public function testValidAlnum($string)
     {
-        Assertion::alnum("a");
-        Assertion::alnum("a1");
-        Assertion::alnum("aasdf1234");
-        Assertion::alnum("a1b2c3");
+        Assertion::alnum($string);
     }
 
-    public function testInvalidAlnum()
+	public function dataInvalidAlnum ()
+    {
+		return array(
+			array("!!!"), 
+			array("aklsfj@"), 
+			array("東京"), 
+			array("")
+		); 
+    }
+
+	/**
+      * @dataProvider dataInvalidAlnum
+      */
+    public function testInvalidAlnum($string)
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_ALNUM);
-        Assertion::alnum("1a");
+        Assertion::alnum($string);
     }
 
     public function testValidTrue()
