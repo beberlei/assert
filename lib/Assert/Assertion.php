@@ -658,7 +658,7 @@ class Assertion
      */
     static public function alnum($value, $message = null, $propertyPath = null)
     {
-        if (ctype_alnum($value) !== true) {
+        if ( ! ctype_alnum($value)) {
                throw static::createException($message, static::INVALID_ALNUM, $propertyPath);
         }
     }
