@@ -350,18 +350,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::digit("0");
     }
 
-	public function dataValidAlnum()
-	{
-		return array(
-			array("a"), 
-			array("a1"),
-			array("aaaadf2143"),
-			array("a1b2c3"), 
-			array("8a91ffd925a11f6e3fc666d83e6de9de2b6ae5b1")
-		); 
- 	}
+    public function dataValidAlnum()
+    {
+        return array(
+            array("a"), 
+            array("a1"),
+            array("aaaadf2143"),
+            array("a1b2c3"), 
+            array("8a91ffd925a11f6e3fc666d83e6de9de2b6ae5b1")
+        ); 
+     }
 
-	/**
+    /**
       * @dataProvider dataValidAlnum
       */
     public function testValidAlnum($string)
@@ -369,17 +369,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::alnum($string);
     }
 
-	public function dataInvalidAlnum ()
+    public function dataInvalidAlnum ()
     {
-		return array(
-			array("!!!"), 
-			array("aklsfj@"), 
-			array("東京"), 
-			array("")
-		); 
+        return array(
+            array("!!!"), 
+            array("aklsfj@"), 
+            array("東京"), 
+            array("")
+        ); 
     }
 
-	/**
+    /**
       * @dataProvider dataInvalidAlnum
       */
     public function testInvalidAlnum($string)
