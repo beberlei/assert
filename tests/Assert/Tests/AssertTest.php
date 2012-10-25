@@ -527,6 +527,36 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::NullOrAssertionDoesNotExist();
     }
+
+    public function testImplementsInterface()
+    {
+        Assertion::implementsInterface(
+            '\ArrayIterator',
+            '\Traversable'
+        );
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INTERFACE_NOT_IMPLEMENTED);
+        Assertion::implementsInterface(
+            '\Exception',
+            '\Traversable'
+        );
+    }
+
+    public function testImplementsInterfaceWithClassObject()
+    {
+        $class = new \ArrayObject();
+
+        Assertion::implementsInterface(
+            $class,
+            '\Traversable'
+        );
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INTERFACE_NOT_IMPLEMENTED);
+        Assertion::implementsInterface(
+            $class,
+            '\SplObserver'
+        );
+    }
 }
 
 class ChildStdClass extends \stdClass

@@ -94,6 +94,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::max($value, $max);
     Assertion::eq($actual, $expected);
     Assertion::same($actual, $expected);
+    Assertion::implementsInterface($value, $interfaceName);
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.
 
