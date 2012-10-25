@@ -659,9 +659,7 @@ class Assertion
      */
     static public function alnum($value, $message = null, $propertyPath = null)
     {
-        try {
-            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)');
-        } catch(AssertionFailedException $e) {
+        if ( ! ctype_alnum($value)) {
             throw static::createException($message, static::INVALID_ALNUM, $propertyPath);
         }
     }
