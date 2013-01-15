@@ -557,10 +557,24 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             '\SplObserver'
         );
     }
+
+    public function testValidKeyExistsForArrayAccess()
+    {
+        $obj = new ArrayAccessImpl();
+        Assertion::keyExists($obj, "key");
+    }
 }
 
 class ChildStdClass extends \stdClass
 {
 
+}
+
+class ArrayAccessImpl extends \ArrayObject
+{
+    public function __construct()
+    {
+        parent::__construct(array('key' => 1));
+    }
 }
 
