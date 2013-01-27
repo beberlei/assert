@@ -55,6 +55,7 @@ class Assertion
     const INVALID_CLASS             = 105;
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
+    const INVALID_URL               = 203;
 
     /**
      * Exception to throw when an assertion failed.
@@ -646,6 +647,26 @@ class Assertion
                 throw static::createException($message, static::INVALID_EMAIL, $propertyPath);
             }
         }
+    }
+
+    /**
+     * Assert that value is an URL (using
+     * input_filter/FILTER_VALIDATE_URL).
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function url($value, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if ( !filter_var($value, FILTER_VALIDATE_URL)) {
+            throw static::createException($message, static::INVALID_URL, $propertyPath);
+        }
+
     }
 
     /**

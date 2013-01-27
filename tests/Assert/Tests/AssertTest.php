@@ -337,6 +337,27 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::email("123hello+world@email.provider.com");
     }
 
+    /**
+     * @dataProvider invalidUrlDataprovider
+     */
+    public function testInvalidUrl($url)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_URL);
+        Assertion::url($url);
+    }
+    public static function invalidUrlDataprovider()
+    {
+        return array(
+            'empty string' => array(""),
+            'no protocol' => array("url.de"),
+        );
+    }
+
+    public function testValidUrl()
+    {
+        Assertion::url("http://example.org");
+    }
+
     public function testInvalidDigit()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DIGIT);
