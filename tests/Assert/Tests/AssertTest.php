@@ -343,19 +343,38 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testInvalidUrl($url)
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_URL);
+
         Assertion::url($url);
     }
     public static function invalidUrlDataprovider()
     {
         return array(
-            'empty string' => array(""),
-            'no protocol' => array("url.de"),
+            'null value' => array(""),
+            'empty string' => array(" "),
+            'no scheme' => array("url.de"),
+            'unsupported scheme' => array("git://url.de"),
+            'Http with query (no / between tld und ?)' => array("http://example.org?do=something"),
+            'Http with query and port (no / between port und ?)' => array("http://example.org:8080?do=something"),
         );
     }
 
-    public function testValidUrl()
+    /**
+     * @dataProvider validUrlDataprovider
+     */
+    public function testValidUrl($url)
     {
-        Assertion::url("http://example.org");
+        Assertion::url($url);
+    }
+    public static function validUrlDataprovider()
+    {
+        return array(
+            'straight with Http' => array("http://example.org"),
+            'Http with path' => array("http://example.org/do/something"),
+            'Http with query' => array("http://example.org/index.php?do=something"),
+            'Http with port' => array("http://example.org:8080"),
+            'Http with all possibilities' => array("http://example.org:8080/do/something/index.php?do=something"),
+            'straight with Https' => array("https://example.org"),
+        );
     }
 
     public function testInvalidDigit()
