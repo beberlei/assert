@@ -6,7 +6,8 @@
     ],
     "keywords": ["assert", "assertion", "validation"],
     "require": {
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "seld/jsonlint": "*"
     },
     "autoload": {
         "psr-0": {

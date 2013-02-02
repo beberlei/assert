@@ -597,6 +597,48 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             '\SplObserver'
         );
     }
+    
+    /**
+     * @dataProvider invalidJsonProvider
+     */
+    public function testInvalidIsJson($invalidJson)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_JSON);
+        Assertion::isJson($invalidJson);
+    }
+    /**
+     * @dataProvider validJsonProvider
+     */
+    public function testValidIsJson($validJson)
+    {
+        Assertion::isJson($validJson);
+    }
+    /**
+     * @return array
+     */
+    public function invalidJsonProvider()
+    {
+        return array(
+          array('['),
+          array('{'),
+          array('{}}'),
+          array(null),
+          array('{"foo":"bar",}'),
+        );
+    }
+    /**
+     * @return array
+     */
+    public function validJsonProvider()
+    {
+        return array(
+          array('-1525.21'),
+          array('["a", "sdfsd"]'),
+          array('{"test":"http:\/\/foo\\\\zomg"}'),
+          array('null'),
+          array('{"test":"\u00c9v\u00e9nement"}'),
+        );
+    }
 }
 
 class ChildStdClass extends \stdClass
