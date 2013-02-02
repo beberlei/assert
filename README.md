@@ -66,6 +66,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::boolean($value);
     Assertion::notEmpty($value);
     Assertion::notNull($value);
+    Assertion::string($value);
     Assertion::regex($value, $regex);
     Assertion::length($value, $length);
     Assertion::minLength($value, $length);
@@ -87,6 +88,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::readable($value);
     Assertion::writeable($value);
     Assertion::email($value);
+    Assertion::url($value);
     Assertion::alnum($value);
     Assertion::true($value);
     Assertion::false($value);
