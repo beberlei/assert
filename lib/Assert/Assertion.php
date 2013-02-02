@@ -13,6 +13,8 @@
 
 namespace Assert;
 
+use Seld\JsonLint\JsonParser;
+
 /**
  * Assert library
  *
@@ -56,6 +58,7 @@ class Assertion
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
+    const INVALID_JSON              = 204;
 
     /**
      * Exception to throw when an assertion failed.
@@ -774,6 +777,25 @@ class Assertion
         $reflection = new \ReflectionClass($class);
         if ( ! $reflection->implementsInterface($interfaceName)) {
             throw static::createException($message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath);
+        }
+    }
+    
+    /**
+     * Assert that value is valid JSON.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function isJson($value, $message = null, $propertyPath = null)
+    {
+        $parser = new JsonParser;
+        $jsonLintResult = $parser->lint($value);
+        
+        if ($jsonLintResult !== null) {
+            throw static::createException($message, static::INVALID_JSON, $propertyPath);
         }
     }
 
