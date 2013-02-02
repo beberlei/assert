@@ -395,7 +395,7 @@ class Assertion
      * Assert that value is numeric.
      *
      * @param mixed $value
-     * @param string $message;
+     * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
@@ -411,7 +411,7 @@ class Assertion
      * Assert that value is array.
      *
      * @param mixed $value
-     * @param string $message;
+     * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
@@ -428,7 +428,7 @@ class Assertion
      *
      * @param mixed $value
      * @param string|integer $key
-     * @param string $message;
+     * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
@@ -446,7 +446,7 @@ class Assertion
      * Assert that value is not blank
      *
      * @param mixed $value
-     * @param string $message;
+     * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
@@ -764,6 +764,7 @@ class Assertion
      *
      * @param mixed $class
      * @param string $interfaceName
+     * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
