@@ -488,7 +488,7 @@ class Assertion
      */
     static public function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
-        if ( ($value instanceof $className)) {
+        if ($value instanceof $className) {
             throw static::createException($message, static::INVALID_NOT_INSTANCE_OF, $propertyPath);
         }
     }
