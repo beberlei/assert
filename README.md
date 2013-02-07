@@ -81,6 +81,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::keyExists($value, $key);
     Assertion::notBlank($value);
     Assertion::isInstanceOf($value, $className);
+    Assertion::notIsInstanceOf($value, $className);
     Assertion::classExists($value);
     Assertion::subclassOf($value, $className);
     Assertion::directory($value);
