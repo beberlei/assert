@@ -291,6 +291,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notBlank("foo");
     }
 
+    public function testInvalidNotInstanceOf()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_INSTANCE_OF);
+        Assertion::notIsInstanceOf(new \stdClass, 'stdClass');
+    }
+
+    public function testValidNotIsInstanceOf()
+    {
+        Assertion::notIsInstanceOf(new \stdClass, 'PDO');
+    }
+
     public function testInvalidInstanceOf()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INSTANCE_OF);

@@ -56,6 +56,7 @@ class Assertion
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
+    const INVALID_NOT_INSTANCE_OF   = 204;
 
     /**
      * Exception to throw when an assertion failed.
@@ -472,6 +473,23 @@ class Assertion
     {
         if ( ! ($value instanceof $className)) {
             throw static::createException($message, static::INVALID_INSTANCE_OF, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is not instance of given class-name.
+     *
+     * @param mixed $value
+     * @param string $className
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
+    {
+        if ( ($value instanceof $className)) {
+            throw static::createException($message, static::INVALID_NOT_INSTANCE_OF, $propertyPath);
         }
     }
 
