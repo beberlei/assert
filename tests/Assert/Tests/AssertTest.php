@@ -99,6 +99,35 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notEmpty( array("foo") );
     }
 
+    public function testEmpty()
+    {
+        Assertion::noContent("");
+        Assertion::noContent(0);
+        Assertion::noContent(false);
+        Assertion::noContent( array() );
+    }
+
+    static public function dataInvalidEmpty()
+    {
+        return array(
+            array("foo"),
+            array(true),
+            array(12),
+            array( array('foo') ),
+            array( new \stdClass() ),
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalidEmpty
+     */
+    public function testInvalidEmpty($value)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NOT_EMPTY);
+        Assertion::noContent($value);
+
+    }
+
     public function testNotNull()
     {
         Assertion::notNull("1");

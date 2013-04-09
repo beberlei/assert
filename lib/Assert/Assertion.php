@@ -56,6 +56,7 @@ class Assertion
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
+    const VALUE_NOT_EMPTY          = 204;
 
     /**
      * Exception to throw when an assertion failed.
@@ -185,6 +186,22 @@ class Assertion
     {
         if (empty($value)) {
             throw static::createException($message, static::VALUE_EMPTY, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is empty
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function noContent($value, $message = null, $propertyPath = null)
+    {
+        if (!empty($value)) {
+            throw static::createException($message, static::VALUE_NOT_EMPTY, $propertyPath);
         }
     }
 
