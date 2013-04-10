@@ -65,6 +65,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::range($value, $minValue, $maxValue);
     Assertion::boolean($value);
     Assertion::notEmpty($value);
+    Assertion::noContent($value);
     Assertion::notNull($value);
     Assertion::string($value);
     Assertion::regex($value, $regex);
