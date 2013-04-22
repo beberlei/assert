@@ -338,7 +338,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidUrlDataprovider
+     * @dataProvider dataInvalidUrl
      */
     public function testInvalidUrl($url)
     {
@@ -346,7 +346,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
         Assertion::url($url);
     }
-    public static function invalidUrlDataprovider()
+
+    public static function dataInvalidUrl()
     {
         return array(
             'null value' => array(""),
@@ -359,13 +360,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider validUrlDataprovider
+     * @dataProvider dataValidUrl
      */
     public function testValidUrl($url)
     {
         Assertion::url($url);
     }
-    public static function validUrlDataprovider()
+
+    public static function dataValidUrl()
     {
         return array(
             'straight with Http' => array("http://example.org"),
