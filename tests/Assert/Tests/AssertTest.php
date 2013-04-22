@@ -5,7 +5,7 @@ use Assert\Assertion;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
-    static public function dataInvalidInteger()
+    public static function dataInvalidInteger()
     {
         return array(
             array(1.23),
@@ -38,7 +38,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::integerish("10");
     }
 
-    static public function dataInvalidIntegerish()
+    public static function dataInvalidIntegerish()
     {
         return array(
             array(1.23),
@@ -47,7 +47,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(null),
             array("1.23"),
         );
-
     }
 
     /**
@@ -71,7 +70,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::boolean(1);
     }
 
-    static public function dataInvalidNotEmpty()
+    public static function dataInvalidNotEmpty()
     {
         return array(
             array(""),
@@ -112,6 +111,33 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NULL);
         Assertion::notNull(null);
+    }
+
+    public function testString()
+    {
+        Assertion::string("test-string");
+        Assertion::string("");
+    }
+
+    /**
+     * @dataProvider dataInvalidString
+     */
+    public function testInvalidString($invalidString)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
+        Assertion::string($invalidString);
+    }
+
+    public static function dataInvalidString()
+    {
+        return array(
+            array(1.23),
+            array(false),
+            array(new \ArrayObject),
+            array(null),
+            array(10),
+            array(true),
+        );
     }
 
     public function testInvalidRegex()
@@ -240,7 +266,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric(1.23);
     }
 
-    static public function dataInvalidArray()
+    public static function dataInvalidArray()
     {
         return array(
             array(null),
@@ -338,7 +364,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidUrlDataprovider
+     * @dataProvider dataInvalidUrl
      */
     public function testInvalidUrl($url)
     {
@@ -346,7 +372,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
         Assertion::url($url);
     }
-    public static function invalidUrlDataprovider()
+
+    public static function dataInvalidUrl()
     {
         return array(
             'null value' => array(""),
@@ -359,13 +386,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider validUrlDataprovider
+     * @dataProvider dataValidUrl
      */
     public function testValidUrl($url)
     {
         Assertion::url($url);
     }
-    public static function validUrlDataprovider()
+
+    public static function dataValidUrl()
     {
         return array(
             'straight with Http' => array("http://example.org"),
@@ -485,7 +513,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::length("", 0);
     }
 
-    public function dataLengthUtf8Characters()
+    public static function dataLengthUtf8Characters()
     {
         return array(
             array("址", 1),
