@@ -5,7 +5,7 @@ use Assert\Assertion;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
-    static public function dataInvalidInteger()
+    public static function dataInvalidInteger()
     {
         return array(
             array(1.23),
@@ -38,7 +38,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::integerish("10");
     }
 
-    static public function dataInvalidIntegerish()
+    public static function dataInvalidIntegerish()
     {
         return array(
             array(1.23),
@@ -71,7 +71,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::boolean(1);
     }
 
-    static public function dataInvalidNotEmpty()
+    public static function dataInvalidNotEmpty()
     {
         return array(
             array(""),
@@ -240,7 +240,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric(1.23);
     }
 
-    static public function dataInvalidArray()
+    public static function dataInvalidArray()
     {
         return array(
             array(null),
@@ -338,7 +338,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidUrlDataprovider
+     * @dataProvider dataInvalidUrl
      */
     public function testInvalidUrl($url)
     {
@@ -346,7 +346,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
         Assertion::url($url);
     }
-    public static function invalidUrlDataprovider()
+
+    public static function dataInvalidUrl()
     {
         return array(
             'null value' => array(""),
@@ -359,13 +360,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider validUrlDataprovider
+     * @dataProvider dataValidUrl
      */
     public function testValidUrl($url)
     {
         Assertion::url($url);
     }
-    public static function validUrlDataprovider()
+
+    public static function dataValidUrl()
     {
         return array(
             'straight with Http' => array("http://example.org"),
