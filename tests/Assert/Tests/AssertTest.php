@@ -114,6 +114,33 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notNull(null);
     }
 
+    public function testString()
+    {
+        Assertion::string("test-string");
+        Assertion::string("");
+    }
+
+    /**
+     * @dataProvider dataInvalidString
+     */
+    public function testInvalidString($invalidString)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
+        Assertion::string($invalidString);
+    }
+
+    public static function dataInvalidString()
+    {
+        return array(
+            array(1.23),
+            array(false),
+            array(new \ArrayObject),
+            array(null),
+            array(10),
+            array(true),
+        );
+    }
+
     public function testInvalidRegex()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_REGEX);
