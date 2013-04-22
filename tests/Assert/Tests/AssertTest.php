@@ -513,7 +513,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::length("", 0);
     }
 
-    public function dataLengthUtf8Characters()
+    public static function dataLengthUtf8Characters()
     {
         return array(
             array("址", 1),
