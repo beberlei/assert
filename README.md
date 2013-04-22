@@ -73,6 +73,7 @@ Real time usage with [Azure Blob Storage](https://github.com/beberlei/azure-blob
     Assertion::maxLength($value, $length);
     Assertion::betweenLength($value, $minLength, $maxLength);
     Assertion::startsWith($value, $needle);
+    Assertion::endsWith($value, $needle);
     Assertion::isArray($value);
     Assertion::contains($value, $needle);
     Assertion::choice($value, $choices);

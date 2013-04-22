@@ -219,6 +219,26 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::startsWith("址foo", "址");
     }
 
+    public function testInvalidEndsWith()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_END);
+        Assertion::endsWith("foo", "bar");
+    }
+
+    public function testInvalidEndsWithDueToWrongEncoding()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_END);
+        Assertion::endsWith("址", "址址", null, null, 'ASCII');
+    }
+
+    public function testValidEndsWith()
+    {
+        Assertion::endsWith("foo", "foo");
+        Assertion::endsWith("sonderbar", "bar");
+        Assertion::endsWith("opp", "p");
+        Assertion::endsWith("foo址", "址");
+    }
+
     public function testInvalidContains()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_CONTAINS);
