@@ -47,7 +47,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(null),
             array("1.23"),
         );
-
     }
 
     /**
@@ -107,7 +106,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::noContent( array() );
     }
 
-    static public function dataInvalidEmpty()
+    public static function dataInvalidEmpty()
     {
         return array(
             array("foo"),
@@ -125,7 +124,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NOT_EMPTY);
         Assertion::noContent($value);
-
     }
 
     public function testNotNull()

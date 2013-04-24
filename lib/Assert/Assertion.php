@@ -56,7 +56,7 @@ class Assertion
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
-    const VALUE_NOT_EMPTY          = 204;
+    const VALUE_NOT_EMPTY           = 204;
 
     /**
      * Exception to throw when an assertion failed.
