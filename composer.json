@@ -4,6 +4,7 @@
     "authors": [
         {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
     ],
+    "license": "BSD-2-Clause",
     "keywords": ["assert", "assertion", "validation"],
     "require": {
         "ext-mbstring": "*"
