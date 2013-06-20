@@ -406,7 +406,7 @@ class Assertion
     }
 
     /**
-     * Assert that string contains a sequence of chars.
+     * Assert that value is in array of choices.
      *
      * @param mixed $value
      * @param array $choices
