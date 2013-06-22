@@ -476,7 +476,9 @@ class Assertion
      */
     static public function keyExists($value, $key, $message = null, $propertyPath = null)
     {
-        static::isArray($value);
+        if ( ! $value instanceof \ArrayObject) {
+            static::isArray($value);
+        }
 
         if ( ! array_key_exists($key, $value)) {
             throw static::createException($message, static::INVALID_KEY_EXISTS, $propertyPath);
