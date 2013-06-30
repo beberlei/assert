@@ -684,10 +684,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             '\SplObserver'
         );
     }
+
+    public function testIsJsonString()
+    {
+        $validString = json_encode(array('Tux', 'Linus', 'Gnu'));
+        $invalidString = 'invalid json encoded string';
+
+        Assertion::isJsonString($validString);
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_JSON_STRING);
+        Assertion::isJsonString($invalidString);
+    }
 }
 
 class ChildStdClass extends \stdClass
 {
 
 }
-

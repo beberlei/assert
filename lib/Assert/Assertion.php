@@ -59,6 +59,7 @@ class Assertion
     const INVALID_URL               = 203;
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
+    const INVALID_JSON_STRING       = 206;
 
     /**
      * Exception to throw when an assertion failed.
@@ -832,6 +833,28 @@ class Assertion
         $reflection = new \ReflectionClass($class);
         if ( ! $reflection->implementsInterface($interfaceName)) {
             throw static::createException($message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the given string is a valid json string.
+     *
+     * NOTICE:
+     * Since this does a json_decode to determine its validity
+     * you probably should consider, when using the variable
+     * content afterwards, just to decode and check for yourself instead
+     * of using this assertion.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function isJsonString($value, $message = null, $propertyPath = null)
+    {
+        if ( ! json_decode($value)) {
+            throw static::createException($message, static::INVALID_JSON_STRING, $propertyPath);
         }
     }
 
