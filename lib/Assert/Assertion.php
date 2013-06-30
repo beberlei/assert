@@ -59,6 +59,7 @@ class Assertion
     const INVALID_URL               = 203;
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
+    const INVALID_JSON_STRING       = 206;
 
     /**
      * Exception to throw when an assertion failed.
