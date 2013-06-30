@@ -48,6 +48,7 @@ class Assertion
     const INVALID_MAX               = 36;
     const INVALID_LENGTH            = 37;
     const INVALID_FALSE             = 38;
+    const INVALID_STRING_END        = 39;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -56,7 +57,8 @@ class Assertion
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
-    const INVALID_JSON_STRING       = 204;
+    const INVALID_NOT_INSTANCE_OF   = 204;
+    const VALUE_NOT_EMPTY           = 205;
 
     /**
      * Exception to throw when an assertion failed.
@@ -186,6 +188,22 @@ class Assertion
     {
         if (empty($value)) {
             throw static::createException($message, static::VALUE_EMPTY, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is empty
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function noContent($value, $message = null, $propertyPath = null)
+    {
+        if (!empty($value)) {
+            throw static::createException($message, static::VALUE_NOT_EMPTY, $propertyPath);
         }
     }
 
@@ -346,6 +364,28 @@ class Assertion
     }
 
     /**
+     * Assert that string ends with a sequence of chars.
+     *
+     * @param mixed $string
+     * @param string $needle
+     * @param string $message
+     * @param string $propertyPath
+     * @param string $encoding
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function endsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    {
+        static::string($string);
+
+        $stringPosition = mb_strlen($string, $encoding) - mb_strlen($needle, $encoding);
+
+        if (mb_strripos($string, $needle, null, $encoding) !== $stringPosition) {
+            throw static::createException($message, static::INVALID_STRING_END, $propertyPath);
+        }
+    }
+
+    /**
      * Assert that string contains a sequence of chars.
      *
      * @param mixed $string
@@ -366,7 +406,7 @@ class Assertion
     }
 
     /**
-     * Assert that string contains a sequence of chars.
+     * Assert that value is in array of choices.
      *
      * @param mixed $value
      * @param array $choices
@@ -473,6 +513,23 @@ class Assertion
     {
         if ( ! ($value instanceof $className)) {
             throw static::createException($message, static::INVALID_INSTANCE_OF, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is not instance of given class-name.
+     *
+     * @param mixed $value
+     * @param string $className
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
+    {
+        if ($value instanceof $className) {
+            throw static::createException($message, static::INVALID_NOT_INSTANCE_OF, $propertyPath);
         }
     }
 
