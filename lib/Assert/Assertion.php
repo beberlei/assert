@@ -836,9 +836,14 @@ class Assertion
         }
     }
 
-
     /**
      * Assert that the given string is a valid json string.
+     *
+     * NOTICE:
+     * Since this does a json_decode to determine its validity
+     * you probably should consider, when using the variable
+     * content afterwards, just to decode and check for yourself instead
+     * of using this assertion.
      *
      * @param mixed $value
      * @param string $message
@@ -852,7 +857,6 @@ class Assertion
             throw static::createException($message, static::INVALID_JSON_STRING, $propertyPath);
         }
     }
-
 
     /**
      * static call handler to implement "null or assertion" delegation.
