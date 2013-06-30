@@ -71,7 +71,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::boolean(1);
     }
 
-    static public function dataInvalidNotEmpty()
+    public static function dataInvalidNotEmpty()
     {
         return array(
             array(""),
@@ -240,7 +240,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric(1.23);
     }
 
-    static public function dataInvalidArray()
+    public static function dataInvalidArray()
     {
         return array(
             array(null),
@@ -485,7 +485,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::length("", 0);
     }
 
-    public function dataLengthUtf8Characters()
+    public static function dataLengthUtf8Characters()
     {
         return array(
             array("址", 1),
@@ -597,10 +597,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             '\SplObserver'
         );
     }
+
+    public function testIsJsonString()
+    {
+        $validString = json_encode(array('Tux', 'Linus', 'Gnu'));
+        $invalidString = 'invalid json encoded string';
+
+        Assertion::isJsonString($validString);
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_JSON_STRING);
+        Assertion::isJsonString($invalidString);
+    }
 }
 
 class ChildStdClass extends \stdClass
 {
 
 }
-

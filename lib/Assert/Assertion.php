@@ -56,6 +56,7 @@ class Assertion
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
+    const INVALID_JSON_STRING       = 204;
 
     /**
      * Exception to throw when an assertion failed.
@@ -776,6 +777,24 @@ class Assertion
             throw static::createException($message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath);
         }
     }
+
+
+    /**
+     * Assert that the given string is a valid json string.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function isJsonString($value, $message = null, $propertyPath = null)
+    {
+        if ( ! json_decode($value)) {
+            throw static::createException($message, static::INVALID_JSON_STRING, $propertyPath);
+        }
+    }
+
 
     /**
      * static call handler to implement "null or assertion" delegation.
