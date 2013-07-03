@@ -685,16 +685,39 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIsJsonString()
+    /**
+     * @dataProvider isJsonStringDataprovider
+     */
+    public function testIsJsonString($content)
     {
-        $validString = json_encode(array('Tux', 'Linus', 'Gnu'));
-        $invalidString = 'invalid json encoded string';
+        Assertion::isJsonString($content);
+    }
+    public static function isJsonStringDataprovider()
+    {
+        return array(
+            '»null« value' => array(json_encode(null)),
+            '»false« value' => array(json_encode(false)),
+            'array value' => array('["false"]'),
+            'object value' => array('{"tux":"false"}'),
+        );
+    }
 
-        Assertion::isJsonString($validString);
-
+    /**
+     * @dataProvider isJsonStringInvalidStringDataprovider
+     */
+    public function testIsJsonStringExpectingException($invalidString)
+    {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_JSON_STRING);
         Assertion::isJsonString($invalidString);
     }
+    public static function isJsonStringInvalidStringDataprovider()
+    {
+        return array(
+            'no json string' => array('invalid json encoded string'),
+            'error in json string' => array('{invalid json encoded string}'),
+        );
+    }
+
 }
 
 class ChildStdClass extends \stdClass
