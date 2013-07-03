@@ -696,8 +696,9 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             '»null« value' => array(json_encode(null)),
-            '»false« value' => array('{"tux":"false"}'),
+            '»false« value' => array(json_encode(false)),
             'array value' => array('["false"]'),
+            'object value' => array('{"tux":"false"}'),
         );
     }
 
