@@ -853,7 +853,7 @@ class Assertion
      */
     static public function isJsonString($value, $message = null, $propertyPath = null)
     {
-        if ( ! json_decode($value)) {
+        if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
             throw static::createException($message, static::INVALID_JSON_STRING, $propertyPath);
         }
     }
