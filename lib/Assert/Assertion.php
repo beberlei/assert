@@ -49,6 +49,7 @@ class Assertion
     const INVALID_LENGTH            = 37;
     const INVALID_FALSE             = 38;
     const INVALID_STRING_END        = 39;
+    const INVALID_UUID              = 40;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -855,6 +856,30 @@ class Assertion
     {
         if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
             throw static::createException($message, static::INVALID_JSON_STRING, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the given string is a valid UUID
+     *
+     * Uses code from {@link https://github.com/ramsey/uuid} that is MIT licensed.
+     *
+     * @param string $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function uuid($value, $message = null, $propertyPath = null)
+    {
+        $value = str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
+
+        if ($value === '00000000-0000-0000-0000-000000000000') {
+            return;
+        }
+
+        if (!preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[1-5][0-9A-Fa-f]{3}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
+            throw static::createException($message, static::INVALID_UUID, $propertyPath);
         }
     }
 

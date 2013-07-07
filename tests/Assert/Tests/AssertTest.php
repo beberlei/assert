@@ -710,6 +710,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_JSON_STRING);
         Assertion::isJsonString($invalidString);
     }
+
     public static function isJsonStringInvalidStringDataprovider()
     {
         return array(
@@ -718,6 +719,46 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider providesValidUuids
+     */
+    public function testValidUuids($uuid)
+    {
+        Assertion::uuid($uuid);
+    }
+
+    /**
+     * @dataProvider providesInvalidUuids
+     */
+    public function testInvalidUuids($uuid)
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException');
+        Assertion::uuid($uuid);
+    }
+
+    static public function providesValidUuids()
+    {
+        return array(
+            array('ff6f8cb0-c57d-11e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-21e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-31e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-41e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-51e1-9b21-0800200c9a66'),
+            array('FF6F8CB0-C57D-11E1-9B21-0800200C9A66'),
+        );
+    }
+
+    static public function providesInvalidUuids()
+    {
+        return array(
+            array('zf6f8cb0-c57d-11e1-9b21-0800200c9a66'),
+            array('af6f8cb0c57d11e19b210800200c9a66'),
+            array('ff6f8cb0-c57da-51e1-9b21-0800200c9a66'),
+            array('af6f8cb-c57d-11e1-9b21-0800200c9a66'),
+            array('3f6f8cb0-c57d-11e1-9b21-0800200c9a6'),
+            array('ff6f8cb0-c57d-61e1-9b21-0800200c9a66'),
+        );
+    }
 }
 
 class ChildStdClass extends \stdClass
