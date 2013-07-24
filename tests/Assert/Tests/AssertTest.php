@@ -692,6 +692,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::isJsonString($content);
     }
+
     public static function isJsonStringDataprovider()
     {
         return array(
@@ -757,6 +758,28 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('af6f8cb-c57d-11e1-9b21-0800200c9a66'),
             array('3f6f8cb0-c57d-11e1-9b21-0800200c9a6'),
             array('ff6f8cb0-c57d-61e1-9b21-0800200c9a66'),
+        );
+    }
+
+    public function testValidKeyExistsNotEmpty()
+    {
+        Assertion::keyExistsNotEmpty(array('keyExists' => 'notEmpty'), 'keyExists');
+    }
+
+    /**
+     * @dataProvider invalidKeyExistsNotEmptyDataprovider
+     */
+    public function testInvalidKeyExistsNotEmpty($invalidArray, $key)
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException');
+        Assertion::keyExistsNotEmpty($invalidArray, $key);
+    }
+
+    public static function invalidKeyExistsNotEmptyDataprovider()
+    {
+        return array(
+            'empty'          => array(array('keyExists' => ''), 'keyExists'),
+            'key not exists' => array(array('key' => 'notEmpty'), 'keyNotExists')
         );
     }
 }

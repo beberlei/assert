@@ -89,6 +89,7 @@ Assertion::choice($value, $choices);
 Assertion::inArray($value, $choices);
 Assertion::numeric($value);
 Assertion::keyExists($value, $key);
+Assertion::keyExistsNotEmpty($value, $key);
 Assertion::notBlank($value);
 Assertion::isInstanceOf($value, $className);
 Assertion::notIsInstanceOf($value, $className);

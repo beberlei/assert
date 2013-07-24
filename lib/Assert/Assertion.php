@@ -486,6 +486,22 @@ class Assertion
     }
 
     /**
+     * Assert that key exists in array and it's value not empty.
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function keyExistsNotEmpty($value, $key, $message = null, $propertyPath = null)
+    {
+        static::keyExists($value, $key, $message, $propertyPath);
+        static::notEmpty($value[$key], $message, $propertyPath);
+    }
+
+    /**
      * Assert that value is not blank
      *
      * @param mixed $value
