@@ -495,7 +495,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function keyExistsNotEmpty($value, $key, $message = null, $propertyPath = null)
+    static public function notEmptyKey($value, $key, $message = null, $propertyPath = null)
     {
         static::keyExists($value, $key, $message, $propertyPath);
         static::notEmpty($value[$key], $message, $propertyPath);

@@ -761,21 +761,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testValidKeyExistsNotEmpty()
+    public function testValidNotEmptyKey()
     {
-        Assertion::keyExistsNotEmpty(array('keyExists' => 'notEmpty'), 'keyExists');
+        Assertion::notEmptyKey(array('keyExists' => 'notEmpty'), 'keyExists');
     }
 
     /**
-     * @dataProvider invalidKeyExistsNotEmptyDataprovider
+     * @dataProvider invalidNotEmptyKeyDataprovider
      */
-    public function testInvalidKeyExistsNotEmpty($invalidArray, $key)
+    public function testInvalidNotEmptyKey($invalidArray, $key)
     {
         $this->setExpectedException('Assert\InvalidArgumentException');
-        Assertion::keyExistsNotEmpty($invalidArray, $key);
+        Assertion::notEmptyKey($invalidArray, $key);
     }
 
-    public static function invalidKeyExistsNotEmptyDataprovider()
+    public static function invalidNotEmptyKeyDataprovider()
     {
         return array(
             'empty'          => array(array('keyExists' => ''), 'keyExists'),
