@@ -17,6 +17,52 @@ namespace Assert;
  * Assert library
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ *
+
+ * @method static void nullOrEq($value, $value2, $message = null, $propertyPath = null)
+ * @method static void nullOrSame($value, $value2, $message = null, $propertyPath = null)
+ * @method static void nullOrInteger($value, $message = null, $propertyPath = null)
+ * @method static void nullOrDigit($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null)
+ * @method static void nullOrBoolean($value, $message = null, $propertyPath = null)
+ * @method static void nullOrNotEmpty($value, $message = null, $propertyPath = null)
+ * @method static void nullOrNoContent($value, $message = null, $propertyPath = null)
+ * @method static void nullOrString($value, $message = null, $propertyPath = null)
+ * @method static void nullOrRegex($value, $regex, $message = null, $propertyPath = null)
+ * @method static void nullOrLength($value, $length, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrMinLength($value, $minLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrMaxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrContains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+ * @method static void nullOrChoice($value, array $choices, $message = null, $propertyPath = null)
+ * @method static void nullOrInArray($value, array $choices, $message = null, $propertyPath = null)
+ * @method static void nullOrNumeric($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsArray($value, $message = null, $propertyPath = null)
+ * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrNotBlank($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null)
+ * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
+ * @method static void nullOrSubclassOf($value, $className, $message = null, $propertyPath = null)
+ * @method static void nullOrRange($value, $minValue, $maxValue, $message = null, $propertyPath = null)
+ * @method static void nullOrMin($value, $minValue, $message = null, $propertyPath = null)
+ * @method static void nullOrMax($value, $maxValue, $message = null, $propertyPath = null)
+ * @method static void nullOrFile($value, $message = null, $propertyPath = null)
+ * @method static void nullOrDirectory($value, $message = null, $propertyPath = null)
+ * @method static void nullOrReadable($value, $message = null, $propertyPath = null)
+ * @method static void nullOrWriteable($value, $message = null, $propertyPath = null)
+ * @method static void nullOrEmail($value, $message = null, $propertyPath = null)
+ * @method static void nullOrUrl($value, $message = null, $propertyPath = null)
+ * @method static void nullOrAlnum($value, $message = null, $propertyPath = null)
+ * @method static void nullOrTrue($value, $message = null, $propertyPath = null)
+ * @method static void nullOrFalse($value, $message = null, $propertyPath = null)
+ * @method static void nullOrClassExists($value, $message = null, $propertyPath = null)
+ * @method static void nullOrImplementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
+ * @method static void nullOrIsJsonString($value, $message = null, $propertyPath = null)
+ * @method static void nullOrUuid($value, $message = null, $propertyPath = null)
+ * @method string void nullOrIsCallable($value, $message = null, $propertyPath = null)
  */
 class Assertion
 {
@@ -61,6 +107,7 @@ class Assertion
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
     const INVALID_JSON_STRING       = 206;
+    const INVALID_CALLBACK          = 207;
 
     /**
      * Exception to throw when an assertion failed.
@@ -896,6 +943,22 @@ class Assertion
 
         if (!preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[1-5][0-9A-Fa-f]{3}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
             throw static::createException($message, static::INVALID_UUID, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the given value is a valid callback
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function isCallable($value, $message = null, $propertyPath = null)
+    {
+        if (!is_callable($value, true)) {
+            throw static::createException($message, static::INVALID_CALLBACK, $propertyPath);
         }
     }
 

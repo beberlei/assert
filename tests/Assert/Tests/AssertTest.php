@@ -686,14 +686,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider isJsonStringDataprovider
+     * @dataProvider isJsonStringDataProvider
      */
     public function testIsJsonString($content)
     {
         Assertion::isJsonString($content);
     }
 
-    public static function isJsonStringDataprovider()
+    public static function isJsonStringDataProvider()
     {
         return array(
             '»null« value' => array(json_encode(null)),
@@ -704,7 +704,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider isJsonStringInvalidStringDataprovider
+     * @dataProvider isJsonStringInvalidStringDataProvider
      */
     public function testIsJsonStringExpectingException($invalidString)
     {
@@ -712,7 +712,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::isJsonString($invalidString);
     }
 
-    public static function isJsonStringInvalidStringDataprovider()
+    public static function isJsonStringInvalidStringDataProvider()
     {
         return array(
             'no json string' => array('invalid json encoded string'),
@@ -767,7 +767,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidNotEmptyKeyDataprovider
+     * @dataProvider invalidNotEmptyKeyDataProvider
      */
     public function testInvalidNotEmptyKey($invalidArray, $key)
     {
@@ -775,11 +775,36 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notEmptyKey($invalidArray, $key);
     }
 
-    public static function invalidNotEmptyKeyDataprovider()
+    public static function invalidNotEmptyKeyDataProvider()
     {
         return array(
             'empty'          => array(array('keyExists' => ''), 'keyExists'),
             'key not exists' => array(array('key' => 'notEmpty'), 'keyNotExists')
+        );
+    }
+
+    public function testIsCallable()
+    {
+        Assertion::isCallable(function() {});
+        Assertion::isCallable('functionName');
+        Assertion::isCallable(array('UndefinedClass', 'functionName'));
+    }
+
+    /**
+     * @dataProvider invalidIsCallableDataProvider
+     */
+    public function testInvalidIsCallable($invalidValue)
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException');
+        Assertion::isCallable($invalidValue);
+    }
+
+    public function invalidIsCallableDataProvider()
+    {
+        return array (
+            'boolean' => array(false),
+            'just and object' => array(new \stdClass()),
+            'array' => array(array())
         );
     }
 }
