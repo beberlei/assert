@@ -18,7 +18,6 @@ namespace Assert;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
-
  * @method static void nullOrEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void nullOrSame($value, $value2, $message = null, $propertyPath = null)
  * @method static void nullOrInteger($value, $message = null, $propertyPath = null)
@@ -62,7 +61,7 @@ namespace Assert;
  * @method static void nullOrImplementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
  * @method static void nullOrIsJsonString($value, $message = null, $propertyPath = null)
  * @method static void nullOrUuid($value, $message = null, $propertyPath = null)
- * @method string void nullOrIsCallable($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsCallable($value, $message = null, $propertyPath = null)
  */
 class Assertion
 {
@@ -107,7 +106,7 @@ class Assertion
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
     const INVALID_JSON_STRING       = 206;
-    const INVALID_CALLBACK          = 207;
+    const INVALID_CALLABLE          = 207;
 
     /**
      * Exception to throw when an assertion failed.
