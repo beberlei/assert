@@ -957,7 +957,7 @@ class Assertion
     static public function isCallable($value, $message = null, $propertyPath = null)
     {
         if (!is_callable($value, true)) {
-            throw static::createException($message, static::INVALID_CALLBACK, $propertyPath);
+            throw static::createException($message, static::INVALID_CALLABLE, $propertyPath);
         }
     }
 
