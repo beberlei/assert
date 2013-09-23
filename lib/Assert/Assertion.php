@@ -900,7 +900,9 @@ class Assertion
     }
 
     /**
-     * static call handler to implement "null or assertion" delegation.
+     * static call handler to implement:
+     *  - "null or assertion" delegation
+     *  - "all" delegation
      */
     static public function __callStatic($method, $args)
     {
@@ -912,6 +914,20 @@ class Assertion
             }
 
             return call_user_func_array(array(get_called_class(), $method), $args);
+        }
+
+        if (strpos($method, "all") === 0) {
+            static::isArray($args[0]);
+
+            $method      = substr($method, 3);
+            $values      = array_shift($args);
+            $calledClass = get_called_class();
+
+            foreach ($values as $value) {
+                call_user_func_array(array($calledClass, $method), array_merge(array($value), $args));
+            }
+
+            return;
         }
 
         throw new \BadMethodCallException("No assertion Assertion#" . $method . " exists.");
