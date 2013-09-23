@@ -782,6 +782,30 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             'key not exists' => array(array('key' => 'notEmpty'), 'keyNotExists')
         );
     }
+
+    public function testAllWithSimpleAssertion()
+    {
+        Assertion::allTrue(array(true, true));
+    }
+
+    public function testAllWithSimpleAssertionThrowsExceptionOnElementThatFailsAssertion()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_TRUE);
+        Assertion::allTrue(array(true, false));
+    }
+
+    public function testAllWithComplexAssertion()
+    {
+        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass');
+    }
+
+    public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', 'Assertion failed', Assertion::INVALID_INSTANCE_OF);
+
+        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', 'foos');
+    }
+
 }
 
 class ChildStdClass extends \stdClass
