@@ -61,6 +61,29 @@ public function putBlob($containerName = '', $blobName = '', $localFileName = ''
 }
 ```
 
+### NullOr helper
+
+A helper method (`Assertion::nullOr*`) is provided to check if a value is null OR holds for the assertion:
+
+```php
+<?php
+Assertion::nullOrMax(null, 42); // success
+Assertion::nullOrMax(1, 42);    // success
+Assertion::nullOrMax(1337, 42); // exception
+```
+
+### All helper
+
+The `Assertion::all*` method checks if all provided values hold for the
+assertion. It will throw an exception of the assertion does not hold for one of
+the values:
+
+```php
+<?php
+Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass'); // success
+Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');      // exception
+```
+
 ## List of assertions
 
 ```php
