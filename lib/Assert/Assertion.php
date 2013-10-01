@@ -13,6 +13,8 @@
 
 namespace Assert;
 
+use BadMethodCallException;
+
 /**
  * Assert library
  *
@@ -907,16 +909,24 @@ class Assertion
     static public function __callStatic($method, $args)
     {
         if (strpos($method, "nullOr") === 0) {
-            $method = substr($method, 6);
+            if ( ! array_key_exists(0, $args)) {
+                throw new BadMethodCallException("Missing the first argument.");
+            }
 
             if ($args[0] === null) {
                 return;
             }
 
+            $method = substr($method, 6);
+
             return call_user_func_array(array(get_called_class(), $method), $args);
         }
 
         if (strpos($method, "all") === 0) {
+            if ( ! array_key_exists(0, $args)) {
+                throw new BadMethodCallException("Missing the first argument.");
+            }
+
             static::isArray($args[0]);
 
             $method      = substr($method, 3);
@@ -930,7 +940,7 @@ class Assertion
             return;
         }
 
-        throw new \BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+        throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
     }
 }
 
