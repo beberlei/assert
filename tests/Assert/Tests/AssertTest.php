@@ -566,6 +566,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::nullOrMax(null, 2);
     }
 
+    public function testNullOrWithNoValueThrows()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        Assertion::nullOrMax();
+    }
+
     public function testLength()
     {
         Assertion::length("asdf", 4);
@@ -804,6 +810,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\AssertionFailedException', 'Assertion failed', Assertion::INVALID_INSTANCE_OF);
 
         Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', 'foos');
+    }
+
+    public function testAllWithNoValueThrows()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        Assertion::allTrue();
     }
 
 }
