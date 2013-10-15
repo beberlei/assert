@@ -560,10 +560,16 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::max(2, 1);
     }
 
-    public function testNullOr()
+    public function testNullOrWithSimpleAssertion()
     {
         Assertion::nullOrMax(null, 1);
         Assertion::nullOrMax(null, 2);
+    }
+
+    public function testNullOrWithSimpleAssertionThrowsExceptionOnElementThatFailsAssertion()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX);
+        Assertion::nullOrMax(5, 1);
     }
 
     public function testNullOrWithNoValueThrows()
@@ -746,6 +752,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     static public function providesValidUuids()
     {
         return array(
+            array('00000000-0000-0000-0000-000000000000'),
             array('ff6f8cb0-c57d-11e1-9b21-0800200c9a66'),
             array('ff6f8cb0-c57d-21e1-9b21-0800200c9a66'),
             array('ff6f8cb0-c57d-31e1-9b21-0800200c9a66'),
@@ -793,6 +800,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('BadMethodCallException');
         Assertion::allTrue();
+    }
+
+    public function testAllWithInvalidValueThrows()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException');
+        Assertion::allTrue('invalid');
+    }
+
+    public function testAllWithEmptyValueThrows()
+    {
+        Assertion::allTrue(array());
     }
 
     public function testAllWithSimpleAssertion()
@@ -847,6 +865,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::count($countable, $count);
     }
  
+    public function testOneWithInvalidValueThrows()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException');
+        Assertion::oneTrue('invalid');
+    }
+
+    public function testOneWithEmptyValueThrows()
+    {
+        Assertion::oneTrue(array());
+    }
+
     public function testOneWithSimpleAssertion()
     {
         Assertion::oneTrue(array(true, true));

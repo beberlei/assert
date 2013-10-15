@@ -990,6 +990,10 @@ class Assertion
 
         static::isArray($args[0]);
 
+        if (empty($args[0])) {
+            return;
+        }
+
         $method      = substr($method, 3);
         $values      = array_shift($args);
         $calledClass = get_called_class();
