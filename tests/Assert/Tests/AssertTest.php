@@ -789,6 +789,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testAllWithNoValueThrows()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        Assertion::allTrue();
+    }
+
     public function testAllWithSimpleAssertion()
     {
         Assertion::allTrue(array(true, true));
@@ -812,10 +818,10 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', 'foos');
     }
 
-    public function testAllWithNoValueThrows()
+    public function testOneWithNoValueThrows()
     {
         $this->setExpectedException('BadMethodCallException');
-        Assertion::allTrue();
+        Assertion::oneTrue();
     }
 
     public function testValidCount()
@@ -839,6 +845,39 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_COUNT);
         Assertion::count($countable, $count);
+    }
+ 
+    public function testOneWithSimpleAssertion()
+    {
+        Assertion::oneTrue(array(true, true));
+    }
+
+    public function testOneWithFailElementsSimpleAssertion()
+    {
+        Assertion::oneTrue(array(true, false));
+    }
+
+    public function testOneWithSimpleAssertionThrowsExceptionOnAllElementsFailsAssertion()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_TRUE);
+        Assertion::oneTrue(array(false, false));
+    }
+
+    public function testOneWithComplexAssertion()
+    {
+        Assertion::oneIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass');
+    }
+
+    public function testOneWithFailElementsComplexAssertion()
+    {
+        Assertion::oneIsInstanceOf(array(new \stdClass, new \DateTime), 'stdClass');
+    }
+
+    public function testOneWithComplexAssertionThrowsExceptionOnAllElementsFailsAssertion()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', 'Assertion failed', Assertion::INVALID_INSTANCE_OF);
+
+        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', 'foos');
     }
 }
 

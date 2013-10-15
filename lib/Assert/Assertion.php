@@ -906,42 +906,105 @@ class Assertion
      * static call handler to implement:
      *  - "null or assertion" delegation
      *  - "all" delegation
+     *  - "one" delegation
      */
     static public function __callStatic($method, $args)
     {
         if (strpos($method, "nullOr") === 0) {
-            if ( ! array_key_exists(0, $args)) {
-                throw new BadMethodCallException("Missing the first argument.");
-            }
-
-            if ($args[0] === null) {
-                return;
-            }
-
-            $method = substr($method, 6);
-
-            return call_user_func_array(array(get_called_class(), $method), $args);
+            return static::nullOr($method, $args);
+        } else if (strpos($method, "all") === 0) {
+            return static::all($method, $args);
+        } else if (strpos($method, "one") === 0) {
+            return static::one($method, $args);
         }
 
-        if (strpos($method, "all") === 0) {
-            if ( ! array_key_exists(0, $args)) {
-                throw new BadMethodCallException("Missing the first argument.");
-            }
+        throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+    }
 
-            static::isArray($args[0]);
+    /**
+     * Is provided to check if a value is null OR holds for the assertion
+     *
+     * @param string $method
+     * @param string $args
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     * @throws \BadMethodCallException
+     */
+    protected static function nullOr($method, $args)
+    {
+        if ( ! array_key_exists(0, $args)) {
+            throw new BadMethodCallException("Missing the first argument.");
+        }
 
-            $method      = substr($method, 3);
-            $values      = array_shift($args);
-            $calledClass = get_called_class();
+        if ($args[0] === null) {
+            return;
+        }
 
-            foreach ($values as $value) {
+        $method = substr($method, 6);
+
+        return call_user_func_array(array(get_called_class(), $method), $args);
+    }
+
+    /**
+     * Checks if all provided values hold for the assertion
+     *
+     * @param string $method
+     * @param string $args
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     * @throws \BadMethodCallException
+     */
+    protected static function all($method, $args)
+    {
+        if ( ! array_key_exists(0, $args)) {
+            throw new BadMethodCallException("Missing the first argument.");
+        }
+
+        static::isArray($args[0]);
+
+        $method      = substr($method, 3);
+        $values      = array_shift($args);
+        $calledClass = get_called_class();
+
+        foreach ($values as $value) {
+            call_user_func_array(array($calledClass, $method), array_merge(array($value), $args));
+        }
+
+        return;
+    }
+
+    /**
+     * Checks if one of provided values hold for the assertion
+     *
+     * @param string $method
+     * @param string $args
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     * @throws \BadMethodCallException
+     */
+    protected static function one($method, $args)
+    {
+        if ( ! array_key_exists(0, $args)) {
+            throw new BadMethodCallException("Missing the first argument.");
+        }
+
+        static::isArray($args[0]);
+
+        $method      = substr($method, 3);
+        $values      = array_shift($args);
+        $calledClass = get_called_class();
+
+        foreach ($values as $value) {
+            try {
                 call_user_func_array(array($calledClass, $method), array_merge(array($value), $args));
+            } catch (AssertionFailedException $e) {
+                continue;
             }
 
             return;
         }
 
-        throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+        throw static::createException('None ' . $method . ' matching found in "' . implode('", "', $values) . '".', $e->getCode(), '');
     }
 
     /**

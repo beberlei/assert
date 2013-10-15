@@ -84,6 +84,18 @@ Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass'); // 
 Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');      // exception
 ```
 
+### One helper
+
+The `Assertion::one*` method checks if one provided values hold for the
+assertion. It will throw an exception of the assertion does not hold one of
+the values:
+
+```php
+<?php
+Assertion::oneIsInstanceOf(array(new \stdClass, new \DateTime), 'stdClass'); // success
+Assertion::oneIsInstanceOf(array(new \stdClass, new \stdClass), 'DateTime'); // exception
+```
+
 ## List of assertions
 
 ```php
