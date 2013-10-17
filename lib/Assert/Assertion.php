@@ -22,6 +22,7 @@ use BadMethodCallException;
  */
 class Assertion
 {
+    const INVALID_FLOAT             = 9;
     const INVALID_INTEGER           = 10;
     const INVALID_DIGIT             = 11;
     const INVALID_INTEGERISH        = 12;
@@ -132,6 +133,22 @@ class Assertion
         }
     }
 
+    /**
+     * Assert that value is a php float.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function float($value, $message = null, $propertyPath = null)
+    {
+        if ( ! is_float($value)) {
+            throw static::createException($message, static::INVALID_FLOAT, $propertyPath);
+        }
+    }
+    
     /**
      * Validates if an integer or integerish is a digit.
      *
