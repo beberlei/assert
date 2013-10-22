@@ -821,16 +821,36 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testValidCount()
     {
         Assertion::count(array('Hi'), 1);
+        Assertion::count(new OneCountable(), 1);
     }
 
-    public function testInvalidCount()
+    public static function dataInvalidCount()
+    {
+        return array(
+            array(array('Hi', 'There'), 3),
+            array(new OneCountable(), 2),
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalidCount
+     */
+    public function testInvalidCount($countable, $count)
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_COUNT);
-        Assertion::count(array('Hi', 'there'), 1);
+        Assertion::count($countable, $count);
     }
 }
 
 class ChildStdClass extends \stdClass
 {
 
+}
+
+class OneCountable implements \Countable
+{
+    public function count()
+    {
+        return 1;
+    }
 }

@@ -947,10 +947,10 @@ class Assertion
     /**
      * Assert that the count of countable is equal to count.
      *
-     * @param mixed  $countable
-     * @param int    $count
-     * @param string $message
-     * @param string $propertyPath
+     * @param array|\Countable $countable
+     * @param int              $count
+     * @param string           $message
+     * @param string           $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
