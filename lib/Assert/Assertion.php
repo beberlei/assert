@@ -52,6 +52,7 @@ class Assertion
     const INVALID_FALSE             = 38;
     const INVALID_STRING_END        = 39;
     const INVALID_UUID              = 40;
+    const INVALID_COUNT             = 41;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -941,6 +942,23 @@ class Assertion
         }
 
         throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+    }
+
+    /**
+     * Assert that the count of countable is equal to count.
+     *
+     * @param mixed  $countable
+     * @param int    $count
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function count($countable, $count, $message = null, $propertyPath = null)
+    {
+        if ($count !== count($countable)) {
+            throw static::createException($message, static::INVALID_COUNT, $propertyPath);
+        }
     }
 }
 
