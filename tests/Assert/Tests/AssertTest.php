@@ -818,6 +818,16 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::allTrue();
     }
 
+    public function testValidCount()
+    {
+        Assertion::count(array('Hi'), 1);
+    }
+
+    public function testInvalidCount()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_COUNT);
+        Assertion::count(array('Hi', 'there'), 1);
+    }
 }
 
 class ChildStdClass extends \stdClass
