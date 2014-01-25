@@ -5,6 +5,34 @@ use Assert\Assertion;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
+    public static function dataInvalidFloat()
+    {
+        return array(
+            array(1),
+            array(false),
+            array("test"),
+            array(null),
+            array("1.23"),
+            array("10"),
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalidFloat
+     */
+    public function testInvalidFloat($nonFloat)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_FLOAT);
+        Assertion::float($nonFloat);
+    }
+
+    public function testValidFloat()
+    {
+        Assertion::float(1.0);
+        Assertion::float(0.1);
+		Assertion::float(-1.1);
+    }
+	
     public static function dataInvalidInteger()
     {
         return array(
