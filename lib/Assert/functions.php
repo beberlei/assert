@@ -26,6 +26,12 @@ namespace Assert;
  *
  * The assertion chain can be stateful, that means be careful when you reuse
  * it. You should never pass around the chain.
+ *
+ * @param mixed $value
+ * @param string $defaultMessage
+ * @param string $defaultPropertyPath
+ *
+ * @return \Assert\AssertionChain
  */
 function that($value, $defaultMessage = null, $defaultPropertyPath = null)
 {
