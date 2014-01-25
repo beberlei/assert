@@ -30,9 +30,9 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::float(1.0);
         Assertion::float(0.1);
-		Assertion::float(-1.1);
+        Assertion::float(-1.1);
     }
-	
+
     public static function dataInvalidInteger()
     {
         return array(
