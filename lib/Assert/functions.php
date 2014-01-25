@@ -15,6 +15,17 @@ namespace Assert;
 
 /**
  * Start validation on a value, returns {@link AssertionChain}
+ *
+ * The invocation of this method starts an assertion chain
+ * that is happening on the passed value.
+ *
+ * @example
+ *
+ *  \Assert\that($value)->notEmpty()->integer();
+ *  \Assert\that($value)->nullOr()->string()->startsWith("Foo");
+ *
+ * The assertion chain can be stateful, that means be careful when you reuse
+ * it. You should never pass around the chain.
  */
 function that($value, $defaultMessage = null, $defaultPropertyPath = null)
 {

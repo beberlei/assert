@@ -8,6 +8,7 @@
  * with this package in the file LICENSE.txt.
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
+ *
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
@@ -21,6 +22,20 @@ class AssertionChain
     private $defaultMessage;
     private $defaultPropertyPath;
 
+    /**
+     * Return each assertion as always valid.
+     *
+     * @var bool
+     */
+    private $alwaysValid = false;
+
+    /**
+     * Perform assertion on every element of array or traversable.
+     *
+     * @var bool
+     */
+    private $all = false;
+
     public function __construct($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
         $this->value = $value;
@@ -28,14 +43,26 @@ class AssertionChain
         $this->defaultPropertyPath = $defaultPropertyPath;
     }
 
-    public function __call($method, $args)
+    /**
+     * Call assertion on the current value in the chain.
+     *
+     * @param string $method
+     * @param array $args
+     *
+     * @return \Assert\AssertionChain
+     */
+    public function __call($methodName, $args)
     {
-        if (!method_exists('Assert\Assertion', $method)) {
-            throw new \RuntimeException("Assertion '" . $method . "' does not exist.");
+        if ($this->alwaysValid === true) {
+            return $this;
+        }
+
+        if (!method_exists('Assert\Assertion', $methodName)) {
+            throw new \RuntimeException("Assertion '" . $methodName . "' does not exist.");
         }
 
         $reflClass = new ReflectionClass('Assert\Assertion');
-        $method = $reflClass->getMethod($method);
+        $method = $reflClass->getMethod($methodName);
 
         array_unshift($args, $this->value);
         $params = $method->getParameters();
@@ -54,7 +81,37 @@ class AssertionChain
             }
         }
 
-        call_user_func_array(array('Assert\Assertion', $method->getName()), $args);
+        if ($this->all) {
+            $methodName = 'all' . $methodName;
+        }
+
+        call_user_func_array(array('Assert\Assertion', $methodName), $args);
+
+        return $this;
+    }
+
+    /**
+     * Switch chain into validation mode for an array of values.
+     *
+     * @return \Assert\AssertionChain
+     */
+    public function all()
+    {
+        $this->all = true;
+
+        return $this;
+    }
+
+    /**
+     * Switch chain into mode allowing nulls, ignoring further assertions.
+     *
+     * @return \Assert\AssertionChain
+     */
+    public function nullOr()
+    {
+        if ($this->value === null) {
+            $this->alwaysValid = true;
+        }
 
         return $this;
     }

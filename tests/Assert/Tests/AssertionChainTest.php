@@ -40,4 +40,20 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
 
         \Assert\that(null, 'Not Null and such')->notEmpty();
     }
+
+    /**
+     * @test
+     */
+    public function it_skips_assertions_on_valid_null()
+    {
+        \Assert\That(null)->nullOr()->integer()->eq(10);
+    }
+
+    /**
+     * @test
+     */
+    public function it_validates_all_inputs()
+    {
+        \Assert\That(array(1, 2, 3))->all()->integer();
+    }
 }
