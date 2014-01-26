@@ -14,7 +14,8 @@ class MethodDocGenerator
             return $parameter->getPosition() === 0;
         };
 
-        return $this->generateMethodDocs($phpFile, $flags, $skipParameterTest);
+        $docs = $this->generateMethodDocs($flags, $skipParameterTest);
+        $this->generateFile($phpFile, $docs);
     }
 
     public function generateAssertionDocs()
@@ -25,10 +26,15 @@ class MethodDocGenerator
             return false;
         };
 
-        return $this->generateMethodDocs($phpFile, $flags, $skipParameterTest);
+        $docs = array_merge(
+            $this->generateMethodDocs($flags, $skipParameterTest, 'nullOr'),
+            $this->generateMethodDocs($flags, $skipParameterTest, 'all')
+        );
+
+        $this->generateFile($phpFile, $docs);
     }
 
-    private function generateMethodDocs($phpFile, $flags, $skipParameterTest)
+    private function generateMethodDocs($flags, $skipParameterTest, $prefix = '')
     {
         $methods = $this->gatherAssertions();
 
@@ -37,7 +43,7 @@ class MethodDocGenerator
             $doc = $method->getDocComment();
             $shortDescription = substr(explode("\n", $doc)[1], 7);
 
-            $line = ' * @method ' . $flags . ' ' . $method->getName() . '(';
+            $line = ' * @method ' . $flags . ' ' . $prefix . $method->getName() . '(';
 
             foreach ($method->getParameters() as $parameter) {
                 if ($skipParameterTest($parameter)) {
@@ -50,6 +56,11 @@ class MethodDocGenerator
             $lines[] = substr($line, 0, -2) . ') ' . $shortDescription . "\n";
         }
 
+        return $lines;
+    }
+
+    private function generateFile($phpFile, $lines)
+    {
         $fileLines = file($phpFile);
         $newLines = array();
         $inGeneratedCode = false;
