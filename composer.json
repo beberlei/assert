@@ -12,6 +12,7 @@
     "autoload": {
         "psr-0": {
             "Assert": "lib/"
-        }
+        },
+        "files": ["lib/Assert/functions.php"]
     }
 }

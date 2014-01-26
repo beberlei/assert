@@ -84,6 +84,20 @@ Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass'); // 
 Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');      // exception
 ```
 
+### \Assert\that() Chaining
+
+Using the static API on values is very verbose when checking values against multiple assertions.
+Starting with 2.0 of Assert there is a much nicer fluent API for assertions, starting
+with ``\Assert\that($value)`` and then receiving the assertions you want to call
+on the fluent interface. You only have to specify the `$value` once.
+
+```php
+<?php
+\Assert\that($value)->notEmpty()->integer();
+\Assert\that($value)->nullOr()->string()->startsWith("Foo");
+\Assert\that($values)->all()->float();
+```
+
 ## List of assertions
 
 ```php
