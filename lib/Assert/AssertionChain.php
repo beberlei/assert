@@ -16,6 +16,14 @@ namespace Assert;
 
 use ReflectionClass;
 
+/**
+ * Chaining builder for assertions
+ *
+ * @author Benjamin Eberlei <kontakt@beberlei.de>
+ *
+ * METHODSTART
+ * METHODEND
+ */
 class AssertionChain
 {
     private $value;

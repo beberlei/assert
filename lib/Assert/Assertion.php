@@ -19,6 +19,9 @@ use BadMethodCallException;
  * Assert library
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ *
+ * METHODSTART
+ * METHODEND
  */
 class Assertion
 {
