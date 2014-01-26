@@ -42,8 +42,9 @@ class MethodDocGenerator
         foreach ($methods as $method) {
             $doc = $method->getDocComment();
             $shortDescription = substr(explode("\n", $doc)[1], 7);
+            $methodName = $prefix . ($prefix ? ucfirst($method->getName()) : $method->getName());
 
-            $line = ' * @method ' . $flags . ' ' . $prefix . $method->getName() . '(';
+            $line = ' * @method ' . $flags . ' ' . $methodName . '(';
 
             foreach ($method->getParameters() as $parameter) {
                 if ($skipParameterTest($parameter)) {
