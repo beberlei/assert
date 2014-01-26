@@ -173,10 +173,10 @@ class Assertion
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
      */
-    static protected function createException($value, $message, $code, $propertyPath)
+    static protected function createException($value, $message, $code, $propertyPath, array $constraints = array())
     {
         $exceptionClass = static::$exceptionClass;
-        return new $exceptionClass($message, $code, $propertyPath, $value);
+        return new $exceptionClass($message, $code, $propertyPath, $value, $constraints);
     }
 
     /**
@@ -198,7 +198,7 @@ class Assertion
                 self::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath, array('expected' => $value2));
         }
     }
 
@@ -221,7 +221,7 @@ class Assertion
                 self::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath, array('expected' => $value2));
         }
     }
 
@@ -418,23 +418,23 @@ class Assertion
      * Assert that value matches a regex
      *
      * @param mixed $value
-     * @param string $regex
+     * @param string $pattern
      * @param string $message
      * @param string $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function regex($value, $regex, $message = null, $propertyPath = null)
+    static public function regex($value, $pattern, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
-        if ( ! preg_match($regex, $value)) {
+        if ( ! preg_match($pattern, $value)) {
             $message = $message ?: sprintf(
                 'Value "%s" does not match expression.',
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_REGEX , $propertyPath);
+            throw static::createException($value, $message, static::INVALID_REGEX , $propertyPath, array('pattern' => $pattern));
         }
     }
 
@@ -461,7 +461,8 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath);
+            $constraints = array('length' => $length, 'encoding' => $encoding);
+            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -488,7 +489,8 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath);
+            $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
+            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -515,7 +517,8 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath);
+            $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
+            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -543,7 +546,8 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath);
+            $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
+            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
 
         if (mb_strlen($value, $encoding) > $maxLength) {
@@ -554,7 +558,8 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath);
+            $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
+            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -580,7 +585,8 @@ class Assertion
                 self::stringify($needle)
             );
 
-            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath);
+            $constraints = array('needle' => $needle, 'encoding' => $encoding);
+            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, $constraints);
         }
     }
 
@@ -608,7 +614,8 @@ class Assertion
                 self::stringify($needle)
             );
 
-            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath);
+            $constraints = array('needle' => $needle, 'encoding' => $encoding);
+            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, $constraints);
         }
     }
 
@@ -634,7 +641,8 @@ class Assertion
                 self::stringify($needle)
             );
 
-            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath);
+            $constraints = array('needle' => $needle, 'encoding' => $encoding);
+            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, $constraints);
         }
     }
 
@@ -657,7 +665,7 @@ class Assertion
                 implode(", ", array_map('Assert\Assertion::stringify', $choices))
             );
 
-            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
         }
     }
 
@@ -733,7 +741,7 @@ class Assertion
                 self::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
         }
     }
 
@@ -793,7 +801,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath, array('class' => $className));
         }
     }
 
@@ -816,7 +824,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath, array('class' => $className));
         }
     }
 
@@ -839,7 +847,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath, array('class' => $className));
         }
     }
 
@@ -866,7 +874,7 @@ class Assertion
                 self::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath, array('min' => $minValue, 'max' => $maxValue));
         }
     }
 
@@ -891,7 +899,7 @@ class Assertion
                 self::stringify($minValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath, array('min' => $minValue));
         }
     }
 
@@ -916,7 +924,7 @@ class Assertion
                 self::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath, array('max' => $maxValue));
         }
     }
 
@@ -1204,7 +1212,7 @@ class Assertion
                 self::stringify($interfaceName)
             );
 
-            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath);
+            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath, array('interface' => $interfaceName));
         }
     }
 
@@ -1265,6 +1273,29 @@ class Assertion
     }
 
     /**
+     * Assert that the count of countable is equal to count.
+     *
+     * @param array|\Countable $countable
+     * @param int              $count
+     * @param string           $message
+     * @param string           $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function count($countable, $count, $message = null, $propertyPath = null)
+    {
+        if ($count !== count($countable)) {
+            $message = $message ?: sprintf(
+                'List does not contain exactly "%d" elements.',
+                self::stringify($countable),
+                self::stringify($count)
+            );
+
+            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, array('count' => $count));
+        }
+    }
+
+    /**
      * static call handler to implement:
      *  - "null or assertion" delegation
      *  - "all" delegation
@@ -1304,23 +1335,6 @@ class Assertion
         }
 
         throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
-    }
-
-    /**
-     * Assert that the count of countable is equal to count.
-     *
-     * @param array|\Countable $countable
-     * @param int              $count
-     * @param string           $message
-     * @param string           $propertyPath
-     * @return void
-     * @throws \Assert\AssertionFailedException
-     */
-    static public function count($countable, $count, $message = null, $propertyPath = null)
-    {
-        if ($count !== count($countable)) {
-            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath);
-        }
     }
 
     /**
