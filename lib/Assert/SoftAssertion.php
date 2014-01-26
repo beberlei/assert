@@ -19,7 +19,7 @@ class SoftAssertion
     private $currentChain;
     private $errors = array();
 
-    public function assertThat($value, $propertyPath, $defaultMessage = null)
+    public function that($value, $propertyPath, $defaultMessage = null)
     {
         $this->currentChainFailed = false;
         $this->chains[] = $this->currentChain = \Assert\that($value, $defaultMessage, $propertyPath);
@@ -45,7 +45,7 @@ class SoftAssertion
     /**
      * @throws \Assert\SoftAssertionException
      */
-    public function assertAll()
+    public function verify()
     {
         if ($this->errors) {
             throw SoftAssertionException::fromErrors($this->errors);

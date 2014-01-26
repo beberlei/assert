@@ -105,20 +105,25 @@ the "nullOr" or "all" helper respectively.
 
 There are many cases in web development, especially when involving forms, you want to collect several errors
 instead of aborting directly on the first error. This is what soft assertions are for. Their API
-works exactly like the fluent ``\Assert\that()`` API. They collect all errors and only trigger the
-exception when the method ``assertAll()`` is called on the ``Assert\SoftAssertion`` object.
+works exactly like the fluent ``\Assert\that()`` API, but instead of throwing an Exception directly,
+they collect all errors and only trigger the exception when the method
+``verify()`` is called on the ``Assert\SoftAssertion`` object.
 
 ```php
 <?php
 \Assert\soft()
-    ->assertThat(10, 'foo')->string()
-    ->assertThat(null, 'bar')->notEmpty()
-    ->assertThat('string', 'baz')->isArray()
-    ->assertAll();
+    ->that(10, 'foo')->string()
+    ->that(null, 'bar')->notEmpty()
+    ->that('string', 'baz')->isArray()
+    ->verify();
 ```
 
-Will throw an exception ``Assert\\SoftAssertionException`` (this does not extend ``AssertionFailedException``)
-with a combined message:
+The method ``that($value, $propertyPath)`` requires a property path (name), so that you know how to differentiate
+the errors afterwards.
+
+On failure ``verify()` will throw an exception
+``Assert\\SoftAssertionException`` (this does not extend
+``AssertionFailedException``) with a combined message:
 
     The following 3 assertions failed:
     1) foo: Value "10" expected to be string, type integer given.

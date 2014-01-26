@@ -18,9 +18,9 @@ EXC
         );
 
         \Assert\soft()
-            ->assertThat(10, 'foo')->string()
-            ->assertThat(null, 'bar')->notEmpty()
-            ->assertThat('string', 'baz')->isArray()
-            ->assertAll();
+            ->that(10, 'foo')->string()
+            ->that(null, 'bar')->notEmpty()
+            ->that('string', 'baz')->isArray()
+            ->verify();
     }
 }
