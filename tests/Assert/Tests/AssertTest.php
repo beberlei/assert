@@ -571,20 +571,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::eq("2", 1);
     }
 
-    public function testIsNot()
+    public function testNotEq()
     {
-        Assertion::isNot("1", false);
-        Assertion::isNot(new \stdClass(), array());
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IS_NOT);
-        Assertion::isNot("1", 1);
+        Assertion::NotEq("1", false);
+        Assertion::NotEq(new \stdClass(), array());
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_EQ);
+        Assertion::NotEq("1", 1);
     }
 
-    public function testIsNotStrict()
+    public function testNotSame()
     {
-        Assertion::isNotStrict("1", 2);
-        Assertion::isNotStrict(new \stdClass(), array());
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IS_NOT_STRICT);
-        Assertion::isNotStrict(1, 1);
+        Assertion::notSame("1", 2);
+        Assertion::notSame(new \stdClass(), array());
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_SAME);
+        Assertion::notSame(1, 1);
     }
 
     public function testMin()
