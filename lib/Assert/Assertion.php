@@ -173,10 +173,10 @@ class Assertion
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
      */
-    static protected function createException($message, $code, $propertyPath)
+    static protected function createException($value, $message, $code, $propertyPath)
     {
         $exceptionClass = static::$exceptionClass;
-        return new $exceptionClass($message, $code, $propertyPath);
+        return new $exceptionClass($message, $code, $propertyPath, $value);
     }
 
     /**
@@ -198,7 +198,7 @@ class Assertion
                 self::stringify($value2)
             );
 
-            throw static::createException($message, static::INVALID_EQ, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath);
         }
     }
 
@@ -221,7 +221,7 @@ class Assertion
                 self::stringify($value2)
             );
 
-            throw static::createException($message, static::INVALID_SAME, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath);
         }
     }
 
@@ -242,7 +242,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_INTEGER, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_INTEGER, $propertyPath);
         }
     }
 
@@ -263,7 +263,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_FLOAT, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_FLOAT, $propertyPath);
         }
     }
 
@@ -284,7 +284,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_DIGIT, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_DIGIT, $propertyPath);
         }
     }
 
@@ -304,7 +304,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_INTEGERISH, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_INTEGERISH, $propertyPath);
         }
     }
 
@@ -325,7 +325,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_BOOLEAN, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_BOOLEAN, $propertyPath);
         }
     }
 
@@ -346,7 +346,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::VALUE_EMPTY, $propertyPath);
+            throw static::createException($value, $message, static::VALUE_EMPTY, $propertyPath);
         }
     }
 
@@ -367,7 +367,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::VALUE_NOT_EMPTY, $propertyPath);
+            throw static::createException($value, $message, static::VALUE_NOT_EMPTY, $propertyPath);
         }
     }
 
@@ -388,7 +388,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::VALUE_NULL, $propertyPath);
+            throw static::createException($value, $message, static::VALUE_NULL, $propertyPath);
         }
     }
 
@@ -410,7 +410,7 @@ class Assertion
                 gettype($value)
             );
 
-            throw static::createException($message, static::INVALID_STRING, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_STRING, $propertyPath);
         }
     }
 
@@ -434,7 +434,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_REGEX , $propertyPath);
+            throw static::createException($value, $message, static::INVALID_REGEX , $propertyPath);
         }
     }
 
@@ -461,7 +461,7 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($message, static::INVALID_LENGTH, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath);
         }
     }
 
@@ -488,7 +488,7 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
     }
 
@@ -515,7 +515,7 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
 
@@ -543,7 +543,7 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($message, static::INVALID_MIN_LENGTH, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath);
         }
 
         if (mb_strlen($value, $encoding) > $maxLength) {
@@ -554,7 +554,7 @@ class Assertion
                 mb_strlen($value, $encoding)
             );
 
-            throw static::createException($message, static::INVALID_MAX_LENGTH, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath);
         }
     }
 
@@ -580,7 +580,7 @@ class Assertion
                 self::stringify($needle)
             );
 
-            throw static::createException($message, static::INVALID_STRING_START, $propertyPath);
+            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath);
         }
     }
 
@@ -608,7 +608,7 @@ class Assertion
                 self::stringify($needle)
             );
 
-            throw static::createException($message, static::INVALID_STRING_END, $propertyPath);
+            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath);
         }
     }
 
@@ -634,7 +634,7 @@ class Assertion
                 self::stringify($needle)
             );
 
-            throw static::createException($message, static::INVALID_STRING_CONTAINS, $propertyPath);
+            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath);
         }
     }
 
@@ -657,7 +657,7 @@ class Assertion
                 implode(", ", array_map('Assert\Assertion::stringify', $choices))
             );
 
-            throw static::createException($message, static::INVALID_CHOICE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath);
         }
     }
 
@@ -688,7 +688,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_NUMERIC, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_NUMERIC, $propertyPath);
         }
     }
 
@@ -709,7 +709,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_ARRAY, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_ARRAY, $propertyPath);
         }
     }
 
@@ -733,7 +733,7 @@ class Assertion
                 self::stringify($key)
             );
 
-            throw static::createException($message, static::INVALID_KEY_EXISTS, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath);
         }
     }
 
@@ -770,7 +770,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_NOT_BLANK, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_NOT_BLANK, $propertyPath);
         }
     }
 
@@ -793,7 +793,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($message, static::INVALID_INSTANCE_OF, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath);
         }
     }
 
@@ -816,7 +816,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($message, static::INVALID_NOT_INSTANCE_OF, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath);
         }
     }
 
@@ -839,7 +839,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($message, static::INVALID_SUBCLASS_OF, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath);
         }
     }
 
@@ -866,7 +866,7 @@ class Assertion
                 self::stringify($maxValue)
             );
 
-            throw static::createException($message, static::INVALID_RANGE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath);
         }
     }
 
@@ -891,7 +891,7 @@ class Assertion
                 self::stringify($minValue)
             );
 
-            throw static::createException($message, static::INVALID_MIN, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath);
         }
     }
 
@@ -916,7 +916,7 @@ class Assertion
                 self::stringify($maxValue)
             );
 
-            throw static::createException($message, static::INVALID_MAX, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath);
         }
     }
 
@@ -940,7 +940,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_FILE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_FILE, $propertyPath);
         }
     }
 
@@ -963,7 +963,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_DIRECTORY, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_DIRECTORY, $propertyPath);
         }
     }
 
@@ -986,7 +986,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_READABLE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_READABLE, $propertyPath);
         }
     }
 
@@ -1009,7 +1009,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_WRITEABLE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_WRITEABLE, $propertyPath);
         }
     }
 
@@ -1033,7 +1033,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_EMAIL, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
         } else {
             $host = substr($value, strpos($value, '@') + 1);
 
@@ -1044,7 +1044,7 @@ class Assertion
                     self::stringify($value)
                 );
 
-                throw static::createException($message, static::INVALID_EMAIL, $propertyPath);
+                throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
             }
         }
     }
@@ -1093,7 +1093,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_URL, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_URL, $propertyPath);
         }
 
     }
@@ -1117,7 +1117,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_ALNUM, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_ALNUM, $propertyPath);
         }
     }
 
@@ -1138,7 +1138,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_TRUE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_TRUE, $propertyPath);
         }
     }
 
@@ -1159,7 +1159,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_FALSE, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_FALSE, $propertyPath);
         }
     }
 
@@ -1180,7 +1180,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_CLASS, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_CLASS, $propertyPath);
         }
     }
 
@@ -1204,7 +1204,7 @@ class Assertion
                 self::stringify($interfaceName)
             );
 
-            throw static::createException($message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath);
+            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath);
         }
     }
 
@@ -1231,7 +1231,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_JSON_STRING, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_JSON_STRING, $propertyPath);
         }
     }
 
@@ -1260,7 +1260,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($message, static::INVALID_UUID, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_UUID, $propertyPath);
         }
     }
 
@@ -1319,7 +1319,7 @@ class Assertion
     static public function count($countable, $count, $message = null, $propertyPath = null)
     {
         if ($count !== count($countable)) {
-            throw static::createException($message, static::INVALID_COUNT, $propertyPath);
+            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath);
         }
     }
 
