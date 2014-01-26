@@ -24,7 +24,7 @@ use ReflectionClass;
  * METHODSTART
  * @method \Assert\AssertionChain eq($value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method \Assert\AssertionChain same($value2, $message, $propertyPath) Assert that two values are the same (using ===).
- * @method \Assert\AssertionChain ssNot($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
+ * @method \Assert\AssertionChain isNot($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
  * @method \Assert\AssertionChain isNotStrict($value1, $value2, $message, $propertyPath) Assert that two values are not the same (using ===).
  * @method \Assert\AssertionChain integer($message, $propertyPath) Assert that value is a php integer.
  * @method \Assert\AssertionChain float($message, $propertyPath) Assert that value is a php float.
