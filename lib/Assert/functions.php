@@ -58,3 +58,13 @@ function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
     return that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
 }
 
+/**
+ * Create a lazy assertion object.
+ *
+ * @return \Assert\LazyAssertion
+ */
+function lazy()
+{
+    return new LazyAssertion();
+}
+

@@ -98,6 +98,41 @@ on the fluent interface. You only have to specify the `$value` once.
 \Assert\that($values)->all()->float();
 ```
 
+There are also two shortcut function ``\Assert\thatNullOr()`` and ``\Assert\thatAll()`` enabling
+the "nullOr" or "all" helper respectively.
+
+### Lazy Assertions
+
+There are many cases in web development, especially when involving forms, you want to collect several errors
+instead of aborting directly on the first error. This is what lazy assertions are for. Their API
+works exactly like the fluent ``\Assert\that()`` API, but instead of throwing an Exception directly,
+they collect all errors and only trigger the exception when the method
+``verifyNow()`` is called on the ``Assert\SoftAssertion`` object.
+
+```php
+<?php
+\Assert\lazy()
+    ->that(10, 'foo')->string()
+    ->that(null, 'bar')->notEmpty()
+    ->that('string', 'baz')->isArray()
+    ->verifyNow();
+```
+
+The method ``that($value, $propertyPath)`` requires a property path (name), so that you know how to differentiate
+the errors afterwards.
+
+On failure ``verifyNow()` will throw an exception
+``Assert\\LazyAssertionException`` (this does not extend
+``AssertionFailedException``) with a combined message:
+
+    The following 3 assertions failed:
+    1) foo: Value "10" expected to be string, type integer given.
+    2) bar: Value "<NULL>" is empty, but non empty value was expected.
+    3) baz: Value "string" is not an array.
+
+You can also retrieve all the ``AssertionFailedException``s by calling ``getErrorExceptions()``.
+This can be useful for example to build a failure response for the user.
+
 ## List of assertions
 
 ```php
@@ -168,8 +203,16 @@ try {
 }
 ```
 
-``Assert\AssertionFailedException`` is just an interface and the default implementation is ``Assert\InvalidArgumentException`` which extends the SPL ``InvalidArgumentException``. You can change the exception being used on a package based level. To shield your library from bugs or misinterpretations inside Assert you should introduce a library/project based assertion
-subclass, where you can override the exception thrown as well:
+``Assert\AssertionFailedException`` is just an interface and the default
+implementation is ``Assert\InvalidArgumentException`` which extends the SPL
+``InvalidArgumentException``. You can change the exception being used on a
+package based level.
+
+## Your own Assertion class
+
+To shield your library from possible bugs, misinterpretations or BC breaks
+inside Assert you should introduce a library/project based assertion subclass,
+where you can override the exception thrown as well:
 
 ```php
 namespace MyProject;
