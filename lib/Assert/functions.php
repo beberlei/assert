@@ -58,3 +58,13 @@ function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
     return that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
 }
 
+/**
+ * Create a soft assertion object.
+ *
+ * @return \Assert\SoftAssertion
+ */
+function soft()
+{
+    return new SoftAssertion();
+}
+
