@@ -14,5 +14,10 @@
             "Assert": "lib/"
         },
         "files": ["lib/Assert/functions.php"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
 }
