@@ -23,6 +23,8 @@ use BadMethodCallException;
  * METHODSTART
  * @method static void nullOrEq($value, $value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method static void nullOrSame($value, $value2, $message, $propertyPath) Assert that two values are the same (using ===).
+ * @method static void nullOrIsNot($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
+ * @method static void nullOrIsNotStrict($value1, $value2, $message, $propertyPath) Assert that two values are not the same (using ===).
  * @method static void nullOrInteger($value, $message, $propertyPath) Assert that value is a php integer.
  * @method static void nullOrFloat($value, $message, $propertyPath) Assert that value is a php float.
  * @method static void nullOrDigit($value, $message, $propertyPath) Validates if an integer or integerish is a digit.
@@ -69,6 +71,8 @@ use BadMethodCallException;
  * @method static void nullOrCount($countable, $count, $message, $propertyPath) Assert that the count of countable is equal to count.
  * @method static void allEq($value, $value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method static void allSame($value, $value2, $message, $propertyPath) Assert that two values are the same (using ===).
+ * @method static void allIsNot($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
+ * @method static void allIsNotStrict($value1, $value2, $message, $propertyPath) Assert that two values are not the same (using ===).
  * @method static void allInteger($value, $message, $propertyPath) Assert that value is a php integer.
  * @method static void allFloat($value, $message, $propertyPath) Assert that value is a php float.
  * @method static void allDigit($value, $message, $propertyPath) Validates if an integer or integerish is a digit.
@@ -149,6 +153,8 @@ class Assertion
     const INVALID_STRING_END        = 39;
     const INVALID_UUID              = 40;
     const INVALID_COUNT             = 41;
+    const INVALID_IS_NOT            = 42;
+    const INVALID_IS_NOT_STRICT     = 43;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -224,6 +230,51 @@ class Assertion
             throw static::createException($value, $message, static::INVALID_SAME, $propertyPath, array('expected' => $value2));
         }
     }
+
+    /**
+        * Assert that two values are not equal (using == ).
+        *
+        * @param mixed $value1
+        * @param mixed $value2
+        * @param string $message
+        * @param string $propertyPath
+        * @return void
+        * @throws \Assert\AssertionFailedException
+        */
+       static public function isNot($value1, $value2, $message = null, $propertyPath = null)
+       {
+           if ($value1 == $value2) {
+               $message = $message?: sprintf(
+                   'Value "%s" is equal to expected value "%s".',
+                   self::stringify($value1),
+                   self::stringify($value2)
+               );
+               throw static::createException($value1, $message, static::INVALID_IS_NOT, $propertyPath, array('expected' => $value2));
+           }
+       }
+
+       /**
+        * Assert that two values are not the same (using === ).
+        *
+        * @param mixed $value1
+        * @param mixed $value2
+        * @param string $message
+        * @param string $propertyPath
+        * @return void
+        * @throws \Assert\AssertionFailedException
+        */
+       static public function isNotStrict($value1, $value2, $message = null, $propertyPath = null)
+       {
+           if ($value1 === $value2) {
+               $message = $message?: sprintf(
+                   'Value "%s" is the same as expected value "%s".',
+                   self::stringify($value1),
+                   self::stringify($value2)
+               );
+               throw static::createException($value1, $message, static::INVALID_IS_NOT_STRICT, $propertyPath, array('expected' => $value2));
+           }
+       }
+
 
     /**
      * Assert that value is a php integer.
