@@ -2,14 +2,14 @@
 
 namespace Assert\Tests;
 
-class SoftAssertionTest extends \PHPUnit_Framework_TestCase
+class LazyAssertionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
     public function it_collects_errors_until_assertall()
     {
-        $this->setExpectedException('Assert\SoftAssertionException', <<<EXC
+        $this->setExpectedException('Assert\LazyAssertionException', <<<EXC
 The following 3 assertions failed:
 1) foo: Value "10" expected to be string, type integer given.
 2) bar: Value "<NULL>" is empty, but non empty value was expected.
@@ -17,10 +17,10 @@ The following 3 assertions failed:
 EXC
         );
 
-        \Assert\soft()
+        \Assert\lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
             ->that('string', 'baz')->isArray()
-            ->verify();
+            ->verifyNow();
     }
 }

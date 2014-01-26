@@ -59,12 +59,12 @@ function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
 }
 
 /**
- * Create a soft assertion object.
+ * Create a lazy assertion object.
  *
- * @return \Assert\SoftAssertion
+ * @return \Assert\LazyAssertion
  */
-function soft()
+function lazy()
 {
-    return new SoftAssertion();
+    return new LazyAssertion();
 }
 

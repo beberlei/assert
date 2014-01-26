@@ -101,28 +101,28 @@ on the fluent interface. You only have to specify the `$value` once.
 There are also two shortcut function ``\Assert\thatNullOr()`` and ``\Assert\thatAll()`` enabling
 the "nullOr" or "all" helper respectively.
 
-### Soft Assertions
+### Lazy Assertions
 
 There are many cases in web development, especially when involving forms, you want to collect several errors
-instead of aborting directly on the first error. This is what soft assertions are for. Their API
+instead of aborting directly on the first error. This is what lazy assertions are for. Their API
 works exactly like the fluent ``\Assert\that()`` API, but instead of throwing an Exception directly,
 they collect all errors and only trigger the exception when the method
-``verify()`` is called on the ``Assert\SoftAssertion`` object.
+``verifyNow()`` is called on the ``Assert\SoftAssertion`` object.
 
 ```php
 <?php
-\Assert\soft()
+\Assert\lazy()
     ->that(10, 'foo')->string()
     ->that(null, 'bar')->notEmpty()
     ->that('string', 'baz')->isArray()
-    ->verify();
+    ->verifyNow();
 ```
 
 The method ``that($value, $propertyPath)`` requires a property path (name), so that you know how to differentiate
 the errors afterwards.
 
-On failure ``verify()` will throw an exception
-``Assert\\SoftAssertionException`` (this does not extend
+On failure ``verifyNow()` will throw an exception
+``Assert\\LazyAssertionException`` (this does not extend
 ``AssertionFailedException``) with a combined message:
 
     The following 3 assertions failed:

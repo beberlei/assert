@@ -13,7 +13,7 @@
 
 namespace Assert;
 
-class SoftAssertionException extends \InvalidArgumentException
+class LazyAssertionException extends \InvalidArgumentException
 {
     /**
      * @var array

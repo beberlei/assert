@@ -13,7 +13,7 @@
 
 namespace Assert;
 
-class SoftAssertion
+class LazyAssertion
 {
     private $currentChainFailed = false;
     private $currentChain;
@@ -43,12 +43,12 @@ class SoftAssertion
     }
 
     /**
-     * @throws \Assert\SoftAssertionException
+     * @throws \Assert\LazyAssertionException
      */
-    public function verify()
+    public function verifyNow()
     {
         if ($this->errors) {
-            throw SoftAssertionException::fromErrors($this->errors);
+            throw LazyAssertionException::fromErrors($this->errors);
         }
     }
 }
