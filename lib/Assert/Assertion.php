@@ -21,6 +21,52 @@ use BadMethodCallException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * METHODSTART
+ * @method static void eq($value, $value2, $message, $propertyPath) Assert that two values are equal (using == ).
+ * @method static void same($value, $value2, $message, $propertyPath) Assert that two values are the same (using ===).
+ * @method static void integer($value, $message, $propertyPath) Assert that value is a php integer.
+ * @method static void float($value, $message, $propertyPath) Assert that value is a php float.
+ * @method static void digit($value, $message, $propertyPath) Validates if an integer or integerish is a digit.
+ * @method static void integerish($value, $message, $propertyPath) Assert that value is a php integer'ish.
+ * @method static void boolean($value, $message, $propertyPath) Assert that value is php boolean
+ * @method static void notEmpty($value, $message, $propertyPath) Assert that value is not empty
+ * @method static void noContent($value, $message, $propertyPath) Assert that value is empty
+ * @method static void notNull($value, $message, $propertyPath) Assert that value is not null
+ * @method static void string($value, $message, $propertyPath) Assert that value is a string
+ * @method static void regex($value, $regex, $message, $propertyPath) Assert that value matches a regex
+ * @method static void length($value, $length, $message, $propertyPath, $encoding) Assert that string has a given length.
+ * @method static void minLength($value, $minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
+ * @method static void maxLength($value, $maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.
+ * @method static void betweenLength($value, $minLength, $maxLength, $message, $propertyPath, $encoding) Assert that string length is between min,max lengths.
+ * @method static void startsWith($string, $needle, $message, $propertyPath, $encoding) Assert that string starts with a sequence of chars.
+ * @method static void endsWith($string, $needle, $message, $propertyPath, $encoding) Assert that string ends with a sequence of chars.
+ * @method static void contains($string, $needle, $message, $propertyPath, $encoding) Assert that string contains a sequence of chars.
+ * @method static void choice($value, $choices, $message, $propertyPath) Assert that value is in array of choices.
+ * @method static void inArray($value, $choices, $message, $propertyPath) Alias of {@see choice()}
+ * @method static void numeric($value, $message, $propertyPath) Assert that value is numeric.
+ * @method static void isArray($value, $message, $propertyPath) Assert that value is array.
+ * @method static void keyExists($value, $key, $message, $propertyPath) Assert that key exists in array
+ * @method static void notEmptyKey($value, $key, $message, $propertyPath) Assert that key exists in array and it's value not empty.
+ * @method static void notBlank($value, $message, $propertyPath) Assert that value is not blank
+ * @method static void isInstanceOf($value, $className, $message, $propertyPath) Assert that value is instance of given class-name.
+ * @method static void notIsInstanceOf($value, $className, $message, $propertyPath) Assert that value is not instance of given class-name.
+ * @method static void subclassOf($value, $className, $message, $propertyPath) Assert that value is subclass of given class-name.
+ * @method static void range($value, $minValue, $maxValue, $message, $propertyPath) Assert that value is in range of integers.
+ * @method static void min($value, $minValue, $message, $propertyPath) Assert that a value is at least as big as a given limit
+ * @method static void max($value, $maxValue, $message, $propertyPath) Assert that a number is smaller as a given limit
+ * @method static void file($value, $message, $propertyPath) Assert that a file exists
+ * @method static void directory($value, $message, $propertyPath) Assert that a directory exists
+ * @method static void readable($value, $message, $propertyPath) Assert that the value is something readable
+ * @method static void writeable($value, $message, $propertyPath) Assert that the value is something writeable
+ * @method static void email($value, $message, $propertyPath) Assert that value is an email adress (using
+ * @method static void url($value, $message, $propertyPath) Assert that value is an URL.
+ * @method static void alnum($value, $message, $propertyPath) Assert that value is alphanumeric.
+ * @method static void true($value, $message, $propertyPath) Assert that the value is boolean True.
+ * @method static void false($value, $message, $propertyPath) Assert that the value is boolean False.
+ * @method static void classExists($value, $message, $propertyPath) Assert that the class exists.
+ * @method static void implementsInterface($class, $interfaceName, $message, $propertyPath) Assert that the class implements the interface
+ * @method static void isJsonString($value, $message, $propertyPath) Assert that the given string is a valid json string.
+ * @method static void uuid($value, $message, $propertyPath) Assert that the given string is a valid UUID
+ * @method static void count($countable, $count, $message, $propertyPath) Assert that the count of countable is equal to count.
  * METHODEND
  */
 class Assertion
