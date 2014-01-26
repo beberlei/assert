@@ -2,6 +2,7 @@
 namespace Assert\Tests;
 
 use Assert\Assertion;
+use Assert\AssertionFailedException;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
@@ -867,6 +868,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_COUNT);
         Assertion::count($countable, $count);
+    }
+
+    /**
+     * @test
+     */
+    public function it_passes_values_and_constraints_to_exception()
+    {
+        try {
+            Assertion::range(0, 10, 20);
+
+            $this->fail('Exception expected');
+        } catch (AssertionFailedException $e) {
+            $this->assertEquals(0, $e->getValue());
+            $this->assertEquals(array('min' => 10, 'max' => 20), $e->getConstraints());
+        }
     }
 }
 
