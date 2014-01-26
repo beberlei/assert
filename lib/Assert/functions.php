@@ -37,3 +37,24 @@ function that($value, $defaultMessage = null, $defaultPropertyPath = null)
 {
     return new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
 }
+
+/**
+ * Start validation on a set of values, returns {@link AssertionChain}
+ *
+ * @return \Assert\AssertionChain
+ */
+function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
+{
+    return that($values, $defaultMessage, $defaultPropertyPath)->all();
+}
+
+/**
+ * Start validation and allow NULL, returns {@link AssertionChain}
+ *
+ * @return \Assert\AssertionChain
+ */
+function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
+{
+    return that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
+}
+

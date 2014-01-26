@@ -56,4 +56,20 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
     {
         \Assert\That(array(1, 2, 3))->all()->integer();
     }
+
+    /**
+     * @test
+     */
+    public function it_has_thatall_shortcut()
+    {
+        \Assert\ThatAll(array(1, 2, 3))->integer();
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_nullor_shortcut()
+    {
+        \Assert\ThatNullOr(null)->integer()->eq(10);
+    }
 }
