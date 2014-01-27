@@ -121,9 +121,8 @@ they collect all errors and only trigger the exception when the method
 The method ``that($value, $propertyPath)`` requires a property path (name), so that you know how to differentiate
 the errors afterwards.
 
-On failure ``verifyNow()` will throw an exception
-``Assert\\LazyAssertionException`` (this does not extend
-``AssertionFailedException``) with a combined message:
+On failure ``verifyNow()`` will throw an exception
+``Assert\\LazyAssertionException`` with a combined message:
 
     The following 3 assertions failed:
     1) foo: Value "10" expected to be string, type integer given.
