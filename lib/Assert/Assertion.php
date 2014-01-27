@@ -69,7 +69,6 @@ use BadMethodCallException;
  * @method static void nullOrIsJsonString($value, $message, $propertyPath) Assert that the given string is a valid json string.
  * @method static void nullOrUuid($value, $message, $propertyPath) Assert that the given string is a valid UUID
  * @method static void nullOrCount($countable, $count, $message, $propertyPath) Assert that the count of countable is equal to count.
- * @method static void nullOrStringify($value) Make a string version of a value.
  * @method static void allEq($value, $value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method static void allSame($value, $value2, $message, $propertyPath) Assert that two values are the same (using ===).
  * @method static void allNotEq($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
@@ -118,7 +117,6 @@ use BadMethodCallException;
  * @method static void allIsJsonString($value, $message, $propertyPath) Assert that the given string is a valid json string.
  * @method static void allUuid($value, $message, $propertyPath) Assert that the given string is a valid UUID
  * @method static void allCount($countable, $count, $message, $propertyPath) Assert that the count of countable is equal to count.
- * @method static void allStringify($value) Make a string version of a value.
  * METHODEND
  */
 class Assertion

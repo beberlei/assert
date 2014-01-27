@@ -70,7 +70,6 @@ use ReflectionClass;
  * @method \Assert\AssertionChain isJsonString($message, $propertyPath) Assert that the given string is a valid json string.
  * @method \Assert\AssertionChain uuid($message, $propertyPath) Assert that the given string is a valid UUID
  * @method \Assert\AssertionChain count($count, $message, $propertyPath) Assert that the count of countable is equal to count.
- * @method \Assert\AssertionChain stringif) Make a string version of a value.
  * METHODEND
  */
 class AssertionChain

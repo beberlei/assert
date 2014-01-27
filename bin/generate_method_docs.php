@@ -97,7 +97,7 @@ class MethodDocGenerator
                     return false;
                 }
 
-                if (in_array($reflMethod->getName(), array('__callStatic', 'createException'))) {
+                if (in_array($reflMethod->getName(), array('__callStatic', 'createException', 'stringify'))) {
                     return false;
                 }
 
