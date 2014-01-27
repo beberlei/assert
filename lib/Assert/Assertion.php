@@ -23,6 +23,8 @@ use BadMethodCallException;
  * METHODSTART
  * @method static void nullOrEq($value, $value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method static void nullOrSame($value, $value2, $message, $propertyPath) Assert that two values are the same (using ===).
+ * @method static void nullOrNotEq($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
+ * @method static void nullOrNotSame($value1, $value2, $message, $propertyPath) Assert that two values are not the same (using === ).
  * @method static void nullOrInteger($value, $message, $propertyPath) Assert that value is a php integer.
  * @method static void nullOrFloat($value, $message, $propertyPath) Assert that value is a php float.
  * @method static void nullOrDigit($value, $message, $propertyPath) Validates if an integer or integerish is a digit.
@@ -32,7 +34,7 @@ use BadMethodCallException;
  * @method static void nullOrNoContent($value, $message, $propertyPath) Assert that value is empty
  * @method static void nullOrNotNull($value, $message, $propertyPath) Assert that value is not null
  * @method static void nullOrString($value, $message, $propertyPath) Assert that value is a string
- * @method static void nullOrRegex($value, $regex, $message, $propertyPath) Assert that value matches a regex
+ * @method static void nullOrRegex($value, $pattern, $message, $propertyPath) Assert that value matches a regex
  * @method static void nullOrLength($value, $length, $message, $propertyPath, $encoding) Assert that string has a given length.
  * @method static void nullOrMinLength($value, $minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
  * @method static void nullOrMaxLength($value, $maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.
@@ -67,8 +69,11 @@ use BadMethodCallException;
  * @method static void nullOrIsJsonString($value, $message, $propertyPath) Assert that the given string is a valid json string.
  * @method static void nullOrUuid($value, $message, $propertyPath) Assert that the given string is a valid UUID
  * @method static void nullOrCount($countable, $count, $message, $propertyPath) Assert that the count of countable is equal to count.
+ * @method static void nullOrStringify($value) Make a string version of a value.
  * @method static void allEq($value, $value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method static void allSame($value, $value2, $message, $propertyPath) Assert that two values are the same (using ===).
+ * @method static void allNotEq($value1, $value2, $message, $propertyPath) Assert that two values are not equal (using == ).
+ * @method static void allNotSame($value1, $value2, $message, $propertyPath) Assert that two values are not the same (using === ).
  * @method static void allInteger($value, $message, $propertyPath) Assert that value is a php integer.
  * @method static void allFloat($value, $message, $propertyPath) Assert that value is a php float.
  * @method static void allDigit($value, $message, $propertyPath) Validates if an integer or integerish is a digit.
@@ -78,7 +83,7 @@ use BadMethodCallException;
  * @method static void allNoContent($value, $message, $propertyPath) Assert that value is empty
  * @method static void allNotNull($value, $message, $propertyPath) Assert that value is not null
  * @method static void allString($value, $message, $propertyPath) Assert that value is a string
- * @method static void allRegex($value, $regex, $message, $propertyPath) Assert that value matches a regex
+ * @method static void allRegex($value, $pattern, $message, $propertyPath) Assert that value matches a regex
  * @method static void allLength($value, $length, $message, $propertyPath, $encoding) Assert that string has a given length.
  * @method static void allMinLength($value, $minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
  * @method static void allMaxLength($value, $maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.
@@ -113,6 +118,7 @@ use BadMethodCallException;
  * @method static void allIsJsonString($value, $message, $propertyPath) Assert that the given string is a valid json string.
  * @method static void allUuid($value, $message, $propertyPath) Assert that the given string is a valid UUID
  * @method static void allCount($countable, $count, $message, $propertyPath) Assert that the count of countable is equal to count.
+ * @method static void allStringify($value) Make a string version of a value.
  * METHODEND
  */
 class Assertion
@@ -149,6 +155,8 @@ class Assertion
     const INVALID_STRING_END        = 39;
     const INVALID_UUID              = 40;
     const INVALID_COUNT             = 41;
+    const INVALID_NOT_EQ            = 42;
+    const INVALID_NOT_SAME          = 43;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -224,6 +232,51 @@ class Assertion
             throw static::createException($value, $message, static::INVALID_SAME, $propertyPath, array('expected' => $value2));
         }
     }
+
+    /**
+     * Assert that two values are not equal (using == ).
+     *
+     * @param mixed $value1
+     * @param mixed $value2
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function notEq($value1, $value2, $message = null, $propertyPath = null)
+    {
+        if ($value1 == $value2) {
+            $message = $message ?: sprintf(
+                'Value "%s" is equal to expected value "%s".',
+                self::stringify($value1),
+                self::stringify($value2)
+            );
+            throw static::createException($value1, $message,static::INVALID_NOT_EQ, $propertyPath, array('expected' => $value2));
+        }
+    }
+
+    /**
+     * Assert that two values are not the same (using === ).
+     *
+     * @param mixed $value1
+     * @param mixed $value2
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function notSame($value1, $value2, $message = null, $propertyPath = null)
+    {
+        if ($value1 === $value2) {
+            $message = $message ?: sprintf(
+                'Value "%s" is the same as expected value "%s".',
+                self::stringify($value1),
+                self::stringify($value2)
+            );
+            throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath, array('expected' => $value2));
+        }
+    }
+
 
     /**
      * Assert that value is a php integer.

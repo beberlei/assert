@@ -24,6 +24,8 @@ use ReflectionClass;
  * METHODSTART
  * @method \Assert\AssertionChain eq($value2, $message, $propertyPath) Assert that two values are equal (using == ).
  * @method \Assert\AssertionChain same($value2, $message, $propertyPath) Assert that two values are the same (using ===).
+ * @method \Assert\AssertionChain notEq($value2, $message, $propertyPath) Assert that two values are not equal (using == ).
+ * @method \Assert\AssertionChain notSame($value2, $message, $propertyPath) Assert that two values are not the same (using === ).
  * @method \Assert\AssertionChain integer($message, $propertyPath) Assert that value is a php integer.
  * @method \Assert\AssertionChain float($message, $propertyPath) Assert that value is a php float.
  * @method \Assert\AssertionChain digit($message, $propertyPath) Validates if an integer or integerish is a digit.
@@ -33,7 +35,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain noContent($message, $propertyPath) Assert that value is empty
  * @method \Assert\AssertionChain notNull($message, $propertyPath) Assert that value is not null
  * @method \Assert\AssertionChain string($message, $propertyPath) Assert that value is a string
- * @method \Assert\AssertionChain regex($regex, $message, $propertyPath) Assert that value matches a regex
+ * @method \Assert\AssertionChain regex($pattern, $message, $propertyPath) Assert that value matches a regex
  * @method \Assert\AssertionChain length($length, $message, $propertyPath, $encoding) Assert that string has a given length.
  * @method \Assert\AssertionChain minLength($minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
  * @method \Assert\AssertionChain maxLength($maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.
@@ -68,6 +70,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain isJsonString($message, $propertyPath) Assert that the given string is a valid json string.
  * @method \Assert\AssertionChain uuid($message, $propertyPath) Assert that the given string is a valid UUID
  * @method \Assert\AssertionChain count($count, $message, $propertyPath) Assert that the count of countable is equal to count.
+ * @method \Assert\AssertionChain stringif) Make a string version of a value.
  * METHODEND
  */
 class AssertionChain
