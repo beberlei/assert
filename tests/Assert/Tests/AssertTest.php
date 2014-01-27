@@ -197,6 +197,32 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testValidIsRegex()
+    {
+        $validRegex = "/{{(.*?)}}/";
+        Assertion::isRegex($validRegex);
+    }
+
+    public function testValidSophisticatedIsRegex()
+    {
+        $validRegex = "/^(?![\d ])(?![^ ]*[ ][^ ]*[ ])(?=.*[!~*:;<>+#\-£$&_?{}\[\]()])[a-z\d!~*:;<>+#\-£$&_?{}\[\]() ]{6,15}(?<![ ])$/";
+        Assertion::isRegex($validRegex);
+    }
+
+    public function testInvalidIsRegexNotString()
+    {
+        $invalidRegex = new \StdClass;
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
+        Assertion::isRegex($invalidRegex);
+    }
+
+    public function testInvalidIsRegexIsString()
+    {
+        $invalidRegex = "foobaar";
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IS_REGEX);
+        Assertion::isRegex($invalidRegex);
+    }
+
     public function testInvalidRegex()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_REGEX);
