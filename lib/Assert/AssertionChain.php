@@ -36,6 +36,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain notNull($message, $propertyPath) Assert that value is not null
  * @method \Assert\AssertionChain string($message, $propertyPath) Assert that value is a string
  * @method \Assert\AssertionChain regex($pattern, $message, $propertyPath) Assert that value matches a regex
+ * @method \Assert\AssertionChain isRegex($message, $propertyPath) Assert that pattern is a regex
  * @method \Assert\AssertionChain length($length, $message, $propertyPath, $encoding) Assert that string has a given length.
  * @method \Assert\AssertionChain minLength($minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
  * @method \Assert\AssertionChain maxLength($maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.

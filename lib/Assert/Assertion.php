@@ -35,6 +35,7 @@ use BadMethodCallException;
  * @method static void nullOrNotNull($value, $message, $propertyPath) Assert that value is not null
  * @method static void nullOrString($value, $message, $propertyPath) Assert that value is a string
  * @method static void nullOrRegex($value, $pattern, $message, $propertyPath) Assert that value matches a regex
+ * @method static void nullOrIsRegex($pattern, $message, $propertyPath) Assert that pattern is a regex
  * @method static void nullOrLength($value, $length, $message, $propertyPath, $encoding) Assert that string has a given length.
  * @method static void nullOrMinLength($value, $minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
  * @method static void nullOrMaxLength($value, $maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.
@@ -83,6 +84,7 @@ use BadMethodCallException;
  * @method static void allNotNull($value, $message, $propertyPath) Assert that value is not null
  * @method static void allString($value, $message, $propertyPath) Assert that value is a string
  * @method static void allRegex($value, $pattern, $message, $propertyPath) Assert that value matches a regex
+ * @method static void allIsRegex($pattern, $message, $propertyPath) Assert that pattern is a regex
  * @method static void allLength($value, $length, $message, $propertyPath, $encoding) Assert that string has a given length.
  * @method static void allMinLength($value, $minLength, $message, $propertyPath, $encoding) Assert that a string is at least $minLength chars long.
  * @method static void allMaxLength($value, $maxLength, $message, $propertyPath, $encoding) Assert that string value is not longer than $maxLength chars.
@@ -155,6 +157,7 @@ class Assertion
     const INVALID_COUNT             = 41;
     const INVALID_NOT_EQ            = 42;
     const INVALID_NOT_SAME          = 43;
+    const INVALID_IS_REGEX          = 44;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -487,6 +490,30 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_REGEX , $propertyPath, array('pattern' => $pattern));
         }
+    }
+
+    /**
+     * Assert that pattern is a regex
+     *
+     * @param string $pattern
+     * @param string $message
+     * @param string $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    static public function isRegex($pattern, $message = null, $propertyPath = null)
+    {
+        static::string($pattern, $message);
+
+        if(@preg_match($pattern, "foobar") === false)
+        {
+            $message = $message ?: sprintf(
+                'Pattern "%s" is not a valid RegEx',
+                self::stringify($pattern)
+            );
+            throw static::createException($pattern, $message, static::INVALID_IS_REGEX , $propertyPath, array('pattern' => $pattern));
+        }
+
     }
 
     /**
