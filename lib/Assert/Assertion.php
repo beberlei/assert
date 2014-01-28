@@ -505,16 +505,15 @@ class Assertion
     {
         static::string($pattern, $message);
 
-        try {
-            preg_match($pattern, "foobar");
-        }  catch(\Exception $e) {
+        if(@preg_match($pattern, "foobar") === false)
+        {
             $message = $message ?: sprintf(
-                'Pattern "%s" is not a RegEx.',
+                'Pattern "%s" is not a valid RegEx',
                 self::stringify($pattern)
             );
-
             throw static::createException($pattern, $message, static::INVALID_IS_REGEX , $propertyPath, array('pattern' => $pattern));
         }
+
     }
 
     /**
