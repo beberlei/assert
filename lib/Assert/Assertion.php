@@ -505,9 +505,9 @@ class Assertion
     {
         static::string($pattern, $message);
 
-        $regex = '/^\/[\s\S]+\/$/';
-
-        if ( ! preg_match($regex, $pattern)) {
+        try {
+            preg_match($pattern, "foobar");
+        }  catch(\Exception $e) {
             $message = $message ?: sprintf(
                 'Pattern "%s" is not a RegEx.',
                 self::stringify($pattern)

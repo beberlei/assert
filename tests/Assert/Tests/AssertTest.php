@@ -199,7 +199,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testValidIsRegex()
     {
-        $validRegex = "/{{(.*?)}}/";
+        $validRegex = "#{{(.*?)}}#";
         Assertion::isRegex($validRegex);
     }
 
