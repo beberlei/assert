@@ -196,7 +196,7 @@ by default.
 ```php
 <?php
 use Assert\Assertion;
-use Assert\InvalidArgumentException;
+use Assert\AssertionFailedException;
 
 try {
     Assertion::integer($value, "The pressure of gas is measured in integers.");
