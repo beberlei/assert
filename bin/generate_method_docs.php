@@ -54,7 +54,7 @@ class MethodDocGenerator
                 $line .= '$' . $parameter->getName() . ', ';
             }
 
-            $lines[] = substr($line, 0, -2) . ') ' . $shortDescription . "\n";
+            $lines[] = substr($line, 0, -2) . ")\n";
         }
 
         return $lines;
