@@ -179,7 +179,7 @@ class Assertion
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
      */
-    static protected function createException($value, $message, $code, $propertyPath, array $constraints = array())
+    protected static function createException($value, $message, $code, $propertyPath, array $constraints = array())
     {
         $exceptionClass = static::$exceptionClass;
         return new $exceptionClass($message, $code, $propertyPath, $value, $constraints);
@@ -195,7 +195,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function eq($value, $value2, $message = null, $propertyPath = null)
+    public static function eq($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value != $value2) {
             $message = $message ?: sprintf(
@@ -218,7 +218,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function same($value, $value2, $message = null, $propertyPath = null)
+    public static function same($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value !== $value2) {
             $message = $message ?: sprintf(
@@ -241,7 +241,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notEq($value1, $value2, $message = null, $propertyPath = null)
+    public static function notEq($value1, $value2, $message = null, $propertyPath = null)
     {
         if ($value1 == $value2) {
             $message = $message ?: sprintf(
@@ -263,7 +263,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notSame($value1, $value2, $message = null, $propertyPath = null)
+    public static function notSame($value1, $value2, $message = null, $propertyPath = null)
     {
         if ($value1 === $value2) {
             $message = $message ?: sprintf(
@@ -285,7 +285,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function integer($value, $message = null, $propertyPath = null)
+    public static function integer($value, $message = null, $propertyPath = null)
     {
         if ( ! is_int($value)) {
             $message = $message ?: sprintf(
@@ -306,7 +306,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function float($value, $message = null, $propertyPath = null)
+    public static function float($value, $message = null, $propertyPath = null)
     {
         if ( ! is_float($value)) {
             $message = $message ?: sprintf(
@@ -327,7 +327,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function digit($value, $message = null, $propertyPath = null)
+    public static function digit($value, $message = null, $propertyPath = null)
     {
         if ( ! ctype_digit((string)$value)) {
             $message = $message ?: sprintf(
@@ -347,7 +347,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function integerish($value, $message = null, $propertyPath = null)
+    public static function integerish($value, $message = null, $propertyPath = null)
     {
         if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
             $message = $message ?: sprintf(
@@ -368,7 +368,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function boolean($value, $message = null, $propertyPath = null)
+    public static function boolean($value, $message = null, $propertyPath = null)
     {
         if ( ! is_bool($value)) {
             $message = $message ?: sprintf(
@@ -389,7 +389,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notEmpty($value, $message = null, $propertyPath = null)
+    public static function notEmpty($value, $message = null, $propertyPath = null)
     {
         if (empty($value)) {
             $message = $message ?: sprintf(
@@ -410,7 +410,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function noContent($value, $message = null, $propertyPath = null)
+    public static function noContent($value, $message = null, $propertyPath = null)
     {
         if (!empty($value)) {
             $message = $message ?: sprintf(
@@ -431,7 +431,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notNull($value, $message = null, $propertyPath = null)
+    public static function notNull($value, $message = null, $propertyPath = null)
     {
         if ($value === null) {
             $message = $message ?: sprintf(
@@ -452,7 +452,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function string($value, $message = null, $propertyPath = null)
+    public static function string($value, $message = null, $propertyPath = null)
     {
         if ( ! is_string($value)) {
             $message = $message ?: sprintf(
@@ -475,7 +475,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function regex($value, $pattern, $message = null, $propertyPath = null)
+    public static function regex($value, $pattern, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
@@ -500,7 +500,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function length($value, $length, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function length($value, $length, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($value, $message);
 
@@ -528,7 +528,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function minLength($value, $minLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function minLength($value, $minLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($value, $message);
 
@@ -556,7 +556,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function maxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function maxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($value, $message);
 
@@ -585,7 +585,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($value, $message);
 
@@ -625,7 +625,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function startsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function startsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($string);
 
@@ -652,7 +652,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function endsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function endsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($string);
 
@@ -681,7 +681,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function contains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function contains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($string);
 
@@ -707,7 +707,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function choice($value, array $choices, $message = null, $propertyPath = null)
+    public static function choice($value, array $choices, $message = null, $propertyPath = null)
     {
         if ( ! in_array($value, $choices, true)) {
             $message = $message ?: sprintf(
@@ -725,7 +725,7 @@ class Assertion
      *
      * @throws \Assert\AssertionFailedException
      */
-    static public function inArray($value, array $choices, $message = null, $propertyPath = null)
+    public static function inArray($value, array $choices, $message = null, $propertyPath = null)
     {
         static::choice($value, $choices, $message, $propertyPath);
     }
@@ -739,7 +739,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function numeric($value, $message = null, $propertyPath = null)
+    public static function numeric($value, $message = null, $propertyPath = null)
     {
         if ( ! is_numeric($value)) {
             $message = $message ?: sprintf(
@@ -760,7 +760,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function isArray($value, $message = null, $propertyPath = null)
+    public static function isArray($value, $message = null, $propertyPath = null)
     {
         if ( ! is_array($value)) {
             $message = $message ?: sprintf(
@@ -782,7 +782,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function keyExists($value, $key, $message = null, $propertyPath = null)
+    public static function keyExists($value, $key, $message = null, $propertyPath = null)
     {
         static::isArray($value);
 
@@ -806,7 +806,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notEmptyKey($value, $key, $message = null, $propertyPath = null)
+    public static function notEmptyKey($value, $key, $message = null, $propertyPath = null)
     {
         static::keyExists($value, $key, $message, $propertyPath);
         static::notEmpty($value[$key], $message, $propertyPath);
@@ -821,7 +821,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notBlank($value, $message = null, $propertyPath = null)
+    public static function notBlank($value, $message = null, $propertyPath = null)
     {
         if (false === $value || (empty($value) && '0' != $value)) {
             $message = $message ?: sprintf(
@@ -843,7 +843,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function isInstanceOf($value, $className, $message = null, $propertyPath = null)
+    public static function isInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! ($value instanceof $className)) {
             $message = $message ?: sprintf(
@@ -866,7 +866,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
+    public static function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ($value instanceof $className) {
             $message = $message ?: sprintf(
@@ -889,7 +889,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function subclassOf($value, $className, $message = null, $propertyPath = null)
+    public static function subclassOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! is_subclass_of($value, $className)) {
             $message = $message ?: sprintf(
@@ -913,7 +913,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
+    public static function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
     {
         static::integer($value);
 
@@ -939,7 +939,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function min($value, $minValue, $message = null, $propertyPath = null)
+    public static function min($value, $minValue, $message = null, $propertyPath = null)
     {
         static::integer($value);
 
@@ -964,7 +964,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function max($value, $maxValue, $message = null, $propertyPath = null)
+    public static function max($value, $maxValue, $message = null, $propertyPath = null)
     {
         static::integer($value);
 
@@ -988,7 +988,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function file($value, $message = null, $propertyPath = null)
+    public static function file($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
         static::notEmpty($value, $message);
@@ -1012,7 +1012,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function directory($value, $message = null, $propertyPath = null)
+    public static function directory($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
@@ -1035,7 +1035,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function readable($value, $message = null, $propertyPath = null)
+    public static function readable($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
@@ -1058,7 +1058,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function writeable($value, $message = null, $propertyPath = null)
+    public static function writeable($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
@@ -1082,7 +1082,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function email($value, $message = null, $propertyPath = null)
+    public static function email($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message);
 
@@ -1123,7 +1123,7 @@ class Assertion
      * @link https://github.com/symfony/Validator/blob/master/Constraints/UrlValidator.php
      * @link https://github.com/symfony/Validator/blob/master/Constraints/Url.php
      */
-    static public function url($value, $message = null, $propertyPath = null)
+    public static function url($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
 
@@ -1166,7 +1166,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function alnum($value, $message = null, $propertyPath = null)
+    public static function alnum($value, $message = null, $propertyPath = null)
     {
         try {
             static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)');
@@ -1189,7 +1189,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function true($value, $message = null, $propertyPath = null)
+    public static function true($value, $message = null, $propertyPath = null)
     {
         if ($value !== true) {
             $message = $message ?: sprintf(
@@ -1210,7 +1210,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function false($value, $message = null, $propertyPath = null)
+    public static function false($value, $message = null, $propertyPath = null)
     {
         if ($value !== false) {
             $message = $message ?: sprintf(
@@ -1231,7 +1231,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function classExists($value, $message = null, $propertyPath = null)
+    public static function classExists($value, $message = null, $propertyPath = null)
     {
         if ( ! class_exists($value)) {
             $message = $message ?: sprintf(
@@ -1253,7 +1253,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function implementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
+    public static function implementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
     {
         $reflection = new \ReflectionClass($class);
         if ( ! $reflection->implementsInterface($interfaceName)) {
@@ -1282,7 +1282,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function isJsonString($value, $message = null, $propertyPath = null)
+    public static function isJsonString($value, $message = null, $propertyPath = null)
     {
         if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
             $message = $message ?: sprintf(
@@ -1305,7 +1305,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function uuid($value, $message = null, $propertyPath = null)
+    public static function uuid($value, $message = null, $propertyPath = null)
     {
         $value = str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
 
@@ -1333,7 +1333,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    static public function count($countable, $count, $message = null, $propertyPath = null)
+    public static function count($countable, $count, $message = null, $propertyPath = null)
     {
         if ($count !== count($countable)) {
             $message = $message ?: sprintf(
@@ -1351,7 +1351,7 @@ class Assertion
      *  - "null or assertion" delegation
      *  - "all" delegation
      */
-    static public function __callStatic($method, $args)
+    public static function __callStatic($method, $args)
     {
         if (strpos($method, "nullOr") === 0) {
             if ( ! array_key_exists(0, $args)) {
@@ -1394,7 +1394,7 @@ class Assertion
      * @param mixed $value
      * @return string
      */
-    static private function stringify($value)
+    private static function stringify($value)
     {
         if (is_bool($value)) {
             return $value ? '<TRUE>' : '<FALSE>';
