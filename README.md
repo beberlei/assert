@@ -16,7 +16,7 @@ Using Composer:
 ```javascript
 {
     "require": {
-        "beberlei/assert": "*"
+        "beberlei/assert": "@stable"
     }
 }
 ```
