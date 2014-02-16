@@ -51,7 +51,17 @@ class MethodDocGenerator
                     continue;
                 }
 
-                $line .= '$' . $parameter->getName() . ', ';
+                $line .= '$' . $parameter->getName();
+
+                if ($parameter->isOptional()) {
+                    if (null === $parameter->getDefaultValue()) {
+                        $line .= ' = null';
+                    } else {
+                        $line .= sprintf(' = "%s"', $parameter->getDefaultValue());
+                    }
+                }
+
+                $line .= ', ';
             }
 
             $lines[] = substr($line, 0, -2) . ")\n";
