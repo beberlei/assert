@@ -14,7 +14,7 @@ class MethodDocGenerator
             return $parameter->getPosition() === 0;
         };
 
-        $docs = $this->generateMethodDocs($flags, $skipParameterTest);
+        $docs = $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest);
         $this->generateFile($phpFile, $docs);
     }
 
@@ -27,17 +27,31 @@ class MethodDocGenerator
         };
 
         $docs = array_merge(
-            $this->generateMethodDocs($flags, $skipParameterTest, 'nullOr'),
-            $this->generateMethodDocs($flags, $skipParameterTest, 'all')
+            $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest, 'nullOr'),
+            $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest, 'all')
         );
 
         $this->generateFile($phpFile, $docs);
     }
 
-    private function generateMethodDocs($flags, $skipParameterTest, $prefix = '')
+    public function generateLazyAssertionDocs()
     {
-        $methods = $this->gatherAssertions();
+        $phpFile = __DIR__ . '/../lib/Assert/LazyAssertion.php';
+        $flags = '\\Assert\\LazyAssertion';
+        $skipParameterTest = function ($parameter) {
+            return $parameter->getPosition() === 0;
+        };
 
+        $docs = array_merge(
+            $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest),
+            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), $flags, false)
+        );
+
+        $this->generateFile($phpFile, $docs);
+    }
+
+    private function generateMethodDocs($methods, $flags, $skipParameterTest, $prefix = '')
+    {
         $lines = array();
         foreach ($methods as $method) {
             $doc = $method->getDocComment();
@@ -46,25 +60,28 @@ class MethodDocGenerator
 
             $line = ' * @method ' . $flags . ' ' . $methodName . '(';
 
-            foreach ($method->getParameters() as $parameter) {
-                if ($skipParameterTest($parameter)) {
-                    continue;
-                }
-
-                $line .= '$' . $parameter->getName();
-
-                if ($parameter->isOptional()) {
-                    if (null === $parameter->getDefaultValue()) {
-                        $line .= ' = null';
-                    } else {
-                        $line .= sprintf(' = "%s"', $parameter->getDefaultValue());
+            if (count($method->getParameters()) === 0) {
+                $lines[] = $line . ")\n";
+            } else {
+                foreach ($method->getParameters() as $parameter) {
+                    if ($skipParameterTest($parameter)) {
+                        continue;
                     }
+
+                    $line .= '$' . $parameter->getName();
+
+                    if ($parameter->isOptional()) {
+                        if (null === $parameter->getDefaultValue()) {
+                            $line .= ' = null';
+                        } else {
+                            $line .= sprintf(' = "%s"', $parameter->getDefaultValue());
+                        }
+                    }
+
+                    $line .= ', ';
                 }
-
-                $line .= ', ';
+                $lines[] = substr($line, 0, -2) . ")\n";
             }
-
-            $lines[] = substr($line, 0, -2) . ")\n";
         }
 
         return $lines;
@@ -115,6 +132,26 @@ class MethodDocGenerator
             }
         );
     }
+
+    private function gatherAssertionChainSwitches()
+    {
+        $reflClass = new ReflectionClass('Assert\AssertionChain');
+
+        return array_filter(
+            $reflClass->getMethods(\ReflectionMethod::IS_PUBLIC),
+            function ($reflMethod) {
+                if ( ! $reflMethod->isPublic()) {
+                    return false;
+                }
+
+                if (in_array($reflMethod->getName(), array('__construct', '__call'))) {
+                    return false;
+                }
+
+                return true;
+            }
+        );
+    }
 }
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -122,3 +159,4 @@ require_once __DIR__ . "/../vendor/autoload.php";
 $generator = new MethodDocGenerator();
 $generator->generateChainDocs();
 $generator->generateAssertionDocs();
+$generator->generateLazyAssertionDocs();
