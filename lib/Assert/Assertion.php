@@ -903,7 +903,7 @@ class Assertion
     }
 
     /**
-     * Assert that value is in range of integers.
+     * Assert that value is in range of numbers.
      *
      * @param mixed $value
      * @param integer $minValue
@@ -915,7 +915,7 @@ class Assertion
      */
     public static function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
     {
-        static::integer($value);
+        static::numeric($value);
 
         if ($value < $minValue || $value > $maxValue) {
             $message = $message ?: sprintf(
@@ -941,7 +941,7 @@ class Assertion
      */
     public static function min($value, $minValue, $message = null, $propertyPath = null)
     {
-        static::integer($value);
+        static::numeric($value);
 
         if ($value < $minValue) {
             $message = $message ?: sprintf(
@@ -966,7 +966,7 @@ class Assertion
      */
     public static function max($value, $maxValue, $message = null, $propertyPath = null)
     {
-        static::integer($value);
+        static::numeric($value);
 
         if ($value > $maxValue) {
             $message = $message ?: sprintf(
