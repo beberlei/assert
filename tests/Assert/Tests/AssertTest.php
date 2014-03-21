@@ -431,6 +431,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_RANGE);
         Assertion::range(1, 2, 3);
+        Assertion::range(1.5, 2, 3);
     }
 
     public function testValidRange()
@@ -438,6 +439,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::range(1, 1, 2);
         Assertion::range(2, 1, 2);
         Assertion::range(2, 0, 100);
+        Assertion::range(2.5, 2.25, 2.75);
     }
 
     public function testInvalidEmail()
@@ -591,6 +593,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::min(1, 1);
         Assertion::min(2, 1);
+        Assertion::min(2.5, 1);
 
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN);
         Assertion::min(0, 1);
@@ -599,6 +602,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testMax()
     {
         Assertion::max(1, 1);
+        Assertion::max(0.5, 1);
         Assertion::max(0, 1);
 
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX);
