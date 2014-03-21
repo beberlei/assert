@@ -13,6 +13,64 @@
 
 namespace Assert;
 
+/**
+ * Chaining builder for lazy assertions
+ *
+ * @author Benjamin Eberlei <kontakt@beberlei.de>
+ *
+ * METHODSTART
+ * @method \Assert\LazyAssertion eq($value2, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion same($value2, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notEq($value2, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notSame($value2, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion integer($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion float($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion digit($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion integerish($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion boolean($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notEmpty($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion noContent($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notNull($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion string($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion regex($pattern, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion length($length, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion minLength($minLength, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion maxLength($maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion betweenLength($minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion contains($needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion choice($choices, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion inArray($choices, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion numeric($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion isArray($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion keyExists($key, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notEmptyKey($key, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notBlank($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion isInstanceOf($className, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion notIsInstanceOf($className, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion subclassOf($className, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion range($minValue, $maxValue, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion min($minValue, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion max($maxValue, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion file($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion directory($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion readable($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion writeable($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion email($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion url($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion alnum($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion true($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion false($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion classExists($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion implementsInterface($interfaceName, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion isJsonString($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion uuid($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion count($count, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion all()
+ * @method \Assert\LazyAssertion nullOr()
+ * METHODEND
+ */
 class LazyAssertion
 {
     private $currentChainFailed = false;
