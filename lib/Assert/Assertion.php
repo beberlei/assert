@@ -1385,7 +1385,7 @@ class Assertion
                 break;
             default:
                 $symbol = '\$';
-                $symbolPrefixError = $symbol;
+                $symbolPrefixError = '$';
                 $symbolAppends = false;
                 break;
         }
@@ -1435,12 +1435,12 @@ class Assertion
         $symbolSuffixError = ($symbolSuffixError ? "($symbolSuffixError)" : '');
 
         if ( ! preg_match("/$pattern/", $value)) {
-            $message = $message ?: sprintf('Curreny "%s" was expected to be of the format '.
-                    $symbolPrefixError.'(-)'. 
-                    '1'.$separator.'000'.
-                    $decimalSeparator.'00'.
-                    $symbolSuffixError.'.',
-                self::stringify($value)
+            $message = $message ?: sprintf('Curreny "%s" was expected to be of the format %s(-)1%s000%s00%s".',
+                self::stringify($value),
+                $symbolPrefixError,
+                $separator,
+                $decimalSeparator,
+                $symbolSuffixError
             );
 
             throw static::createException($value, $message, static::INVALID_CURRENCY, $propertyPath, array('value' => $value));
