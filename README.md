@@ -138,50 +138,55 @@ This can be useful for example to build a failure response for the user.
 <?php
 use Assert\Assertion;
 
-Assertion::integer($value);
-Assertion::digit($value);
-Assertion::integerish($value);
-Assertion::range($value, $minValue, $maxValue);
-Assertion::boolean($value);
-Assertion::notEmpty($value);
-Assertion::noContent($value);
-Assertion::notNull($value);
-Assertion::string($value);
-Assertion::regex($value, $regex);
-Assertion::length($value, $length);
-Assertion::minLength($value, $length);
-Assertion::maxLength($value, $length);
-Assertion::betweenLength($value, $minLength, $maxLength);
-Assertion::startsWith($value, $needle);
-Assertion::endsWith($value, $needle);
-Assertion::isArray($value);
-Assertion::contains($value, $needle);
-Assertion::choice($value, $choices);
-Assertion::inArray($value, $choices);
-Assertion::numeric($value);
-Assertion::keyExists($value, $key);
-Assertion::notEmptyKey($value, $key);
-Assertion::notBlank($value);
-Assertion::isInstanceOf($value, $className);
-Assertion::notIsInstanceOf($value, $className);
-Assertion::classExists($value);
-Assertion::subclassOf($value, $className);
-Assertion::directory($value);
-Assertion::file($value);
-Assertion::readable($value);
-Assertion::writeable($value);
-Assertion::email($value);
-Assertion::url($value);
 Assertion::alnum($value);
-Assertion::true($value);
-Assertion::false($value);
-Assertion::min($value, $min);
-Assertion::max($value, $max);
+Assertion::betweenLength($value, $minLength, $maxLength);
+Assertion::boolean($value);
+Assertion::choice($value, $choices);
+Assertion::classExists($value);
+Assertion::contains($value, $needle);
+Assertion::count($countable, $count);
+Assertion::currency($value, $locale);
+Assertion::digit($value);
+Assertion::directory($value);
+Assertion::email($value);
+Assertion::endsWith($value, $needle);
 Assertion::eq($actual, $expected);
-Assertion::same($actual, $expected);
+Assertion::false($value);
+Assertion::file($value);
+Assertion::float($value);
 Assertion::implementsInterface($value, $interfaceName);
+Assertion::inArray($value, $choices);
+Assertion::integer($value);
+Assertion::integerish($value);
+Assertion::isArray($value);
+Assertion::isInstanceOf($value, $className);
 Assertion::isJsonString($value);
+Assertion::keyExists($value, $key);
+Assertion::length($value, $length);
+Assertion::max($value, $max);
+Assertion::maxLength($value, $length);
+Assertion::min($value, $min);
+Assertion::minLength($value, $length);
+Assertion::noContent($value);
+Assertion::notBlank($value);
+Assertion::notEmpty($value);
+Assertion::notEmptyKey($value, $key);
+Assertion::notEqual($value1, $value2);
+Assertion::notIsInstanceOf($value, $className);
+Assertion::notNull($value);
+Assertion::notSame($value1, $value2);
+Assertion::numeric($value);
+Assertion::range($value, $minValue, $maxValue);
+Assertion::readable($value);
+Assertion::regex($value, $regex);
+Assertion::same($actual, $expected);
+Assertion::startsWith($value, $needle);
+Assertion::string($value);
+Assertion::subclassOf($value, $className);
+Assertion::true($value);
+Assertion::url($value);
 Assertion::uuid($value);
+Assertion::writeable($value);
 ```
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.
@@ -228,4 +233,3 @@ class Assertion extends BaseAssertion
     protected static $exceptionClass = 'MyProject\AssertionFailedException';
 }
 ```
-
