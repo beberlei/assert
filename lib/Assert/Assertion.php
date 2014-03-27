@@ -1366,19 +1366,19 @@ class Assertion
         $symbolPrefixError = null;
         $symbolSuffixError = null;
         switch ($locale) {
-            case('en_GB'):
+            case ('en_GB'):
                 $symbol = '£';
                 $symbolPrefixError = $symbol;
                 $symbolAppends = false;
                 break;
-            case('es_ES'):
-            case('de_DE'):
+            case ('es_ES'):
+            case ('de_DE'):
                 $symbol = '€';
                 $symbolSuffixError = $symbol;
                 $symbolAppends = true;
                 break;
-            case('el_GR'):
-            case('it_IT'):
+            case ('el_GR'):
+            case ('it_IT'):
                 $symbol = '€';
                 $symbolPrefixError = $symbol;
                 $symbolAppends = false;
@@ -1396,7 +1396,7 @@ class Assertion
         * The US should be the expection
         */
         switch ($locale) {
-            case('en_US'):
+            case ('en_US'):
                 $decimalSeparator = '.';
                 $separator = ',';
                 break;
@@ -1435,12 +1435,11 @@ class Assertion
         $symbolSuffixError = ($symbolSuffixError ? "($symbolSuffixError)" : '');
 
         if ( ! preg_match("/$pattern/", $value)) {
-            $message = $message ?: sprintf(
-                'Curreny "%s" was expected to be of the format '.
-                    $symbolPrefixError . '(-)' . 
-                    '1' . $separator .  '000' .
-                    $decimalSeparator . '00' .
-                    $symbolSuffixError . '.',
+            $message = $message ?: sprintf('Curreny "%s" was expected to be of the format '.
+                    $symbolPrefixError.'(-)'. 
+                    '1'.$separator.'000'.
+                    $decimalSeparator.'00'.
+                    $symbolSuffixError.'.',
                 self::stringify($value)
             );
 
