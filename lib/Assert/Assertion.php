@@ -166,6 +166,7 @@ class Assertion
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
     const INVALID_JSON_STRING       = 206;
+    const INVALID_CURRENCY          = 301;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1343,6 +1344,106 @@ class Assertion
             );
 
             throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, array('count' => $count));
+        }
+    }
+
+    /**
+     * Assert that value is in currency format.
+     *
+     * @param mixed $value
+     * @param string $currencyType
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function currency($value, $locale = 'en_US', $message = null, $propertyPath = null)
+    {
+
+        /**
+        * Symbol initialization
+        */
+        $symbolPrefixError = null;
+        $symbolSuffixError = null;
+        switch ($locale) {
+            case ('en_GB'):
+                $symbol = '£';
+                $symbolPrefixError = $symbol;
+                $symbolAppends = false;
+                break;
+            case ('es_ES'):
+            case ('de_DE'):
+                $symbol = '€';
+                $symbolSuffixError = $symbol;
+                $symbolAppends = true;
+                break;
+            case ('el_GR'):
+            case ('it_IT'):
+                $symbol = '€';
+                $symbolPrefixError = $symbol;
+                $symbolAppends = false;
+                break;
+            default:
+                $symbol = '\$';
+                $symbolPrefixError = '$';
+                $symbolAppends = false;
+                break;
+        }
+
+
+        /**
+        * Separator initialization
+        * The US should be the expection
+        */
+        switch ($locale) {
+            case ('en_US'):
+                $decimalSeparator = '.';
+                $separator = ',';
+                break;
+            default:
+                $decimalSeparator = ',';
+                $separator = '.';
+                break;
+        }
+
+        /**
+        * The symbol is a prefix or suffix of the currency
+        */
+        if ($symbolAppends) {
+            $symbolPrefixPattern = '(^(-)?)';
+            $symbolSuffixPattern = '(\s)?('.$symbol.')?$';
+        } else {
+            $symbolPrefixPattern = '(^('.$symbol.'(\s)?)?(-)?)';
+            $symbolSuffixPattern = '$';
+        }
+
+        /**
+        * The currency pattern formatting
+        */
+        $unitsPattern = '(([1-9][0-9]{0,2}('.$separator.'[0-9]{3})*)|0)?';
+        $decimalPattern = '('.$decimalSeparator.'[0-9]{2,4})';
+
+        /**
+        * The currency pattern 
+        */
+        $pattern = '(?=.)' . $symbolPrefixPattern . $unitsPattern . $decimalPattern . $symbolSuffixPattern;
+
+        /**
+        * The currency error message handling
+        */
+        $symbolPrefixError = ($symbolPrefixError ? "($symbolPrefixError)" : '');
+        $symbolSuffixError = ($symbolSuffixError ? "($symbolSuffixError)" : '');
+
+        if ( ! preg_match("/$pattern/", $value)) {
+            $message = $message ?: sprintf('Curreny "%s" was expected to be of the format %s(-)1%s000%s00%s".',
+                self::stringify($value),
+                $symbolPrefixError,
+                $separator,
+                $decimalSeparator,
+                $symbolSuffixError
+            );
+
+            throw static::createException($value, $message, static::INVALID_CURRENCY, $propertyPath, array('value' => $value));
         }
     }
 

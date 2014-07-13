@@ -890,6 +890,159 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::count($countable, $count);
     }
 
+    public function testValid_en_US_Currency()
+    {
+        Assertion::currency('1.00');
+        Assertion::currency('$1.00');
+        Assertion::currency('$ 1.00');
+        Assertion::currency('$-1.00');
+        Assertion::currency('$1.125');
+        Assertion::currency('$100.125', 'en_US');
+        Assertion::currency('$1,100.125');
+        Assertion::currency('1,100.125');
+        Assertion::currency('$10,100.125');
+        Assertion::currency('100,100.1250');
+        Assertion::currency('$1,100,100.1250');
+    }
+
+    public static function dataInvalid_en_US_Currency()
+    {
+        return array(
+            array(1),
+            array('<100>'),
+            array('$010.00'),
+            array('$100.00$'),
+            array('$1000.12'),
+            array('$1,000.1'),
+            array('$1.000,10'),
+
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalid_en_US_Currency
+     */
+    public function testInvalid_en_US_Currency($currency)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CURRENCY);
+        Assertion::currency($currency);
+    }
+
+    public function testValid_en_GB_Currency()
+    {
+        Assertion::currency('1,00', 'en_GB');
+        Assertion::currency('£1,00', 'en_GB');
+        Assertion::currency('£ 1,00', 'en_GB');
+        Assertion::currency('£-1,00', 'en_GB');
+        Assertion::currency('£1,125', 'en_GB');
+        Assertion::currency('£100,125', 'en_GB');
+        Assertion::currency('£1.100,125', 'en_GB');
+        Assertion::currency('1.100,125', 'en_GB');
+        Assertion::currency('£10.100,125', 'en_GB');
+        Assertion::currency('100.100,125', 'en_GB');
+        Assertion::currency('£1.100.100,125', 'en_GB');
+    }
+
+    public static function dataInvalid_en_GB_Currency()
+    {
+        return array(
+            array('<100>'),
+            array('£100.00£'),
+            array('£010.00'),
+            array('£1000,00'),
+            array('$1000.12'),
+            array('£1.000.1'),
+            array('£1,000.10'),
+
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalid_en_GB_Currency
+     */
+    public function testInvalid_de_GB_Currency($currency)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CURRENCY);
+        Assertion::currency($currency, 'de_DE');
+    }
+
+    public function testValid_de_DE_Currency()
+    {
+        Assertion::currency('1,00', 'de_DE');
+        Assertion::currency('1,00€', 'de_DE');
+        Assertion::currency('1,00 €', 'de_DE');
+        Assertion::currency('-1,00€', 'de_DE');
+        Assertion::currency('1,125€', 'de_DE');
+        Assertion::currency('100,125€', 'de_DE');
+        Assertion::currency('1.100,125 €', 'de_DE');
+        Assertion::currency('1.100,125', 'de_DE');
+        Assertion::currency('10.100,125€', 'de_DE');
+        Assertion::currency('100.100,125', 'de_DE');
+        Assertion::currency('1.100.100,125€', 'de_DE');
+    }
+
+    public static function dataInvalid_de_DE_Currency()
+    {
+        return array(
+            array('<100>'),
+            array('€100.00€'),
+            array('€010.00'),
+            array('010.00€'),
+            array('€1000,00'),
+            array('$1000.12'),
+            array('€1.000.1'),
+            array('1,000.10€'),
+
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalid_de_DE_Currency
+     */
+    public function testInvalid_de_DE_Currency($currency)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CURRENCY);
+        Assertion::currency($currency, 'en_GB');
+    }
+
+    public function testValid_it_IT_Currency()
+    {
+        Assertion::currency('1,00', 'it_IT');
+        Assertion::currency('€1,00', 'it_IT');
+        Assertion::currency('€ 1,00', 'it_IT');
+        Assertion::currency('€-1,00', 'it_IT');
+        Assertion::currency('€1,125', 'it_IT');
+        Assertion::currency('€100,125', 'it_IT');
+        Assertion::currency('€1.100,125', 'it_IT');
+        Assertion::currency('1.100,125', 'it_IT');
+        Assertion::currency('€10.100,125', 'it_IT');
+        Assertion::currency('100.100,125', 'it_IT');
+        Assertion::currency('€1.100.100,125', 'it_IT');
+    }
+
+    public static function dataInvalid_it_IT_Currency()
+    {
+        return array(
+            array('<100>'),
+            array('€100.00€'),
+            array('€010.00'),
+            array('€1000,00'),
+            array('$1000.12'),
+            array('€1.000.1'),
+            array('£1,000.10'),
+
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalid_it_IT_Currency
+     */
+    public function testInvalid_it_IT_Currency($currency)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CURRENCY);
+        Assertion::currency($currency, 'it_IT');
+    }
+
     /**
      * @test
      */
