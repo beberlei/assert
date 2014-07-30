@@ -16,10 +16,14 @@ namespace Assert;
 class LazyAssertionException extends \InvalidArgumentException
 {
     /**
-     * @var array
+     * @var InvalidArgumentException[]
      */
     private $errors = array();
 
+    /**
+     * @param InvalidArgumentException[] $errors
+     * @return self
+     */
     static public function fromErrors(array $errors)
     {
         $message = sprintf('The following %d assertions failed:' , count($errors)) . "\n";
