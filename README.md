@@ -182,6 +182,7 @@ Assertion::same($actual, $expected);
 Assertion::implementsInterface($value, $interfaceName);
 Assertion::isJsonString($value);
 Assertion::uuid($value);
+Assertion::choicesNotEmpty($value, $choices)
 ```
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.

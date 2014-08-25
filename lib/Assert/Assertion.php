@@ -275,7 +275,6 @@ class Assertion
         }
     }
 
-
     /**
      * Assert that value is a php integer.
      *
@@ -1386,6 +1385,24 @@ class Assertion
         }
 
         throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+    }
+
+    /**
+     * Determines if the values array has every choice as key and that this choice has content.
+     *
+     * @param array $values
+     * @param array $choices
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function choicesNotEmpty(array $values, array $choices, $message = null, $propertyPath = null)
+    {
+        self::notEmpty($values, $message, $propertyPath);
+
+        foreach ($choices as $choice) {
+
+            self::notEmptyKey($values, $choice, $message, $propertyPath);
+        }
     }
 
     /**
