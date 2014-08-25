@@ -919,6 +919,22 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testIsObject()
+    {
+        Assertion::isObject(new \StdClass);
+    }
+
+    public function testIsObjectExpectingException()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_OBJECT);
+        Assertion::isObject('notAnObject');
+    }
+
+    public function testMethodExists()
+    {
+        Assertion::methodExists('methodExists', new Assertion());
+    }
+
     /**
      * @test
      */
