@@ -890,6 +890,51 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::count($countable, $count);
     }
 
+    public function testChoicesNotEmpty()
+    {
+        Assertion::choicesNotEmpty(
+            array('tux' => 'linux', 'Gnu' => 'dolphin'),
+            array('tux')
+        );
+    }
+
+    /**
+     * @dataProvider invalidChoicesProvider
+     */
+    public function testChoicesNotEmptyExpectingException($values, $choices, $exceptionCode)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, $exceptionCode);
+        Assertion::choicesNotEmpty(
+            $values,
+            $choices
+        );
+    }
+
+    public function invalidChoicesProvider()
+    {
+        return array(
+            'empty values' => array(array(), array('tux'), Assertion::VALUE_EMPTY),
+            'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion::VALUE_EMPTY),
+            'choice not found in values' => array(array('tux' => ''), array('invalidChoice'), Assertion::INVALID_KEY_EXISTS),
+        );
+    }
+
+    public function testIsObject()
+    {
+        Assertion::isObject(new \StdClass);
+    }
+
+    public function testIsObjectExpectingException()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_OBJECT);
+        Assertion::isObject('notAnObject');
+    }
+
+    public function testMethodExists()
+    {
+        Assertion::methodExists('methodExists', new Assertion());
+    }
+
     /**
      * @test
      */

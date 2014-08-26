@@ -117,6 +117,9 @@ use BadMethodCallException;
  * @method static void allIsJsonString($value, $message = null, $propertyPath = null)
  * @method static void allUuid($value, $message = null, $propertyPath = null)
  * @method static void allCount($countable, $count, $message = null, $propertyPath = null)
+ * @method static void choiceNotEmpty($values, $choices, $message = null, $propertyPath = null)
+ * @method static void methodExists($value, $object, $message = null, $propertyPath = null)
+ * @method static void isObject($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
@@ -166,6 +169,8 @@ class Assertion
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
     const INVALID_JSON_STRING       = 206;
+    const INVALID_OBJECT         = 207;
+    const INVALID_METHOD            = 208;
 
     /**
      * Exception to throw when an assertion failed.
@@ -274,7 +279,6 @@ class Assertion
             throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath, array('expected' => $value2));
         }
     }
-
 
     /**
      * Assert that value is a php integer.
@@ -1386,6 +1390,68 @@ class Assertion
         }
 
         throw new BadMethodCallException("No assertion Assertion#" . $method . " exists.");
+    }
+
+    /**
+     * Determines if the values array has every choice as key and that this choice has content.
+     *
+     * @param array $values
+     * @param array $choices
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function choicesNotEmpty(array $values, array $choices, $message = null, $propertyPath = null)
+    {
+        self::notEmpty($values, $message, $propertyPath);
+
+        foreach ($choices as $choice) {
+
+            self::notEmptyKey($values, $choice, $message, $propertyPath);
+        }
+    }
+
+    /**
+     * Determines that the named method is defined in the provided object.
+     *
+     * @param string $value
+     * @param mixed  $object
+     * @param null   $message
+     * @param null   $propertyPath
+     *
+     * @throws
+     */
+    public static function methodExists($value, $object, $message = null, $propertyPath = null)
+    {
+        self::isObject($object, $message, $propertyPath);
+
+        if (!method_exists($object, $value)) {
+            $message = $message ?: sprintf(
+                'Expected "%s" does not a exist in provided object.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_METHOD, $propertyPath);
+        }
+    }
+
+    /**
+     * Determines that the provided value is an object.
+     *
+     * @param mixed $value
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function isObject($value, $message = null, $propertyPath = null)
+    {
+        if (!is_object($value)) {
+            $message = $message ?: sprintf(
+                'Provided "%s" is not a valid object.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
+
+        }
     }
 
     /**
