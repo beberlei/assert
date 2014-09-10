@@ -481,7 +481,7 @@ class Assertion
      */
     public static function regex($value, $pattern, $message = null, $propertyPath = null)
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if ( ! preg_match($pattern, $value)) {
             $message = $message ?: sprintf(
@@ -506,7 +506,7 @@ class Assertion
      */
     public static function length($value, $length, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) !== $length) {
             $message = $message ?: sprintf(
@@ -534,7 +534,7 @@ class Assertion
      */
     public static function minLength($value, $minLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) < $minLength) {
             $message = $message ?: sprintf(
@@ -562,7 +562,7 @@ class Assertion
      */
     public static function maxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) > $maxLength) {
             $message = $message ?: sprintf(
@@ -591,7 +591,7 @@ class Assertion
      */
     public static function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) < $minLength) {
             $message = $message ?: sprintf(
@@ -631,7 +631,7 @@ class Assertion
      */
     public static function startsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($string);
+        static::string($string, $message, $propertyPath);
 
         if (mb_strpos($string, $needle, null, $encoding) !== 0) {
             $message = $message ?: sprintf(
@@ -658,7 +658,7 @@ class Assertion
      */
     public static function endsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($string);
+        static::string($string, $message, $propertyPath);
 
         $stringPosition = mb_strlen($string, $encoding) - mb_strlen($needle, $encoding);
 
@@ -687,7 +687,7 @@ class Assertion
      */
     public static function contains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($string);
+        static::string($string, $message, $propertyPath);
 
         if (mb_strpos($string, $needle, null, $encoding) === false) {
             $message = $message ?: sprintf(
@@ -788,7 +788,7 @@ class Assertion
      */
     public static function keyExists($value, $key, $message = null, $propertyPath = null)
     {
-        static::isArray($value);
+        static::isArray($value, $message, $propertyPath);
 
         if ( ! array_key_exists($key, $value)) {
             $message = $message ?: sprintf(
@@ -919,7 +919,7 @@ class Assertion
      */
     public static function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
     {
-        static::numeric($value);
+        static::numeric($value, $message, $propertyPath);
 
         if ($value < $minValue || $value > $maxValue) {
             $message = $message ?: sprintf(
@@ -945,7 +945,7 @@ class Assertion
      */
     public static function min($value, $minValue, $message = null, $propertyPath = null)
     {
-        static::numeric($value);
+        static::numeric($value, $message, $propertyPath);
 
         if ($value < $minValue) {
             $message = $message ?: sprintf(
@@ -970,7 +970,7 @@ class Assertion
      */
     public static function max($value, $maxValue, $message = null, $propertyPath = null)
     {
-        static::numeric($value);
+        static::numeric($value, $message, $propertyPath);
 
         if ($value > $maxValue) {
             $message = $message ?: sprintf(
@@ -994,8 +994,8 @@ class Assertion
      */
     public static function file($value, $message = null, $propertyPath = null)
     {
-        static::string($value, $message);
-        static::notEmpty($value, $message);
+        static::string($value, $message, $propertyPath);
+        static::notEmpty($value, $message, $propertyPath);
 
         if ( ! is_file($value)) {
             $message = $message ?: sprintf(
@@ -1018,7 +1018,7 @@ class Assertion
      */
     public static function directory($value, $message = null, $propertyPath = null)
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if ( ! is_dir($value)) {
             $message = $message ?: sprintf(
@@ -1041,7 +1041,7 @@ class Assertion
      */
     public static function readable($value, $message = null, $propertyPath = null)
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if ( ! is_readable($value)) {
             $message = $message ?: sprintf(
@@ -1064,7 +1064,7 @@ class Assertion
      */
     public static function writeable($value, $message = null, $propertyPath = null)
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if ( ! is_writeable($value)) {
             $message = $message ?: sprintf(
@@ -1088,7 +1088,7 @@ class Assertion
      */
     public static function email($value, $message = null, $propertyPath = null)
     {
-        static::string($value, $message);
+        static::string($value, $message, $propertyPath);
 
         if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $message = $message ?: sprintf(
@@ -1173,7 +1173,7 @@ class Assertion
     public static function alnum($value, $message = null, $propertyPath = null)
     {
         try {
-            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)');
+            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
         } catch(AssertionFailedException $e) {
             $message = $message ?: sprintf(
                 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.',
