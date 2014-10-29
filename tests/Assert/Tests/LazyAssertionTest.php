@@ -23,4 +23,20 @@ EXC
             ->that('string', 'baz')->isArray()
             ->verifyNow();
     }
+
+    /**
+     * @test
+     */
+    public function it_skips_assertions_of_current_chain_after_failure()
+    {
+        $this->setExpectedException('Assert\LazyAssertionException', <<<EXC
+The following 1 assertions failed:
+1) foo: Value "<NULL>" is empty, but non empty value was expected.
+EXC
+        );
+
+        \Assert\lazy()
+            ->that(null, 'foo')->notEmpty()->string()
+            ->verifyNow();
+    }
 }

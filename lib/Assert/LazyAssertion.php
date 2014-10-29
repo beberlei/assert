@@ -95,6 +95,7 @@ class LazyAssertion
             call_user_func_array(array($this->currentChain, $method), $args);
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e;
+            $this->currentChainFailed = true;
         }
 
         return $this;
