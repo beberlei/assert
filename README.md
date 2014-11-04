@@ -143,6 +143,7 @@ Assertion::digit($value);
 Assertion::integerish($value);
 Assertion::range($value, $minValue, $maxValue);
 Assertion::boolean($value);
+Assertion::scalar($value);
 Assertion::notEmpty($value);
 Assertion::noContent($value);
 Assertion::notNull($value);
