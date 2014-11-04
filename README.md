@@ -13,12 +13,8 @@ The library is not using Symfony or Zend Validators for a reason: The checks hav
 
 Using Composer:
 
-```javascript
-{
-    "require": {
-        "beberlei/assert": "@stable"
-    }
-}
+```sh
+composer require beberlei/assert
 ```
 
 ## Example usages
