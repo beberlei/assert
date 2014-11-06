@@ -99,6 +99,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::boolean(1);
     }
 
+    public function testInvalidScalar()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SCALAR);
+        Assertion::scalar(new \stdClass);
+    }
+
+    public function testValidScalar()
+    {
+        Assertion::scalar("foo");
+        Assertion::scalar(52);
+        Assertion::scalar(12.34);
+        Assertion::scalar(false);
+    }
+
     public static function dataInvalidNotEmpty()
     {
         return array(

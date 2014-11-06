@@ -30,6 +30,7 @@ use BadMethodCallException;
  * @method static void nullOrDigit($value, $message = null, $propertyPath = null)
  * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null)
  * @method static void nullOrBoolean($value, $message = null, $propertyPath = null)
+ * @method static void nullOrScalar($value, $message = null, $propertyPath = null)
  * @method static void nullOrNotEmpty($value, $message = null, $propertyPath = null)
  * @method static void nullOrNoContent($value, $message = null, $propertyPath = null)
  * @method static void nullOrNotNull($value, $message = null, $propertyPath = null)
@@ -78,6 +79,7 @@ use BadMethodCallException;
  * @method static void allDigit($value, $message = null, $propertyPath = null)
  * @method static void allIntegerish($value, $message = null, $propertyPath = null)
  * @method static void allBoolean($value, $message = null, $propertyPath = null)
+ * @method static void allScalar($value, $message = null, $propertyPath = null)
  * @method static void allNotEmpty($value, $message = null, $propertyPath = null)
  * @method static void allNoContent($value, $message = null, $propertyPath = null)
  * @method static void allNotNull($value, $message = null, $propertyPath = null)
@@ -169,8 +171,9 @@ class Assertion
     const INVALID_NOT_INSTANCE_OF   = 204;
     const VALUE_NOT_EMPTY           = 205;
     const INVALID_JSON_STRING       = 206;
-    const INVALID_OBJECT         = 207;
+    const INVALID_OBJECT            = 207;
     const INVALID_METHOD            = 208;
+    const INVALID_SCALAR            = 209;
 
     /**
      * Exception to throw when an assertion failed.
@@ -381,6 +384,27 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_BOOLEAN, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is a PHP scalar
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function scalar($value, $message = null, $propertyPath = null)
+    {
+        if (!is_scalar($value)) {
+            $message = $message ?: sprintf(
+                'Value "%s" is not a scalar.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_SCALAR, $propertyPath);
         }
     }
 
