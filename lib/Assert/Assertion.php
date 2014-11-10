@@ -356,7 +356,7 @@ class Assertion
      */
     public static function integerish($value, $message = null, $propertyPath = null)
     {
-        if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
+        if (is_object($value) || strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
             $message = $message ?: sprintf(
                 'Value "%s" is not an integer or a number castable to integer.',
                 self::stringify($value)
