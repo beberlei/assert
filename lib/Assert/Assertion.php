@@ -48,6 +48,7 @@ use BadMethodCallException;
  * @method static void nullOrNumeric($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsArray($value, $message = null, $propertyPath = null)
  * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrPropertyExists($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotBlank($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null)
@@ -174,7 +175,8 @@ class Assertion
     const INVALID_OBJECT            = 207;
     const INVALID_METHOD            = 208;
     const INVALID_SCALAR            = 209;
-
+    const INVALID_DATE              = 210;
+    const INVALID_CALLABLE          = 211;
     /**
      * Exception to throw when an assertion failed.
      *
@@ -343,6 +345,18 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_DIGIT, $propertyPath);
+        }
+    }
+
+    public static function date($value, $message=null, $propertyPath=null)
+    {
+        if ( ! strtotime($value) )
+        {
+            $message = $message ?: sprintf(
+                'Value "%s" is not a date.',
+                self::stringify($value)
+            );
+            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath);
         }
     }
 
@@ -825,6 +839,55 @@ class Assertion
     }
 
     /**
+     * Assert that property exists in array
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function propertyExists($value, $key, $message = null, $propertyPath = null)
+    {
+        static::isObject($value);
+
+        if ( ! property_exists($value, $key)) {
+            $message = $message ?: sprintf(
+                'Object does not contain an property with key "%s"',
+                self::stringify($key)
+            );
+
+            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
+        }
+    }
+
+    /**
+     * Assert that properties exists in array
+     *
+     * @param mixed $value
+     * @param array $keys
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function propertiesExist($value, array $keys, $message = null, $propertyPath = null)
+    {
+        static::isObject($value);
+        foreach ($keys as $key )
+        {
+            if ( !property_exists($value, $key) )
+            {
+                $message = $message ?: sprintf(
+                    'Object does not contain an property with key "%s"',
+                    self::stringify($key)
+                );
+                throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
+            }
+        }
+    }
+    /**
      * Assert that key exists in array and it's value not empty.
      *
      * @param mixed $value
@@ -858,6 +921,26 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_NOT_BLANK, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is callable
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function isCallable($value, $message = null, $propertyPath = null)
+    {
+        if (false === $value || (empty($value) && '0' != $value)) {
+            $message = $message ?: sprintf(
+                'Callable is not callable.'
+            );
+
+            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
         }
     }
 
