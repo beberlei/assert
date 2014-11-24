@@ -1,3 +1,6 @@
+Forked from https://github.com/beberlei/assert... Please use that project.
+
+
 # Assert
 
 Travis Status: [![Build Status](https://secure.travis-ci.org/beberlei/assert.png?branch=master)](http://travis-ci.org/beberlei/assert)
