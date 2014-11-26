@@ -397,9 +397,37 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::keyExists(array("foo" => "bar"), "foo");
     }
 
+    public function testInvalidKeysExist()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_KEYS_EXIST);
+        Assertion::keysExist(array("foo" => "bar"), array("baz", "hum"));
+    }
+
     public function testValidKeysExist()
     {
-        Assertion::keysExist(array("foo" => "bar", "baz" => "bar"), array("foo", "baz"));
+        Assertion::keysExist(array("foo" => "bar", "fum" => "bar"), array("foo", "fum");
+    }
+
+    public function testInvalidPropertyExists()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_PROPERTY_EXISTS);
+        Assertion::propertyExists((object)array("foo" => "bar"), "baz");
+    }
+
+    public function testValidPropertyExists()
+    {
+        Assertion::propertyExists((object)array("foo" => "bar"), "foo");
+    }
+
+    public function testInvalidPropertiesExist()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_PROPERTIES_EXIST);
+        Assertion::keysExist((object)array("foo" => "bar"), array("baz", "hum"));
+    }
+
+    public function testValidPropertiesExist()
+    {
+        Assertion::keysExist((object)array("foo" => "bar", "fum" => "bar"), array("foo", "fum");
     }
 
     public function testInvalidNotBlank()
@@ -470,6 +498,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testValidEmail()
     {
         Assertion::email("123hello+world@email.provider.com");
+    }
+
+    public function testInvalidDate()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DATE);
+        Assertion::date('yabba-dabba-doo');
+    }
+
+    public function testValidDate()
+    {
+        Assertion::date(date('Y-m-d'));
     }
 
     /**

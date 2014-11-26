@@ -55,7 +55,8 @@ class MethodDocGenerator
         $lines = array();
         foreach ($methods as $method) {
             $doc = $method->getDocComment();
-            $shortDescription = substr(explode("\n", $doc)[1], 7);
+            $doc = $doc ? $doc : '';
+            $shortDescription = empty($doc) ? '' : substr(explode("\n", $doc)[1], 7);
             $methodName = $prefix . ($prefix ? ucfirst($method->getName()) : $method->getName());
 
             $line = ' * @method ' . $flags . ' ' . $methodName . '(';
@@ -154,7 +155,7 @@ class MethodDocGenerator
     }
 }
 
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../../../../vendor/autoload.php";
 
 $generator = new MethodDocGenerator();
 $generator->generateChainDocs();

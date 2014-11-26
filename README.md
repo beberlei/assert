@@ -160,6 +160,7 @@ Assertion::choice($value, $choices);
 Assertion::inArray($value, $choices);
 Assertion::numeric($value);
 Assertion::keyExists($value, $key);
+Assertion::keysExist($value, $keys);
 Assertion::notEmptyKey($value, $key);
 Assertion::notBlank($value);
 Assertion::isInstanceOf($value, $className);
@@ -185,7 +186,8 @@ Assertion::uuid($value);
 Assertion::choicesNotEmpty($value, $choices)
 Assertion::isObject($value)
 Assertion::methodExists($value, $object)
-
+Assertion::propertyExists($key, $object)
+Assertion::propertiesExists($keys, $object)
 ```
 
 Remember: When a configuration parameter is necessary, it is always passed AFTER the value. The value is always the first parameter.
