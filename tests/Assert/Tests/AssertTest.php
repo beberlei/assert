@@ -397,6 +397,11 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::keyExists(array("foo" => "bar"), "foo");
     }
 
+    public function testValidKeysExist()
+    {
+        Assertion::keysExist(array("foo" => "bar", "baz" => "bar"), array("foo", "baz"));
+    }
+
     public function testInvalidNotBlank()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_BLANK);

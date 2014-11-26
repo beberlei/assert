@@ -177,6 +177,7 @@ class Assertion
     const INVALID_SCALAR            = 209;
     const INVALID_DATE              = 210;
     const INVALID_CALLABLE          = 211;
+    const INVALID_KEYS_EXIST        = 300;
     /**
      * Exception to throw when an assertion failed.
      *
@@ -836,6 +837,34 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
         }
+    }
+
+    /**
+     * Assert that keys exist in array
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function keysExist($value, $keys, $message = null, $propertyPath = null)
+    {
+        static::isArray($value, $message, $propertyPath);
+
+        foreach ( $keys as $key ) {
+
+            if ( ! array_key_exists($key, $value)) {
+                $message = $message ?: sprintf(
+                    'Array does not contain an element with key "%s"',
+                    self::stringify($key)
+                );
+
+                throw static::createException($value, $message, static::INVALID_KEYS_EXIST, $propertyPath, array('key' => $key));
+            }
+        }
+
     }
 
     /**

@@ -45,6 +45,7 @@ namespace Assert;
  * @method \Assert\LazyAssertion numeric($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion isArray($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion keyExists($key, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion keysExist($keys, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion notEmptyKey($key, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion notBlank($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion isInstanceOf($className, $message = null, $propertyPath = null)
