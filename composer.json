@@ -7,7 +7,12 @@
     "license": "BSD-2-Clause",
     "keywords": ["assert", "assertion", "validation"],
     "require": {
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "phpunit/phpunit": "~4"
+    },
+    "suggest": {
+        "ext-intl": "*",
+        "true/punycode": "to handle UTF-8 emails, if you does not have ext-intl"
     },
     "autoload": {
         "psr-0": {

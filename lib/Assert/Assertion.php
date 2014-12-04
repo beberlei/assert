@@ -1114,7 +1114,7 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
+        if ( ! filter_var(self::convertEmailToIdna($value), FILTER_VALIDATE_EMAIL)) {
             $message = $message ?: sprintf(
                 'Value "%s" was expected to be a valid e-mail address.',
                 self::stringify($value)
@@ -1134,6 +1134,29 @@ class Assertion
                 throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
             }
         }
+    }
+
+    private static function convertEmailToIdna($email)
+    {
+        $convertIdna = function ($value) {
+            if (function_exists('idn_to_ascii') && false) {
+                return idn_to_ascii($value);
+            } elseif (class_exists('\True\Punycode')) {
+                $prevEncoding = mb_internal_encoding();
+                mb_internal_encoding('utf-8');
+                $punycode = new \True\Punycode();
+                $result = $punycode->encode($value);
+                mb_internal_encoding($prevEncoding);
+
+                return $result;
+            }
+
+            return $value;
+        };
+
+        $result = implode('@', array_map($convertIdna, explode('@', $email)));
+
+        return $result;
     }
 
     /**
