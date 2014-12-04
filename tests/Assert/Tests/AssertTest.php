@@ -8,14 +8,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 {
     public static function dataInvalidFloat()
     {
-        return [
-            [1],
-            [false],
-            ["test"],
-            [null],
-            ["1.23"],
-            ["10"],
-        ];
+        return array(
+            array(1),
+            array(false),
+            array("test"),
+            array(null),
+            array("1.23"),
+            array("10"),
+        );
     }
 
     /**
@@ -36,14 +36,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataInvalidInteger()
     {
-        return [
-            [1.23],
-            [false],
-            ["test"],
-            [null],
-            ["1.23"],
-            ["10"],
-        ];
+        return array(
+            array(1.23),
+            array(false),
+            array("test"),
+            array(null),
+            array("1.23"),
+            array("10"),
+        );
     }
 
     /**
@@ -69,13 +69,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataInvalidIntegerish()
     {
-        return [
-            [1.23],
-            [false],
-            ["test"],
-            [null],
-            ["1.23"],
-        ];
+        return array(
+            array(1.23),
+            array(false),
+            array("test"),
+            array(null),
+            array("1.23"),
+        );
     }
 
     /**
@@ -115,13 +115,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataInvalidNotEmpty()
     {
-        return [
-            [""],
-            [false],
-            [0],
-            [null],
-            [ [] ],
-        ];
+        return array(
+            array(""),
+            array(false),
+            array(0),
+            array(null),
+            array( array() ),
+        );
     }
 
     /**
@@ -138,7 +138,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notEmpty("test");
         Assertion::notEmpty(1);
         Assertion::notEmpty(true);
-        Assertion::notEmpty( ["foo"] );
+        Assertion::notEmpty( array("foo") );
     }
 
     public function testEmpty()
@@ -146,18 +146,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::noContent("");
         Assertion::noContent(0);
         Assertion::noContent(false);
-        Assertion::noContent( [] );
+        Assertion::noContent( array() );
     }
 
     public static function dataInvalidEmpty()
     {
-        return [
-            ["foo"],
-            [true],
-            [12],
-            [ ['foo'] ],
-            [ new \stdClass() ],
-        ];
+        return array(
+            array("foo"),
+            array(true),
+            array(12),
+            array( array('foo') ),
+            array( new \stdClass() ),
+        );
     }
 
     /**
@@ -174,7 +174,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notNull("1");
         Assertion::notNull(1);
         Assertion::notNull(0);
-        Assertion::notNull([]);
+        Assertion::notNull(array());
         Assertion::notNull(false);
     }
 
@@ -201,14 +201,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataInvalidString()
     {
-        return [
-            [1.23],
-            [false],
-            [new \ArrayObject],
-            [null],
-            [10],
-            [true],
-        ];
+        return array(
+            array(1.23),
+            array(false),
+            array(new \ArrayObject),
+            array(null),
+            array(10),
+            array(true),
+        );
     }
 
     public function testInvalidRegex()
@@ -220,7 +220,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testInvalidRegexValueNotString()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
-        Assertion::regex(["foo"], "(bar)");
+        Assertion::regex(array("foo"), "(bar)");
     }
 
     public function testInvalidMinLength()
@@ -325,23 +325,23 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testInvalidChoice()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);
-        Assertion::choice("foo", ["bar", "baz"]);
+        Assertion::choice("foo", array("bar", "baz"));
     }
 
     public function testValidChoice()
     {
-        Assertion::choice("foo", ["foo"]);
+        Assertion::choice("foo", array("foo"));
     }
 
     public function testInvalidInArray()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);
-        Assertion::inArray("bar", ["baz"]);
+        Assertion::inArray("bar", array("baz"));
     }
 
     public function testValidInArray()
     {
-        Assertion::inArray("foo", ["foo"]);
+        Assertion::inArray("foo", array("foo"));
     }
 
     public function testInvalidNumeric()
@@ -359,15 +359,15 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataInvalidArray()
     {
-        return [
-            [null],
-            [false],
-            ["test"],
-            [1],
-            [1.23],
-            [new \StdClass],
-            [fopen('php://memory', 'r')],
-        ];
+        return array(
+            array(null),
+            array(false),
+            array("test"),
+            array(1),
+            array(1.23),
+            array(new \StdClass),
+            array(fopen('php://memory', 'r')),
+        );
     }
 
     /**
@@ -381,20 +381,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testValidArray()
     {
-        Assertion::isArray([]);
-        Assertion::isArray([1,2,3]);
-        Assertion::isArray([[],[]]);
+        Assertion::isArray(array());
+        Assertion::isArray(array(1,2,3));
+        Assertion::isArray(array(array(),array()));
     }
 
     public function testInvalidKeyExists()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_KEY_EXISTS);
-        Assertion::keyExists(["foo" => "bar"], "baz");
+        Assertion::keyExists(array("foo" => "bar"), "baz");
     }
 
     public function testValidKeyExists()
     {
-        Assertion::keyExists(["foo" => "bar"], "foo");
+        Assertion::keyExists(array("foo" => "bar"), "foo");
     }
 
     public function testInvalidNotBlank()
@@ -468,11 +468,11 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataInvalidEmail()
     {
-        return [
-            'no @' => ["foo"],
-            'no domain' => ["foo@"],
-            'contains space ' => ["fo o@example.com"],
-        ];
+        return array(
+            'no @' => array("foo"),
+            'no domain' => array("foo@"),
+            'contains space' => array("fo o@example.com"),
+        );
     }
 
     /**
@@ -486,32 +486,22 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataValidEmail()
     {
-        return [
-            'regular email' => ["123hello+world@email.provider.com"],
-            'cyrillic characters ' => ["вася@домен.рф"],
-        ];
-    }
-
-    /**
-     * @dataProvider dataInvalidUrl
-     */
-    public function testInvalidUrl($url)
-    {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_URL);
-
-        Assertion::url($url);
+        return array(
+            'regular email' => array("123hello+world@email.provider.com"),
+            'cyrillic characters ' => array("вася@домен.рф"),
+        );
     }
 
     public static function dataInvalidUrl()
     {
-        return [
-            'null value' => [""],
-            'empty string' => [" "],
-            'no scheme' => ["url.de"],
-            'unsupported scheme' => ["git://url.de"],
-            'Http with query (no / between tld und ?)' => ["http://example.org?do=something"],
-            'Http with query and port (no / between port und ?)' => ["http://example.org:8080?do=something"],
-        ];
+        return array(
+            'null value' => array(""),
+            'empty string' => array(" "),
+            'no scheme' => array("url.de"),
+            'unsupported scheme' => array("git://url.de"),
+            'Http with query (no / between tld und ?)' => array("http://example.org?do=something"),
+            'Http with query and port (no / between port und ?)' => array("http://example.org:8080?do=something"),
+        );
     }
 
     /**
@@ -524,14 +514,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataValidUrl()
     {
-        return [
-            'straight with Http' => ["http://example.org"],
-            'Http with path' => ["http://example.org/do/something"],
-            'Http with query' => ["http://example.org/index.php?do=something"],
-            'Http with port' => ["http://example.org:8080"],
-            'Http with all possibilities' => ["http://example.org:8080/do/something/index.php?do=something"],
-            'straight with Https' => ["https://example.org"],
-        ];
+        return array(
+            'straight with Http' => array("http://example.org"),
+            'Http with path' => array("http://example.org/do/something"),
+            'Http with query' => array("http://example.org/index.php?do=something"),
+            'Http with port' => array("http://example.org:8080"),
+            'Http with all possibilities' => array("http://example.org:8080/do/something/index.php?do=something"),
+            'straight with Https' => array("https://example.org"),
+        );
     }
 
     public function testInvalidDigit()
@@ -615,7 +605,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testNotEq()
     {
         Assertion::NotEq("1", false);
-        Assertion::NotEq(new \stdClass(), []);
+        Assertion::NotEq(new \stdClass(), array());
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_EQ);
         Assertion::NotEq("1", 1);
     }
@@ -623,7 +613,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testNotSame()
     {
         Assertion::notSame("1", 2);
-        Assertion::notSame(new \stdClass(), []);
+        Assertion::notSame(new \stdClass(), array());
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_SAME);
         Assertion::notSame(1, 1);
     }
@@ -668,10 +658,10 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function dataLengthUtf8Characters()
     {
-        return [
-            ["址", 1],
-            ["ل", 1],
-        ];
+        return array(
+            array("址", 1),
+            array("ل", 1),
+        );
     }
 
     /**
@@ -789,12 +779,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function isJsonStringDataprovider()
     {
-        return [
-            '»null« value' => [json_encode(null)],
-            '»false« value' => [json_encode(false)],
-            'array value' => ['["false"]'],
-            'object value' => ['{"tux":"false"}'],
-        ];
+        return array(
+            '»null« value' => array(json_encode(null)),
+            '»false« value' => array(json_encode(false)),
+            'array value' => array('["false"]'),
+            'object value' => array('{"tux":"false"}'),
+        );
     }
 
     /**
@@ -808,10 +798,10 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function isJsonStringInvalidStringDataprovider()
     {
-        return [
-            'no json string' => ['invalid json encoded string'],
-            'error in json string' => ['{invalid json encoded string}'],
-        ];
+        return array(
+            'no json string' => array('invalid json encoded string'),
+            'error in json string' => array('{invalid json encoded string}'),
+        );
     }
 
     /**
@@ -833,30 +823,30 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     static public function providesValidUuids()
     {
-        return [
-            ['ff6f8cb0-c57d-11e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-31e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-41e1-9b21-0800200c9a66'],
-            ['ff6f8cb0-c57d-51e1-9b21-0800200c9a66'],
-            ['FF6F8CB0-C57D-11E1-9B21-0800200C9A66'],
-        ];
+        return array(
+            array('ff6f8cb0-c57d-11e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-21e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-31e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-41e1-9b21-0800200c9a66'),
+            array('ff6f8cb0-c57d-51e1-9b21-0800200c9a66'),
+            array('FF6F8CB0-C57D-11E1-9B21-0800200C9A66'),
+        );
     }
 
     static public function providesInvalidUuids()
     {
-        return [
-            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66'],
-            ['af6f8cb0c57d11e19b210800200c9a66'],
-            ['ff6f8cb0-c57da-51e1-9b21-0800200c9a66'],
-            ['af6f8cb-c57d-11e1-9b21-0800200c9a66'],
-            ['3f6f8cb0-c57d-11e1-9b21-0800200c9a6'],
-        ];
+        return array(
+            array('zf6f8cb0-c57d-11e1-9b21-0800200c9a66'),
+            array('af6f8cb0c57d11e19b210800200c9a66'),
+            array('ff6f8cb0-c57da-51e1-9b21-0800200c9a66'),
+            array('af6f8cb-c57d-11e1-9b21-0800200c9a66'),
+            array('3f6f8cb0-c57d-11e1-9b21-0800200c9a6'),
+        );
     }
 
     public function testValidNotEmptyKey()
     {
-        Assertion::notEmptyKey(['keyExists' => 'notEmpty'], 'keyExists');
+        Assertion::notEmptyKey(array('keyExists' => 'notEmpty'), 'keyExists');
     }
 
     /**
@@ -870,33 +860,33 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public static function invalidNotEmptyKeyDataprovider()
     {
-        return [
-            'empty'          => [['keyExists' => ''], 'keyExists'],
-            'key not exists' => [['key' => 'notEmpty'], 'keyNotExists']
-        ];
+        return array(
+            'empty'          => array(array('keyExists' => ''), 'keyExists'),
+            'key not exists' => array(array('key' => 'notEmpty'), 'keyNotExists')
+        );
     }
 
     public function testAllWithSimpleAssertion()
     {
-        Assertion::allTrue([true, true]);
+        Assertion::allTrue(array(true, true));
     }
 
     public function testAllWithSimpleAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_TRUE);
-        Assertion::allTrue([true, false]);
+        Assertion::allTrue(array(true, false));
     }
 
     public function testAllWithComplexAssertion()
     {
-        Assertion::allIsInstanceOf([new \stdClass, new \stdClass], 'stdClass');
+        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass');
     }
 
     public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
         $this->setExpectedException('Assert\AssertionFailedException', 'Assertion failed', Assertion::INVALID_INSTANCE_OF);
 
-        Assertion::allIsInstanceOf([new \stdClass, new \stdClass], 'PDO', 'Assertion failed', 'foos');
+        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', 'foos');
     }
 
     public function testAllWithNoValueThrows()
@@ -907,16 +897,16 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testValidCount()
     {
-        Assertion::count(['Hi'], 1);
+        Assertion::count(array('Hi'), 1);
         Assertion::count(new OneCountable(), 1);
     }
 
     public static function dataInvalidCount()
     {
-        return [
-            [['Hi', 'There'], 3],
-            [new OneCountable(), 2],
-        ];
+        return array(
+            array(array('Hi', 'There'), 3),
+            array(new OneCountable(), 2),
+        );
     }
 
     /**
@@ -931,8 +921,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testChoicesNotEmpty()
     {
         Assertion::choicesNotEmpty(
-            ['tux' => 'linux', 'Gnu' => 'dolphin'],
-            ['tux']
+            array('tux' => 'linux', 'Gnu' => 'dolphin'),
+            array('tux')
         );
     }
 
@@ -950,11 +940,11 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function invalidChoicesProvider()
     {
-        return [
-            'empty values' => [[], ['tux'], Assertion::VALUE_EMPTY],
-            'empty recodes in $values' => [['tux' => ''], ['tux'], Assertion::VALUE_EMPTY],
-            'choice not found in values' => [['tux' => ''], ['invalidChoice'], Assertion::INVALID_KEY_EXISTS],
-        ];
+        return array(
+            'empty values' => array(array(), array('tux'), Assertion::VALUE_EMPTY),
+            'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion::VALUE_EMPTY),
+            'choice not found in values' => array(array('tux' => ''), array('invalidChoice'), Assertion::INVALID_KEY_EXISTS),
+        );
     }
 
     public function testIsObject()
@@ -984,7 +974,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             $this->fail('Exception expected');
         } catch (AssertionFailedException $e) {
             $this->assertEquals(0, $e->getValue());
-            $this->assertEquals(['min' => 10, 'max' => 20], $e->getConstraints());
+            $this->assertEquals(array('min' => 10, 'max' => 20), $e->getConstraints());
         }
     }
 }
