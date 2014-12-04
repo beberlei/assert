@@ -1139,7 +1139,7 @@ class Assertion
     private static function convertEmailToIdna($email)
     {
         $convertIdna = function ($value) {
-            if (function_exists('idn_to_ascii') && false) {
+            if (function_exists('idn_to_ascii')) {
                 return idn_to_ascii($value);
             } elseif (class_exists('\True\Punycode')) {
                 $prevEncoding = mb_internal_encoding();
