@@ -120,8 +120,6 @@ use BadMethodCallException;
  * @method static void allUuid($value, $message = null, $propertyPath = null)
  * @method static void allCount($countable, $count, $message = null, $propertyPath = null)
  * @method static void choiceNotEmpty($values, $choices, $message = null, $propertyPath = null)
- * @method static void methodExists($value, $object, $message = null, $propertyPath = null)
- * @method static void isObject($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
