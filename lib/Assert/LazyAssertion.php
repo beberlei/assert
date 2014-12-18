@@ -28,6 +28,7 @@ namespace Assert;
  * @method \Assert\LazyAssertion digit($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion integerish($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion boolean($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion scalar($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion notEmpty($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion noContent($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion notNull($message = null, $propertyPath = null)
@@ -67,6 +68,9 @@ namespace Assert;
  * @method \Assert\LazyAssertion isJsonString($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion uuid($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion count($count, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion choicesNotEmpty($choices, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion methodExists($object, $message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion isObject($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion all()
  * @method \Assert\LazyAssertion nullOr()
  * METHODEND

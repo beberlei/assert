@@ -43,6 +43,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(null),
             array("1.23"),
             array("10"),
+            array(new \DateTime()),
         );
     }
 
