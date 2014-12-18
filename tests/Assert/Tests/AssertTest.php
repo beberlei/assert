@@ -471,7 +471,10 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         return array(
             'no @' => array("foo"),
             'no domain' => array("foo@"),
+            'two ats' => array("foo@baz@example.com"),
             'contains space' => array("fo o@example.com"),
+            'leading space' => array(" foo@example.com"),
+            'trailing space' => array("foo@example.com "),
         );
     }
 
@@ -488,6 +491,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             'regular email' => array("123hello+world@email.provider.com"),
+            'mixed case' => array("soMeUser@email.Provider.com"),
+            'valid special chars' => array("!#$%&'*+-=?^_`{|}~@example.com"),
             'cyrillic characters ' => array("вася@домен.рф"),
         );
     }
