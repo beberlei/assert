@@ -929,7 +929,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         return array(
             'empty values' => array(array(), array('tux'), Assertion::VALUE_EMPTY),
             'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion::VALUE_EMPTY),
-            'choice not found in values' => array(array('tux' => ''), array('invalidChoice'), Assertion::INVALID_KEY_EXISTS),
+            'choice not found in values' => array(array('tux' => ''), array('invalidChoice'), Assertion::INVALID_KEY_ISSET),
         );
     }
 
