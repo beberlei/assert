@@ -47,7 +47,10 @@ use BadMethodCallException;
  * @method static void nullOrInArray($value, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrNumeric($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsArray($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsTraversable($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsArrayAccessible($value, $message = null, $propertyPath = null)
  * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrKeyIsset($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotBlank($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null)
@@ -99,7 +102,10 @@ use BadMethodCallException;
  * @method static void allInArray($value, $choices, $message = null, $propertyPath = null)
  * @method static void allNumeric($value, $message = null, $propertyPath = null)
  * @method static void allIsArray($value, $message = null, $propertyPath = null)
+ * @method static void allIsTraversable($value, $message = null, $propertyPath = null)
+ * @method static void allIsArrayAccessible($value, $message = null, $propertyPath = null)
  * @method static void allKeyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void allKeyIsset($value, $key, $message = null, $propertyPath = null)
  * @method static void allNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void allNotBlank($value, $message = null, $propertyPath = null)
  * @method static void allIsInstanceOf($value, $className, $message = null, $propertyPath = null)
@@ -163,6 +169,9 @@ class Assertion
     const INVALID_COUNT             = 41;
     const INVALID_NOT_EQ            = 42;
     const INVALID_NOT_SAME          = 43;
+    const INVALID_TRAVERSABLE       = 44;
+    const INVALID_ARRAY_ACCESSIBLE  = 45;
+    const INVALID_KEY_ISSET         = 46;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -783,7 +792,7 @@ class Assertion
     }
 
     /**
-     * Assert that value is array.
+     * Assert that value is an array.
      *
      * @param mixed $value
      * @param string|null $message
@@ -804,7 +813,49 @@ class Assertion
     }
 
     /**
-     * Assert that key exists in array
+     * Assert that value is an array or a traversable object.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function isTraversable($value, $message = null, $propertyPath = null)
+    {
+        if ( ! is_array($value) && ! $value instanceof \Traversable) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an array and does not implement Traversable.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_TRAVERSABLE, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is an array or an array-accessible object.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function isArrayAccessible($value, $message = null, $propertyPath = null)
+    {
+        if ( ! is_array($value) && ! $value instanceof \ArrayAccess) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an array and does not implement ArrayAccess.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_ARRAY_ACCESSIBLE, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that key exists in an array
      *
      * @param mixed $value
      * @param string|integer $key
@@ -828,7 +879,31 @@ class Assertion
     }
 
     /**
-     * Assert that key exists in array and it's value not empty.
+     * Assert that key exists in an array/array-accessible object using isset()
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function keyIsset($value, $key, $message = null, $propertyPath = null)
+    {
+        static::isArrayAccessible($value, $message, $propertyPath);
+
+        if ( ! isset($value[$key])) {
+            $message = sprintf(
+                $message ?: 'The element with key "%s" was not found',
+                self::stringify($key)
+            );
+
+            throw static::createException($value, $message, static::INVALID_KEY_ISSET, $propertyPath, array('key' => $key));
+        }
+    }
+
+    /**
+     * Assert that key exists in an array/array-accessible object and it's value is not empty.
      *
      * @param mixed $value
      * @param string|integer $key
@@ -839,7 +914,7 @@ class Assertion
      */
     public static function notEmptyKey($value, $key, $message = null, $propertyPath = null)
     {
-        static::keyExists($value, $key, $message, $propertyPath);
+        static::keyIsset($value, $key, $message, $propertyPath);
         static::notEmpty($value[$key], $message, $propertyPath);
     }
 
@@ -1403,7 +1478,7 @@ class Assertion
                 throw new BadMethodCallException("Missing the first argument.");
             }
 
-            static::isArray($args[0]);
+            static::isTraversable($args[0]);
 
             $method      = substr($method, 3);
             $values      = array_shift($args);
