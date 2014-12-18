@@ -70,6 +70,9 @@ use BadMethodCallException;
  * @method static void nullOrIsJsonString($value, $message = null, $propertyPath = null)
  * @method static void nullOrUuid($value, $message = null, $propertyPath = null)
  * @method static void nullOrCount($countable, $count, $message = null, $propertyPath = null)
+ * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
+ * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
+ * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
  * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null)
@@ -119,9 +122,9 @@ use BadMethodCallException;
  * @method static void allIsJsonString($value, $message = null, $propertyPath = null)
  * @method static void allUuid($value, $message = null, $propertyPath = null)
  * @method static void allCount($countable, $count, $message = null, $propertyPath = null)
- * @method static void choiceNotEmpty($values, $choices, $message = null, $propertyPath = null)
- * @method static void methodExists($value, $object, $message = null, $propertyPath = null)
- * @method static void isObject($value, $message = null, $propertyPath = null)
+ * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
+ * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
+ * @method static void allIsObject($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion

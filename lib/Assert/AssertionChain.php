@@ -31,6 +31,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain digit($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain integerish($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain boolean($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain scalar($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notEmpty($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain noContent($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notNull($message = null, $propertyPath = null)
@@ -70,6 +71,9 @@ use ReflectionClass;
  * @method \Assert\AssertionChain isJsonString($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain uuid($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain count($count, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain choicesNotEmpty($choices, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain methodExists($object, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isObject($message = null, $propertyPath = null)
  * METHODEND
  */
 class AssertionChain
