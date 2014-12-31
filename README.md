@@ -155,6 +155,7 @@ Assertion::isArray($value);
 Assertion::contains($value, $needle);
 Assertion::choice($value, $choices);
 Assertion::inArray($value, $choices);
+Assertion::isUnique($value, $values);
 Assertion::numeric($value);
 Assertion::keyExists($value, $key);
 Assertion::notEmptyKey($value, $key);
