@@ -357,6 +357,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric(1.23);
     }
 
+    public function testInvalidUtf8()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_UTF8);
+        Assertion::utf8("foo");
+    }
+
+    public function testValidUtf8()
+    {
+        Assertion::utf8("1");
+    }
+
     public static function dataInvalidArray()
     {
         return array(

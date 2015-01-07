@@ -79,6 +79,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain choicesNotEmpty($choices, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain methodExists($object, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain isObject($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain utf8($message = null, $propertyPath = null)
  * METHODEND
  */
 class AssertionChain

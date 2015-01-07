@@ -76,6 +76,7 @@ namespace Assert;
  * @method \Assert\LazyAssertion choicesNotEmpty($choices, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion methodExists($object, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion isObject($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion utf8($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion all()
  * @method \Assert\LazyAssertion nullOr()
  * METHODEND

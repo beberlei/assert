@@ -78,6 +78,7 @@ use BadMethodCallException;
  * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
+ * @method static void nullOrUtf8($value, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
  * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null)
@@ -135,6 +136,7 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
+ * @method static void allUtf8($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
@@ -192,6 +194,7 @@ class Assertion
     const INVALID_KEYS_EXIST        = 300;
     const INVALID_PROPERTY_EXISTS   = 301;
     const INVALID_PROPERTIES_EXIST  = 302;
+    const INVALID_UTF8              = 303;
     /**
      * Exception to throw when an assertion failed.
      *
@@ -931,6 +934,42 @@ class Assertion
             }
         }
     }
+
+    /**
+     * Assert that string is valid utf8
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function utf8($value, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+        $pattern = '/^(?:
+              [\x09\x0A\x0D\x20-\x7E]            # ASCII
+            | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
+            | \xE0[\xA0-\xBF][\x80-\xBF]         # excluding overlongs
+            | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
+            | \xED[\x80-\x9F][\x80-\xBF]         # excluding surrogates
+            | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
+            | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
+            | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
+        )+$|^$/xs';
+
+
+        if (!preg_match($pattern, $value)) {
+            $message = $message ?: sprintf(
+                'Value "%s" was expected to be a valid UTF8 string',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_UTF8, $propertyPath);
+        }
+
+    }
+
     /**
      * Assert that key exists in array and it's value not empty.
      *
