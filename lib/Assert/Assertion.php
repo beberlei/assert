@@ -1155,10 +1155,8 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        $protocols = array('http', 'https');
-
         $pattern = '~^
-            (%s)://                                 # protocol
+            ([a-zA-Z]+)://                                 # protocol
             (
                 ([\pL\pN\pS-]+\.)+[\pL]+                   # a domain name
                     |                                     #  or
@@ -1171,8 +1169,6 @@ class Assertion
             (:[0-9]+)?                              # a port (optional)
             (/?|/\S+)                               # a /, nothing or a / with something
         $~ixu';
-
-        $pattern = sprintf($pattern, implode('|', $protocols));
 
         if (!preg_match($pattern, $value)) {
             $message = $message ?: sprintf(
