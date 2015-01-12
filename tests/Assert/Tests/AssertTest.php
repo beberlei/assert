@@ -483,7 +483,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             'null value' => array(""),
             'empty string' => array(" "),
             'no scheme' => array("url.de"),
-            'unsupported scheme' => array("git://url.de"),
             'Http with query (no / between tld und ?)' => array("http://example.org?do=something"),
             'Http with query and port (no / between port und ?)' => array("http://example.org:8080?do=something"),
         );
