@@ -28,7 +28,6 @@ use BadMethodCallException;
  * @method static void nullOrInteger($value, $message = null, $propertyPath = null)
  * @method static void nullOrFloat($value, $message = null, $propertyPath = null)
  * @method static void nullOrDigit($value, $message = null, $propertyPath = null)
- * @method static void nullOrDate($value, $message = null, $propertyPath = null)
  * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null)
  * @method static void nullOrBoolean($value, $message = null, $propertyPath = null)
  * @method static void nullOrScalar($value, $message = null, $propertyPath = null)
@@ -48,13 +47,12 @@ use BadMethodCallException;
  * @method static void nullOrInArray($value, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrNumeric($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsArray($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsTraversable($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsArrayAccessible($value, $message = null, $propertyPath = null)
  * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null)
- * @method static void nullOrKeysExist($value, $keys, $message = null, $propertyPath = null)
- * @method static void nullOrPropertyExists($value, $key, $message = null, $propertyPath = null)
- * @method static void nullOrPropertiesExist($value, $keys, $message = null, $propertyPath = null)
+ * @method static void nullOrKeyIsset($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotBlank($value, $message = null, $propertyPath = null)
- * @method static void nullOrIsCallable($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void nullOrSubclassOf($value, $className, $message = null, $propertyPath = null)
@@ -78,7 +76,6 @@ use BadMethodCallException;
  * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
- * @method static void nullOrUtf8($value, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
  * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null)
@@ -86,7 +83,6 @@ use BadMethodCallException;
  * @method static void allInteger($value, $message = null, $propertyPath = null)
  * @method static void allFloat($value, $message = null, $propertyPath = null)
  * @method static void allDigit($value, $message = null, $propertyPath = null)
- * @method static void allDate($value, $message = null, $propertyPath = null)
  * @method static void allIntegerish($value, $message = null, $propertyPath = null)
  * @method static void allBoolean($value, $message = null, $propertyPath = null)
  * @method static void allScalar($value, $message = null, $propertyPath = null)
@@ -106,13 +102,12 @@ use BadMethodCallException;
  * @method static void allInArray($value, $choices, $message = null, $propertyPath = null)
  * @method static void allNumeric($value, $message = null, $propertyPath = null)
  * @method static void allIsArray($value, $message = null, $propertyPath = null)
+ * @method static void allIsTraversable($value, $message = null, $propertyPath = null)
+ * @method static void allIsArrayAccessible($value, $message = null, $propertyPath = null)
  * @method static void allKeyExists($value, $key, $message = null, $propertyPath = null)
- * @method static void allKeysExist($value, $keys, $message = null, $propertyPath = null)
- * @method static void allPropertyExists($value, $key, $message = null, $propertyPath = null)
- * @method static void allPropertiesExist($value, $keys, $message = null, $propertyPath = null)
+ * @method static void allKeyIsset($value, $key, $message = null, $propertyPath = null)
  * @method static void allNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void allNotBlank($value, $message = null, $propertyPath = null)
- * @method static void allIsCallable($value, $message = null, $propertyPath = null)
  * @method static void allIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void allNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void allSubclassOf($value, $className, $message = null, $propertyPath = null)
@@ -136,7 +131,6 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
- * @method static void allUtf8($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
@@ -175,6 +169,9 @@ class Assertion
     const INVALID_COUNT             = 41;
     const INVALID_NOT_EQ            = 42;
     const INVALID_NOT_SAME          = 43;
+    const INVALID_TRAVERSABLE       = 44;
+    const INVALID_ARRAY_ACCESSIBLE  = 45;
+    const INVALID_KEY_ISSET         = 46;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -189,12 +186,7 @@ class Assertion
     const INVALID_OBJECT            = 207;
     const INVALID_METHOD            = 208;
     const INVALID_SCALAR            = 209;
-    const INVALID_DATE              = 210;
-    const INVALID_CALLABLE          = 211;
-    const INVALID_KEYS_EXIST        = 300;
-    const INVALID_PROPERTY_EXISTS   = 301;
-    const INVALID_PROPERTIES_EXIST  = 302;
-    const INVALID_UTF8              = 303;
+
     /**
      * Exception to throw when an assertion failed.
      *
@@ -226,8 +218,8 @@ class Assertion
     public static function eq($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value != $value2) {
-            $message = $message ?: sprintf(
-                'Value "%s" does not equal expected value "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" does not equal expected value "%s".',
                 self::stringify($value),
                 self::stringify($value2)
             );
@@ -249,8 +241,8 @@ class Assertion
     public static function same($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value !== $value2) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not the same as expected value "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not the same as expected value "%s".',
                 self::stringify($value),
                 self::stringify($value2)
             );
@@ -272,8 +264,8 @@ class Assertion
     public static function notEq($value1, $value2, $message = null, $propertyPath = null)
     {
         if ($value1 == $value2) {
-            $message = $message ?: sprintf(
-                'Value "%s" is equal to expected value "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" is equal to expected value "%s".',
                 self::stringify($value1),
                 self::stringify($value2)
             );
@@ -294,8 +286,8 @@ class Assertion
     public static function notSame($value1, $value2, $message = null, $propertyPath = null)
     {
         if ($value1 === $value2) {
-            $message = $message ?: sprintf(
-                'Value "%s" is the same as expected value "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" is the same as expected value "%s".',
                 self::stringify($value1),
                 self::stringify($value2)
             );
@@ -315,8 +307,8 @@ class Assertion
     public static function integer($value, $message = null, $propertyPath = null)
     {
         if ( ! is_int($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not an integer.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an integer.',
                 self::stringify($value)
             );
 
@@ -336,8 +328,8 @@ class Assertion
     public static function float($value, $message = null, $propertyPath = null)
     {
         if ( ! is_float($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a float.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a float.',
                 self::stringify($value)
             );
 
@@ -357,24 +349,12 @@ class Assertion
     public static function digit($value, $message = null, $propertyPath = null)
     {
         if ( ! ctype_digit((string)$value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a digit.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a digit.',
                 self::stringify($value)
             );
 
             throw static::createException($value, $message, static::INVALID_DIGIT, $propertyPath);
-        }
-    }
-
-    public static function date($value, $message=null, $propertyPath=null)
-    {
-        if ( strtotime($value) === false )
-        {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a date.',
-                self::stringify($value)
-            );
-            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath);
         }
     }
 
@@ -388,9 +368,9 @@ class Assertion
      */
     public static function integerish($value, $message = null, $propertyPath = null)
     {
-        if (strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not an integer or a number castable to integer.',
+        if (is_object($value) || strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an integer or a number castable to integer.',
                 self::stringify($value)
             );
 
@@ -410,8 +390,8 @@ class Assertion
     public static function boolean($value, $message = null, $propertyPath = null)
     {
         if ( ! is_bool($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a boolean.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a boolean.',
                 self::stringify($value)
             );
 
@@ -431,8 +411,8 @@ class Assertion
     public static function scalar($value, $message = null, $propertyPath = null)
     {
         if (!is_scalar($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a scalar.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a scalar.',
                 self::stringify($value)
             );
 
@@ -452,8 +432,8 @@ class Assertion
     public static function notEmpty($value, $message = null, $propertyPath = null)
     {
         if (empty($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is empty, but non empty value was expected.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is empty, but non empty value was expected.',
                 self::stringify($value)
             );
 
@@ -473,8 +453,8 @@ class Assertion
     public static function noContent($value, $message = null, $propertyPath = null)
     {
         if (!empty($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not empty, but empty value was expected.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not empty, but empty value was expected.',
                 self::stringify($value)
             );
 
@@ -494,8 +474,8 @@ class Assertion
     public static function notNull($value, $message = null, $propertyPath = null)
     {
         if ($value === null) {
-            $message = $message ?: sprintf(
-                'Value "%s" is null, but non null value was expected.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is null, but non null value was expected.',
                 self::stringify($value)
             );
 
@@ -515,8 +495,8 @@ class Assertion
     public static function string($value, $message = null, $propertyPath = null)
     {
         if ( ! is_string($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" expected to be string, type %s given.',
+            $message = sprintf(
+                $message ?: 'Value "%s" expected to be string, type %s given.',
                 self::stringify($value),
                 gettype($value)
             );
@@ -540,8 +520,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if ( ! preg_match($pattern, $value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" does not match expression.',
+            $message = sprintf(
+                $message ?: 'Value "%s" does not match expression.',
                 self::stringify($value)
             );
 
@@ -565,8 +545,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) !== $length) {
-            $message = $message ?: sprintf(
-                'Value "%s" has to be %d exactly characters long, but length is %d.',
+            $message = sprintf(
+                $message ?: 'Value "%s" has to be %d exactly characters long, but length is %d.',
                 self::stringify($value),
                 $length,
                 mb_strlen($value, $encoding)
@@ -593,8 +573,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) < $minLength) {
-            $message = $message ?: sprintf(
-                'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
                 self::stringify($value),
                 $minLength,
                 mb_strlen($value, $encoding)
@@ -621,8 +601,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) > $maxLength) {
-            $message = $message ?: sprintf(
-                'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
                 self::stringify($value),
                 $maxLength,
                 mb_strlen($value, $encoding)
@@ -650,8 +630,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if (mb_strlen($value, $encoding) < $minLength) {
-            $message = $message ?: sprintf(
-                'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
                 self::stringify($value),
                 $minLength,
                 mb_strlen($value, $encoding)
@@ -662,8 +642,8 @@ class Assertion
         }
 
         if (mb_strlen($value, $encoding) > $maxLength) {
-            $message = $message ?: sprintf(
-                'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
                 self::stringify($value),
                 $maxLength,
                 mb_strlen($value, $encoding)
@@ -690,8 +670,8 @@ class Assertion
         static::string($string, $message, $propertyPath);
 
         if (mb_strpos($string, $needle, null, $encoding) !== 0) {
-            $message = $message ?: sprintf(
-                'Value "%s" does not start with "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" does not start with "%s".',
                 self::stringify($string),
                 self::stringify($needle)
             );
@@ -719,8 +699,8 @@ class Assertion
         $stringPosition = mb_strlen($string, $encoding) - mb_strlen($needle, $encoding);
 
         if (mb_strripos($string, $needle, null, $encoding) !== $stringPosition) {
-            $message = $message ?: sprintf(
-                'Value "%s" does not end with "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" does not end with "%s".',
                 self::stringify($string),
                 self::stringify($needle)
             );
@@ -746,8 +726,8 @@ class Assertion
         static::string($string, $message, $propertyPath);
 
         if (mb_strpos($string, $needle, null, $encoding) === false) {
-            $message = $message ?: sprintf(
-                'Value "%s" does not contain "%s".',
+            $message = sprintf(
+                $message ?: 'Value "%s" does not contain "%s".',
                 self::stringify($string),
                 self::stringify($needle)
             );
@@ -770,8 +750,8 @@ class Assertion
     public static function choice($value, array $choices, $message = null, $propertyPath = null)
     {
         if ( ! in_array($value, $choices, true)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not an element of the valid values: %s',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an element of the valid values: %s',
                 self::stringify($value),
                 implode(", ", array_map('Assert\Assertion::stringify', $choices))
             );
@@ -802,8 +782,8 @@ class Assertion
     public static function numeric($value, $message = null, $propertyPath = null)
     {
         if ( ! is_numeric($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not numeric.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not numeric.',
                 self::stringify($value)
             );
 
@@ -812,7 +792,7 @@ class Assertion
     }
 
     /**
-     * Assert that value is array.
+     * Assert that value is an array.
      *
      * @param mixed $value
      * @param string|null $message
@@ -823,8 +803,8 @@ class Assertion
     public static function isArray($value, $message = null, $propertyPath = null)
     {
         if ( ! is_array($value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not an array.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an array.',
                 self::stringify($value)
             );
 
@@ -833,7 +813,49 @@ class Assertion
     }
 
     /**
-     * Assert that key exists in array
+     * Assert that value is an array or a traversable object.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function isTraversable($value, $message = null, $propertyPath = null)
+    {
+        if ( ! is_array($value) && ! $value instanceof \Traversable) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an array and does not implement Traversable.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_TRAVERSABLE, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is an array or an array-accessible object.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function isArrayAccessible($value, $message = null, $propertyPath = null)
+    {
+        if ( ! is_array($value) && ! $value instanceof \ArrayAccess) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an array and does not implement ArrayAccess.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_ARRAY_ACCESSIBLE, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that key exists in an array
      *
      * @param mixed $value
      * @param string|integer $key
@@ -847,8 +869,8 @@ class Assertion
         static::isArray($value, $message, $propertyPath);
 
         if ( ! array_key_exists($key, $value)) {
-            $message = $message ?: sprintf(
-                'Array does not contain an element with key "%s"',
+            $message = sprintf(
+                $message ?: 'Array does not contain an element with key "%s"',
                 self::stringify($key)
             );
 
@@ -857,7 +879,7 @@ class Assertion
     }
 
     /**
-     * Assert that keys exist in array
+     * Assert that key exists in an array/array-accessible object using isset()
      *
      * @param mixed $value
      * @param string|integer $key
@@ -866,112 +888,22 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function keysExist($value, $keys, $message = null, $propertyPath = null)
+    public static function keyIsset($value, $key, $message = null, $propertyPath = null)
     {
-        static::isArray($value, $message, $propertyPath);
+        static::isArrayAccessible($value, $message, $propertyPath);
 
-        foreach ( $keys as $key ) {
-
-            if ( ! array_key_exists($key, $value)) {
-                $message = $message ?: sprintf(
-                    'Array does not contain an element with key "%s"',
-                    self::stringify($key)
-                );
-
-                throw static::createException($value, $message, static::INVALID_KEYS_EXIST, $propertyPath, array('key' => $key));
-            }
-        }
-
-    }
-
-    /**
-     * Assert that property exists in array
-     *
-     * @param mixed $value
-     * @param string|integer $key
-     * @param string|null $message
-     * @param string|null $propertyPath
-     * @return void
-     * @throws \Assert\AssertionFailedException
-     */
-    public static function propertyExists($value, $key, $message = null, $propertyPath = null)
-    {
-        static::isObject($value);
-
-        if ( ! property_exists($value, $key)) {
-            $message = $message ?: sprintf(
-                'Object does not contain an property with key "%s"',
+        if ( ! isset($value[$key])) {
+            $message = sprintf(
+                $message ?: 'The element with key "%s" was not found',
                 self::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_PROPERTY_EXISTS, $propertyPath, array('key' => $key));
-
+            throw static::createException($value, $message, static::INVALID_KEY_ISSET, $propertyPath, array('key' => $key));
         }
     }
 
     /**
-     * Assert that properties exists in array
-     *
-     * @param mixed $value
-     * @param array $keys
-     * @param string|null $message
-     * @param string|null $propertyPath
-     * @return void
-     * @throws \Assert\AssertionFailedException
-     */
-    public static function propertiesExist($value, array $keys, $message = null, $propertyPath = null)
-    {
-        static::isObject($value);
-        foreach ($keys as $key )
-        {
-            if ( !property_exists($value, $key) )
-            {
-                $message = $message ?: sprintf(
-                    'Object does not contain an property with key "%s"',
-                    self::stringify($key)
-                );
-                throw static::createException($value, $message, static::INVALID_PROPERTIES_EXIST, $propertyPath, array('key' => $key));
-            }
-        }
-    }
-
-    /**
-     * Assert that string is valid utf8
-     *
-     * @param mixed $value
-     * @param string|null $message
-     * @param string|null $propertyPath
-     * @return void
-     * @throws \Assert\AssertionFailedException
-     */
-    public static function utf8($value, $message = null, $propertyPath = null)
-    {
-        static::string($value, $message, $propertyPath);
-        $pattern = '/^(?:
-              [\x09\x0A\x0D\x20-\x7E]            # ASCII
-            | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
-            | \xE0[\xA0-\xBF][\x80-\xBF]         # excluding overlongs
-            | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
-            | \xED[\x80-\x9F][\x80-\xBF]         # excluding surrogates
-            | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
-            | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
-            | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
-        )+$|^$/xs';
-
-
-        if (!preg_match($pattern, $value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" was expected to be a valid UTF8 string',
-                self::stringify($value)
-            );
-
-            throw static::createException($value, $message, static::INVALID_UTF8, $propertyPath);
-        }
-
-    }
-
-    /**
-     * Assert that key exists in array and it's value not empty.
+     * Assert that key exists in an array/array-accessible object and it's value is not empty.
      *
      * @param mixed $value
      * @param string|integer $key
@@ -982,7 +914,7 @@ class Assertion
      */
     public static function notEmptyKey($value, $key, $message = null, $propertyPath = null)
     {
-        static::keyExists($value, $key, $message, $propertyPath);
+        static::keyIsset($value, $key, $message, $propertyPath);
         static::notEmpty($value[$key], $message, $propertyPath);
     }
 
@@ -998,32 +930,12 @@ class Assertion
     public static function notBlank($value, $message = null, $propertyPath = null)
     {
         if (false === $value || (empty($value) && '0' != $value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is blank, but was expected to contain a value.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is blank, but was expected to contain a value.',
                 self::stringify($value)
             );
 
             throw static::createException($value, $message, static::INVALID_NOT_BLANK, $propertyPath);
-        }
-    }
-
-    /**
-     * Assert that value is callable
-     *
-     * @param mixed $value
-     * @param string|null $message
-     * @param string|null $propertyPath
-     * @return void
-     * @throws \Assert\AssertionFailedException
-     */
-    public static function isCallable($value, $message = null, $propertyPath = null)
-    {
-        if (false === $value || (empty($value) && '0' != $value)) {
-            $message = $message ?: sprintf(
-                'Callable is not callable.'
-            );
-
-            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
         }
     }
 
@@ -1040,8 +952,8 @@ class Assertion
     public static function isInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! ($value instanceof $className)) {
-            $message = $message ?: sprintf(
-                'Class "%s" was expected to be instanceof of "%s" but is not.',
+            $message = sprintf(
+                $message ?: 'Class "%s" was expected to be instanceof of "%s" but is not.',
                 self::stringify($value),
                 $className
             );
@@ -1063,8 +975,8 @@ class Assertion
     public static function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ($value instanceof $className) {
-            $message = $message ?: sprintf(
-                'Class "%s" was not expected to be instanceof of "%s".',
+            $message = sprintf(
+                $message ?: 'Class "%s" was not expected to be instanceof of "%s".',
                 self::stringify($value),
                 $className
             );
@@ -1086,8 +998,8 @@ class Assertion
     public static function subclassOf($value, $className, $message = null, $propertyPath = null)
     {
         if ( ! is_subclass_of($value, $className)) {
-            $message = $message ?: sprintf(
-                'Class "%s" was expected to be subclass of "%s".',
+            $message = sprintf(
+                $message ?: 'Class "%s" was expected to be subclass of "%s".',
                 self::stringify($value),
                 $className
             );
@@ -1112,8 +1024,8 @@ class Assertion
         static::numeric($value, $message, $propertyPath);
 
         if ($value < $minValue || $value > $maxValue) {
-            $message = $message ?: sprintf(
-                'Number "%s" was expected to be at least "%d" and at most "%d".',
+            $message = sprintf(
+                $message ?: 'Number "%s" was expected to be at least "%d" and at most "%d".',
                 self::stringify($value),
                 self::stringify($minValue),
                 self::stringify($maxValue)
@@ -1138,8 +1050,8 @@ class Assertion
         static::numeric($value, $message, $propertyPath);
 
         if ($value < $minValue) {
-            $message = $message ?: sprintf(
-                'Number "%s" was expected to be at least "%d".',
+            $message = sprintf(
+                $message ?: 'Number "%s" was expected to be at least "%d".',
                 self::stringify($value),
                 self::stringify($minValue)
             );
@@ -1163,8 +1075,8 @@ class Assertion
         static::numeric($value, $message, $propertyPath);
 
         if ($value > $maxValue) {
-            $message = $message ?: sprintf(
-                'Number "%s" was expected to be at most "%d".',
+            $message = sprintf(
+                $message ?: 'Number "%s" was expected to be at most "%d".',
                 self::stringify($value),
                 self::stringify($maxValue)
             );
@@ -1188,8 +1100,8 @@ class Assertion
         static::notEmpty($value, $message, $propertyPath);
 
         if ( ! is_file($value)) {
-            $message = $message ?: sprintf(
-                'File "%s" was expected to exist.',
+            $message = sprintf(
+                $message ?: 'File "%s" was expected to exist.',
                 self::stringify($value)
             );
 
@@ -1211,8 +1123,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if ( ! is_dir($value)) {
-            $message = $message ?: sprintf(
-                'Path "%s" was expected to be a directory.',
+            $message = sprintf(
+                $message ?: 'Path "%s" was expected to be a directory.',
                 self::stringify($value)
             );
 
@@ -1234,8 +1146,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if ( ! is_readable($value)) {
-            $message = $message ?: sprintf(
-                'Path "%s" was expected to be readable.',
+            $message = sprintf(
+                $message ?: 'Path "%s" was expected to be readable.',
                 self::stringify($value)
             );
 
@@ -1257,8 +1169,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if ( ! is_writeable($value)) {
-            $message = $message ?: sprintf(
-                'Path "%s" was expected to be writeable.',
+            $message = sprintf(
+                $message ?: 'Path "%s" was expected to be writeable.',
                 self::stringify($value)
             );
 
@@ -1281,8 +1193,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $message = $message ?: sprintf(
-                'Value "%s" was expected to be a valid e-mail address.',
+            $message = sprintf(
+                $message ?: 'Value "%s" was expected to be a valid e-mail address.',
                 self::stringify($value)
             );
 
@@ -1292,8 +1204,8 @@ class Assertion
 
             // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
             if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
-                $message = $message ?: sprintf(
-                    'Value "%s" was expected to be a valid e-mail address.',
+                $message = sprintf(
+                    $message ?: 'Value "%s" was expected to be a valid e-mail address.',
                     self::stringify($value)
                 );
 
@@ -1341,8 +1253,8 @@ class Assertion
         $pattern = sprintf($pattern, implode('|', $protocols));
 
         if (!preg_match($pattern, $value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" was expected to be a valid URL starting with http or https',
+            $message = sprintf(
+                $message ?: 'Value "%s" was expected to be a valid URL starting with http or https',
                 self::stringify($value)
             );
 
@@ -1365,8 +1277,8 @@ class Assertion
         try {
             static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
         } catch(AssertionFailedException $e) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.',
                 self::stringify($value)
             );
 
@@ -1386,8 +1298,8 @@ class Assertion
     public static function true($value, $message = null, $propertyPath = null)
     {
         if ($value !== true) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not TRUE.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not TRUE.',
                 self::stringify($value)
             );
 
@@ -1407,8 +1319,8 @@ class Assertion
     public static function false($value, $message = null, $propertyPath = null)
     {
         if ($value !== false) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not FALSE.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not FALSE.',
                 self::stringify($value)
             );
 
@@ -1428,8 +1340,8 @@ class Assertion
     public static function classExists($value, $message = null, $propertyPath = null)
     {
         if ( ! class_exists($value)) {
-            $message = $message ?: sprintf(
-                'Class "%s" does not exist.',
+            $message = sprintf(
+                $message ?: 'Class "%s" does not exist.',
                 self::stringify($value)
             );
 
@@ -1451,8 +1363,8 @@ class Assertion
     {
         $reflection = new \ReflectionClass($class);
         if ( ! $reflection->implementsInterface($interfaceName)) {
-            $message = $message ?: sprintf(
-                'Class "%s" does not implement interface "%s".',
+            $message = sprintf(
+                $message ?: 'Class "%s" does not implement interface "%s".',
                 self::stringify($class),
                 self::stringify($interfaceName)
             );
@@ -1479,8 +1391,8 @@ class Assertion
     public static function isJsonString($value, $message = null, $propertyPath = null)
     {
         if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a valid JSON string.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a valid JSON string.',
                 self::stringify($value)
             );
 
@@ -1508,8 +1420,8 @@ class Assertion
         }
 
         if (!preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
-            $message = $message ?: sprintf(
-                'Value "%s" is not a valid UUID.',
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a valid UUID.',
                 self::stringify($value)
             );
 
@@ -1530,8 +1442,8 @@ class Assertion
     public static function count($countable, $count, $message = null, $propertyPath = null)
     {
         if ($count !== count($countable)) {
-            $message = $message ?: sprintf(
-                'List does not contain exactly "%d" elements.',
+            $message = sprintf(
+                $message ?: 'List does not contain exactly "%d" elements.',
                 self::stringify($countable),
                 self::stringify($count)
             );
@@ -1566,7 +1478,7 @@ class Assertion
                 throw new BadMethodCallException("Missing the first argument.");
             }
 
-            static::isArray($args[0]);
+            static::isTraversable($args[0]);
 
             $method      = substr($method, 3);
             $values      = array_shift($args);
@@ -1615,8 +1527,8 @@ class Assertion
         self::isObject($object, $message, $propertyPath);
 
         if (!method_exists($object, $value)) {
-            $message = $message ?: sprintf(
-                'Expected "%s" does not a exist in provided object.',
+            $message = sprintf(
+                $message ?: 'Expected "%s" does not a exist in provided object.',
                 self::stringify($value)
             );
 
@@ -1634,8 +1546,8 @@ class Assertion
     public static function isObject($value, $message = null, $propertyPath = null)
     {
         if (!is_object($value)) {
-            $message = $message ?: sprintf(
-                'Provided "%s" is not a valid object.',
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not a valid object.',
                 self::stringify($value)
             );
 
