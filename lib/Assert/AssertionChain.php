@@ -29,6 +29,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain integer($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain float($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain digit($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain date($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain integerish($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain boolean($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain scalar($message = null, $propertyPath = null)
@@ -49,8 +50,12 @@ use ReflectionClass;
  * @method \Assert\AssertionChain numeric($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain isArray($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain keyExists($key, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain keysExist($keys, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain propertyExists($key, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain propertiesExist($keys, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notEmptyKey($key, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notBlank($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isCallable($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain isInstanceOf($className, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notIsInstanceOf($className, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain subclassOf($className, $message = null, $propertyPath = null)
@@ -74,6 +79,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain choicesNotEmpty($choices, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain methodExists($object, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain isObject($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain utf8($message = null, $propertyPath = null)
  * METHODEND
  */
 class AssertionChain
