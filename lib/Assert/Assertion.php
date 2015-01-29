@@ -30,6 +30,7 @@ use BadMethodCallException;
  * @method static void nullOrDigit($value, $message = null, $propertyPath = null)
  * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null)
  * @method static void nullOrBoolean($value, $message = null, $propertyPath = null)
+ * @method static void nullOrBooleanish($value, $message = null, $propertyPath = null)
  * @method static void nullOrScalar($value, $message = null, $propertyPath = null)
  * @method static void nullOrNotEmpty($value, $message = null, $propertyPath = null)
  * @method static void nullOrNoContent($value, $message = null, $propertyPath = null)
@@ -85,6 +86,7 @@ use BadMethodCallException;
  * @method static void allDigit($value, $message = null, $propertyPath = null)
  * @method static void allIntegerish($value, $message = null, $propertyPath = null)
  * @method static void allBoolean($value, $message = null, $propertyPath = null)
+ * @method static void allBooleanish($value, $message = null, $propertyPath = null)
  * @method static void allScalar($value, $message = null, $propertyPath = null)
  * @method static void allNotEmpty($value, $message = null, $propertyPath = null)
  * @method static void allNoContent($value, $message = null, $propertyPath = null)
@@ -190,6 +192,7 @@ class Assertion
     const INVALID_LESS_OR_EQUAL     = 211;
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
+    const INVALID_BOOLEANISH        = 213;
 
     /**
      * Exception to throw when an assertion failed.
@@ -400,6 +403,31 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_BOOLEAN, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is a php boolean'ish.
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function booleanish($value, $message = null, $propertyPath = null)
+    {
+        // protect against https://bugs.php.net/bug.php?id=49510
+        if (false === $value || null === $value) {
+            return;
+        }
+
+        if (null === filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not boolean or 1 or 0.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_BOOLEANISH, $propertyPath);
         }
     }
 

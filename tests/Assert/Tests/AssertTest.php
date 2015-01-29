@@ -100,11 +100,44 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::boolean(1);
     }
 
+    public function testValidBooleanish()
+    {
+        Assertion::booleanish(true);
+        Assertion::booleanish(false);
+        Assertion::booleanish(1);
+        Assertion::booleanish(0);
+        Assertion::booleanish(null);
+        Assertion::booleanish('1');
+        Assertion::booleanish('0');
+    }
+
+    public static function dataInvalidBooleanish()
+    {
+        return array(
+            array(-1),
+            array(2),
+            array('2'),
+            array('string'),
+            array(1.23),
+            array("1.23"),
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalidBooleanish
+     */
+    public function testInvalidBooleanish($nonBoolean)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BOOLEANISH);
+        Assertion::booleanish($nonBoolean);
+    }
+
     public function testInvalidScalar()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SCALAR);
         Assertion::scalar(new \stdClass);
     }
+
 
     public function testValidScalar()
     {
