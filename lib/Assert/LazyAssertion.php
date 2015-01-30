@@ -81,10 +81,12 @@ class LazyAssertion
     private $currentChain;
     private $errors = array();
 
+    protected $assertChainClass = 'Assert\AssertionChain';
+
     public function that($value, $propertyPath, $defaultMessage = null)
     {
         $this->currentChainFailed = false;
-        $this->currentChain = \Assert\that($value, $defaultMessage, $propertyPath);
+        $this->currentChain = new $this->assertChainClass($value, $defaultMessage, $propertyPath);
 
         return $this;
     }
