@@ -19,6 +19,11 @@
         },
         "files": ["lib/Assert/functions.php"]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Assert\\Tests\\": "tests/Assert/Tests/"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.3-dev"
