@@ -232,6 +232,38 @@ use Assert\Assertion as BaseAssertion;
 class Assertion extends BaseAssertion
 {
     protected static $exceptionClass = 'MyProject\AssertionFailedException';
+
+    const INVALID_CUSTOM = 10001;
+
+    /**
+      * You can also create your own assertion methods
+      *
+      * Be aware, these methods will only be available when using a custom assertion chain
+      */
+    public static function customAssert($value, $message = null, $propertyPath = null)
+    {
+        if (!$value) {
+            $message = sprintf(
+                $message ?: 'Value "%s" doesn\'t pass.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_CUSTOM, $propertyPath);
+        }
+    }
 }
 ```
 
+To get access to these assertion methods when chaining, you'll need to create your own assertion chain subclass.
+
+
+```php
+namespace MyProject;
+
+use Assert\AssertionChain as BaseChain;
+
+class AssertionChain extends BaseChain
+{
+    protected $assertionClass = 'MyProject\Assertion';
+}
+```
