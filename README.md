@@ -280,3 +280,17 @@ class LazyAssertion extends BaseLazy
     protected $assertChainClass = 'MyProject\AssertionChain';
 }
 ```
+
+### Custom assertions and \Assert\that()
+
+You will not be able to use your custom assertion methods if you use \Assert\that() and similar functions.  One solution to this is to copy the functions into your project/library under your namespace.
+
+```php
+namespace MyProject;
+
+function that($value, $defaultMessage = null, $defaultPropertyPath = null)
+{
+    return new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
+}
+```
+`\MyProject\that($value)` will return an instance of your custom assertion chain with full access to your custom assertion methods
