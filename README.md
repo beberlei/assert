@@ -254,7 +254,7 @@ class Assertion extends BaseAssertion
 }
 ```
 
-To get access to these assertion methods when chaining, you'll need to create your own assertion chain subclass.
+To get access to custom assertion methods when chaining, you'll need to create your own assertion chain subclass.
 
 
 ```php
@@ -265,5 +265,18 @@ use Assert\AssertionChain as BaseChain;
 class AssertionChain extends BaseChain
 {
     protected $assertionClass = 'MyProject\Assertion';
+}
+```
+
+To get access to custom assertion methods when using a lazy assertion, you'll need to create your own lazy assertion subclass.
+
+```php
+namespace MyProject;
+
+use Assert\LazyAssertion as BaseLazy;
+
+class LazyAssertion extends BaseLazy
+{
+    protected $assertChainClass = 'MyProject\AssertionChain';
 }
 ```
