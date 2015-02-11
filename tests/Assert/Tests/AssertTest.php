@@ -963,6 +963,125 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(array('min' => 10, 'max' => 20), $e->getConstraints());
         }
     }
+
+    public function testLessThan()
+    {
+        Assertion::lessThan(1, 2);
+        Assertion::lessThan('aaa', 'bbb');
+        Assertion::lessThan('aaa', 'aaaa');
+        Assertion::lessThan(new \DateTime('today'), new \DateTime('tomorrow'));
+    }
+
+    public function invalidLessProvider()
+    {
+        return [
+            [2, 1],
+            [2, 2],
+            ['aaa', 'aaa'],
+            ['aaaa', 'aaa'],
+            [new \DateTime('today'), new \DateTime('yesterday')],
+            [new \DateTime('today'), new \DateTime('today')],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidLessProvider
+     */
+    public function testLessThanThrowsException($value, $limit)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LESS);
+        Assertion::lessThan($value, $limit);
+    }
+
+    public function testLessOrEqualThan()
+    {
+        Assertion::lessOrEqualThan(1, 2);
+        Assertion::lessOrEqualThan(1, 1);
+        Assertion::lessOrEqualThan('aaa', 'bbb');
+        Assertion::lessOrEqualThan('aaa', 'aaaa');
+        Assertion::lessOrEqualThan('aaa', 'aaa');
+        Assertion::lessOrEqualThan(new \DateTime('today'), new \DateTime('tomorrow'));
+        Assertion::lessOrEqualThan(new \DateTime('today'), new \DateTime('today'));
+    }
+
+    public function invalidLessOrEqualProvider()
+    {
+        return [
+            [2, 1],
+            ['aaaa', 'aaa'],
+            [new \DateTime('today'), new \DateTime('yesterday')],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidLessOrEqualProvider
+     */
+    public function testLessOrEqualThanThrowsException($value, $limit)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LESS_OR_EQUAL);
+        Assertion::lessOrEqualThan($value, $limit);
+    }
+
+    public function testGreaterThan()
+    {
+        Assertion::greaterThan(2, 1);
+        Assertion::greaterThan('bbb', 'aaa');
+        Assertion::greaterThan('aaaa', 'aaa');
+        Assertion::greaterThan(new \DateTime('tomorrow'), new \DateTime('today'));
+    }
+
+    public function invalidGreaterProvider()
+    {
+        return [
+            [1, 2],
+            [2, 2],
+            ['aaa', 'aaa'],
+            ['aaa', 'aaaa'],
+            [new \DateTime('yesterday'), new \DateTime('today')],
+            [new \DateTime('today'), new \DateTime('today')],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidGreaterProvider
+     */
+    public function testGreaterThanThrowsException($value, $limit)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_GREATER);
+        Assertion::greaterThan($value, $limit);
+    }
+
+    public function testGreaterOrEqualThan()
+    {
+        Assertion::greaterOrEqualThan(2, 1);
+        Assertion::greaterOrEqualThan(1, 1);
+        Assertion::greaterOrEqualThan('bbb', 'aaa');
+        Assertion::greaterOrEqualThan('aaaa', 'aaa');
+        Assertion::greaterOrEqualThan('aaa', 'aaa');
+        Assertion::greaterOrEqualThan(new \DateTime('tomorrow'), new \DateTime('today'));
+        Assertion::greaterOrEqualThan(new \DateTime('today'), new \DateTime('today'));
+    }
+
+    public function invalidGreaterOrEqualProvider()
+    {
+        return [
+            [1, 2],
+            ['aaa', 'aaaa'],
+            [new \DateTime('yesterday'), new \DateTime('tomorrow')],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidGreaterOrEqualProvider
+     *
+     * @param mixed $value
+     * @param mixed $limit
+     */
+    public function testGreaterOrEqualThanThrowsException($value, $limit)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_GREATER_OR_EQUAL);
+        Assertion::greaterOrEqualThan($value, $limit);
+    }
 }
 
 class ChildStdClass extends \stdClass

@@ -186,6 +186,10 @@ class Assertion
     const INVALID_OBJECT            = 207;
     const INVALID_METHOD            = 208;
     const INVALID_SCALAR            = 209;
+    const INVALID_LESS              = 210;
+    const INVALID_LESS_OR_EQUAL     = 211;
+    const INVALID_GREATER           = 212;
+    const INVALID_GREATER_OR_EQUAL  = 212;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1553,6 +1557,90 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
 
+        }
+    }
+
+    /**
+     * Determines if the value is less than given limit.
+     *
+     * @param mixed $value
+     * @param mixed $limit
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function lessThan($value, $limit, $message = null, $propertyPath = null)
+    {
+        if ($value >= $limit) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not less than "%s".',
+                self::stringify($value),
+                self::stringify($limit)
+            );
+
+            throw static::createException($value, $message, static::INVALID_LESS, $propertyPath);
+        }
+    }
+
+    /**
+     * Determines if the value is less or than given limit.
+     *
+     * @param mixed $value
+     * @param mixed $limit
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function lessOrEqualThan($value, $limit, $message = null, $propertyPath = null)
+    {
+        if ($value > $limit) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not less or equal than "%s".',
+                self::stringify($value),
+                self::stringify($limit)
+            );
+
+            throw static::createException($value, $message, static::INVALID_LESS_OR_EQUAL, $propertyPath);
+        }
+    }
+
+    /**
+     * Determines if the value is greater than given limit.
+     *
+     * @param mixed $value
+     * @param mixed $limit
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function greaterThan($value, $limit, $message = null, $propertyPath = null)
+    {
+        if ($value <= $limit) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not less than "%s".',
+                self::stringify($value),
+                self::stringify($limit)
+            );
+
+            throw static::createException($value, $message, static::INVALID_GREATER, $propertyPath);
+        }
+    }
+
+    /**
+     * Determines if the value is greater or equal than given limit.
+     *
+     * @param mixed $value
+     * @param mixed $limit
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function greaterOrEqualThan($value, $limit, $message = null, $propertyPath = null)
+    {
+        if ($value < $limit) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not less or equal than "%s".',
+                self::stringify($value),
+                self::stringify($limit)
+            );
+
+            throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath);
         }
     }
 
