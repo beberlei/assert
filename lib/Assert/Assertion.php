@@ -1614,7 +1614,7 @@ class Assertion
     {
         if ($value <= $limit) {
             $message = sprintf(
-                $message ?: 'Provided "%s" is not less than "%s".',
+                $message ?: 'Provided "%s" is not greater than "%s".',
                 self::stringify($value),
                 self::stringify($limit)
             );
@@ -1635,7 +1635,7 @@ class Assertion
     {
         if ($value < $limit) {
             $message = sprintf(
-                $message ?: 'Provided "%s" is not less or equal than "%s".',
+                $message ?: 'Provided "%s" is not greater or equal than "%s".',
                 self::stringify($value),
                 self::stringify($limit)
             );
