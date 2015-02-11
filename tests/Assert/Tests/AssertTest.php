@@ -974,14 +974,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function invalidLessProvider()
     {
-        return [
-            [2, 1],
-            [2, 2],
-            ['aaa', 'aaa'],
-            ['aaaa', 'aaa'],
-            [new \DateTime('today'), new \DateTime('yesterday')],
-            [new \DateTime('today'), new \DateTime('today')],
-        ];
+        return array(
+            array(2, 1),
+            array(2, 2),
+            array('aaa', 'aaa'),
+            array('aaaa', 'aaa'),
+            array(new \DateTime('today'), new \DateTime('yesterday')),
+            array(new \DateTime('today'), new \DateTime('today')),
+        );
     }
 
     /**
@@ -1006,11 +1006,11 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function invalidLessOrEqualProvider()
     {
-        return [
-            [2, 1],
-            ['aaaa', 'aaa'],
-            [new \DateTime('today'), new \DateTime('yesterday')],
-        ];
+        return array(
+            array(2, 1),
+            array('aaaa', 'aaa'),
+            array(new \DateTime('today'), new \DateTime('yesterday')),
+        );
     }
 
     /**
@@ -1032,14 +1032,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function invalidGreaterProvider()
     {
-        return [
-            [1, 2],
-            [2, 2],
-            ['aaa', 'aaa'],
-            ['aaa', 'aaaa'],
-            [new \DateTime('yesterday'), new \DateTime('today')],
-            [new \DateTime('today'), new \DateTime('today')],
-        ];
+        return array(
+            array(1, 2),
+            array(2, 2),
+            array('aaa', 'aaa'),
+            array('aaa', 'aaaa'),
+            array(new \DateTime('yesterday'), new \DateTime('today')),
+            array(new \DateTime('today'), new \DateTime('today')),
+        );
     }
 
     /**
@@ -1064,11 +1064,11 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function invalidGreaterOrEqualProvider()
     {
-        return [
-            [1, 2],
-            ['aaa', 'aaaa'],
-            [new \DateTime('yesterday'), new \DateTime('tomorrow')],
-        ];
+        return array(
+            array(1, 2),
+            array('aaa', 'aaaa'),
+            array(new \DateTime('yesterday'), new \DateTime('tomorrow')),
+        );
     }
 
     /**
