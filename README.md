@@ -137,6 +137,7 @@ use Assert\Assertion;
 Assertion::integer($value);
 Assertion::digit($value);
 Assertion::integerish($value);
+Assertion::float($value);
 Assertion::range($value, $minValue, $maxValue);
 Assertion::boolean($value);
 Assertion::scalar($value);
