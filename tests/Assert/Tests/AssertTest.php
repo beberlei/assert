@@ -457,25 +457,48 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::range(2.5, 2.25, 2.75);
     }
 
-    public function testInvalidEmail()
+    /**
+     * @param string $invalidEmail
+     * @dataProvider dataInvalidEmail
+     */
+    public function testInvalidEmail($invalidEmail)
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EMAIL);
-        Assertion::email("foo");
+        Assertion::email($invalidEmail);
     }
 
-    public function testValidEmail()
+    public static function dataInvalidEmail()
     {
-        Assertion::email("123hello+world@email.provider.com");
+        return array(
+            'no @' => array("foo"),
+            'no domain' => array("foo@"),
+            'two ats' => array("foo@baz@example.com"),
+            'double quot' => array('foo"a@example.com'),
+            'double quot in domain' => array('fooa@exam"ple.com'),
+            "\xb2 symbol" => array("foo\xb2a@example.com"),
+            'contains space' => array("fo o@example.com"),
+            'leading space' => array(" foo@example.com"),
+            'trailing space' => array("foo@example.com "),
+        );
     }
 
     /**
-     * @dataProvider dataInvalidUrl
+     * @param string $validEmail
+     * @dataProvider dataValidEmail
      */
-    public function testInvalidUrl($url)
+    public function testValidEmail($validEmail)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_URL);
+        Assertion::email($validEmail);
+    }
 
-        Assertion::url($url);
+    public static function dataValidEmail()
+    {
+        return array(
+            'regular email' => array("123hello+world@email.provider.com"),
+            'mixed case' => array("soMeUser@email.Provider.com"),
+            'valid special chars' => array("!#$%&'*+-=?^_`{|}~@example.com"),
+            'cyrillic characters ' => array("вася@домен.рф"),
+        );
     }
 
     public static function dataInvalidUrl()
