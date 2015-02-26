@@ -186,6 +186,7 @@ class Assertion
     const INVALID_OBJECT            = 207;
     const INVALID_METHOD            = 208;
     const INVALID_SCALAR            = 209;
+    const INVALID_UNIQUE            = 210;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1553,6 +1554,28 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
 
+        }
+    }
+
+    /**
+     * Determines that the provided value is unique in the array.
+     *
+     * @param mixed $value
+     * @param array $values
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function isUnique($value, array $values, $message = null, $propertyPath = null)
+    {
+        $unique = array_unique($values);
+        if (count($unique) !== count($values)) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not an unique element of the values: %s',
+                self::stringify($value),
+                implode(', ', array_map('Assert\Assertion::stringify', $values))
+            );
+
+            throw static::createException($value, $message, static::INVALID_UNIQUE, $propertyPath);
         }
     }
 

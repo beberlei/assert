@@ -949,6 +949,23 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::methodExists('methodExists', new Assertion());
     }
 
+    public function testIsUnique()
+    {
+        Assertion::isUnique('one', array(
+            'one',
+            'two',
+        ));
+    }
+
+    public function testIsUniqueExpectingException()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_UNIQUE);
+        Assertion::isUnique('one', array(
+            'one',
+            'one',
+        ));
+    }
+
     /**
      * @test
      */
