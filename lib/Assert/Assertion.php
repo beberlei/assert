@@ -984,7 +984,8 @@ class Assertion
         static::isObject($value);
         foreach ($keys as $key )
         {
-            if ( !property_exists($value, $key) )
+            // Using isset to allow resolution of magically defined properties
+            if ( ! property_exists($value, $key) && ! isset($value->$key) )
             {
                 $message = $message ?: sprintf(
                     'Object does not contain an property with key "%s"',
