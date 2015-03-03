@@ -222,6 +222,11 @@ class Assertion
         return new $exceptionClass($message, $code, $propertyPath, $value, $constraints);
     }
 
+    public static function setExceptionClass($exceptionClass)
+    {
+        static::$exceptionClass = $exceptionClass;
+    }
+
     /**
      * Assert that two values are equal (using == ).
      *
