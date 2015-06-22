@@ -398,10 +398,27 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::keyExists(array("foo" => "bar"), "foo");
     }
 
-    public function testInvalidNotBlank()
+    public static function dataInvalidNotBlank()
+    {
+        return array(
+            array(""),
+            array(" "),
+            array("\t"),
+            array("\n"),
+            array("\r"),
+            array(false),
+            array(null),
+            array( array() ),
+        );
+    }
+
+    /**
+     * @dataProvider dataInvalidNotBlank
+     */
+    public function testInvalidNotBlank($notBlank)
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_BLANK);
-        Assertion::notBlank("");
+        Assertion::notBlank($notBlank);
     }
 
     public function testValidNotBlank()
