@@ -1444,7 +1444,6 @@ class Assertion
         if ($count !== count($countable)) {
             $message = sprintf(
                 $message ?: 'List does not contain exactly "%d" elements.',
-                self::stringify($countable),
                 self::stringify($count)
             );
 
