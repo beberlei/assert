@@ -9,6 +9,9 @@
     "require": {
         "ext-mbstring": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
     "autoload": {
         "psr-0": {
             "Assert": "lib/"
