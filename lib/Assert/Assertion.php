@@ -28,6 +28,7 @@ use BadMethodCallException;
  * @method static void nullOrInteger($value, $message = null, $propertyPath = null)
  * @method static void nullOrFloat($value, $message = null, $propertyPath = null)
  * @method static void nullOrDigit($value, $message = null, $propertyPath = null)
+ * @method static void nullOrDate($value, $message = null, $propertyPath = null)
  * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null)
  * @method static void nullOrBoolean($value, $message = null, $propertyPath = null)
  * @method static void nullOrScalar($value, $message = null, $propertyPath = null)
@@ -50,9 +51,13 @@ use BadMethodCallException;
  * @method static void nullOrIsTraversable($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsArrayAccessible($value, $message = null, $propertyPath = null)
  * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrKeysExist($value, $keys, $message = null, $propertyPath = null)
  * @method static void nullOrKeyIsset($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrPropertyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void nullOrPropertiesExist($value, $keys, $message = null, $propertyPath = null)
  * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void nullOrNotBlank($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsCallable($value, $message = null, $propertyPath = null)
  * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void nullOrSubclassOf($value, $className, $message = null, $propertyPath = null)
@@ -76,6 +81,7 @@ use BadMethodCallException;
  * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
+ * @method static void nullOrUtf8($value, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
  * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null)
@@ -83,6 +89,7 @@ use BadMethodCallException;
  * @method static void allInteger($value, $message = null, $propertyPath = null)
  * @method static void allFloat($value, $message = null, $propertyPath = null)
  * @method static void allDigit($value, $message = null, $propertyPath = null)
+ * @method static void allDate($value, $message = null, $propertyPath = null)
  * @method static void allIntegerish($value, $message = null, $propertyPath = null)
  * @method static void allBoolean($value, $message = null, $propertyPath = null)
  * @method static void allScalar($value, $message = null, $propertyPath = null)
@@ -105,9 +112,13 @@ use BadMethodCallException;
  * @method static void allIsTraversable($value, $message = null, $propertyPath = null)
  * @method static void allIsArrayAccessible($value, $message = null, $propertyPath = null)
  * @method static void allKeyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void allKeysExist($value, $keys, $message = null, $propertyPath = null)
  * @method static void allKeyIsset($value, $key, $message = null, $propertyPath = null)
+ * @method static void allPropertyExists($value, $key, $message = null, $propertyPath = null)
+ * @method static void allPropertiesExist($value, $keys, $message = null, $propertyPath = null)
  * @method static void allNotEmptyKey($value, $key, $message = null, $propertyPath = null)
  * @method static void allNotBlank($value, $message = null, $propertyPath = null)
+ * @method static void allIsCallable($value, $message = null, $propertyPath = null)
  * @method static void allIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void allNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
  * @method static void allSubclassOf($value, $className, $message = null, $propertyPath = null)
@@ -131,6 +142,7 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
+ * @method static void allUtf8($value, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
@@ -186,7 +198,12 @@ class Assertion
     const INVALID_OBJECT            = 207;
     const INVALID_METHOD            = 208;
     const INVALID_SCALAR            = 209;
-
+    const INVALID_DATE              = 210;
+    const INVALID_CALLABLE          = 211;
+    const INVALID_KEYS_EXIST        = 300;
+    const INVALID_PROPERTY_EXISTS   = 301;
+    const INVALID_PROPERTIES_EXIST  = 302;
+    const INVALID_UTF8              = 303;
     /**
      * Exception to throw when an assertion failed.
      *
@@ -203,6 +220,11 @@ class Assertion
     {
         $exceptionClass = static::$exceptionClass;
         return new $exceptionClass($message, $code, $propertyPath, $value, $constraints);
+    }
+
+    public static function setExceptionClass($exceptionClass)
+    {
+        static::$exceptionClass = $exceptionClass;
     }
 
     /**
@@ -355,6 +377,27 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_DIGIT, $propertyPath);
+        }
+    }
+
+    /**
+     * Validates if an string is a date .
+     *
+     * @param string $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function date($value, $message=null, $propertyPath=null)
+    {
+        if ( strtotime($value) === false )
+        {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a date.',
+                self::stringify($value)
+            );
+            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath);
         }
     }
 
@@ -876,6 +919,110 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
         }
+    }
+
+    /**
+     * Assert that keys exist in array
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function keysExist($value, $keys, $message = null, $propertyPath = null)
+    {
+        static::isArray($value, $message, $propertyPath);
+
+        foreach ( $keys as $key ) {
+
+            if ( ! array_key_exists($key, $value)) {
+                $message = $message ?: sprintf(
+                    'Array does not contain an element with key "%s"',
+                    self::stringify($key)
+                );
+
+                throw static::createException($value, $message, static::INVALID_KEYS_EXIST, $propertyPath, array('key' => $key));
+            }
+        }
+
+    }
+
+    /**
+     * Assert that property exists in array
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function propertyExists($value, $key, $message = null, $propertyPath = null)
+    {
+        static::isObject($value);
+
+        if ( ! property_exists($value, $key) && ! isset($value->$key) ) {
+            $message = $message ?: sprintf(
+                'Object does not contain an property with key "%s"',
+                self::stringify($key)
+            );
+
+            throw static::createException($value, $message, static::INVALID_PROPERTY_EXISTS, $propertyPath, array('key' => $key));
+
+        }
+    }
+
+    /**
+     * Assert that properties exists in array
+     *
+     * @param mixed $value
+     * @param array $keys
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function propertiesExist($value, array $keys, $message = null, $propertyPath = null)
+    {
+        static::isObject($value);
+        foreach ($keys as $key )
+        {
+            // Using isset to allow resolution of magically defined properties
+            if ( ! property_exists($value, $key) && ! isset($value->$key) )
+            {
+                $message = $message ?: sprintf(
+                    'Object does not contain an property with key "%s"',
+                    self::stringify($key)
+                );
+                throw static::createException($value, $message, static::INVALID_PROPERTIES_EXIST, $propertyPath, array('key' => $key));
+            }
+        }
+    }
+
+    /**
+     * Assert that string is valid utf8
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function utf8($value, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if  ( mb_detect_encoding($value, 'UTF-8', true) !== 'UTF-8' ) {
+            $message = $message ?: sprintf(
+                'Value "%s" was expected to be a valid UTF8 string',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_UTF8, $propertyPath);
+        }
+
     }
 
     /**

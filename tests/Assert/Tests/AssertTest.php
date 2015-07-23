@@ -358,6 +358,15 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::numeric(1.23);
     }
 
+    public function testValidUtf8()
+    {
+        $text = 'Française señor café 0123 කොහොමද ශ්‍රී ලංකා  hello Žluťoučký kůň '
+            . 'ÀÁÂ,ÃÄÅ,Æ,ÇÈ,ÉÊË,ÌÍÎ,ÏÐÑ,ÒÓÔ,ÕÖØ,ÙÚÛ,ÜÝ,Þ,'
+            . 'ß,àáâ,ãäå,æ,çèé,êëì,íîï,ðñò,óôõ,öøù,úûýý,þ,ÿŔŕ '
+            . 'YA(亚） HE（何） Tra Mỹ';
+        Assertion::utf8($text);
+    }
+
     public static function dataInvalidArray()
     {
         return array(
