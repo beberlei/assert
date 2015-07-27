@@ -1156,7 +1156,7 @@ class Assertion
         static::string($value, $message, $propertyPath);
 
         $pattern = '~^
-            ([a-zA-Z]+)://                                 # protocol
+            ([a-zA-Z]*)://                                 # protocol
             (
                 ([\pL\pN\pS-]+\.)+[\pL]+                   # a domain name
                     |                                     #  or
