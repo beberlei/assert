@@ -963,6 +963,42 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(array('min' => 10, 'max' => 20), $e->getConstraints());
         }
     }
+
+    /**
+     * @dataProvider validDateProvider
+     */
+    public function testValidDate($value, $format)
+    {
+        Assertion::date($value, $format);
+    }
+
+    public function validDateProvider()
+    {
+        return array(
+            array('2012-03-13', 'Y-m-d'),
+            array('29.02.2012 12:03:36.432563', 'd.m.Y H:i:s.u'),
+            array('13.08.2015 17:08:23 Thu Thursday th 224 August Aug 8 15 17 432563 UTC UTC', 'd.m.Y H:i:s D l S z F M n y H u e T'),
+            array('1439486158', 'U')
+        );
+    }
+
+    /**
+     * @dataProvider invalidDateProvider
+     */
+    public function testInvalidDate($value, $format)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DATE);
+        Assertion::date($value, $format);
+    }
+
+    public function invalidDateProvider()
+    {
+        return array(
+            array('this is not the date', 'Y-m-d'),
+            array('2011-02-29', 'Y-m-d'),
+            array('2012.02.29 12:60:36.432563', 'Y.m.d H:i:s.u')
+        );
+    }
 }
 
 class ChildStdClass extends \stdClass

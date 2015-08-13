@@ -183,6 +183,7 @@ Assertion::uuid($value);
 Assertion::choicesNotEmpty($value, $choices)
 Assertion::isObject($value)
 Assertion::methodExists($value, $object)
+Assertion::date($value, $format)
 
 ```
 
