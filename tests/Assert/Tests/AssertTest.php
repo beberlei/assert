@@ -917,7 +917,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidCount($countable, $count)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_COUNT);
+        $this->setExpectedException('Assert\AssertionFailedException', 'List does not contain exactly "'.$count.'" elements.', Assertion::INVALID_COUNT);
         Assertion::count($countable, $count);
     }
 
