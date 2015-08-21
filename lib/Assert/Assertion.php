@@ -929,7 +929,7 @@ class Assertion
      */
     public static function notBlank($value, $message = null, $propertyPath = null)
     {
-        if (false === $value || (empty($value) && '0' != $value)) {
+        if (false === $value || (empty($value) && '0' != $value) || (is_string($value) && '' === trim($value))) {
             $message = sprintf(
                 $message ?: 'Value "%s" is blank, but was expected to contain a value.',
                 self::stringify($value)
