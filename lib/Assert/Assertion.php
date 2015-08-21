@@ -189,7 +189,7 @@ class Assertion
     const INVALID_LESS              = 210;
     const INVALID_LESS_OR_EQUAL     = 211;
     const INVALID_GREATER           = 212;
-    const INVALID_GREATER_OR_EQUAL  = 212;
+    const INVALID_GREATER_OR_EQUAL  = 213;
 
     /**
      * Exception to throw when an assertion failed.
