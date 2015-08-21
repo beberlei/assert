@@ -1562,7 +1562,7 @@ class Assertion
      * @param mixed $value
      * @return string
      */
-    private static function stringify($value)
+    protected static function stringify($value)
     {
         if (is_bool($value)) {
             return $value ? '<TRUE>' : '<FALSE>';
