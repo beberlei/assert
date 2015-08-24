@@ -28,6 +28,7 @@ namespace Assert;
  * @method \Assert\LazyAssertion digit($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion integerish($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion boolean($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion booleanish($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion scalar($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion notEmpty($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion noContent($message = null, $propertyPath = null)
