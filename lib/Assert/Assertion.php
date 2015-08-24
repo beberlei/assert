@@ -76,6 +76,7 @@ use BadMethodCallException;
  * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
+ * @method static void nullOrDate($value, $format, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
  * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null)
@@ -131,6 +132,7 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
+ * @method static void allDate($value, $format, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
@@ -190,6 +192,7 @@ class Assertion
     const INVALID_LESS_OR_EQUAL     = 211;
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
+    const INVALID_DATE              = 213;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1642,6 +1645,35 @@ class Assertion
             throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath);
         }
     }
+
+    /**
+     * Assert that date is valid and corresponds to the given format.
+     *
+     * @param string      $value
+     * @param string      $format supports all of the options date(), except for the following:
+     *                            N, w, W, t, L, o, B, a, A, g, h, I, O, P, Z, c, r.
+     * @param string|null $message
+     * @param string|null $propertyPath
+     *
+     * @link http://php.net/manual/function.date.php#refsect1-function.date-parameters
+     */
+     public static function date($value, $format, $message = null, $propertyPath = null)
+     {
+         static::string($value, $message, $propertyPath);
+         static::string($format, $message, $propertyPath);
+
+         $dateTime = \DateTime::createFromFormat($format, $value);
+
+         if (false === $dateTime || $value !== $dateTime->format($format)) {
+             $message = sprintf(
+                 $message ?: 'Date "%s" is invalid or does not match format "%s".',
+                 self::stringify($value),
+                 self::stringify($format)
+             );
+
+             throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
+         }
+     }
 
     /**
      * Make a string version of a value.

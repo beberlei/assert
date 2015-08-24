@@ -187,6 +187,7 @@ Assertion::lessThan($value, $limit)
 Assertion::lessOrEqualThan($value, $limit)
 Assertion::greaterThan($value, $limit)
 Assertion::greaterOrEqualThan($value, $limit)
+Assertion::date($value, $format)
 
 ```
 
