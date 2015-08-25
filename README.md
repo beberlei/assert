@@ -236,3 +236,23 @@ class Assertion extends BaseAssertion
 }
 ```
 
+## Your own exception class
+
+If you want to throw other exception when calling assertion method you can specify the exception class to use.
+You can specify php base exception and custom exception.
+
+```php
+<?php
+use Assert\Assertion;
+use Assert\AssertionFailedException;
+use Acme\CustomException;
+
+try {
+    Assertion::integer($value, "The pressure of gas is measured in integers.", "\InvalidArgumentException");
+    Assertion::notNull($value, "The pressure of gas should not be null.", "CustomException");
+} catch(\InvalidArgumentException $e) {
+    // do stuff
+} catch (CustomException $e) {
+    // do other stuff
+}
+```

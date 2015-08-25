@@ -22,68 +22,74 @@ use ReflectionClass;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * METHODSTART
- * @method \Assert\AssertionChain eq($value2, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain same($value2, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notEq($value2, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notSame($value2, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain integer($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain float($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain digit($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain integerish($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain boolean($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain scalar($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notEmpty($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain noContent($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notNull($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain string($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain regex($pattern, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain length($length, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain minLength($minLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain maxLength($maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain betweenLength($minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain contains($needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method \Assert\AssertionChain choice($choices, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain inArray($choices, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain numeric($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain isArray($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain keyExists($key, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notEmptyKey($key, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notBlank($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain isInstanceOf($className, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain notIsInstanceOf($className, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain subclassOf($className, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain range($minValue, $maxValue, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain min($minValue, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain max($maxValue, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain file($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain directory($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain readable($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain writeable($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain email($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain url($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain alnum($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain true($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain false($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain classExists($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain implementsInterface($interfaceName, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain isJsonString($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain uuid($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain count($count, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain choicesNotEmpty($choices, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain methodExists($object, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain isObject($message = null, $propertyPath = null)
- * @method \Assert\AssertionChain lessThan($limit, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain lessOrEqualThan($limit, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain greaterThan($limit, $message = null, $propertyPath = null)
- * @method \Assert\AssertionChain greaterOrEqualThan($limit, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain fail($exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain eq($value2, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain same($value2, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notEq($value2, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notSame($value2, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain integer($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain float($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain digit($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain integerish($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain boolean($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain scalar($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notEmpty($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain noContent($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notNull($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain string($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain regex($pattern, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain length($length, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain minLength($minLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain maxLength($maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain betweenLength($minLength, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain startsWith($needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain endsWith($needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain contains($needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain choice($choices, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain inArray($choices, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain numeric($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isArray($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isTraversable($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isArrayAccessible($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain keyExists($key, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain keyIsset($key, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notEmptyKey($key, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notBlank($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isInstanceOf($className, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain notIsInstanceOf($className, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain subclassOf($className, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain range($minValue, $maxValue, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain min($minValue, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain max($maxValue, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain file($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain directory($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain readable($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain writeable($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain email($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain url($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain alnum($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain true($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain false($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain classExists($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain implementsInterface($interfaceName, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isJsonString($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain uuid($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain count($count, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain choicesNotEmpty($choices, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain methodExists($object, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isObject($message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain lessThan($limit, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain lessOrEqualThan($limit, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain greaterThan($limit, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain greaterOrEqualThan($limit, $message = null, $exception = null, $propertyPath = null)
+ * @method \Assert\AssertionChain date($format, $message = null, $exception = null, $propertyPath = null)
  * METHODEND
  */
 class AssertionChain
 {
     private $value;
     private $defaultMessage;
+    private $defaultException;
     private $defaultPropertyPath;
 
     /**
@@ -100,17 +106,18 @@ class AssertionChain
      */
     private $all = false;
 
-    public function __construct($value, $defaultMessage = null, $defaultPropertyPath = null)
+    public function __construct($value, $defaultMessage = null, $defaultException = null, $defaultPropertyPath = null)
     {
         $this->value = $value;
         $this->defaultMessage = $defaultMessage;
+        $this->defaultException = $defaultException;
         $this->defaultPropertyPath = $defaultPropertyPath;
     }
 
     /**
      * Call assertion on the current value in the chain.
      *
-     * @param string $method
+     * @param string $methodName
      * @param array $args
      *
      * @return \Assert\AssertionChain
@@ -138,6 +145,10 @@ class AssertionChain
 
             if ($param->getName() == 'message') {
                 $args[$idx] = $this->defaultMessage;
+            }
+
+            if ($param->getName() == 'exception') {
+                $args[$idx] = $this->defaultException;
             }
 
             if ($param->getName() == 'propertyPath') {

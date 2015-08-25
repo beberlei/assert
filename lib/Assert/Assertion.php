@@ -21,122 +21,133 @@ use BadMethodCallException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * METHODSTART
- * @method static void nullOrEq($value, $value2, $message = null, $propertyPath = null)
- * @method static void nullOrSame($value, $value2, $message = null, $propertyPath = null)
- * @method static void nullOrNotEq($value1, $value2, $message = null, $propertyPath = null)
- * @method static void nullOrNotSame($value1, $value2, $message = null, $propertyPath = null)
- * @method static void nullOrInteger($value, $message = null, $propertyPath = null)
- * @method static void nullOrFloat($value, $message = null, $propertyPath = null)
- * @method static void nullOrDigit($value, $message = null, $propertyPath = null)
- * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null)
- * @method static void nullOrBoolean($value, $message = null, $propertyPath = null)
- * @method static void nullOrScalar($value, $message = null, $propertyPath = null)
- * @method static void nullOrNotEmpty($value, $message = null, $propertyPath = null)
- * @method static void nullOrNoContent($value, $message = null, $propertyPath = null)
- * @method static void nullOrNotNull($value, $message = null, $propertyPath = null)
- * @method static void nullOrString($value, $message = null, $propertyPath = null)
- * @method static void nullOrRegex($value, $pattern, $message = null, $propertyPath = null)
- * @method static void nullOrLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrMinLength($value, $minLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrMaxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrContains($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrChoice($value, $choices, $message = null, $propertyPath = null)
- * @method static void nullOrInArray($value, $choices, $message = null, $propertyPath = null)
- * @method static void nullOrNumeric($value, $message = null, $propertyPath = null)
- * @method static void nullOrIsArray($value, $message = null, $propertyPath = null)
- * @method static void nullOrIsTraversable($value, $message = null, $propertyPath = null)
- * @method static void nullOrIsArrayAccessible($value, $message = null, $propertyPath = null)
- * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null)
- * @method static void nullOrKeyIsset($value, $key, $message = null, $propertyPath = null)
- * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null)
- * @method static void nullOrNotBlank($value, $message = null, $propertyPath = null)
- * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null)
- * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
- * @method static void nullOrSubclassOf($value, $className, $message = null, $propertyPath = null)
- * @method static void nullOrRange($value, $minValue, $maxValue, $message = null, $propertyPath = null)
- * @method static void nullOrMin($value, $minValue, $message = null, $propertyPath = null)
- * @method static void nullOrMax($value, $maxValue, $message = null, $propertyPath = null)
- * @method static void nullOrFile($value, $message = null, $propertyPath = null)
- * @method static void nullOrDirectory($value, $message = null, $propertyPath = null)
- * @method static void nullOrReadable($value, $message = null, $propertyPath = null)
- * @method static void nullOrWriteable($value, $message = null, $propertyPath = null)
- * @method static void nullOrEmail($value, $message = null, $propertyPath = null)
- * @method static void nullOrUrl($value, $message = null, $propertyPath = null)
- * @method static void nullOrAlnum($value, $message = null, $propertyPath = null)
- * @method static void nullOrTrue($value, $message = null, $propertyPath = null)
- * @method static void nullOrFalse($value, $message = null, $propertyPath = null)
- * @method static void nullOrClassExists($value, $message = null, $propertyPath = null)
- * @method static void nullOrImplementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
- * @method static void nullOrIsJsonString($value, $message = null, $propertyPath = null)
- * @method static void nullOrUuid($value, $message = null, $propertyPath = null)
- * @method static void nullOrCount($countable, $count, $message = null, $propertyPath = null)
- * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
- * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
- * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
- * @method static void nullOrDate($value, $format, $message = null, $propertyPath = null)
- * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
- * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
- * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null)
- * @method static void allNotSame($value1, $value2, $message = null, $propertyPath = null)
- * @method static void allInteger($value, $message = null, $propertyPath = null)
- * @method static void allFloat($value, $message = null, $propertyPath = null)
- * @method static void allDigit($value, $message = null, $propertyPath = null)
- * @method static void allIntegerish($value, $message = null, $propertyPath = null)
- * @method static void allBoolean($value, $message = null, $propertyPath = null)
- * @method static void allScalar($value, $message = null, $propertyPath = null)
- * @method static void allNotEmpty($value, $message = null, $propertyPath = null)
- * @method static void allNoContent($value, $message = null, $propertyPath = null)
- * @method static void allNotNull($value, $message = null, $propertyPath = null)
- * @method static void allString($value, $message = null, $propertyPath = null)
- * @method static void allRegex($value, $pattern, $message = null, $propertyPath = null)
- * @method static void allLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allMinLength($value, $minLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allMaxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allContains($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allChoice($value, $choices, $message = null, $propertyPath = null)
- * @method static void allInArray($value, $choices, $message = null, $propertyPath = null)
- * @method static void allNumeric($value, $message = null, $propertyPath = null)
- * @method static void allIsArray($value, $message = null, $propertyPath = null)
- * @method static void allIsTraversable($value, $message = null, $propertyPath = null)
- * @method static void allIsArrayAccessible($value, $message = null, $propertyPath = null)
- * @method static void allKeyExists($value, $key, $message = null, $propertyPath = null)
- * @method static void allKeyIsset($value, $key, $message = null, $propertyPath = null)
- * @method static void allNotEmptyKey($value, $key, $message = null, $propertyPath = null)
- * @method static void allNotBlank($value, $message = null, $propertyPath = null)
- * @method static void allIsInstanceOf($value, $className, $message = null, $propertyPath = null)
- * @method static void allNotIsInstanceOf($value, $className, $message = null, $propertyPath = null)
- * @method static void allSubclassOf($value, $className, $message = null, $propertyPath = null)
- * @method static void allRange($value, $minValue, $maxValue, $message = null, $propertyPath = null)
- * @method static void allMin($value, $minValue, $message = null, $propertyPath = null)
- * @method static void allMax($value, $maxValue, $message = null, $propertyPath = null)
- * @method static void allFile($value, $message = null, $propertyPath = null)
- * @method static void allDirectory($value, $message = null, $propertyPath = null)
- * @method static void allReadable($value, $message = null, $propertyPath = null)
- * @method static void allWriteable($value, $message = null, $propertyPath = null)
- * @method static void allEmail($value, $message = null, $propertyPath = null)
- * @method static void allUrl($value, $message = null, $propertyPath = null)
- * @method static void allAlnum($value, $message = null, $propertyPath = null)
- * @method static void allTrue($value, $message = null, $propertyPath = null)
- * @method static void allFalse($value, $message = null, $propertyPath = null)
- * @method static void allClassExists($value, $message = null, $propertyPath = null)
- * @method static void allImplementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
- * @method static void allIsJsonString($value, $message = null, $propertyPath = null)
- * @method static void allUuid($value, $message = null, $propertyPath = null)
- * @method static void allCount($countable, $count, $message = null, $propertyPath = null)
- * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
- * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
- * @method static void allIsObject($value, $message = null, $propertyPath = null)
- * @method static void allDate($value, $format, $message = null, $propertyPath = null)
+ * @method static void nullOrFail($message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrEq($value, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrSame($value, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotEq($value1, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotSame($value1, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrInteger($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrFloat($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrDigit($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIntegerish($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrBoolean($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrScalar($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotEmpty($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNoContent($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotNull($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrString($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrRegex($value, $pattern, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrLength($value, $length, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrMinLength($value, $minLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrMaxLength($value, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrBetweenLength($value, $minLength, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrStartsWith($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrEndsWith($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrContains($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrChoice($value, $choices, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrInArray($value, $choices, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNumeric($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIsArray($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIsTraversable($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIsArrayAccessible($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrKeyExists($value, $key, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrKeyIsset($value, $key, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotEmptyKey($value, $key, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotBlank($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIsInstanceOf($value, $className, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrSubclassOf($value, $className, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrRange($value, $minValue, $maxValue, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrMin($value, $minValue, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrMax($value, $maxValue, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrFile($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrDirectory($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrReadable($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrWriteable($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrEmail($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrUrl($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrAlnum($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrTrue($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrFalse($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrClassExists($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrImplementsInterface($class, $interfaceName, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIsJsonString($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrUuid($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrCount($countable, $count, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrMethodExists($value, $object, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrIsObject($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrLessThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrLessOrEqualThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrGreaterThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrGreaterOrEqualThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void nullOrDate($value, $format, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allFail($message = null, $exception = null, $propertyPath = null)
+ * @method static void allEq($value, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allSame($value, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotEq($value1, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotSame($value1, $value2, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allInteger($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allFloat($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allDigit($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIntegerish($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allBoolean($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allScalar($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotEmpty($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNoContent($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotNull($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allString($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allRegex($value, $pattern, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allLength($value, $length, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allMinLength($value, $minLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allMaxLength($value, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allBetweenLength($value, $minLength, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allStartsWith($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allEndsWith($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allContains($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allChoice($value, $choices, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allInArray($value, $choices, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNumeric($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIsArray($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIsTraversable($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIsArrayAccessible($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allKeyExists($value, $key, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allKeyIsset($value, $key, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotEmptyKey($value, $key, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotBlank($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIsInstanceOf($value, $className, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allNotIsInstanceOf($value, $className, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allSubclassOf($value, $className, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allRange($value, $minValue, $maxValue, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allMin($value, $minValue, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allMax($value, $maxValue, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allFile($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allDirectory($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allReadable($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allWriteable($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allEmail($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allUrl($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allAlnum($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allTrue($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allFalse($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allClassExists($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allImplementsInterface($class, $interfaceName, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIsJsonString($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allUuid($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allCount($countable, $count, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allChoicesNotEmpty($values, $choices, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allMethodExists($value, $object, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allIsObject($value, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allLessThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allLessOrEqualThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allGreaterThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allGreaterOrEqualThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
+ * @method static void allDate($value, $format, $message = null, $exception = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
 {
+    const INVALID                   = 0;
     const INVALID_FLOAT             = 9;
     const INVALID_INTEGER           = 10;
     const INVALID_DIGIT             = 11;
@@ -206,10 +217,21 @@ class Assertion
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
      */
-    protected static function createException($value, $message, $code, $propertyPath, array $constraints = array())
+    protected static function createException($value, $message, $exception, $code, $propertyPath, array $constraints = array())
     {
-        $exceptionClass = static::$exceptionClass;
-        return new $exceptionClass($message, $code, $propertyPath, $value, $constraints);
+        $exception = $exception ?: static::$exceptionClass;
+
+        $class = new \ReflectionClass($exception);
+        if ($class->implementsInterface('Assert\AssertionFailedException')) {
+            return new $exception($message, $code, $propertyPath, $value, $constraints);
+        }
+
+        return new $exception($message, $code);
+    }
+
+    public static function fail($message = null, $exception = null, $propertyPath = null)
+    {
+        throw static::createException(null, $message, $exception, static::INVALID, $propertyPath);
     }
 
     /**
@@ -222,7 +244,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function eq($value, $value2, $message = null, $propertyPath = null)
+    public static function eq($value, $value2, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value != $value2) {
             $message = sprintf(
@@ -231,7 +253,7 @@ class Assertion
                 self::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath, array('expected' => $value2));
+            throw static::createException($value, $message, $exception, static::INVALID_EQ, $propertyPath, array('expected' => $value2));
         }
     }
 
@@ -245,7 +267,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function same($value, $value2, $message = null, $propertyPath = null)
+    public static function same($value, $value2, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value !== $value2) {
             $message = sprintf(
@@ -254,7 +276,7 @@ class Assertion
                 self::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath, array('expected' => $value2));
+            throw static::createException($value, $message, $exception, static::INVALID_SAME, $propertyPath, array('expected' => $value2));
         }
     }
 
@@ -268,7 +290,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notEq($value1, $value2, $message = null, $propertyPath = null)
+    public static function notEq($value1, $value2, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value1 == $value2) {
             $message = sprintf(
@@ -276,7 +298,7 @@ class Assertion
                 self::stringify($value1),
                 self::stringify($value2)
             );
-            throw static::createException($value1, $message,static::INVALID_NOT_EQ, $propertyPath, array('expected' => $value2));
+            throw static::createException($value1, $message, $exception, static::INVALID_NOT_EQ, $propertyPath, array('expected' => $value2));
         }
     }
 
@@ -290,7 +312,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notSame($value1, $value2, $message = null, $propertyPath = null)
+    public static function notSame($value1, $value2, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value1 === $value2) {
             $message = sprintf(
@@ -298,7 +320,7 @@ class Assertion
                 self::stringify($value1),
                 self::stringify($value2)
             );
-            throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath, array('expected' => $value2));
+            throw static::createException($value1, $message, $exception, static::INVALID_NOT_SAME, $propertyPath, array('expected' => $value2));
         }
     }
 
@@ -311,7 +333,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function integer($value, $message = null, $propertyPath = null)
+    public static function integer($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_int($value)) {
             $message = sprintf(
@@ -319,7 +341,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_INTEGER, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_INTEGER, $propertyPath);
         }
     }
 
@@ -332,7 +354,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function float($value, $message = null, $propertyPath = null)
+    public static function float($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_float($value)) {
             $message = sprintf(
@@ -340,7 +362,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_FLOAT, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_FLOAT, $propertyPath);
         }
     }
 
@@ -353,7 +375,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function digit($value, $message = null, $propertyPath = null)
+    public static function digit($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! ctype_digit((string)$value)) {
             $message = sprintf(
@@ -361,7 +383,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_DIGIT, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_DIGIT, $propertyPath);
         }
     }
 
@@ -373,7 +395,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function integerish($value, $message = null, $propertyPath = null)
+    public static function integerish($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (is_object($value) || strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
             $message = sprintf(
@@ -381,7 +403,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_INTEGERISH, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_INTEGERISH, $propertyPath);
         }
     }
 
@@ -394,7 +416,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function boolean($value, $message = null, $propertyPath = null)
+    public static function boolean($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_bool($value)) {
             $message = sprintf(
@@ -402,7 +424,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_BOOLEAN, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_BOOLEAN, $propertyPath);
         }
     }
 
@@ -415,7 +437,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function scalar($value, $message = null, $propertyPath = null)
+    public static function scalar($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (!is_scalar($value)) {
             $message = sprintf(
@@ -423,7 +445,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_SCALAR, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_SCALAR, $propertyPath);
         }
     }
 
@@ -436,7 +458,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notEmpty($value, $message = null, $propertyPath = null)
+    public static function notEmpty($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (empty($value)) {
             $message = sprintf(
@@ -444,7 +466,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_EMPTY, $propertyPath);
+            throw static::createException($value, $message, $exception, static::VALUE_EMPTY, $propertyPath);
         }
     }
 
@@ -457,7 +479,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function noContent($value, $message = null, $propertyPath = null)
+    public static function noContent($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (!empty($value)) {
             $message = sprintf(
@@ -465,7 +487,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_NOT_EMPTY, $propertyPath);
+            throw static::createException($value, $message, $exception, static::VALUE_NOT_EMPTY, $propertyPath);
         }
     }
 
@@ -478,7 +500,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notNull($value, $message = null, $propertyPath = null)
+    public static function notNull($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value === null) {
             $message = sprintf(
@@ -486,7 +508,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_NULL, $propertyPath);
+            throw static::createException($value, $message, $exception, static::VALUE_NULL, $propertyPath);
         }
     }
 
@@ -499,7 +521,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function string($value, $message = null, $propertyPath = null)
+    public static function string($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_string($value)) {
             $message = sprintf(
@@ -508,7 +530,7 @@ class Assertion
                 gettype($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_STRING, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_STRING, $propertyPath);
         }
     }
 
@@ -522,7 +544,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function regex($value, $pattern, $message = null, $propertyPath = null)
+    public static function regex($value, $pattern, $message = null, $exception = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
 
@@ -532,7 +554,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_REGEX , $propertyPath, array('pattern' => $pattern));
+            throw static::createException($value, $message, $exception, static::INVALID_REGEX , $propertyPath, array('pattern' => $pattern));
         }
     }
 
@@ -547,9 +569,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function length($value, $length, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function length($value, $length, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if (mb_strlen($value, $encoding) !== $length) {
             $message = sprintf(
@@ -560,7 +582,7 @@ class Assertion
             );
 
             $constraints = array('length' => $length, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, $exception, static::INVALID_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -575,9 +597,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function minLength($value, $minLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function minLength($value, $minLength, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if (mb_strlen($value, $encoding) < $minLength) {
             $message = sprintf(
@@ -588,7 +610,7 @@ class Assertion
             );
 
             $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, $exception, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -603,9 +625,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function maxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function maxLength($value, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if (mb_strlen($value, $encoding) > $maxLength) {
             $message = sprintf(
@@ -616,7 +638,7 @@ class Assertion
             );
 
             $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, $exception, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -632,9 +654,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function betweenLength($value, $minLength, $maxLength, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if (mb_strlen($value, $encoding) < $minLength) {
             $message = sprintf(
@@ -645,7 +667,7 @@ class Assertion
             );
 
             $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, $exception, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
 
         if (mb_strlen($value, $encoding) > $maxLength) {
@@ -657,7 +679,7 @@ class Assertion
             );
 
             $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, $exception, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
     }
 
@@ -672,9 +694,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function startsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function startsWith($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($string, $message, $propertyPath);
+        static::string($string, $message, $exception, $propertyPath);
 
         if (mb_strpos($string, $needle, null, $encoding) !== 0) {
             $message = sprintf(
@@ -684,7 +706,7 @@ class Assertion
             );
 
             $constraints = array('needle' => $needle, 'encoding' => $encoding);
-            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, $constraints);
+            throw static::createException($string, $message, $exception, static::INVALID_STRING_START, $propertyPath, $constraints);
         }
     }
 
@@ -699,9 +721,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function endsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function endsWith($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($string, $message, $propertyPath);
+        static::string($string, $message, $exception, $propertyPath);
 
         $stringPosition = mb_strlen($string, $encoding) - mb_strlen($needle, $encoding);
 
@@ -713,7 +735,7 @@ class Assertion
             );
 
             $constraints = array('needle' => $needle, 'encoding' => $encoding);
-            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, $constraints);
+            throw static::createException($string, $message, $exception, static::INVALID_STRING_END, $propertyPath, $constraints);
         }
     }
 
@@ -728,9 +750,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function contains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function contains($string, $needle, $message = null, $exception = null, $propertyPath = null, $encoding = 'utf8')
     {
-        static::string($string, $message, $propertyPath);
+        static::string($string, $message, $exception, $propertyPath);
 
         if (mb_strpos($string, $needle, null, $encoding) === false) {
             $message = sprintf(
@@ -740,7 +762,7 @@ class Assertion
             );
 
             $constraints = array('needle' => $needle, 'encoding' => $encoding);
-            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, $constraints);
+            throw static::createException($string, $message, $exception, static::INVALID_STRING_CONTAINS, $propertyPath, $constraints);
         }
     }
 
@@ -754,7 +776,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function choice($value, array $choices, $message = null, $propertyPath = null)
+    public static function choice($value, array $choices, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! in_array($value, $choices, true)) {
             $message = sprintf(
@@ -763,7 +785,7 @@ class Assertion
                 implode(", ", array_map('Assert\Assertion::stringify', $choices))
             );
 
-            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
+            throw static::createException($value, $message, $exception, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
         }
     }
 
@@ -772,9 +794,9 @@ class Assertion
      *
      * @throws \Assert\AssertionFailedException
      */
-    public static function inArray($value, array $choices, $message = null, $propertyPath = null)
+    public static function inArray($value, array $choices, $message = null, $exception = null, $propertyPath = null)
     {
-        static::choice($value, $choices, $message, $propertyPath);
+        static::choice($value, $choices, $message, $exception, $propertyPath);
     }
 
     /**
@@ -786,7 +808,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function numeric($value, $message = null, $propertyPath = null)
+    public static function numeric($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_numeric($value)) {
             $message = sprintf(
@@ -794,7 +816,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_NUMERIC, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_NUMERIC, $propertyPath);
         }
     }
 
@@ -807,7 +829,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function isArray($value, $message = null, $propertyPath = null)
+    public static function isArray($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_array($value)) {
             $message = sprintf(
@@ -815,7 +837,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_ARRAY, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_ARRAY, $propertyPath);
         }
     }
 
@@ -828,7 +850,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function isTraversable($value, $message = null, $propertyPath = null)
+    public static function isTraversable($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_array($value) && ! $value instanceof \Traversable) {
             $message = sprintf(
@@ -836,7 +858,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_TRAVERSABLE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_TRAVERSABLE, $propertyPath);
         }
     }
 
@@ -849,7 +871,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function isArrayAccessible($value, $message = null, $propertyPath = null)
+    public static function isArrayAccessible($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_array($value) && ! $value instanceof \ArrayAccess) {
             $message = sprintf(
@@ -857,7 +879,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_ARRAY_ACCESSIBLE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_ARRAY_ACCESSIBLE, $propertyPath);
         }
     }
 
@@ -871,9 +893,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function keyExists($value, $key, $message = null, $propertyPath = null)
+    public static function keyExists($value, $key, $message = null, $exception = null, $propertyPath = null)
     {
-        static::isArray($value, $message, $propertyPath);
+        static::isArray($value, $message, $exception, $propertyPath);
 
         if ( ! array_key_exists($key, $value)) {
             $message = sprintf(
@@ -881,7 +903,7 @@ class Assertion
                 self::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
+            throw static::createException($value, $message, $exception, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
         }
     }
 
@@ -895,9 +917,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function keyIsset($value, $key, $message = null, $propertyPath = null)
+    public static function keyIsset($value, $key, $message = null, $exception = null, $propertyPath = null)
     {
-        static::isArrayAccessible($value, $message, $propertyPath);
+        static::isArrayAccessible($value, $message, $exception, $propertyPath);
 
         if ( ! isset($value[$key])) {
             $message = sprintf(
@@ -905,7 +927,7 @@ class Assertion
                 self::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_ISSET, $propertyPath, array('key' => $key));
+            throw static::createException($value, $message, $exception, static::INVALID_KEY_ISSET, $propertyPath, array('key' => $key));
         }
     }
 
@@ -919,10 +941,10 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notEmptyKey($value, $key, $message = null, $propertyPath = null)
+    public static function notEmptyKey($value, $key, $message = null, $exception = null, $propertyPath = null)
     {
-        static::keyIsset($value, $key, $message, $propertyPath);
-        static::notEmpty($value[$key], $message, $propertyPath);
+        static::keyIsset($value, $key, $message, $exception, $propertyPath);
+        static::notEmpty($value[$key], $message, $exception, $propertyPath);
     }
 
     /**
@@ -934,7 +956,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notBlank($value, $message = null, $propertyPath = null)
+    public static function notBlank($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (false === $value || (empty($value) && '0' != $value) || (is_string($value) && '' === trim($value))) {
             $message = sprintf(
@@ -942,7 +964,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_NOT_BLANK, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_NOT_BLANK, $propertyPath);
         }
     }
 
@@ -956,7 +978,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function isInstanceOf($value, $className, $message = null, $propertyPath = null)
+    public static function isInstanceOf($value, $className, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! ($value instanceof $className)) {
             $message = sprintf(
@@ -965,7 +987,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath, array('class' => $className));
+            throw static::createException($value, $message, $exception, static::INVALID_INSTANCE_OF, $propertyPath, array('class' => $className));
         }
     }
 
@@ -979,7 +1001,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
+    public static function notIsInstanceOf($value, $className, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value instanceof $className) {
             $message = sprintf(
@@ -988,7 +1010,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath, array('class' => $className));
+            throw static::createException($value, $message, $exception, static::INVALID_NOT_INSTANCE_OF, $propertyPath, array('class' => $className));
         }
     }
 
@@ -1002,7 +1024,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function subclassOf($value, $className, $message = null, $propertyPath = null)
+    public static function subclassOf($value, $className, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! is_subclass_of($value, $className)) {
             $message = sprintf(
@@ -1011,7 +1033,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath, array('class' => $className));
+            throw static::createException($value, $message, $exception, static::INVALID_SUBCLASS_OF, $propertyPath, array('class' => $className));
         }
     }
 
@@ -1026,9 +1048,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function range($value, $minValue, $maxValue, $message = null, $propertyPath = null)
+    public static function range($value, $minValue, $maxValue, $message = null, $exception = null, $propertyPath = null)
     {
-        static::numeric($value, $message, $propertyPath);
+        static::numeric($value, $message, $exception, $propertyPath);
 
         if ($value < $minValue || $value > $maxValue) {
             $message = sprintf(
@@ -1038,7 +1060,7 @@ class Assertion
                 self::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath, array('min' => $minValue, 'max' => $maxValue));
+            throw static::createException($value, $message, $exception, static::INVALID_RANGE, $propertyPath, array('min' => $minValue, 'max' => $maxValue));
         }
     }
 
@@ -1052,9 +1074,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function min($value, $minValue, $message = null, $propertyPath = null)
+    public static function min($value, $minValue, $message = null, $exception = null, $propertyPath = null)
     {
-        static::numeric($value, $message, $propertyPath);
+        static::numeric($value, $message, $exception, $propertyPath);
 
         if ($value < $minValue) {
             $message = sprintf(
@@ -1063,7 +1085,7 @@ class Assertion
                 self::stringify($minValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath, array('min' => $minValue));
+            throw static::createException($value, $message, $exception, static::INVALID_MIN, $propertyPath, array('min' => $minValue));
         }
     }
 
@@ -1077,9 +1099,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function max($value, $maxValue, $message = null, $propertyPath = null)
+    public static function max($value, $maxValue, $message = null, $exception = null, $propertyPath = null)
     {
-        static::numeric($value, $message, $propertyPath);
+        static::numeric($value, $message, $exception, $propertyPath);
 
         if ($value > $maxValue) {
             $message = sprintf(
@@ -1088,7 +1110,7 @@ class Assertion
                 self::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath, array('max' => $maxValue));
+            throw static::createException($value, $message, $exception, static::INVALID_MAX, $propertyPath, array('max' => $maxValue));
         }
     }
 
@@ -1101,10 +1123,10 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function file($value, $message = null, $propertyPath = null)
+    public static function file($value, $message = null, $exception = null, $propertyPath = null)
     {
-        static::string($value, $message, $propertyPath);
-        static::notEmpty($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
+        static::notEmpty($value, $message, $exception, $propertyPath);
 
         if ( ! is_file($value)) {
             $message = sprintf(
@@ -1112,7 +1134,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_FILE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_FILE, $propertyPath);
         }
     }
 
@@ -1125,9 +1147,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function directory($value, $message = null, $propertyPath = null)
+    public static function directory($value, $message = null, $exception = null, $propertyPath = null)
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if ( ! is_dir($value)) {
             $message = sprintf(
@@ -1135,7 +1157,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_DIRECTORY, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_DIRECTORY, $propertyPath);
         }
     }
 
@@ -1148,9 +1170,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function readable($value, $message = null, $propertyPath = null)
+    public static function readable($value, $message = null, $exception = null, $propertyPath = null)
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if ( ! is_readable($value)) {
             $message = sprintf(
@@ -1158,7 +1180,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_READABLE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_READABLE, $propertyPath);
         }
     }
 
@@ -1171,9 +1193,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function writeable($value, $message = null, $propertyPath = null)
+    public static function writeable($value, $message = null, $exception = null, $propertyPath = null)
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if ( ! is_writeable($value)) {
             $message = sprintf(
@@ -1181,7 +1203,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_WRITEABLE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_WRITEABLE, $propertyPath);
         }
     }
 
@@ -1195,9 +1217,9 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function email($value, $message = null, $propertyPath = null)
+    public static function email($value, $message = null, $exception = null, $propertyPath = null)
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $message = sprintf(
@@ -1205,7 +1227,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_EMAIL, $propertyPath);
         } else {
             $host = substr($value, strpos($value, '@') + 1);
 
@@ -1216,7 +1238,7 @@ class Assertion
                     self::stringify($value)
                 );
 
-                throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
+                throw static::createException($value, $message, $exception, static::INVALID_EMAIL, $propertyPath);
             }
         }
     }
@@ -1236,9 +1258,9 @@ class Assertion
      * @link https://github.com/symfony/Validator/blob/master/Constraints/UrlValidator.php
      * @link https://github.com/symfony/Validator/blob/master/Constraints/Url.php
      */
-    public static function url($value, $message = null, $propertyPath = null)
+    public static function url($value, $message = null, $exception = null, $propertyPath = null)
     {
-        static::string($value, $message, $propertyPath);
+        static::string($value, $message, $exception, $propertyPath);
 
         $protocols = array('http', 'https');
 
@@ -1265,7 +1287,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_URL, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_URL, $propertyPath);
         }
 
     }
@@ -1279,17 +1301,17 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function alnum($value, $message = null, $propertyPath = null)
+    public static function alnum($value, $message = null, $exception = null, $propertyPath = null)
     {
         try {
-            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
+            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $exception, $propertyPath);
         } catch(AssertionFailedException $e) {
             $message = sprintf(
                 $message ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.',
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_ALNUM, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_ALNUM, $propertyPath);
         }
     }
 
@@ -1302,7 +1324,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function true($value, $message = null, $propertyPath = null)
+    public static function true($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value !== true) {
             $message = sprintf(
@@ -1310,7 +1332,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_TRUE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_TRUE, $propertyPath);
         }
     }
 
@@ -1323,7 +1345,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function false($value, $message = null, $propertyPath = null)
+    public static function false($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value !== false) {
             $message = sprintf(
@@ -1331,7 +1353,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_FALSE, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_FALSE, $propertyPath);
         }
     }
 
@@ -1344,7 +1366,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function classExists($value, $message = null, $propertyPath = null)
+    public static function classExists($value, $message = null, $exception = null, $propertyPath = null)
     {
         if ( ! class_exists($value)) {
             $message = sprintf(
@@ -1352,7 +1374,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_CLASS, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_CLASS, $propertyPath);
         }
     }
 
@@ -1366,7 +1388,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function implementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
+    public static function implementsInterface($class, $interfaceName, $message = null, $exception = null, $propertyPath = null)
     {
         $reflection = new \ReflectionClass($class);
         if ( ! $reflection->implementsInterface($interfaceName)) {
@@ -1376,7 +1398,7 @@ class Assertion
                 self::stringify($interfaceName)
             );
 
-            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath, array('interface' => $interfaceName));
+            throw static::createException($class, $message, $exception, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath, array('interface' => $interfaceName));
         }
     }
 
@@ -1395,7 +1417,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function isJsonString($value, $message = null, $propertyPath = null)
+    public static function isJsonString($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
             $message = sprintf(
@@ -1403,7 +1425,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_JSON_STRING, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_JSON_STRING, $propertyPath);
         }
     }
 
@@ -1418,7 +1440,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function uuid($value, $message = null, $propertyPath = null)
+    public static function uuid($value, $message = null, $exception = null, $propertyPath = null)
     {
         $value = str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
 
@@ -1432,7 +1454,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_UUID, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_UUID, $propertyPath);
         }
     }
 
@@ -1446,7 +1468,7 @@ class Assertion
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function count($countable, $count, $message = null, $propertyPath = null)
+    public static function count($countable, $count, $message = null, $exception = null, $propertyPath = null)
     {
         if ($count !== count($countable)) {
             $message = sprintf(
@@ -1454,7 +1476,7 @@ class Assertion
                 self::stringify($count)
             );
 
-            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, array('count' => $count));
+            throw static::createException($countable, $message, $exception, static::INVALID_COUNT, $propertyPath, array('count' => $count));
         }
     }
 
@@ -1508,13 +1530,13 @@ class Assertion
      * @param null  $message
      * @param null  $propertyPath
      */
-    public static function choicesNotEmpty(array $values, array $choices, $message = null, $propertyPath = null)
+    public static function choicesNotEmpty(array $values, array $choices, $message = null, $exception = null, $propertyPath = null)
     {
-        self::notEmpty($values, $message, $propertyPath);
+        self::notEmpty($values, $message, $exception, $propertyPath);
 
         foreach ($choices as $choice) {
 
-            self::notEmptyKey($values, $choice, $message, $propertyPath);
+            self::notEmptyKey($values, $choice, $message, $exception, $propertyPath);
         }
     }
 
@@ -1528,9 +1550,9 @@ class Assertion
      *
      * @throws
      */
-    public static function methodExists($value, $object, $message = null, $propertyPath = null)
+    public static function methodExists($value, $object, $message = null, $exception = null, $propertyPath = null)
     {
-        self::isObject($object, $message, $propertyPath);
+        self::isObject($object, $message, $exception, $propertyPath);
 
         if (!method_exists($object, $value)) {
             $message = sprintf(
@@ -1538,7 +1560,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_METHOD, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_METHOD, $propertyPath);
         }
     }
 
@@ -1549,7 +1571,7 @@ class Assertion
      * @param null  $message
      * @param null  $propertyPath
      */
-    public static function isObject($value, $message = null, $propertyPath = null)
+    public static function isObject($value, $message = null, $exception = null, $propertyPath = null)
     {
         if (!is_object($value)) {
             $message = sprintf(
@@ -1557,7 +1579,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_OBJECT, $propertyPath);
 
         }
     }
@@ -1570,7 +1592,7 @@ class Assertion
      * @param null  $message
      * @param null  $propertyPath
      */
-    public static function lessThan($value, $limit, $message = null, $propertyPath = null)
+    public static function lessThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value >= $limit) {
             $message = sprintf(
@@ -1579,7 +1601,7 @@ class Assertion
                 self::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_LESS, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_LESS, $propertyPath);
         }
     }
 
@@ -1591,7 +1613,7 @@ class Assertion
      * @param null  $message
      * @param null  $propertyPath
      */
-    public static function lessOrEqualThan($value, $limit, $message = null, $propertyPath = null)
+    public static function lessOrEqualThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value > $limit) {
             $message = sprintf(
@@ -1600,7 +1622,7 @@ class Assertion
                 self::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_LESS_OR_EQUAL, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_LESS_OR_EQUAL, $propertyPath);
         }
     }
 
@@ -1612,7 +1634,7 @@ class Assertion
      * @param null  $message
      * @param null  $propertyPath
      */
-    public static function greaterThan($value, $limit, $message = null, $propertyPath = null)
+    public static function greaterThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value <= $limit) {
             $message = sprintf(
@@ -1621,7 +1643,7 @@ class Assertion
                 self::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_GREATER, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_GREATER, $propertyPath);
         }
     }
 
@@ -1633,7 +1655,7 @@ class Assertion
      * @param null  $message
      * @param null  $propertyPath
      */
-    public static function greaterOrEqualThan($value, $limit, $message = null, $propertyPath = null)
+    public static function greaterOrEqualThan($value, $limit, $message = null, $exception = null, $propertyPath = null)
     {
         if ($value < $limit) {
             $message = sprintf(
@@ -1642,7 +1664,7 @@ class Assertion
                 self::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath);
+            throw static::createException($value, $message, $exception, static::INVALID_GREATER_OR_EQUAL, $propertyPath);
         }
     }
 
@@ -1657,10 +1679,10 @@ class Assertion
      *
      * @link http://php.net/manual/function.date.php#refsect1-function.date-parameters
      */
-     public static function date($value, $format, $message = null, $propertyPath = null)
+     public static function date($value, $format, $message = null, $exception = null, $propertyPath = null)
      {
-         static::string($value, $message, $propertyPath);
-         static::string($format, $message, $propertyPath);
+         static::string($value, $message, $exception, $propertyPath);
+         static::string($format, $message, $exception, $propertyPath);
 
          $dateTime = \DateTime::createFromFormat($format, $value);
 
@@ -1671,7 +1693,7 @@ class Assertion
                  self::stringify($format)
              );
 
-             throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
+             throw static::createException($value, $message, $exception, static::INVALID_DATE, $propertyPath, array('format' => $format));
          }
      }
 

@@ -13,6 +13,8 @@
 
 namespace Assert\Tests;
 
+use Assert\Assertion;
+
 class AssertionChainTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -71,5 +73,26 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
     public function it_has_nullor_shortcut()
     {
         \Assert\ThatNullOr(null)->integer()->eq(10);
+    }
+
+    public static function dataCustomException()
+    {
+        return array(
+            array('\Exception', 'exception', Assertion::INVALID),
+            array('\InvalidArgumentException', 'exception', Assertion::INVALID),
+            array('Assert\InvalidArgumentException', 'exception', Assertion::INVALID),
+        );
+    }
+
+    /**
+     * @dataProvider dataCustomException
+     *
+     * @test
+     */
+    public function it_can_throw_custom_exception($exception, $message, $code)
+    {
+        $this->setExpectedException($exception, $message, $code);
+
+        \Assert\that($message, $exception)->fail();
     }
 }
