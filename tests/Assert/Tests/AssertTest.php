@@ -3,9 +3,35 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use Assert\InvalidArgumentException;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
+    public static function dataCustomException()
+    {
+        return array(
+            array('\Exception', 'exception', Assertion::INVALID),
+            array('\InvalidArgumentException', 'exception', Assertion::INVALID),
+            array('Assert\InvalidArgumentException', 'exception', Assertion::INVALID),
+            array('Assert\Tests\CustomException', 'exception', Assertion::INVALID),
+        );
+    }
+
+    /**
+     * @dataProvider dataCustomException
+     */
+    public function testCustomException($exception, $message, $code)
+    {
+        $this->setExpectedException($exception, $message, $code);
+        Assertion::fail($message, $exception);
+    }
+
+    public function testAssertFail()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID);
+        Assertion::fail();
+    }
+
     public static function dataInvalidFloat()
     {
         return array(
@@ -684,12 +710,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testLengthFailedForWrongEncoding()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
-        Assertion::length("址", 1, null, null, 'ASCII');
+        Assertion::length("址", 1, null, null, null, 'ASCII');
     }
 
     public function testLengthValidForGivenEncoding()
     {
-        Assertion::length("址", 1, null, null, 'utf8');
+        Assertion::length("址", 1, null, null, null, 'utf8');
     }
 
     public function testFile()
@@ -889,7 +915,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', 'Assertion failed', Assertion::INVALID_INSTANCE_OF);
 
-        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', 'foos');
+        Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO', 'Assertion failed', null, 'foos');
     }
 
     public function testAllWithNoValueThrows()
@@ -1148,4 +1174,9 @@ class OneCountable implements \Countable
     {
         return 1;
     }
+}
+
+class CustomException extends InvalidArgumentException
+{
+
 }

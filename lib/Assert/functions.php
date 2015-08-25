@@ -27,15 +27,16 @@ namespace Assert;
  * The assertion chain can be stateful, that means be careful when you reuse
  * it. You should never pass around the chain.
  *
- * @param mixed $value
+ * @param mixed  $value
  * @param string $defaultMessage
+ * @param string $defaultException
  * @param string $defaultPropertyPath
  *
  * @return \Assert\AssertionChain
  */
-function that($value, $defaultMessage = null, $defaultPropertyPath = null)
+function that($value, $defaultMessage = null, $defaultException = null, $defaultPropertyPath = null)
 {
-    return new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
+    return new AssertionChain($value, $defaultMessage, $defaultException, $defaultPropertyPath);
 }
 
 /**
@@ -43,9 +44,9 @@ function that($value, $defaultMessage = null, $defaultPropertyPath = null)
  *
  * @return \Assert\AssertionChain
  */
-function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
+function thatAll($values, $defaultMessage = null, $defaultException = null, $defaultPropertyPath = null)
 {
-    return that($values, $defaultMessage, $defaultPropertyPath)->all();
+    return that($values, $defaultMessage, $defaultException, $defaultPropertyPath)->all();
 }
 
 /**
@@ -53,9 +54,9 @@ function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
  *
  * @return \Assert\AssertionChain
  */
-function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
+function thatNullOr($value, $defaultMessage = null, $defaultException = null, $defaultPropertyPath = null)
 {
-    return that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
+    return that($value, $defaultMessage, $defaultException, $defaultPropertyPath)->nullOr();
 }
 
 /**
