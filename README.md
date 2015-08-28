@@ -1,6 +1,6 @@
 # Assert
 
-Travis Status: [![Build Status](https://secure.travis-ci.org/beberlei/assert.png?branch=master)](http://travis-ci.org/beberlei/assert)
+Travis Status: [![Build Status](https://travis-ci.org/beberlei/assert.svg?branch=master)](https://travis-ci.org/beberlei/assert)
 
 A simple php library which contains assertions and guard methods for input validation (not filtering!) in business-model, libraries and application low-level code.
 The library can be used to implement pre-/post-conditions on input data.
