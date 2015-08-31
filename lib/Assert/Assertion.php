@@ -193,6 +193,7 @@ class Assertion
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
     const INVALID_DATE              = 213;
+    const INVALID_NOT_COUNTABLE     = 214;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1437,24 +1438,92 @@ class Assertion
     }
 
     /**
-     * Assert that the count of countable is equal to count.
+     * Assert that the value is countable.
      *
-     * @param array|\Countable $countable
-     * @param int              $count
+     * @param mixed            $value
      * @param string           $message
      * @param string           $propertyPath
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function count($countable, $count, $message = null, $propertyPath = null)
+    public static function countable($value, $message = null, $propertyPath = null)
     {
-        if ($count !== count($countable)) {
+        if (!$value instanceof \Countable && !is_array($value)) {
+            $message = 'Provided value is not countable';
+            throw static::createException($value, $message, static::INVALID_NOT_COUNTABLE, $propertyPath);
+        }
+
+    }
+
+    /**
+     * Assert that the value is countable and his size matches the given integer.
+     *
+     * @param mixed            $value
+     * @param int              $size expected countable size
+     * @param string           $message
+     * @param string           $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function count($value, $size, $message = null, $propertyPath = null)
+    {
+        static::countable($value,$message,$propertyPath);
+
+        if ($size !== count($value)) {
             $message = sprintf(
                 $message ?: 'List does not contain exactly "%d" elements.',
-                self::stringify($count)
+                self::stringify($size)
             );
 
-            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, array('count' => $count));
+            throw static::createException($value, $message, static::INVALID_COUNT, $propertyPath, array('count' => $size));
+        }
+    }
+
+    /**
+     * Assert that the value is countable and his size matches the given integer.
+     *
+     * @param mixed            $value
+     * @param int              $min minimum elements expected
+     * @param string           $message
+     * @param string           $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function minCount($value, $min, $message = null, $propertyPath = null)
+    {
+        static::countable($value,$message,$propertyPath);
+
+        if (count($value) < $min) {
+            $message = sprintf(
+                $message ?: 'List contains fewer than "%d" elements.',
+                self::stringify($min)
+            );
+
+            throw static::createException($value, $message, static::INVALID_COUNT, $propertyPath, array('min' => $min));
+        }
+    }
+
+    /**
+     * Assert that the value is countable and his size matches the given integer.
+     *
+     * @param mixed            $value
+     * @param int              $max maximum elements expected
+     * @param string           $message
+     * @param string           $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function maxCount($value, $max, $message = null, $propertyPath = null)
+    {
+        static::countable($value,$message,$propertyPath);
+
+        if (count($value) > $max) {
+            $message = sprintf(
+                $message ?: 'List contains more than "%d" elements.',
+                self::stringify($max)
+            );
+
+            throw static::createException($value, $message, static::INVALID_COUNT, $propertyPath, array('max' => $max));
         }
     }
 

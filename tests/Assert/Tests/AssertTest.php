@@ -898,29 +898,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::allTrue();
     }
 
-    public function testValidCount()
-    {
-        Assertion::count(array('Hi'), 1);
-        Assertion::count(new OneCountable(), 1);
-    }
-
-    public static function dataInvalidCount()
-    {
-        return array(
-            array(array('Hi', 'There'), 3),
-            array(new OneCountable(), 2),
-        );
-    }
-
-    /**
-     * @dataProvider dataInvalidCount
-     */
-    public function testInvalidCount($countable, $count)
-    {
-        $this->setExpectedException('Assert\AssertionFailedException', 'List does not contain exactly "'.$count.'" elements.', Assertion::INVALID_COUNT);
-        Assertion::count($countable, $count);
-    }
-
     public function testChoicesNotEmpty()
     {
         Assertion::choicesNotEmpty(
@@ -1142,10 +1119,5 @@ class ChildStdClass extends \stdClass
 
 }
 
-class OneCountable implements \Countable
-{
-    public function count()
-    {
-        return 1;
-    }
-}
+
+
