@@ -1534,7 +1534,7 @@ class Assertion
 
         if (!method_exists($object, $value)) {
             $message = sprintf(
-                $message ?: 'Expected "%s" does not a exist in provided object.',
+                $message ?: 'Expected "%s" does not exist in provided object.',
                 self::stringify($value)
             );
 
