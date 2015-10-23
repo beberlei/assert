@@ -193,6 +193,9 @@ class Assertion
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
     const INVALID_DATE              = 213;
+    const INVALID_SIZE              = 214;
+    const INVALID_MIN_SIZE          = 215;
+    const INVALID_MAX_SIZE          = 216;
 
     /**
      * Exception to throw when an assertion failed.
@@ -658,6 +661,128 @@ class Assertion
 
             $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
             throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
+        }
+    }
+
+
+    /**
+     * Assert that string has a given size (in bytes).
+     *
+     * @param mixed $value
+     * @param int $size
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function size($value, $size, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (strlen($value) !== $size) {
+            $message = sprintf(
+                $message ?: 'Value "%s" has to be %d exactly bytes long, but size is %d.',
+                self::stringify($value),
+                $size,
+                strlen($value)
+            );
+
+            $constraints = array('size' => $size);
+            throw static::createException($value, $message, static::INVALID_SIZE, $propertyPath, $constraints);
+        }
+    }
+
+    /**
+     * Assert that a string is at least $minSize bytes long.
+     *
+     * @param mixed $value
+     * @param int $minSize
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function minSize($value, $minSize, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (strlen($value) < $minSize) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is too short, it should have more than %d bytes, but only has %d bytes.',
+                self::stringify($value),
+                $minSize,
+                strlen($value)
+            );
+
+            $constraints = array('min_length' => $minSize);
+            throw static::createException($value, $message, static::INVALID_MIN_SIZE, $propertyPath, $constraints);
+        }
+    }
+
+    /**
+     * Assert that string value is not longer than $maxSize bytes.
+     *
+     * @param mixed $value
+     * @param integer $maxSize
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function maxSize($value, $maxSize, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (strlen($value) > $maxSize) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
+                self::stringify($value),
+                $maxSize,
+                strlen($value)
+            );
+
+            $constraints = array('max_length' => $maxSize);
+            throw static::createException($value, $message, static::INVALID_MAX_SIZE, $propertyPath, $constraints);
+        }
+    }
+
+    /**
+     * Assert that string length is between min,max bytes.
+     *
+     * @param mixed $value
+     * @param integer $minSize
+     * @param integer $maxSize
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function betweenSize($value, $minSize, $maxSize, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (strlen($value) < $minSize) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is too short, it should have more than %d bytes, but only has %d bytes.',
+                self::stringify($value),
+                $minSize,
+                strlen($value)
+            );
+
+            $constraints = array('min_length' => $minSize);
+            throw static::createException($value, $message, static::INVALID_MIN_SIZE, $propertyPath, $constraints);
+        }
+
+        if (strlen($value) > $maxSize) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is too long, it should have no more than %d bytes, but has %d bytes.',
+                self::stringify($value),
+                $maxSize,
+                strlen($value)
+            );
+
+            $constraints = array('max_length' => $maxSize);
+            throw static::createException($value, $message, static::INVALID_MAX_SIZE, $propertyPath, $constraints);
         }
     }
 
