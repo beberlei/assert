@@ -163,6 +163,7 @@ Assertion::notBlank($value);
 Assertion::isInstanceOf($value, $className);
 Assertion::notIsInstanceOf($value, $className);
 Assertion::classExists($value);
+Assertion::interfaceExists($value);
 Assertion::subclassOf($value, $className);
 Assertion::directory($value);
 Assertion::file($value);

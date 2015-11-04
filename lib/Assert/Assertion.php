@@ -69,6 +69,7 @@ use BadMethodCallException;
  * @method static void nullOrTrue($value, $message = null, $propertyPath = null)
  * @method static void nullOrFalse($value, $message = null, $propertyPath = null)
  * @method static void nullOrClassExists($value, $message = null, $propertyPath = null)
+ * @method static void nullOrInterfaceExists($value, $message = null, $propertyPath = null)
  * @method static void nullOrImplementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
  * @method static void nullOrIsJsonString($value, $message = null, $propertyPath = null)
  * @method static void nullOrUuid($value, $message = null, $propertyPath = null)
@@ -125,6 +126,7 @@ use BadMethodCallException;
  * @method static void allTrue($value, $message = null, $propertyPath = null)
  * @method static void allFalse($value, $message = null, $propertyPath = null)
  * @method static void allClassExists($value, $message = null, $propertyPath = null)
+ * @method static void allInterfaceExists($value, $message = null, $propertyPath = null)
  * @method static void allImplementsInterface($class, $interfaceName, $message = null, $propertyPath = null)
  * @method static void allIsJsonString($value, $message = null, $propertyPath = null)
  * @method static void allUuid($value, $message = null, $propertyPath = null)
@@ -179,6 +181,7 @@ class Assertion
     const INVALID_READABLE          = 103;
     const INVALID_WRITEABLE         = 104;
     const INVALID_CLASS             = 105;
+    const INVALID_INTERFACE         = 106;
     const INVALID_EMAIL             = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL               = 203;
@@ -1353,6 +1356,27 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_CLASS, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the interface exists.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function interfaceExists($value, $message = null, $propertyPath = null)
+    {
+        if ( ! interface_exists($value)) {
+            $message = sprintf(
+                $message ?: 'Interface "%s" does not exist.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_INTERFACE, $propertyPath);
         }
     }
 
