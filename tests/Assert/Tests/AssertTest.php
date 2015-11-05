@@ -323,6 +323,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::contains("foo", "oo");
     }
 
+    public function testInvalidContainsNot()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_CONTAINS_NOT);
+        Assertion::containsNot("foo", "foo");
+    }
+
+    public function testValidContainsNot()
+    {
+        Assertion::containsNot("foo", "bar");
+        Assertion::containsNot("foo", "baz");
+    }
+
     public function testInvalidChoice()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);

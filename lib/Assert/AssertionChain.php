@@ -44,6 +44,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
  * @method \Assert\AssertionChain endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
  * @method \Assert\AssertionChain contains($needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\AssertionChain containsNot($needle, $message = null, $propertyPath = null, $encoding = "utf8")
  * @method \Assert\AssertionChain choice($choices, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain inArray($choices, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain numeric($message = null, $propertyPath = null)
