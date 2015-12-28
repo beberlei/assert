@@ -681,12 +681,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::length("asdf", 3);
     }
 
-    public function testLengthFailedForWrongEncoding()
-    {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
-        Assertion::length("址", 1, null, null, 'ASCII');
-    }
-
     public function testLengthValidForGivenEncoding()
     {
         Assertion::length("址", 1, null, null, 'utf8');

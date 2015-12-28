@@ -36,13 +36,13 @@ use BadMethodCallException;
  * @method static void nullOrNotNull($value, $message = null, $propertyPath = null)
  * @method static void nullOrString($value, $message = null, $propertyPath = null)
  * @method static void nullOrRegex($value, $pattern, $message = null, $propertyPath = null)
- * @method static void nullOrLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrMinLength($value, $minLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrMaxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void nullOrContains($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void nullOrLength($value, $length, $message = null, $propertyPath = null)
+ * @method static void nullOrMinLength($value, $minLength, $message = null, $propertyPath = null)
+ * @method static void nullOrMaxLength($value, $maxLength, $message = null, $propertyPath = null)
+ * @method static void nullOrBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
+ * @method static void nullOrStartsWith($string, $needle, $message = null, $propertyPath = null)
+ * @method static void nullOrEndsWith($string, $needle, $message = null, $propertyPath = null)
+ * @method static void nullOrContains($string, $needle, $message = null, $propertyPath = null)
  * @method static void nullOrChoice($value, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrInArray($value, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrNumeric($value, $message = null, $propertyPath = null)
@@ -92,13 +92,13 @@ use BadMethodCallException;
  * @method static void allNotNull($value, $message = null, $propertyPath = null)
  * @method static void allString($value, $message = null, $propertyPath = null)
  * @method static void allRegex($value, $pattern, $message = null, $propertyPath = null)
- * @method static void allLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allMinLength($value, $minLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allMaxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
- * @method static void allContains($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method static void allLength($value, $length, $message = null, $propertyPath = null)
+ * @method static void allMinLength($value, $minLength, $message = null, $propertyPath = null)
+ * @method static void allMaxLength($value, $maxLength, $message = null, $propertyPath = null)
+ * @method static void allBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
+ * @method static void allStartsWith($string, $needle, $message = null, $propertyPath = null)
+ * @method static void allEndsWith($string, $needle, $message = null, $propertyPath = null)
+ * @method static void allContains($string, $needle, $message = null, $propertyPath = null)
  * @method static void allChoice($value, $choices, $message = null, $propertyPath = null)
  * @method static void allInArray($value, $choices, $message = null, $propertyPath = null)
  * @method static void allNumeric($value, $message = null, $propertyPath = null)
@@ -132,7 +132,6 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
- * @method static void allDate($value, $format, $message = null, $propertyPath = null)
  * METHODEND
  */
 class Assertion
@@ -543,23 +542,22 @@ class Assertion
      * @param int $length
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function length($value, $length, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function length($value, $length, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) !== $length) {
+        if (grapheme_strlen($value) !== $length) {
             $message = sprintf(
                 $message ?: 'Value "%s" has to be %d exactly characters long, but length is %d.',
                 self::stringify($value),
                 $length,
-                mb_strlen($value, $encoding)
+                grapheme_strlen($value)
             );
 
-            $constraints = array('length' => $length, 'encoding' => $encoding);
+            $constraints = array('length' => $length);
             throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, $constraints);
         }
     }
@@ -571,23 +569,22 @@ class Assertion
      * @param int $minLength
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function minLength($value, $minLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function minLength($value, $minLength, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) < $minLength) {
+        if (grapheme_strlen($value) < $minLength) {
             $message = sprintf(
                 $message ?: 'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
                 self::stringify($value),
                 $minLength,
-                mb_strlen($value, $encoding)
+                grapheme_strlen($value)
             );
 
-            $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
+            $constraints = array('min_length' => $minLength);
             throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
     }
@@ -599,23 +596,22 @@ class Assertion
      * @param integer $maxLength
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function maxLength($value, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function maxLength($value, $maxLength, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) > $maxLength) {
+        if (grapheme_strlen($value) > $maxLength) {
             $message = sprintf(
                 $message ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
                 self::stringify($value),
                 $maxLength,
-                mb_strlen($value, $encoding)
+                grapheme_strlen($value)
             );
 
-            $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
+            $constraints = array('max_length' => $maxLength);
             throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
     }
@@ -628,35 +624,34 @@ class Assertion
      * @param integer $maxLength
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) < $minLength) {
+        if (grapheme_strlen($value) < $minLength) {
             $message = sprintf(
                 $message ?: 'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
                 self::stringify($value),
                 $minLength,
-                mb_strlen($value, $encoding)
+                grapheme_strlen($value)
             );
 
-            $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
+            $constraints = array('min_length' => $minLength);
             throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
 
-        if (mb_strlen($value, $encoding) > $maxLength) {
+        if (grapheme_strlen($value) > $maxLength) {
             $message = sprintf(
                 $message ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
                 self::stringify($value),
                 $maxLength,
-                mb_strlen($value, $encoding)
+                grapheme_strlen($value)
             );
 
-            $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
+            $constraints = array('max_length' => $maxLength);
             throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
     }
@@ -668,22 +663,21 @@ class Assertion
      * @param string $needle
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function startsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function startsWith($string, $needle, $message = null, $propertyPath = null)
     {
         static::string($string, $message, $propertyPath);
 
-        if (mb_strpos($string, $needle, null, $encoding) !== 0) {
+        if (grapheme_strpos($string, $needle, null) !== 0) {
             $message = sprintf(
                 $message ?: 'Value "%s" does not start with "%s".',
                 self::stringify($string),
                 self::stringify($needle)
             );
 
-            $constraints = array('needle' => $needle, 'encoding' => $encoding);
+            $constraints = array('needle' => $needle);
             throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, $constraints);
         }
     }
@@ -695,24 +689,23 @@ class Assertion
      * @param string $needle
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function endsWith($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function endsWith($string, $needle, $message = null, $propertyPath = null)
     {
         static::string($string, $message, $propertyPath);
 
-        $stringPosition = mb_strlen($string, $encoding) - mb_strlen($needle, $encoding);
+        $stringPosition = grapheme_strlen($string) - grapheme_strlen($needle);
 
-        if (mb_strripos($string, $needle, null, $encoding) !== $stringPosition) {
+        if (grapheme_strripos($string, $needle, null) !== $stringPosition) {
             $message = sprintf(
                 $message ?: 'Value "%s" does not end with "%s".',
                 self::stringify($string),
                 self::stringify($needle)
             );
 
-            $constraints = array('needle' => $needle, 'encoding' => $encoding);
+            $constraints = array('needle' => $needle);
             throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, $constraints);
         }
     }
@@ -724,22 +717,21 @@ class Assertion
      * @param string $needle
      * @param string|null $message
      * @param string|null $propertyPath
-     * @param string $encoding
      * @return void
      * @throws \Assert\AssertionFailedException
      */
-    public static function contains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    public static function contains($string, $needle, $message = null, $propertyPath = null)
     {
         static::string($string, $message, $propertyPath);
 
-        if (mb_strpos($string, $needle, null, $encoding) === false) {
+        if (grapheme_strpos($string, $needle, null) === false) {
             $message = sprintf(
                 $message ?: 'Value "%s" does not contain "%s".',
                 self::stringify($string),
                 self::stringify($needle)
             );
 
-            $constraints = array('needle' => $needle, 'encoding' => $encoding);
+            $constraints = array('needle' => $needle);
             throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, $constraints);
         }
     }
@@ -1657,23 +1649,23 @@ class Assertion
      *
      * @link http://php.net/manual/function.date.php#refsect1-function.date-parameters
      */
-     public static function date($value, $format, $message = null, $propertyPath = null)
-     {
-         static::string($value, $message, $propertyPath);
-         static::string($format, $message, $propertyPath);
+    public static function date($value, $format, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+        static::string($format, $message, $propertyPath);
 
-         $dateTime = \DateTime::createFromFormat($format, $value);
+        $dateTime = \DateTime::createFromFormat($format, $value);
 
-         if (false === $dateTime || $value !== $dateTime->format($format)) {
-             $message = sprintf(
-                 $message ?: 'Date "%s" is invalid or does not match format "%s".',
-                 self::stringify($value),
-                 self::stringify($format)
-             );
+        if (false === $dateTime || $value !== $dateTime->format($format)) {
+            $message = sprintf(
+                $message ?: 'Date "%s" is invalid or does not match format "%s".',
+                self::stringify($value),
+                self::stringify($format)
+            );
 
-             throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
-         }
-     }
+            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
+        }
+    }
 
     /**
      * Make a string version of a value.
