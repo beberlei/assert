@@ -638,7 +638,7 @@ class Assertion
 
         if (mb_strlen($value, $encoding) < $minLength) {
             $message = sprintf(
-                $message ?: 'Value "%s" is too short, it should have more than %d characters, but only has %d characters.',
+                $message ?: 'Value "%s" is too short, it should have at least %d characters, but only has %d characters.',
                 self::stringify($value),
                 $minLength,
                 mb_strlen($value, $encoding)
