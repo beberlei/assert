@@ -110,7 +110,7 @@ class AssertionChain
     /**
      * Call assertion on the current value in the chain.
      *
-     * @param string $method
+     * @param string $methodName
      * @param array $args
      *
      * @return \Assert\AssertionChain
