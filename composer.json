@@ -8,7 +8,7 @@
     "keywords": ["assert", "assertion", "validation"],
     "require": {
         "php": ">=5.3",
-        "ext-mbstring": "*"
+        "ext-intl": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable"
