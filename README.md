@@ -156,6 +156,7 @@ Assertion::startsWith($value, $needle);
 Assertion::endsWith($value, $needle);
 Assertion::isArray($value);
 Assertion::contains($value, $needle);
+Assertion::containsNot($value, $needle);
 Assertion::choice($value, $choices);
 Assertion::inArray($value, $choices);
 Assertion::numeric($value);

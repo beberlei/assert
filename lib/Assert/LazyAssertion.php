@@ -41,6 +41,7 @@ namespace Assert;
  * @method \Assert\LazyAssertion startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
  * @method \Assert\LazyAssertion endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8")
  * @method \Assert\LazyAssertion contains($needle, $message = null, $propertyPath = null, $encoding = "utf8")
+ * @method \Assert\LazyAssertion containsNot($needle, $message = null, $propertyPath = null, $encoding = "utf8")
  * @method \Assert\LazyAssertion choice($choices, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion inArray($choices, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion numeric($message = null, $propertyPath = null)
