@@ -438,7 +438,7 @@ class Assertion
      */
     public static function notEmpty($value, $message = null, $propertyPath = null)
     {
-        if (empty($value)) {
+        if (empty($value) && '0' !== $value) {
             $message = sprintf(
                 $message ?: 'Value "%s" is empty, but non empty value was expected.',
                 self::stringify($value)
