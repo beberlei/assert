@@ -76,6 +76,10 @@ use BadMethodCallException;
  * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
+ * @method static void nullOrLessThan($value, $limit, $message = null, $propertyPath = null)
+ * @method static void nullOrLessOrEqualThan($value, $limit, $message = null, $propertyPath = null)
+ * @method static void nullOrGreaterThan($value, $limit, $message = null, $propertyPath = null)
+ * @method static void nullOrGreaterOrEqualThan($value, $limit, $message = null, $propertyPath = null)
  * @method static void nullOrDate($value, $format, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
@@ -132,6 +136,10 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
+ * @method static void allLessThan($value, $limit, $message = null, $propertyPath = null)
+ * @method static void allLessOrEqualThan($value, $limit, $message = null, $propertyPath = null)
+ * @method static void allGreaterThan($value, $limit, $message = null, $propertyPath = null)
+ * @method static void allGreaterOrEqualThan($value, $limit, $message = null, $propertyPath = null)
  * @method static void allDate($value, $format, $message = null, $propertyPath = null)
  * METHODEND
  */

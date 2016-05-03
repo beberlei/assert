@@ -48,7 +48,10 @@ use ReflectionClass;
  * @method \Assert\AssertionChain inArray($choices, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain numeric($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain isArray($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isTraversable($message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain isArrayAccessible($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain keyExists($key, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain keyIsset($key, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notEmptyKey($key, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain notBlank($message = null, $propertyPath = null)
  * @method \Assert\AssertionChain isInstanceOf($className, $message = null, $propertyPath = null)
@@ -78,6 +81,7 @@ use ReflectionClass;
  * @method \Assert\AssertionChain lessOrEqualThan($limit, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain greaterThan($limit, $message = null, $propertyPath = null)
  * @method \Assert\AssertionChain greaterOrEqualThan($limit, $message = null, $propertyPath = null)
+ * @method \Assert\AssertionChain date($format, $message = null, $propertyPath = null)
  * METHODEND
  */
 class AssertionChain
