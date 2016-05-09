@@ -174,6 +174,7 @@ class Assertion
     const INVALID_TRAVERSABLE       = 44;
     const INVALID_ARRAY_ACCESSIBLE  = 45;
     const INVALID_KEY_ISSET         = 46;
+    const INVALID_CALLABLE          = 47;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -1674,6 +1675,25 @@ class Assertion
              throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
          }
      }
+
+    /**
+     * Assert that the value is callable.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     */
+    public static function isCallable ($value, $message = null, $propertyPath = null)
+    {
+        if (!\is_callable($value)) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is callable.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
+        }
+    }
 
     /**
      * Make a string version of a value.
