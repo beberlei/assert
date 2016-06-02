@@ -167,6 +167,7 @@ Assertion::isJsonString($value);
 Assertion::isObject($value);
 Assertion::isTraversable($value);
 Assertion::keyExists($value, $key);
+Assertion::keyNotExists($value, $key);
 Assertion::keyIsset($value, $key);
 Assertion::length($value, $length);
 Assertion::lessOrEqualThan($value, $limit);

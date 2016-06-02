@@ -113,6 +113,7 @@ use BadMethodCallException;
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null) Determines that the provided value is an object or that the value is null.
  * @method static void nullOrIsTraversable($value, $message = null, $propertyPath = null) Assert that value is an array or a traversable object or that the value is null.
  * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array or that the value is null.
+ * @method static void nullOrKeyNotExists($value, $key, $message = null, $propertyPath = null) Assert that key does not exist in an array
  * @method static void nullOrKeyIsset($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() or that the value is null.
  * @method static void nullOrLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length or that the value is null.
  * @method static void nullOrLessOrEqualThan($value, $limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit or that the value is null.
@@ -205,6 +206,7 @@ class Assertion
     const INVALID_GREATER_OR_EQUAL  = 213;
     const INVALID_DATE              = 214;
     const INVALID_CALLABLE          = 215;
+    const INVALID_KEY_NOT_EXISTS    = 216;
 
     /**
      * Exception to throw when an assertion failed.
@@ -917,6 +919,30 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
+        }
+    }
+
+    /**
+     * Assert that key does not exist in an array
+     *
+     * @param mixed $value
+     * @param string|integer $key
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function keyNotExists($value, $key, $message = null, $propertyPath = null)
+    {
+        static::isArray($value, $message, $propertyPath);
+
+        if (array_key_exists($key, $value)) {
+            $message = sprintf(
+                $message ?: 'Array contains an element with key "%s"',
+                self::stringify($key)
+            );
+
+            throw static::createException($value, $message, static::INVALID_KEY_NOT_EXISTS, $propertyPath, array('key' => $key));
         }
     }
 
