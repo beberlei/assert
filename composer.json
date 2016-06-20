@@ -2,7 +2,8 @@
     "name": "beberlei/assert",
     "description": "Thin assertion library for input validation in business models.",
     "authors": [
-        {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
+        {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de", "role": "Lead Developer"},
+        {"name": "Richard Quadling", "email": "rquadling@gmail.com", "role": "Collaborator"}
     ],
     "license": "BSD-2-Clause",
     "keywords": ["assert", "assertion", "validation"],
