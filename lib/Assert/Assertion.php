@@ -195,6 +195,7 @@ class Assertion
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
     const INVALID_DATE              = 213;
+    const INVALID_CALLABLE          = 214;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1578,7 +1579,7 @@ class Assertion
                 self::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
         }
     }
 
