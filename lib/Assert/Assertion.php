@@ -76,6 +76,7 @@ use BadMethodCallException;
  * @method static void nullOrChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void nullOrMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null)
+ * @method static void nullOrIsCallable($value, $message = null, $propertyPath = null)
  * @method static void nullOrDate($value, $format, $message = null, $propertyPath = null)
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null)
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null)
@@ -132,6 +133,7 @@ use BadMethodCallException;
  * @method static void allChoicesNotEmpty($values, $choices, $message = null, $propertyPath = null)
  * @method static void allMethodExists($value, $object, $message = null, $propertyPath = null)
  * @method static void allIsObject($value, $message = null, $propertyPath = null)
+ * @method static void allIsCallable($value, $message = null, $propertyPath = null)
  * @method static void allDate($value, $format, $message = null, $propertyPath = null)
  * METHODEND
  */
@@ -193,6 +195,7 @@ class Assertion
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
     const INVALID_DATE              = 213;
+    const INVALID_CALLABLE          = 214;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1558,7 +1561,25 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
+        }
+    }
 
+    /**
+     * Determines that the provided value is callable.
+     *
+     * @param mixed $value
+     * @param null  $message
+     * @param null  $propertyPath
+     */
+    public static function isCallable($value, $message = null, $propertyPath = null)
+    {
+        if (!is_callable($value)) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not a callable.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
         }
     }
 
