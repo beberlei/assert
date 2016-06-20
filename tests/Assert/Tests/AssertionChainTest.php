@@ -72,4 +72,14 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
     {
         \Assert\ThatNullOr(null)->integer()->eq(10);
     }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage Assertion 'unknownAssertion' does not exist.
+     * @test
+     */
+    public function it_throws_exception_for_unknown_assertion()
+    {
+        \Assert\That(null)->unknownAssertion();
+    }
 }
