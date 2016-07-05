@@ -67,6 +67,7 @@ namespace Assert;
  * @method \Assert\LazyAssertion true($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion false($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion classExists($message = null, $propertyPath = null)
+ * @method \Assert\LazyAssertion interfaceExists($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion implementsInterface($interfaceName, $message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion isJsonString($message = null, $propertyPath = null)
  * @method \Assert\LazyAssertion uuid($message = null, $propertyPath = null)
