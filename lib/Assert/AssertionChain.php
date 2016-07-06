@@ -104,6 +104,8 @@ class AssertionChain
      */
     private $all = false;
 
+    protected $assertionClass = 'Assert\Assertion';
+
     public function __construct($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
         $this->value = $value;
@@ -125,11 +127,11 @@ class AssertionChain
             return $this;
         }
 
-        if (!method_exists('Assert\Assertion', $methodName)) {
+        if (!method_exists($this->assertionClass, $methodName)) {
             throw new \RuntimeException("Assertion '" . $methodName . "' does not exist.");
         }
 
-        $reflClass = new ReflectionClass('Assert\Assertion');
+        $reflClass = new ReflectionClass($this->assertionClass);
         $method = $reflClass->getMethod($methodName);
 
         array_unshift($args, $this->value);
@@ -153,7 +155,7 @@ class AssertionChain
             $methodName = 'all' . $methodName;
         }
 
-        call_user_func_array(array('Assert\Assertion', $methodName), $args);
+        call_user_func_array(array($this->assertionClass, $methodName), $args);
 
         return $this;
     }
