@@ -692,6 +692,81 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::length("址", 1, null, null, 'utf8');
     }
 
+    public function testSize()
+    {
+        Assertion::size("asdf", 4);
+        Assertion::size("", 0);
+    }
+
+    public static function dataSizeUtf8Characters()
+    {
+        return array(
+            array("址", 3),
+            array("ل", 2),
+        );
+    }
+
+    /**
+     * @dataProvider dataSizeUtf8Characters
+     */
+    public function testSizeUtf8Characters($value, $expected)
+    {
+        Assertion::size($value, $expected);
+    }
+
+    public function testSizeFailed()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SIZE);
+        Assertion::size("asdf", 3);
+    }
+
+    public function testInvalidMinSize()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN_SIZE);
+        Assertion::minSize("foo", 4);
+    }
+
+    public function testValidMinSize()
+    {
+        Assertion::minSize("foo", 3);
+        Assertion::minSize("foo", 1);
+        Assertion::minSize("foo", 0);
+        Assertion::minSize("", 0);
+        Assertion::minSize("址址", 6);
+    }
+
+    public function testInvalidMaxSize()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_SIZE);
+        Assertion::maxSize("foo", 2);
+    }
+
+    public function testValidMaxSize()
+    {
+        Assertion::maxSize("foo", 10);
+        Assertion::maxSize("foo", 3);
+        Assertion::maxSize("", 0);
+        Assertion::maxSize("址址", 6);
+    }
+
+    public function testInvalidBetweenSizeMin()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN_SIZE);
+        Assertion::betweenSize("foo", 4, 100);
+    }
+
+    public function testInvalidBetweenSizeMax()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_SIZE);
+        Assertion::betweenSize("foo", 0, 2);
+    }
+
+    public function testValidBetweenSize()
+    {
+        Assertion::betweenSize("foo", 0, 3);
+        Assertion::betweenSize("址址", 6, 6);
+    }
+
     public function testFile()
     {
         Assertion::file(__FILE__);
