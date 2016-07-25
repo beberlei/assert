@@ -8,109 +8,48 @@ class MethodDocGenerator
 {
     public function generateChainDocs()
     {
-        $phpFile = __DIR__ . '/../lib/Assert/AssertionChain.php';
-        $flags = '\\Assert\\AssertionChain';
-        $skipParameterTest = function ($parameter) {
+        $phpFile           = __DIR__ . '/../lib/Assert/AssertionChain.php';
+        $skipParameterTest = function (\ReflectionParameter $parameter) {
             return $parameter->getPosition() === 0;
         };
 
-        $docs = $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest);
-        $this->generateFile($phpFile, $docs);
+        $docs = $this->generateMethodDocs($this->gatherAssertions(), ' * @method \Assert\AssertionChain %s(%s) %s.', $skipParameterTest);
+        $this->generateFile($phpFile, $docs, 'class');
     }
 
-    public function generateAssertionDocs()
+    private function generateMethodDocs($methods, $format, $skipParameterTest, $prefix = '')
     {
-        $phpFile = __DIR__ . '/../lib/Assert/Assertion.php';
-        $flags = 'static void';
-        $skipParameterTest = function ($parameter) {
-            return false;
-        };
-
-        $docs = array_merge(
-            $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest, 'nullOr'),
-            $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest, 'all')
-        );
-
-        $this->generateFile($phpFile, $docs);
-    }
-
-    public function generateLazyAssertionDocs()
-    {
-        $phpFile = __DIR__ . '/../lib/Assert/LazyAssertion.php';
-        $flags = '\\Assert\\LazyAssertion';
-        $skipParameterTest = function ($parameter) {
-            return $parameter->getPosition() === 0;
-        };
-
-        $docs = array_merge(
-            $this->generateMethodDocs($this->gatherAssertions(), $flags, $skipParameterTest),
-            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), $flags, false)
-        );
-
-        $this->generateFile($phpFile, $docs);
-    }
-
-    private function generateMethodDocs($methods, $flags, $skipParameterTest, $prefix = '')
-    {
-        $lines = array();
+        $lines = [];
+        asort($methods);
         foreach ($methods as $method) {
-            $doc = $method->getDocComment();
-            $shortDescription = substr(explode("\n", $doc)[1], 7);
-            $methodName = $prefix . ($prefix ? ucfirst($method->getName()) : $method->getName());
+            $doc              = $method->getDocComment();
+            $shortDescription = trim(substr(explode("\n", $doc)[1], 7), '.');
+            $methodName       = $prefix . ($prefix ? ucfirst($method->getName()) : $method->getName());
 
-            $line = ' * @method ' . $flags . ' ' . $methodName . '(';
+            $parameters = [];
 
-            if (count($method->getParameters()) === 0) {
-                $lines[] = $line . ")\n";
-            } else {
-                foreach ($method->getParameters() as $parameter) {
-                    if ($skipParameterTest($parameter)) {
-                        continue;
-                    }
-
-                    $line .= '$' . $parameter->getName();
-
-                    if ($parameter->isOptional()) {
-                        if (null === $parameter->getDefaultValue()) {
-                            $line .= ' = null';
-                        } else {
-                            $line .= sprintf(' = "%s"', $parameter->getDefaultValue());
-                        }
-                    }
-
-                    $line .= ', ';
+            foreach ($method->getParameters() as &$methodParameter) {
+                if ($skipParameterTest($methodParameter)) {
+                    continue;
                 }
-                $lines[] = substr($line, 0, -2) . ")\n";
+
+                $parameter = '$' . $methodParameter->getName();
+
+                if ($methodParameter->isOptional()) {
+                    if (null === $methodParameter->getDefaultValue()) {
+                        $parameter .= ' = null';
+                    } else {
+                        $parameter .= sprintf(' = "%s"', $methodParameter->getDefaultValue());
+                    }
+                }
+
+                $parameters[] = $parameter;
             }
+
+            $lines[] = sprintf($format, $methodName, implode(', ', $parameters), $shortDescription);
         }
 
         return $lines;
-    }
-
-    private function generateFile($phpFile, $lines)
-    {
-        $fileLines = file($phpFile);
-        $newLines = array();
-        $inGeneratedCode = false;
-
-        for ($i = 0; $i < count($fileLines); $i++) {
-            if (strpos($fileLines[$i], ' * METHODSTART') === 0) {
-                $inGeneratedCode = true;
-                $newLines[] = ' * METHODSTART' . "\n";
-            }
-
-            if (strpos($fileLines[$i], ' * METHODEND') === 0) {
-                $inGeneratedCode = false;
-
-                $newLines = array_merge($newLines, $lines);
-            }
-
-            if ( ! $inGeneratedCode) {
-                $newLines[] = $fileLines[$i];
-            }
-        }
-
-        file_put_contents($phpFile, implode("", $newLines));
     }
 
     private function gatherAssertions()
@@ -124,13 +63,80 @@ class MethodDocGenerator
                     return false;
                 }
 
-                if (in_array($reflMethod->getName(), array('__callStatic', 'createException', 'stringify'))) {
+                if (in_array($reflMethod->getName(), ['__callStatic', 'createException', 'stringify'])) {
                     return false;
                 }
 
                 return true;
             }
         );
+    }
+
+    private function generateFile($phpFile, $lines, $fileType)
+    {
+        $file = file_get_contents($phpFile);
+
+        switch ($fileType) {
+            case 'class':
+                $file = preg_replace(
+                    '` * @method.*?/ */\nclass `sim',
+                    sprintf("%s\n */\nclass ", trim(implode("\n", $lines))),
+                    $file
+                );
+                break;
+            case 'readme':
+                $file = preg_replace(
+                    '/```php\n<\?php\nuse Assert\\\Assertion;\n\nAssertion::.*?```/sim',
+                    sprintf("```php\n<?php\nuse Assert\\Assertion;\n\n%s\n\n```", implode("\n", $lines)),
+                    $file
+                );
+                break;
+        }
+
+        file_put_contents($phpFile, $file);
+    }
+
+    public function generateAssertionDocs()
+    {
+        $phpFile           = __DIR__ . '/../lib/Assert/Assertion.php';
+        $skipParameterTest = function (\ReflectionParameter $parameter) {
+            return false;
+        };
+
+        $docs = array_merge(
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static void %s(%s) %s for all values.', $skipParameterTest, 'all'),
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static void %s(%s) %s or that the value is null.', $skipParameterTest, 'nullOr')
+        );
+
+        $this->generateFile($phpFile, $docs, 'class');
+    }
+
+    public function generateReadMe()
+    {
+        $mdFile            = __DIR__ . '/../README.md';
+        $skipParameterTest = function (\ReflectionParameter $parameter) {
+            return in_array($parameter->getName(), ['message', 'propertyPath', 'encoding']);
+        };
+
+        $docs = $this->generateMethodDocs($this->gatherAssertions(), 'Assertion::%s(%s);', $skipParameterTest);
+
+        $this->generateFile($mdFile, $docs, 'readme');
+    }
+
+    public function generateLazyAssertionDocs()
+    {
+        $phpFile           = __DIR__ . '/../lib/Assert/LazyAssertion.php';
+        $flags             = '\\Assert\\LazyAssertion';
+        $skipParameterTest = function ($parameter) {
+            return $parameter->getPosition() === 0;
+        };
+
+        $docs = array_merge(
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method \Assert\LazyAssertion %s(%s) %s.', $skipParameterTest),
+            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), ' * @method \Assert\LazyAssertion %s(%s) %s.', false)
+        );
+
+        $this->generateFile($phpFile, $docs, 'class');
     }
 
     private function gatherAssertionChainSwitches()
@@ -140,11 +146,11 @@ class MethodDocGenerator
         return array_filter(
             $reflClass->getMethods(\ReflectionMethod::IS_PUBLIC),
             function ($reflMethod) {
-                if ( ! $reflMethod->isPublic()) {
+                if (!$reflMethod->isPublic()) {
                     return false;
                 }
 
-                if (in_array($reflMethod->getName(), array('__construct', '__call'))) {
+                if (in_array($reflMethod->getName(), ['__construct', '__call'])) {
                     return false;
                 }
 
@@ -157,6 +163,7 @@ class MethodDocGenerator
 require_once __DIR__ . "/../vendor/autoload.php";
 
 $generator = new MethodDocGenerator();
-$generator->generateChainDocs();
 $generator->generateAssertionDocs();
+$generator->generateChainDocs();
 $generator->generateLazyAssertionDocs();
+$generator->generateReadMe();

@@ -136,60 +136,66 @@ This can be useful for example to build a failure response for the user.
 <?php
 use Assert\Assertion;
 
-Assertion::integer($value);
-Assertion::digit($value);
-Assertion::integerish($value);
-Assertion::float($value);
-Assertion::range($value, $minValue, $maxValue);
-Assertion::boolean($value);
-Assertion::scalar($value);
-Assertion::notEmpty($value);
-Assertion::noContent($value);
-Assertion::notNull($value);
-Assertion::string($value);
-Assertion::regex($value, $regex);
-Assertion::length($value, $length);
-Assertion::minLength($value, $length);
-Assertion::maxLength($value, $length);
-Assertion::betweenLength($value, $minLength, $maxLength);
-Assertion::startsWith($value, $needle);
-Assertion::endsWith($value, $needle);
-Assertion::isArray($value);
-Assertion::contains($value, $needle);
-Assertion::choice($value, $choices);
-Assertion::inArray($value, $choices);
-Assertion::numeric($value);
-Assertion::keyExists($value, $key);
-Assertion::notEmptyKey($value, $key);
-Assertion::notBlank($value);
-Assertion::isInstanceOf($value, $className);
-Assertion::notIsInstanceOf($value, $className);
-Assertion::classExists($value);
-Assertion::subclassOf($value, $className);
-Assertion::directory($value);
-Assertion::file($value);
-Assertion::readable($value);
-Assertion::writeable($value);
-Assertion::email($value);
-Assertion::url($value);
 Assertion::alnum($value);
-Assertion::true($value);
+Assertion::betweenLength($value, $minLength, $maxLength);
+Assertion::boolean($value);
+Assertion::choice($value, $choices);
+Assertion::choicesNotEmpty($values, $choices);
+Assertion::classExists($value);
+Assertion::contains($string, $needle);
+Assertion::count($countable, $count);
+Assertion::date($value, $format);
+Assertion::digit($value);
+Assertion::directory($value);
+Assertion::email($value);
+Assertion::endsWith($string, $needle);
+Assertion::eq($value, $value2);
 Assertion::false($value);
-Assertion::min($value, $min);
-Assertion::max($value, $max);
-Assertion::eq($actual, $expected);
-Assertion::same($actual, $expected);
-Assertion::implementsInterface($value, $interfaceName);
+Assertion::file($value);
+Assertion::float($value);
+Assertion::greaterOrEqualThan($value, $limit);
+Assertion::greaterThan($value, $limit);
+Assertion::implementsInterface($class, $interfaceName);
+Assertion::inArray($value, $choices);
+Assertion::integer($value);
+Assertion::integerish($value);
+Assertion::isArray($value);
+Assertion::isArrayAccessible($value);
+Assertion::isInstanceOf($value, $className);
 Assertion::isJsonString($value);
+Assertion::isObject($value);
+Assertion::isTraversable($value);
+Assertion::keyExists($value, $key);
+Assertion::keyIsset($value, $key);
+Assertion::length($value, $length);
+Assertion::lessOrEqualThan($value, $limit);
+Assertion::lessThan($value, $limit);
+Assertion::max($value, $maxValue);
+Assertion::maxLength($value, $maxLength);
+Assertion::methodExists($value, $object);
+Assertion::min($value, $minValue);
+Assertion::minLength($value, $minLength);
+Assertion::noContent($value);
+Assertion::notBlank($value);
+Assertion::notEmpty($value);
+Assertion::notEmptyKey($value, $key);
+Assertion::notEq($value1, $value2);
+Assertion::notIsInstanceOf($value, $className);
+Assertion::notNull($value);
+Assertion::notSame($value1, $value2);
+Assertion::numeric($value);
+Assertion::range($value, $minValue, $maxValue);
+Assertion::readable($value);
+Assertion::regex($value, $pattern);
+Assertion::same($value, $value2);
+Assertion::scalar($value);
+Assertion::startsWith($string, $needle);
+Assertion::string($value);
+Assertion::subclassOf($value, $className);
+Assertion::true($value);
+Assertion::url($value);
 Assertion::uuid($value);
-Assertion::choicesNotEmpty($value, $choices)
-Assertion::isObject($value)
-Assertion::methodExists($value, $object)
-Assertion::lessThan($value, $limit)
-Assertion::lessOrEqualThan($value, $limit)
-Assertion::greaterThan($value, $limit)
-Assertion::greaterOrEqualThan($value, $limit)
-Assertion::date($value, $format)
+Assertion::writeable($value);
 
 ```
 
