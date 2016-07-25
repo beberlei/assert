@@ -1135,6 +1135,19 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('2012.02.29 12:60:36.432563', 'Y.m.d H:i:s.u')
         );
     }
+
+    public function testInvalidCallable()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CALLABLE);
+        Assertion::isCallable("nonExistingFunction");
+    }
+
+    public function testValidCallable()
+    {
+        Assertion::isCallable(__NAMESPACE__ . "\\someCallable");
+        Assertion::isCallable(array(__NAMESPACE__ . "\\someClass", "someMethod"));
+        Assertion::isCallable(function(){});
+    }
 }
 
 class ChildStdClass extends \stdClass
@@ -1147,5 +1160,18 @@ class OneCountable implements \Countable
     public function count()
     {
         return 1;
+    }
+}
+
+function someCallable ()
+{
+
+}
+
+class someClass
+{
+    public static function someMethod ()
+    {
+
     }
 }
