@@ -46,7 +46,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_skips_assertions_on_valid_null()
     {
-        \Assert\That(null)->nullOr()->integer()->eq(10);
+        \Assert\that(null)->nullOr()->integer()->eq(10);
     }
 
     /**
@@ -54,7 +54,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_validates_all_inputs()
     {
-        \Assert\That(array(1, 2, 3))->all()->integer();
+        \Assert\that(array(1, 2, 3))->all()->integer();
     }
 
     /**
@@ -70,7 +70,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_has_nullor_shortcut()
     {
-        \Assert\ThatNullOr(null)->integer()->eq(10);
+        \Assert\thatNullOr(null)->integer()->eq(10);
     }
 
     /**
@@ -80,6 +80,6 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_exception_for_unknown_assertion()
     {
-        \Assert\That(null)->unknownAssertion();
+        \Assert\that(null)->unknownAssertion();
     }
 }

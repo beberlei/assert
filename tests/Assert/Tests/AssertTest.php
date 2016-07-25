@@ -966,6 +966,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::methodExists('methodExists', new Assertion());
     }
 
+    public function testMethodExistsFailure()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_METHOD);
+        Assertion::methodExists('methodNotExists', new Assertion());
+    }
+
     /**
      * @test
      */
@@ -1134,6 +1140,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('2011-02-29', 'Y-m-d'),
             array('2012.02.29 12:60:36.432563', 'Y.m.d H:i:s.u')
         );
+    }
+
+    public function testInvalidTraversable()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_TRAVERSABLE);
+        Assertion::isTraversable('not traversable');
+    }
+
+    public function testInvalidArrayAccessible()
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_ARRAY_ACCESSIBLE);
+        Assertion::isArrayAccessible('not array accessible');
     }
 }
 
