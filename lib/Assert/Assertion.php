@@ -375,6 +375,7 @@ class Assertion
 
     /**
      * Assert that value is a php integer'ish.
+     * 
      * @param mixed $value
      * @param string|null $message
      * @param string|null $propertyPath
