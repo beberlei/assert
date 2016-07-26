@@ -18,68 +18,68 @@ namespace Assert;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
- * @method \Assert\LazyAssertion alnum($message = null, $propertyPath = null) Assert that value is alphanumeric.
- * @method \Assert\LazyAssertion betweenLength($minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string length is between min,max lengths.
- * @method \Assert\LazyAssertion boolean($message = null, $propertyPath = null) Assert that value is php boolean.
- * @method \Assert\LazyAssertion choice($choices, $message = null, $propertyPath = null) Assert that value is in array of choices.
- * @method \Assert\LazyAssertion choicesNotEmpty($choices, $message = null, $propertyPath = null) Determines if the values array has every choice as key and that this choice has content.
- * @method \Assert\LazyAssertion classExists($message = null, $propertyPath = null) Assert that the class exists.
- * @method \Assert\LazyAssertion contains($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string contains a sequence of chars.
- * @method \Assert\LazyAssertion count($count, $message = null, $propertyPath = null) Assert that the count of countable is equal to count.
- * @method \Assert\LazyAssertion date($format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format.
- * @method \Assert\LazyAssertion digit($message = null, $propertyPath = null) Validates if an integer or integerish is a digit.
- * @method \Assert\LazyAssertion directory($message = null, $propertyPath = null) Assert that a directory exists.
- * @method \Assert\LazyAssertion email($message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL).
- * @method \Assert\LazyAssertion endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars.
- * @method \Assert\LazyAssertion eq($value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ).
- * @method \Assert\LazyAssertion false($message = null, $propertyPath = null) Assert that the value is boolean False.
- * @method \Assert\LazyAssertion file($message = null, $propertyPath = null) Assert that a file exists.
- * @method \Assert\LazyAssertion float($message = null, $propertyPath = null) Assert that value is a php float.
- * @method \Assert\LazyAssertion greaterOrEqualThan($limit, $message = null, $propertyPath = null) Determines if the value is greater or equal than given limit.
- * @method \Assert\LazyAssertion greaterThan($limit, $message = null, $propertyPath = null) Determines if the value is greater than given limit.
- * @method \Assert\LazyAssertion implementsInterface($interfaceName, $message = null, $propertyPath = null) Assert that the class implements the interface.
- * @method \Assert\LazyAssertion inArray($choices, $message = null, $propertyPath = null) Alias of {@see choice()}.
- * @method \Assert\LazyAssertion integer($message = null, $propertyPath = null) Assert that value is a php integer.
- * @method \Assert\LazyAssertion integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
- * @method \Assert\LazyAssertion isArray($message = null, $propertyPath = null) Assert that value is an array.
- * @method \Assert\LazyAssertion isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
- * @method \Assert\LazyAssertion isInstanceOf($className, $message = null, $propertyPath = null) Assert that value is instance of given class-name.
- * @method \Assert\LazyAssertion isJsonString($message = null, $propertyPath = null) Assert that the given string is a valid json string.
- * @method \Assert\LazyAssertion isObject($message = null, $propertyPath = null) Determines that the provided value is an object.
- * @method \Assert\LazyAssertion isTraversable($message = null, $propertyPath = null) Assert that value is an array or a traversable object.
- * @method \Assert\LazyAssertion keyExists($key, $message = null, $propertyPath = null) Assert that key exists in an array.
- * @method \Assert\LazyAssertion keyIsset($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
- * @method \Assert\LazyAssertion length($length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length.
- * @method \Assert\LazyAssertion lessOrEqualThan($limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit.
- * @method \Assert\LazyAssertion lessThan($limit, $message = null, $propertyPath = null) Determines if the value is less than given limit.
- * @method \Assert\LazyAssertion max($maxValue, $message = null, $propertyPath = null) Assert that a number is smaller as a given limit.
- * @method \Assert\LazyAssertion maxLength($maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string value is not longer than $maxLength chars.
- * @method \Assert\LazyAssertion methodExists($object, $message = null, $propertyPath = null) Determines that the named method is defined in the provided object.
- * @method \Assert\LazyAssertion min($minValue, $message = null, $propertyPath = null) Assert that a value is at least as big as a given limit.
- * @method \Assert\LazyAssertion minLength($minLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that a string is at least $minLength chars long.
- * @method \Assert\LazyAssertion noContent($message = null, $propertyPath = null) Assert that value is empty.
- * @method \Assert\LazyAssertion notBlank($message = null, $propertyPath = null) Assert that value is not blank.
- * @method \Assert\LazyAssertion notEmpty($message = null, $propertyPath = null) Assert that value is not empty.
- * @method \Assert\LazyAssertion notEmptyKey($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty.
- * @method \Assert\LazyAssertion notEq($value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ).
- * @method \Assert\LazyAssertion notIsInstanceOf($className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name.
- * @method \Assert\LazyAssertion notNull($message = null, $propertyPath = null) Assert that value is not null.
- * @method \Assert\LazyAssertion notSame($value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ).
- * @method \Assert\LazyAssertion numeric($message = null, $propertyPath = null) Assert that value is numeric.
- * @method \Assert\LazyAssertion range($minValue, $maxValue, $message = null, $propertyPath = null) Assert that value is in range of numbers.
- * @method \Assert\LazyAssertion readable($message = null, $propertyPath = null) Assert that the value is something readable.
- * @method \Assert\LazyAssertion regex($pattern, $message = null, $propertyPath = null) Assert that value matches a regex.
- * @method \Assert\LazyAssertion same($value2, $message = null, $propertyPath = null) Assert that two values are the same (using ===).
- * @method \Assert\LazyAssertion scalar($message = null, $propertyPath = null) Assert that value is a PHP scalar.
- * @method \Assert\LazyAssertion startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string starts with a sequence of chars.
- * @method \Assert\LazyAssertion string($message = null, $propertyPath = null) Assert that value is a string.
- * @method \Assert\LazyAssertion subclassOf($className, $message = null, $propertyPath = null) Assert that value is subclass of given class-name.
- * @method \Assert\LazyAssertion true($message = null, $propertyPath = null) Assert that the value is boolean True.
- * @method \Assert\LazyAssertion url($message = null, $propertyPath = null) Assert that value is an URL.
- * @method \Assert\LazyAssertion uuid($message = null, $propertyPath = null) Assert that the given string is a valid UUID.
- * @method \Assert\LazyAssertion writeable($message = null, $propertyPath = null) Assert that the value is something writeable.
- * @method \Assert\LazyAssertion all() Switch chain into validation mode for an array of values.
- * @method \Assert\LazyAssertion nullOr() Switch chain into mode allowing nulls, ignoring further assertions.
+ * @method LazyAssertion alnum($message = null, $propertyPath = null) Assert that value is alphanumeric.
+ * @method LazyAssertion betweenLength($minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string length is between min,max lengths.
+ * @method LazyAssertion boolean($message = null, $propertyPath = null) Assert that value is php boolean.
+ * @method LazyAssertion choice($choices, $message = null, $propertyPath = null) Assert that value is in array of choices.
+ * @method LazyAssertion choicesNotEmpty($choices, $message = null, $propertyPath = null) Determines if the values array has every choice as key and that this choice has content.
+ * @method LazyAssertion classExists($message = null, $propertyPath = null) Assert that the class exists.
+ * @method LazyAssertion contains($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string contains a sequence of chars.
+ * @method LazyAssertion count($count, $message = null, $propertyPath = null) Assert that the count of countable is equal to count.
+ * @method LazyAssertion date($format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format.
+ * @method LazyAssertion digit($message = null, $propertyPath = null) Validates if an integer or integerish is a digit.
+ * @method LazyAssertion directory($message = null, $propertyPath = null) Assert that a directory exists.
+ * @method LazyAssertion email($message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL).
+ * @method LazyAssertion endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars.
+ * @method LazyAssertion eq($value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ).
+ * @method LazyAssertion false($message = null, $propertyPath = null) Assert that the value is boolean False.
+ * @method LazyAssertion file($message = null, $propertyPath = null) Assert that a file exists.
+ * @method LazyAssertion float($message = null, $propertyPath = null) Assert that value is a php float.
+ * @method LazyAssertion greaterOrEqualThan($limit, $message = null, $propertyPath = null) Determines if the value is greater or equal than given limit.
+ * @method LazyAssertion greaterThan($limit, $message = null, $propertyPath = null) Determines if the value is greater than given limit.
+ * @method LazyAssertion implementsInterface($interfaceName, $message = null, $propertyPath = null) Assert that the class implements the interface.
+ * @method LazyAssertion inArray($choices, $message = null, $propertyPath = null) Alias of {@see choice()}.
+ * @method LazyAssertion integer($message = null, $propertyPath = null) Assert that value is a php integer.
+ * @method LazyAssertion integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
+ * @method LazyAssertion isArray($message = null, $propertyPath = null) Assert that value is an array.
+ * @method LazyAssertion isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
+ * @method LazyAssertion isInstanceOf($className, $message = null, $propertyPath = null) Assert that value is instance of given class-name.
+ * @method LazyAssertion isJsonString($message = null, $propertyPath = null) Assert that the given string is a valid json string.
+ * @method LazyAssertion isObject($message = null, $propertyPath = null) Determines that the provided value is an object.
+ * @method LazyAssertion isTraversable($message = null, $propertyPath = null) Assert that value is an array or a traversable object.
+ * @method LazyAssertion keyExists($key, $message = null, $propertyPath = null) Assert that key exists in an array.
+ * @method LazyAssertion keyIsset($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
+ * @method LazyAssertion length($length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length.
+ * @method LazyAssertion lessOrEqualThan($limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit.
+ * @method LazyAssertion lessThan($limit, $message = null, $propertyPath = null) Determines if the value is less than given limit.
+ * @method LazyAssertion max($maxValue, $message = null, $propertyPath = null) Assert that a number is smaller as a given limit.
+ * @method LazyAssertion maxLength($maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string value is not longer than $maxLength chars.
+ * @method LazyAssertion methodExists($object, $message = null, $propertyPath = null) Determines that the named method is defined in the provided object.
+ * @method LazyAssertion min($minValue, $message = null, $propertyPath = null) Assert that a value is at least as big as a given limit.
+ * @method LazyAssertion minLength($minLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that a string is at least $minLength chars long.
+ * @method LazyAssertion noContent($message = null, $propertyPath = null) Assert that value is empty.
+ * @method LazyAssertion notBlank($message = null, $propertyPath = null) Assert that value is not blank.
+ * @method LazyAssertion notEmpty($message = null, $propertyPath = null) Assert that value is not empty.
+ * @method LazyAssertion notEmptyKey($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty.
+ * @method LazyAssertion notEq($value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ).
+ * @method LazyAssertion notIsInstanceOf($className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name.
+ * @method LazyAssertion notNull($message = null, $propertyPath = null) Assert that value is not null.
+ * @method LazyAssertion notSame($value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ).
+ * @method LazyAssertion numeric($message = null, $propertyPath = null) Assert that value is numeric.
+ * @method LazyAssertion range($minValue, $maxValue, $message = null, $propertyPath = null) Assert that value is in range of numbers.
+ * @method LazyAssertion readable($message = null, $propertyPath = null) Assert that the value is something readable.
+ * @method LazyAssertion regex($pattern, $message = null, $propertyPath = null) Assert that value matches a regex.
+ * @method LazyAssertion same($value2, $message = null, $propertyPath = null) Assert that two values are the same (using ===).
+ * @method LazyAssertion scalar($message = null, $propertyPath = null) Assert that value is a PHP scalar.
+ * @method LazyAssertion startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string starts with a sequence of chars.
+ * @method LazyAssertion string($message = null, $propertyPath = null) Assert that value is a string.
+ * @method LazyAssertion subclassOf($className, $message = null, $propertyPath = null) Assert that value is subclass of given class-name.
+ * @method LazyAssertion true($message = null, $propertyPath = null) Assert that the value is boolean True.
+ * @method LazyAssertion url($message = null, $propertyPath = null) Assert that value is an URL.
+ * @method LazyAssertion uuid($message = null, $propertyPath = null) Assert that the given string is a valid UUID.
+ * @method LazyAssertion writeable($message = null, $propertyPath = null) Assert that the value is something writeable.
+ * @method LazyAssertion all() Switch chain into validation mode for an array of values.
+ * @method LazyAssertion nullOr() Switch chain into mode allowing nulls, ignoring further assertions.
  */
 class LazyAssertion
 {

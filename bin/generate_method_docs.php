@@ -13,7 +13,7 @@ class MethodDocGenerator
             return $parameter->getPosition() === 0;
         };
 
-        $docs = $this->generateMethodDocs($this->gatherAssertions(), ' * @method \Assert\AssertionChain %s(%s) %s.', $skipParameterTest);
+        $docs = $this->generateMethodDocs($this->gatherAssertions(), ' * @method AssertionChain %s(%s) %s.', $skipParameterTest);
         $this->generateFile($phpFile, $docs, 'class');
     }
 
@@ -28,7 +28,7 @@ class MethodDocGenerator
 
             $parameters = [];
 
-            foreach ($method->getParameters() as &$methodParameter) {
+            foreach ($method->getParameters() as $methodParameter) {
                 if ($skipParameterTest($methodParameter)) {
                     continue;
                 }
@@ -79,7 +79,7 @@ class MethodDocGenerator
         switch ($fileType) {
             case 'class':
                 $file = preg_replace(
-                    '` * @method.*?/ */\nclass `sim',
+                    '`\* @method.*? \*/\nclass `sim',
                     sprintf("%s\n */\nclass ", trim(implode("\n", $lines))),
                     $file
                 );
@@ -132,8 +132,8 @@ class MethodDocGenerator
         };
 
         $docs = array_merge(
-            $this->generateMethodDocs($this->gatherAssertions(), ' * @method \Assert\LazyAssertion %s(%s) %s.', $skipParameterTest),
-            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), ' * @method \Assert\LazyAssertion %s(%s) %s.', false)
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method LazyAssertion %s(%s) %s.', $skipParameterTest),
+            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), ' * @method LazyAssertion %s(%s) %s.', false)
         );
 
         $this->generateFile($phpFile, $docs, 'class');
