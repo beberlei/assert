@@ -51,11 +51,11 @@ EXC
                 ->that('string', 'baz')->isArray()
                 ->verifyNow();
         } catch (LazyAssertionException $ex) {
-            self::assertEquals([
+            self::assertEquals(array(
                 'Value "10" expected to be string, type integer given.',
                 'Value "<NULL>" is empty, but non empty value was expected.',
                 'Value "string" is not an array.',
-            ], array_map(function (\Exception $ex) {
+            ), array_map(function (\Exception $ex) {
                 return $ex->getMessage();
             }, $ex->getErrorExceptions()));
         }
