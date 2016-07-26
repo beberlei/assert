@@ -1164,7 +1164,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::isCallable('\is_callable');
         Assertion::isCallable(__NAMESPACE__ . "\\someCallable");
-        Assertion::isCallable([__NAMESPACE__ . "\\OneCountable", "count"]);
+        Assertion::isCallable(array(__NAMESPACE__ . "\\OneCountable", "count"));
         Assertion::isCallable(function () {
         });
     }
