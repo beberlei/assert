@@ -43,6 +43,7 @@ namespace Assert;
  * @method LazyAssertion integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
  * @method LazyAssertion isArray($message = null, $propertyPath = null) Assert that value is an array.
  * @method LazyAssertion isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
+ * @method LazyAssertion isCallable($message = null, $propertyPath = null) Determines that the provided value is callable.
  * @method LazyAssertion isInstanceOf($className, $message = null, $propertyPath = null) Assert that value is instance of given class-name.
  * @method LazyAssertion isJsonString($message = null, $propertyPath = null) Assert that the given string is a valid json string.
  * @method LazyAssertion isObject($message = null, $propertyPath = null) Determines that the provided value is an object.

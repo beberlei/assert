@@ -161,6 +161,7 @@ Assertion::integer($value);
 Assertion::integerish($value);
 Assertion::isArray($value);
 Assertion::isArrayAccessible($value);
+Assertion::isCallable($value);
 Assertion::isInstanceOf($value, $className);
 Assertion::isJsonString($value);
 Assertion::isObject($value);

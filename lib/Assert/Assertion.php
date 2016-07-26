@@ -45,6 +45,7 @@ use BadMethodCallException;
  * @method static void allIntegerish($value, $message = null, $propertyPath = null) Assert that value is a php integer'ish for all values.
  * @method static void allIsArray($value, $message = null, $propertyPath = null) Assert that value is an array for all values.
  * @method static void allIsArrayAccessible($value, $message = null, $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
+ * @method static void allIsCallable($value, $message = null, $propertyPath = null) Determines that the provided value is callable for all values.
  * @method static void allIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is instance of given class-name for all values.
  * @method static void allIsJsonString($value, $message = null, $propertyPath = null) Assert that the given string is a valid json string for all values.
  * @method static void allIsObject($value, $message = null, $propertyPath = null) Determines that the provided value is an object for all values.
@@ -105,6 +106,7 @@ use BadMethodCallException;
  * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null) Assert that value is a php integer'ish or that the value is null.
  * @method static void nullOrIsArray($value, $message = null, $propertyPath = null) Assert that value is an array or that the value is null.
  * @method static void nullOrIsArrayAccessible($value, $message = null, $propertyPath = null) Assert that value is an array or an array-accessible object or that the value is null.
+ * @method static void nullOrIsCallable($value, $message = null, $propertyPath = null) Determines that the provided value is callable or that the value is null.
  * @method static void nullOrIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is instance of given class-name or that the value is null.
  * @method static void nullOrIsJsonString($value, $message = null, $propertyPath = null) Assert that the given string is a valid json string or that the value is null.
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null) Determines that the provided value is an object or that the value is null.
@@ -199,6 +201,7 @@ class Assertion
     const INVALID_GREATER           = 212;
     const INVALID_GREATER_OR_EQUAL  = 212;
     const INVALID_DATE              = 213;
+    const INVALID_CALLABLE          = 214;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1680,6 +1683,25 @@ class Assertion
              throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
          }
      }
+
+    /**
+     * Determines that the provided value is callable.
+     *
+     * @param mixed $value
+     * @param null $message
+     * @param null $propertyPath
+     */
+    public static function isCallable($value, $message = null, $propertyPath = null)
+    {
+        if (!is_callable($value)) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is not a callable.',
+                self::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
+        }
+    }
 
     /**
      * Make a string version of a value.

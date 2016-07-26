@@ -1153,6 +1153,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_ARRAY_ACCESSIBLE);
         Assertion::isArrayAccessible('not array accessible');
     }
+
+    public function testInvalidCallable()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CALLABLE);
+        Assertion::isCallable("nonExistingFunction");
+    }
+
+    public function testValidCallable()
+    {
+        Assertion::isCallable('\is_callable');
+        Assertion::isCallable(__NAMESPACE__ . "\\someCallable");
+        Assertion::isCallable([__NAMESPACE__ . "\\OneCountable", "count"]);
+        Assertion::isCallable(function () {
+        });
+    }
 }
 
 class ChildStdClass extends \stdClass
@@ -1166,4 +1181,9 @@ class OneCountable implements \Countable
     {
         return 1;
     }
+}
+
+function someCallable()
+{
+
 }

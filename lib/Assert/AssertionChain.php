@@ -46,6 +46,7 @@ use ReflectionClass;
  * @method AssertionChain integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
  * @method AssertionChain isArray($message = null, $propertyPath = null) Assert that value is an array.
  * @method AssertionChain isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
+ * @method AssertionChain isCallable($message = null, $propertyPath = null) Determines that the provided value is callable.
  * @method AssertionChain isInstanceOf($className, $message = null, $propertyPath = null) Assert that value is instance of given class-name.
  * @method AssertionChain isJsonString($message = null, $propertyPath = null) Assert that the given string is a valid json string.
  * @method AssertionChain isObject($message = null, $propertyPath = null) Determines that the provided value is an object.
