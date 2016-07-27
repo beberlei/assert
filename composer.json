@@ -24,5 +24,8 @@
         "branch-alias": {
             "dev-master": "2.5-dev"
         }
+    },
+    "scripts": {
+        "generate-docs": "php bin/generate_method_docs.php"
     }
 }
