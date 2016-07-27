@@ -65,6 +65,7 @@ use BadMethodCallException;
  * @method static void allNotEmpty($value, $message = null, $propertyPath = null) Assert that value is not empty for all values.
  * @method static void allNotEmptyKey($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty for all values.
  * @method static void allNotEq($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ) for all values.
+ * @method static void allNotInArray($value, $choices, $message = null, $propertyPath = null) Assert that value is not in array of choices for all values.
  * @method static void allNotIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name for all values.
  * @method static void allNotNull($value, $message = null, $propertyPath = null) Assert that value is not null for all values.
  * @method static void allNotSame($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ) for all values.
@@ -126,6 +127,7 @@ use BadMethodCallException;
  * @method static void nullOrNotEmpty($value, $message = null, $propertyPath = null) Assert that value is not empty or that the value is null.
  * @method static void nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty or that the value is null.
  * @method static void nullOrNotEq($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ) or that the value is null.
+ * @method static void nullOrNotInArray($value, $choices, $message = null, $propertyPath = null) Assert that value is not in array of choices or that the value is null.
  * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name or that the value is null.
  * @method static void nullOrNotNull($value, $message = null, $propertyPath = null) Assert that value is not null or that the value is null.
  * @method static void nullOrNotSame($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ) or that the value is null.
@@ -182,6 +184,7 @@ class Assertion
     const INVALID_TRAVERSABLE       = 44;
     const INVALID_ARRAY_ACCESSIBLE  = 45;
     const INVALID_KEY_ISSET         = 46;
+    const INVALID_VALUE_IN_ARRAY    = 47;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -308,6 +311,28 @@ class Assertion
                 self::stringify($value2)
             );
             throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath, array('expected' => $value2));
+        }
+    }
+
+    /**
+     * Assert that value is not in array of choices.
+     *
+     * @param mixed $value
+     * @param array $choices
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function notInArray($value, array $choices, $message = null, $propertyPath = null)
+    {
+        if (in_array($value, $choices) === true) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is in given "%s".',
+                self::stringify($value),
+                self::stringify($choices)
+            );
+            throw static::createException($value, $message, static::INVALID_VALUE_IN_ARRAY, $propertyPath);
         }
     }
 
