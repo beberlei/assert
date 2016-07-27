@@ -8,7 +8,10 @@ $rules = array(
     '@PSR2' => true,
 );
 
+$cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
+
 return PhpCsFixer\Config::create()
     ->setRules($rules)
     ->finder($finder)
-    ->setUsingCache(true);
+    ->setUsingCache(true)
+    ->setCacheFile($cacheDir . '/.php_cs.cache');
