@@ -233,7 +233,9 @@ package based level.
 
 To shield your library from possible bugs, misinterpretations or BC breaks
 inside Assert you should introduce a library/project based assertion subclass,
-where you can override the exception thrown as well:
+where you can override the exception thrown as well. In addition, you can
+override the ``Assert\Assertion::stringify()`` method to provide your own
+interpretations of the types during error handling.
 
 ```php
 <?php
