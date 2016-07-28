@@ -9,10 +9,13 @@
     "keywords": ["assert", "assertion", "validation"],
     "require": {
         "php": ">=5.3",
-        "ext-mbstring": "*"
+        "symfony/polyfill-mbstring": "^1.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "~4.0|^5.0"
+    },
+    "suggest": {
+        "ext-mbstring": "For best performance"
     },
     "autoload": {
         "psr-0": {
