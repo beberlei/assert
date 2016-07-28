@@ -235,6 +235,7 @@ inside Assert you should introduce a library/project based assertion subclass,
 where you can override the exception thrown as well:
 
 ```php
+<?php
 namespace MyProject;
 
 use Assert\Assertion as BaseAssertion;
