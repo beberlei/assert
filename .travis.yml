@@ -11,8 +11,10 @@ php:
   - 7.0
   - hhvm
 
-before_script:
+before_install:
   - composer self-update
+
+install:
   - composer update
 
 script: php vendor/bin/phpunit
