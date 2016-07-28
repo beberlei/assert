@@ -26,6 +26,6 @@
         }
     },
     "scripts": {
-        "generate-docs": "php bin/generate_method_docs.php"
+        "assert:generate-docs": "php bin/generate_method_docs.php"
     }
 }
