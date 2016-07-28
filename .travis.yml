@@ -15,5 +15,6 @@ install:
   - composer update
 
 script:
+  - vendor/bin/php-cs-fixer fix --diff --verbose --dry-run
   - php vendor/bin/phpunit
   - composer assert:generate-docs && [[ -z $(git status -s) ]] || echo "Please run composer assert:generate-docs and commit the changes"

@@ -24,7 +24,8 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "@stable"
+    "phpunit/phpunit": "@stable",
+    "friendsofphp/php-cs-fixer": "^1.12"
   },
   "autoload": {
     "psr-0": {
@@ -35,6 +36,7 @@
     ]
   },
   "scripts": {
-    "assert:generate-docs": "php bin/generate_method_docs.php"
+    "assert:generate-docs": "php bin/generate_method_docs.php",
+    "cs-fix": "php-cs-fixer fix . -vv || true"
   }
 }
