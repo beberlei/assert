@@ -16,6 +16,7 @@ The following 3 assertions failed:
 1) foo: Value "10" expected to be string, type integer given.
 2) bar: Value "<NULL>" is empty, but non empty value was expected.
 3) baz: Value "string" is not an array.
+
 EXC
         );
 
@@ -34,6 +35,7 @@ EXC
         $this->setExpectedException('Assert\LazyAssertionException', <<<EXC
 The following 1 assertions failed:
 1) foo: Value "<NULL>" is empty, but non empty value was expected.
+
 EXC
         );
 
