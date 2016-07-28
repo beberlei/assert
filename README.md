@@ -246,3 +246,6 @@ class Assertion extends BaseAssertion
 }
 ```
 
+## Contributing
+Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
+

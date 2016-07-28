@@ -74,26 +74,31 @@ class MethodDocGenerator
 
     private function generateFile($phpFile, $lines, $fileType)
     {
-        $file = file_get_contents($phpFile);
+        $phpFile = realpath($phpFile);
+        $fileContent = file_get_contents($phpFile);
 
         switch ($fileType) {
             case 'class':
-                $file = preg_replace(
+                $fileContent = preg_replace(
                     '`\* @method.*? \*/\nclass `sim',
                     sprintf("%s\n */\nclass ", trim(implode("\n", $lines))),
-                    $file
+                    $fileContent
                 );
                 break;
             case 'readme':
-                $file = preg_replace(
+                $fileContent = preg_replace(
                     '/```php\n<\?php\nuse Assert\\\Assertion;\n\nAssertion::.*?```/sim',
                     sprintf("```php\n<?php\nuse Assert\\Assertion;\n\n%s\n\n```", implode("\n", $lines)),
-                    $file
+                    $fileContent
                 );
                 break;
         }
 
-        file_put_contents($phpFile, $file);
+        $writtenBytes = file_put_contents($phpFile, $fileContent);
+
+        if ($writtenBytes !== false) {
+            echo 'Generated ' . $phpFile . '.' . PHP_EOL;
+        }
     }
 
     public function generateAssertionDocs()
