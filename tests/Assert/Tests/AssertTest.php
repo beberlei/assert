@@ -621,6 +621,15 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notSame(1, 1);
     }
 
+    public function testNotInArray()
+    {
+        Assertion::notInArray(6, range(1, 5));
+
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_VALUE_IN_ARRAY);
+        Assertion::notInArray(1, range(1, 5));
+        Assertion::notInArray(range('a', 'c'), range('a', 'd'));
+    }
+
     public function testMin()
     {
         Assertion::min(1, 1);

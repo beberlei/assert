@@ -181,6 +181,7 @@ Assertion::notBlank($value);
 Assertion::notEmpty($value);
 Assertion::notEmptyKey($value, $key);
 Assertion::notEq($value1, $value2);
+Assertion::notInArray($value, $choices);
 Assertion::notIsInstanceOf($value, $className);
 Assertion::notNull($value);
 Assertion::notSame($value1, $value2);

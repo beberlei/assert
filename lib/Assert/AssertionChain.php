@@ -66,6 +66,7 @@ use ReflectionClass;
  * @method AssertionChain notEmpty($message = null, $propertyPath = null) Assert that value is not empty.
  * @method AssertionChain notEmptyKey($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty.
  * @method AssertionChain notEq($value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ).
+ * @method AssertionChain notInArray($choices, $message = null, $propertyPath = null) Assert that value is not in array of choices.
  * @method AssertionChain notIsInstanceOf($className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name.
  * @method AssertionChain notNull($message = null, $propertyPath = null) Assert that value is not null.
  * @method AssertionChain notSame($value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ).
