@@ -11,9 +11,6 @@ php:
   - 7.0
   - hhvm
 
-before_install:
-  - composer self-update
-
 install:
   - composer update
 
