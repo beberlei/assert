@@ -1,31 +1,45 @@
 {
-    "name": "beberlei/assert",
-    "description": "Thin assertion library for input validation in business models.",
-    "authors": [
-        {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de", "role": "Lead Developer"},
-        {"name": "Richard Quadling", "email": "rquadling@gmail.com", "role": "Collaborator"}
-    ],
-    "license": "BSD-2-Clause",
-    "keywords": ["assert", "assertion", "validation"],
-    "require": {
-        "php": ">=5.3",
-        "ext-mbstring": "*"
+  "name": "beberlei/assert",
+  "description": "Thin assertion library for input validation in business models.",
+  "authors": [
+    {
+      "name": "Benjamin Eberlei",
+      "email": "kontakt@beberlei.de",
+      "role": "Lead Developer"
     },
-    "require-dev": {
-        "phpunit/phpunit": "@stable"
-    },
-    "autoload": {
-        "psr-0": {
-            "Assert": "lib/"
-        },
-        "files": ["lib/Assert/functions.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.5-dev"
-        }
-    },
-    "scripts": {
-        "assert:generate-docs": "php bin/generate_method_docs.php"
+    {
+      "name": "Richard Quadling",
+      "email": "rquadling@gmail.com",
+      "role": "Collaborator"
     }
+  ],
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "assert",
+    "assertion",
+    "validation"
+  ],
+  "require": {
+    "php": ">=5.3",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable"
+  },
+  "autoload": {
+    "psr-0": {
+      "Assert": "lib/"
+    },
+    "files": [
+      "lib/Assert/functions.php"
+    ]
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.5-dev"
+    }
+  },
+  "scripts": {
+    "assert:generate-docs": "php bin/generate_method_docs.php"
+  }
 }
