@@ -52,6 +52,7 @@ use BadMethodCallException;
  * @method static void allIsTraversable($value, $message = null, $propertyPath = null) Assert that value is an array or a traversable object for all values.
  * @method static void allKeyExists($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array for all values.
  * @method static void allKeyIsset($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() for all values.
+ * @method static void allKeyNotExists($value, $key, $message = null, $propertyPath = null) Assert that key does not exist in an array for all values.
  * @method static void allLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length for all values.
  * @method static void allLessOrEqualThan($value, $limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit for all values.
  * @method static void allLessThan($value, $limit, $message = null, $propertyPath = null) Determines if the value is less than given limit for all values.
@@ -113,8 +114,8 @@ use BadMethodCallException;
  * @method static void nullOrIsObject($value, $message = null, $propertyPath = null) Determines that the provided value is an object or that the value is null.
  * @method static void nullOrIsTraversable($value, $message = null, $propertyPath = null) Assert that value is an array or a traversable object or that the value is null.
  * @method static void nullOrKeyExists($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array or that the value is null.
- * @method static void nullOrKeyNotExists($value, $key, $message = null, $propertyPath = null) Assert that key does not exist in an array
  * @method static void nullOrKeyIsset($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() or that the value is null.
+ * @method static void nullOrKeyNotExists($value, $key, $message = null, $propertyPath = null) Assert that key does not exist in an array or that the value is null.
  * @method static void nullOrLength($value, $length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length or that the value is null.
  * @method static void nullOrLessOrEqualThan($value, $limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit or that the value is null.
  * @method static void nullOrLessThan($value, $limit, $message = null, $propertyPath = null) Determines if the value is less than given limit or that the value is null.
