@@ -50,6 +50,7 @@ namespace Assert;
  * @method LazyAssertion isTraversable($message = null, $propertyPath = null) Assert that value is an array or a traversable object.
  * @method LazyAssertion keyExists($key, $message = null, $propertyPath = null) Assert that key exists in an array.
  * @method LazyAssertion keyIsset($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
+ * @method LazyAssertion keyNotExists($key, $message = null, $propertyPath = null) Assert that key does not exist in an array.
  * @method LazyAssertion length($length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length.
  * @method LazyAssertion lessOrEqualThan($limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit.
  * @method LazyAssertion lessThan($limit, $message = null, $propertyPath = null) Determines if the value is less than given limit.

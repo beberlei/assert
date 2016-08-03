@@ -53,6 +53,7 @@ use ReflectionClass;
  * @method AssertionChain isTraversable($message = null, $propertyPath = null) Assert that value is an array or a traversable object.
  * @method AssertionChain keyExists($key, $message = null, $propertyPath = null) Assert that key exists in an array.
  * @method AssertionChain keyIsset($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
+ * @method AssertionChain keyNotExists($key, $message = null, $propertyPath = null) Assert that key does not exist in an array.
  * @method AssertionChain length($length, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string has a given length.
  * @method AssertionChain lessOrEqualThan($limit, $message = null, $propertyPath = null) Determines if the value is less or than given limit.
  * @method AssertionChain lessThan($limit, $message = null, $propertyPath = null) Determines if the value is less than given limit.

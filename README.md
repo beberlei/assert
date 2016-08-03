@@ -168,6 +168,7 @@ Assertion::isObject($value);
 Assertion::isTraversable($value);
 Assertion::keyExists($value, $key);
 Assertion::keyIsset($value, $key);
+Assertion::keyNotExists($value, $key);
 Assertion::length($value, $length);
 Assertion::lessOrEqualThan($value, $limit);
 Assertion::lessThan($value, $limit);
