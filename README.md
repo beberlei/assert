@@ -186,6 +186,7 @@ Assertion::notInArray($value, $choices);
 Assertion::notIsInstanceOf($value, $className);
 Assertion::notNull($value);
 Assertion::notSame($value1, $value2);
+Assertion::null($value);
 Assertion::numeric($value);
 Assertion::range($value, $minValue, $maxValue);
 Assertion::readable($value);

@@ -71,6 +71,7 @@ use ReflectionClass;
  * @method AssertionChain notIsInstanceOf($className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name.
  * @method AssertionChain notNull($message = null, $propertyPath = null) Assert that value is not null.
  * @method AssertionChain notSame($value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ).
+ * @method AssertionChain null($message = null, $propertyPath = null) Assert that value is null.
  * @method AssertionChain numeric($message = null, $propertyPath = null) Assert that value is numeric.
  * @method AssertionChain range($minValue, $maxValue, $message = null, $propertyPath = null) Assert that value is in range of numbers.
  * @method AssertionChain readable($message = null, $propertyPath = null) Assert that the value is something readable.

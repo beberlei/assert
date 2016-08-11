@@ -68,6 +68,7 @@ namespace Assert;
  * @method LazyAssertion notIsInstanceOf($className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name.
  * @method LazyAssertion notNull($message = null, $propertyPath = null) Assert that value is not null.
  * @method LazyAssertion notSame($value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ).
+ * @method LazyAssertion null($message = null, $propertyPath = null) Assert that value is null.
  * @method LazyAssertion numeric($message = null, $propertyPath = null) Assert that value is numeric.
  * @method LazyAssertion range($minValue, $maxValue, $message = null, $propertyPath = null) Assert that value is in range of numbers.
  * @method LazyAssertion readable($message = null, $propertyPath = null) Assert that the value is something readable.
