@@ -62,4 +62,17 @@ EXC
             }, $ex->getErrorExceptions()));
         }
     }
+
+    /**
+     * @test
+     * @expectedException Assert\AssertionException
+     */
+    public function testLazyAssertionExceptionIsAnAssertionException()
+    {
+        \Assert\lazy()
+            ->that(10, 'foo')->string()
+            ->that(null, 'bar')->notEmpty()
+            ->that('string', 'baz')->isArray()
+            ->verifyNow();
+    }
 }
