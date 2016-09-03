@@ -191,6 +191,7 @@ Assertion::range($value, $minValue, $maxValue);
 Assertion::readable($value);
 Assertion::regex($value, $pattern);
 Assertion::same($value, $value2);
+Assertion::satisfy($value, $callback);
 Assertion::scalar($value);
 Assertion::startsWith($string, $needle);
 Assertion::string($value);

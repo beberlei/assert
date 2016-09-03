@@ -73,6 +73,7 @@ namespace Assert;
  * @method LazyAssertion readable($message = null, $propertyPath = null) Assert that the value is something readable.
  * @method LazyAssertion regex($pattern, $message = null, $propertyPath = null) Assert that value matches a regex.
  * @method LazyAssertion same($value2, $message = null, $propertyPath = null) Assert that two values are the same (using ===).
+ * @method LazyAssertion satisfy($callback, $message = null, $propertyPath = null) Assert that the provided value is valid according to a callback.
  * @method LazyAssertion scalar($message = null, $propertyPath = null) Assert that value is a PHP scalar.
  * @method LazyAssertion startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string starts with a sequence of chars.
  * @method LazyAssertion string($message = null, $propertyPath = null) Assert that value is a string.

@@ -82,4 +82,14 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
     {
         \Assert\that(null)->unknownAssertion();
     }
+
+    /**
+     * @test
+     */
+    public function it_has_satisfy_shortcut()
+    {
+        \Assert\that(null)->satisfy(function ($value) {
+            return is_null($value);
+        });
+    }
 }

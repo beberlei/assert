@@ -75,6 +75,7 @@ use BadMethodCallException;
  * @method static void allReadable($value, $message = null, $propertyPath = null) Assert that the value is something readable for all values.
  * @method static void allRegex($value, $pattern, $message = null, $propertyPath = null) Assert that value matches a regex for all values.
  * @method static void allSame($value, $value2, $message = null, $propertyPath = null) Assert that two values are the same (using ===) for all values.
+ * @method static void allSatisfy($value, $callback, $message = null, $propertyPath = null) Assert that the provided value is valid according to a callback for all values.
  * @method static void allScalar($value, $message = null, $propertyPath = null) Assert that value is a PHP scalar for all values.
  * @method static void allStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string starts with a sequence of chars for all values.
  * @method static void allString($value, $message = null, $propertyPath = null) Assert that value is a string for all values.
@@ -138,6 +139,7 @@ use BadMethodCallException;
  * @method static void nullOrReadable($value, $message = null, $propertyPath = null) Assert that the value is something readable or that the value is null.
  * @method static void nullOrRegex($value, $pattern, $message = null, $propertyPath = null) Assert that value matches a regex or that the value is null.
  * @method static void nullOrSame($value, $value2, $message = null, $propertyPath = null) Assert that two values are the same (using ===) or that the value is null.
+ * @method static void nullOrSatisfy($value, $callback, $message = null, $propertyPath = null) Assert that the provided value is valid according to a callback or that the value is null.
  * @method static void nullOrScalar($value, $message = null, $propertyPath = null) Assert that value is a PHP scalar or that the value is null.
  * @method static void nullOrStartsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string starts with a sequence of chars or that the value is null.
  * @method static void nullOrString($value, $message = null, $propertyPath = null) Assert that value is a string or that the value is null.
@@ -208,6 +210,7 @@ class Assertion
     const INVALID_DATE              = 214;
     const INVALID_CALLABLE          = 215;
     const INVALID_KEY_NOT_EXISTS    = 216;
+    const INVALID_SATISFY           = 217;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1752,6 +1755,28 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the provided value is valid according to a callback.
+     *
+     * If the callback returns `false` the assertion will fail.
+     *
+     * @param mixed $value
+     * @param callable $callback
+     * @param string|null $message
+     * @param string|null $propertyPath
+     */
+    public static function satisfy($value, $callback, $message = null, $propertyPath = null)
+    {
+        if (call_user_func($callback, $value) === false) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is invalid according to custom rule.',
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_SATISFY, $propertyPath);
         }
     }
 
