@@ -14,4 +14,6 @@ php:
 install:
   - composer update
 
-script: php vendor/bin/phpunit
+script:
+  - php vendor/bin/phpunit
+  - composer assert:generate-docs && [[ -z $(git status -s) ]] || echo "Please run composer assert:generate-docs and commit the changes"
