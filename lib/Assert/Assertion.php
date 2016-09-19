@@ -1770,6 +1770,8 @@ class Assertion
      */
     public static function satisfy($value, $callback, $message = null, $propertyPath = null)
     {
+        static::isCallable($callback);
+
         if (call_user_func($callback, $value) === false) {
             $message = sprintf(
                 $message ?: 'Provided "%s" is invalid according to custom rule.',
