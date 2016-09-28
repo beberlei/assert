@@ -1188,6 +1188,29 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::isCallable(function () {
         });
     }
+
+    public function testInvalidSatisfy()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SATISFY);
+        Assertion::satisfy(null, function ($value) {
+            return !is_null($value);
+        });
+    }
+
+    public function testValidSatisfy()
+    {
+        // Should not fail with true return
+        Assertion::satisfy(null, function ($value) {
+            return is_null($value);
+        });
+
+        // Should not fail with void return
+        Assertion::satisfy(true, function ($value) {
+            if (!is_bool($value)) {
+                return false;
+            }
+        });
+    }
 }
 
 class ChildStdClass extends \stdClass

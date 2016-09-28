@@ -76,6 +76,7 @@ use ReflectionClass;
  * @method AssertionChain readable($message = null, $propertyPath = null) Assert that the value is something readable.
  * @method AssertionChain regex($pattern, $message = null, $propertyPath = null) Assert that value matches a regex.
  * @method AssertionChain same($value2, $message = null, $propertyPath = null) Assert that two values are the same (using ===).
+ * @method AssertionChain satisfy($callback, $message = null, $propertyPath = null) Assert that the provided value is valid according to a callback.
  * @method AssertionChain scalar($message = null, $propertyPath = null) Assert that value is a PHP scalar.
  * @method AssertionChain startsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string starts with a sequence of chars.
  * @method AssertionChain string($message = null, $propertyPath = null) Assert that value is a string.
