@@ -3,6 +3,8 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use Assert\AssertionException;
+use Assert\InvalidArgumentException;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
@@ -1030,6 +1032,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         } catch (AssertionFailedException $e) {
             $this->assertEquals(0, $e->getValue());
             $this->assertEquals(array('min' => 10, 'max' => 20), $e->getConstraints());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function testCatchingWithInterface()
+    {
+        try {
+            Assertion::range(0, 10, 20);
+
+            $this->fail('Exception expected');
+        } catch (AssertionException $e) {
+            $this->assertTrue($e instanceof AssertionFailedException);
+            $this->assertTrue($e instanceof InvalidArgumentException);
         }
     }
 

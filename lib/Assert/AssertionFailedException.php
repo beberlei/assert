@@ -13,7 +13,7 @@
 
 namespace Assert;
 
-interface AssertionFailedException
+interface AssertionFailedException extends AssertionException
 {
     public function getPropertyPath();
     public function getValue();
