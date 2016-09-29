@@ -131,7 +131,6 @@ class MethodDocGenerator
     public function generateLazyAssertionDocs()
     {
         $phpFile           = __DIR__ . '/../lib/Assert/LazyAssertion.php';
-        $flags             = '\\Assert\\LazyAssertion';
         $skipParameterTest = function ($parameter) {
             return $parameter->getPosition() === 0;
         };
