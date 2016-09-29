@@ -647,8 +647,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::min(2, 1);
         Assertion::min(2.5, 1);
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN);
-        Assertion::min(0, 1);
+        try {
+            Assertion::min(0, 1);
+            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
+        } catch (AssertionFailedException $e){
+            $this->assertEquals(Assertion::INVALID_MIN, $e->getCode());
+            $this->assertEquals('Number "0" was expected to be at least "1".', $e->getMessage());
+        }
+
+        try {
+            Assertion::min(0.5, 2.5);
+            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
+        } catch (AssertionFailedException $e){
+            $this->assertEquals(Assertion::INVALID_MIN, $e->getCode());
+            $this->assertEquals('Number "0.5" was expected to be at least "2.5".', $e->getMessage());
+        }
     }
 
     public function testMax()
@@ -657,8 +670,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::max(0.5, 1);
         Assertion::max(0, 1);
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX);
-        Assertion::max(2, 1);
+        try {
+            Assertion::max(2, 1);
+            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
+        } catch (AssertionFailedException $e){
+            $this->assertEquals(Assertion::INVALID_MAX, $e->getCode());
+            $this->assertEquals('Number "2" was expected to be at most "1".', $e->getMessage());
+        }
+
+        try {
+            Assertion::max(2.5, 0.5);
+            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
+        } catch (AssertionFailedException $e){
+            $this->assertEquals(Assertion::INVALID_MAX, $e->getCode());
+            $this->assertEquals('Number "2.5" was expected to be at most "0.5".', $e->getMessage());
+        }
     }
 
     public function testNullOr()

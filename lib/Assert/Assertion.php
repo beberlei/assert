@@ -1123,7 +1123,7 @@ class Assertion
 
         if ($value < $minValue) {
             $message = sprintf(
-                $message ?: 'Number "%s" was expected to be at least "%d".',
+                $message ?: 'Number "%s" was expected to be at least "%s".',
                 static::stringify($value),
                 static::stringify($minValue)
             );
@@ -1148,7 +1148,7 @@ class Assertion
 
         if ($value > $maxValue) {
             $message = sprintf(
-                $message ?: 'Number "%s" was expected to be at most "%d".',
+                $message ?: 'Number "%s" was expected to be at most "%s".',
                 static::stringify($value),
                 static::stringify($maxValue)
             );
