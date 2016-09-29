@@ -159,6 +159,7 @@ Assertion::implementsInterface($class, $interfaceName);
 Assertion::inArray($value, $choices);
 Assertion::integer($value);
 Assertion::integerish($value);
+Assertion::interfaceExists($value);
 Assertion::isArray($value);
 Assertion::isArrayAccessible($value);
 Assertion::isCallable($value);

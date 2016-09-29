@@ -1237,6 +1237,18 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             }
         });
     }
+
+    public function testInvalidInterfaceExists()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTERFACE);
+        Assertion::interfaceExists("Foo");
+    }
+
+    public function testValidInterfaceExists()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTERFACE);
+        Assertion::interfaceExists("\\Countable");
+    }
 }
 
 class ChildStdClass extends \stdClass

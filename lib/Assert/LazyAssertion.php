@@ -41,6 +41,7 @@ namespace Assert;
  * @method LazyAssertion inArray($choices, $message = null, $propertyPath = null) Alias of {@see choice()}.
  * @method LazyAssertion integer($message = null, $propertyPath = null) Assert that value is a php integer.
  * @method LazyAssertion integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
+ * @method LazyAssertion interfaceExists($message = null, $propertyPath = null) Assert that the interface exists.
  * @method LazyAssertion isArray($message = null, $propertyPath = null) Assert that value is an array.
  * @method LazyAssertion isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method LazyAssertion isCallable($message = null, $propertyPath = null) Determines that the provided value is callable.

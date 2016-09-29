@@ -44,6 +44,7 @@ use ReflectionClass;
  * @method AssertionChain inArray($choices, $message = null, $propertyPath = null) Alias of {@see choice()}.
  * @method AssertionChain integer($message = null, $propertyPath = null) Assert that value is a php integer.
  * @method AssertionChain integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
+ * @method AssertionChain interfaceExists($message = null, $propertyPath = null) Assert that the interface exists.
  * @method AssertionChain isArray($message = null, $propertyPath = null) Assert that value is an array.
  * @method AssertionChain isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method AssertionChain isCallable($message = null, $propertyPath = null) Determines that the provided value is callable.
