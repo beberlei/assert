@@ -74,6 +74,7 @@ use BadMethodCallException;
  * @method static void allNotIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name for all values.
  * @method static void allNotNull($value, $message = null, $propertyPath = null) Assert that value is not null for all values.
  * @method static void allNotSame($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ) for all values.
+ * @method static void allNull($value, $message = null, $propertyPath = null) Assert that value is null for all values.
  * @method static void allNumeric($value, $message = null, $propertyPath = null) Assert that value is numeric for all values.
  * @method static void allRange($value, $minValue, $maxValue, $message = null, $propertyPath = null) Assert that value is in range of numbers for all values.
  * @method static void allReadable($value, $message = null, $propertyPath = null) Assert that the value is something readable for all values.
@@ -142,6 +143,7 @@ use BadMethodCallException;
  * @method static void nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name or that the value is null.
  * @method static void nullOrNotNull($value, $message = null, $propertyPath = null) Assert that value is not null or that the value is null.
  * @method static void nullOrNotSame($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not the same (using === ) or that the value is null.
+ * @method static void nullOrNull($value, $message = null, $propertyPath = null) Assert that value is null or that the value is null.
  * @method static void nullOrNumeric($value, $message = null, $propertyPath = null) Assert that value is numeric or that the value is null.
  * @method static void nullOrRange($value, $minValue, $maxValue, $message = null, $propertyPath = null) Assert that value is in range of numbers or that the value is null.
  * @method static void nullOrReadable($value, $message = null, $propertyPath = null) Assert that the value is something readable or that the value is null.
@@ -166,6 +168,7 @@ class Assertion
     const INVALID_BOOLEAN           = 13;
     const VALUE_EMPTY               = 14;
     const VALUE_NULL                = 15;
+    const VALUE_NOT_NULL            = 25;
     const INVALID_STRING            = 16;
     const INVALID_REGEX             = 17;
     const INVALID_MIN_LENGTH        = 18;
@@ -517,6 +520,27 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::VALUE_NOT_EMPTY, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is null
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function null($value, $message = null, $propertyPath = null)
+    {
+        if ($value !== null) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not null, but null value was expected.',
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::VALUE_NOT_NULL, $propertyPath);
         }
     }
 
@@ -1909,4 +1933,3 @@ class Assertion
         return 'unknown';
     }
 }
-
