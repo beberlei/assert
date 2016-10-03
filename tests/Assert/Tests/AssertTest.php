@@ -1238,6 +1238,61 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         });
     }
 
+    /**
+     * @dataProvider validIpProvider
+     */
+    public function testValidIp($value) {
+        Assertion::ip($value);
+    }
+
+    public function validIpProvider() {
+        return array(
+            array('0.0.0.0'),
+            array('14.32.152.216'),
+            array('255.255.255.255'),
+            array('2001:db8:85a3:8d3:1319:8a2e:370:7348'),
+        );
+    }
+
+    /**
+     * @dataProvider invalidIpProvider
+     */
+    public function testInvalidIp($value, $flag = null) {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
+        Assertion::ip($value, $flag);
+    }
+
+    public function invalidIpProvider() {
+        return array(
+            array('invalid ip address'),
+            array('14.32.152,216'),
+            array('14.32.256.216'),
+            array('192.168.0.10', FILTER_FLAG_NO_PRIV_RANGE),
+            array('127.0.0.1', FILTER_FLAG_NO_RES_RANGE),
+            array('2001:db8:85a3:8d3:1319:8g2e:370:7348'),
+            array('fdb9:75b9:9e69:5d08:1:1:1:1', FILTER_FLAG_NO_PRIV_RANGE),
+        );
+    }
+
+    public function testValidIpv4() {
+        Assertion::ipv4('109.188.127.26');
+    }
+
+    public function testInvalidIpv4() {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
+        Assertion::ipv4('2001:db8:85a3:8d3:1319:8a2e:370:7348');
+    }
+
+    public function testValidIpv6() {
+        Assertion::ipv6('2001:db8:85a3:8d3:1319:8a2e:370:7348');
+    }
+
+    public function testInvalidIpv6()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
+        Assertion::ipv6('109.188.127.26');
+    }
+
     public function testInvalidInterfaceExists()
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTERFACE);

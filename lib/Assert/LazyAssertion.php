@@ -42,6 +42,9 @@ namespace Assert;
  * @method LazyAssertion integer($message = null, $propertyPath = null) Assert that value is a php integer.
  * @method LazyAssertion integerish($message = null, $propertyPath = null) Assert that value is a php integer'ish.
  * @method LazyAssertion interfaceExists($message = null, $propertyPath = null) Assert that the interface exists.
+ * @method LazyAssertion ip($flag = null, $message = null, $propertyPath = null) Assert that value is an IPv4 or IPv6 address.
+ * @method LazyAssertion ipv4($flag = null, $message = null, $propertyPath = null) Assert that value is an IPv4 address.
+ * @method LazyAssertion ipv6($flag = null, $message = null, $propertyPath = null) Assert that value is an IPv6 address.
  * @method LazyAssertion isArray($message = null, $propertyPath = null) Assert that value is an array.
  * @method LazyAssertion isArrayAccessible($message = null, $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method LazyAssertion isCallable($message = null, $propertyPath = null) Determines that the provided value is callable.
