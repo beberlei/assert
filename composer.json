@@ -34,11 +34,6 @@
       "lib/Assert/functions.php"
     ]
   },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
-    }
-  },
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php"
   }
