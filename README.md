@@ -147,6 +147,7 @@ Assertion::count($countable, $count);
 Assertion::date($value, $format);
 Assertion::digit($value);
 Assertion::directory($value);
+Assertion::e164($value);
 Assertion::email($value);
 Assertion::endsWith($string, $needle);
 Assertion::eq($value, $value2);

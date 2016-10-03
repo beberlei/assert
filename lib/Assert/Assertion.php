@@ -31,6 +31,7 @@ use BadMethodCallException;
  * @method static void allDate($value, $format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format for all values.
  * @method static void allDigit($value, $message = null, $propertyPath = null) Validates if an integer or integerish is a digit for all values.
  * @method static void allDirectory($value, $message = null, $propertyPath = null) Assert that a directory exists for all values.
+ * @method static void allE164($value, $message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
  * @method static void allEmail($value, $message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
  * @method static void allEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars for all values.
  * @method static void allEq($value, $value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ) for all values.
@@ -100,6 +101,7 @@ use BadMethodCallException;
  * @method static void nullOrDate($value, $format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format or that the value is null.
  * @method static void nullOrDigit($value, $message = null, $propertyPath = null) Validates if an integer or integerish is a digit or that the value is null.
  * @method static void nullOrDirectory($value, $message = null, $propertyPath = null) Assert that a directory exists or that the value is null.
+ * @method static void nullOrE164($value, $message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number or that the value is null.
  * @method static void nullOrEmail($value, $message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL) or that the value is null.
  * @method static void nullOrEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars or that the value is null.
  * @method static void nullOrEq($value, $value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ) or that the value is null.
@@ -200,6 +202,7 @@ class Assertion
     const INVALID_ARRAY_ACCESSIBLE  = 45;
     const INVALID_KEY_ISSET         = 46;
     const INVALID_VALUE_IN_ARRAY    = 47;
+    const INVALID_E164              = 48;
     const INVALID_DIRECTORY         = 101;
     const INVALID_FILE              = 102;
     const INVALID_READABLE          = 103;
@@ -1552,6 +1555,29 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_UUID, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that the given string is a valid E164 Phone Number
+     *
+     * @link https://en.wikipedia.org/wiki/E.164
+     *
+     * @param string $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return void
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function e164($value, $message = null, $propertyPath = null)
+    {
+        if (!preg_match('/^\+?[1-9]\d{1,14}$/', $value)) {
+            $message = sprintf(
+                $message ?: 'Value "%s" is not a valid E164.',
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_E164, $propertyPath);
         }
     }
 
