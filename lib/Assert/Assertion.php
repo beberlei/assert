@@ -44,6 +44,9 @@ use BadMethodCallException;
  * @method static void allInteger($value, $message = null, $propertyPath = null) Assert that value is a php integer for all values.
  * @method static void allIntegerish($value, $message = null, $propertyPath = null) Assert that value is a php integer'ish for all values.
  * @method static void allInterfaceExists($value, $message = null, $propertyPath = null) Assert that the interface exists for all values.
+ * @method static void allIp($value, $flag = null, $message = null, $propertyPath = null) Assert that value is an IPv4 or IPv6 address for all values.
+ * @method static void allIpv4($value, $flag = null, $message = null, $propertyPath = null) Assert that value is an IPv4 address for all values.
+ * @method static void allIpv6($value, $flag = null, $message = null, $propertyPath = null) Assert that value is an IPv6 address for all values.
  * @method static void allIsArray($value, $message = null, $propertyPath = null) Assert that value is an array for all values.
  * @method static void allIsArrayAccessible($value, $message = null, $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
  * @method static void allIsCallable($value, $message = null, $propertyPath = null) Determines that the provided value is callable for all values.
@@ -109,6 +112,9 @@ use BadMethodCallException;
  * @method static void nullOrInteger($value, $message = null, $propertyPath = null) Assert that value is a php integer or that the value is null.
  * @method static void nullOrIntegerish($value, $message = null, $propertyPath = null) Assert that value is a php integer'ish or that the value is null.
  * @method static void nullOrInterfaceExists($value, $message = null, $propertyPath = null) Assert that the interface exists or that the value is null.
+ * @method static void nullOrIp($value, $flag = null, $message = null, $propertyPath = null) Assert that value is an IPv4 or IPv6 address or that the value is null.
+ * @method static void nullOrIpv4($value, $flag = null, $message = null, $propertyPath = null) Assert that value is an IPv4 address or that the value is null.
+ * @method static void nullOrIpv6($value, $flag = null, $message = null, $propertyPath = null) Assert that value is an IPv6 address or that the value is null.
  * @method static void nullOrIsArray($value, $message = null, $propertyPath = null) Assert that value is an array or that the value is null.
  * @method static void nullOrIsArrayAccessible($value, $message = null, $propertyPath = null) Assert that value is an array or an array-accessible object or that the value is null.
  * @method static void nullOrIsCallable($value, $message = null, $propertyPath = null) Determines that the provided value is callable or that the value is null.
@@ -214,6 +220,7 @@ class Assertion
     const INVALID_CALLABLE          = 215;
     const INVALID_KEY_NOT_EXISTS    = 216;
     const INVALID_SATISFY           = 217;
+    const INVALID_IP                = 218;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1804,6 +1811,61 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_SATISFY, $propertyPath);
         }
+    }
+
+    /**
+     * Assert that value is an IPv4 or IPv6 address
+     * (using input_filter/FILTER_VALIDATE_IP).
+     *
+     * @param string      $value
+     * @param null|int    $flag
+     * @param string|null $message
+     * @param string|null $propertyPath
+     *
+     * @link http://php.net/manual/filter.filters.flags.php
+     */
+    public static function ip($value, $flag = null, $message = null, $propertyPath = null)
+    {
+        self::string($value, $message, $propertyPath);
+        if (!filter_var($value, FILTER_VALIDATE_IP, $flag)) {
+            $message = sprintf(
+                $message ?: 'Value "%s" was expected to be a valid IP address.',
+                self::stringify($value)
+            );
+            throw static::createException($value, $message, static::INVALID_IP, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that value is an IPv4 address
+     * (using input_filter/FILTER_VALIDATE_IP).
+     *
+     * @param string      $value
+     * @param null|int    $flag
+     * @param string|null $message
+     * @param string|null $propertyPath
+     *
+     * @link http://php.net/manual/filter.filters.flags.php
+     */
+    public static function ipv4($value, $flag = null, $message = null, $propertyPath = null)
+    {
+        self::ip($value, $flag | FILTER_FLAG_IPV4, $message ?: 'Value "%s" was expected to be a valid IPv4 address.', $propertyPath);
+    }
+
+    /**
+     * Assert that value is an IPv6 address
+     * (using input_filter/FILTER_VALIDATE_IP).
+     *
+     * @param string      $value
+     * @param null|int    $flag
+     * @param string|null $message
+     * @param string|null $propertyPath
+     *
+     * @link http://php.net/manual/filter.filters.flags.php
+     */
+    public static function ipv6($value, $flag = null, $message = null, $propertyPath = null)
+    {
+        self::ip($value, $flag | FILTER_FLAG_IPV6, $message ?: 'Value "%s" was expected to be a valid IPv6 address.', $propertyPath);
     }
 
     /**
