@@ -32,6 +32,7 @@ use ReflectionClass;
  * @method AssertionChain date($format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format.
  * @method AssertionChain digit($message = null, $propertyPath = null) Validates if an integer or integerish is a digit.
  * @method AssertionChain directory($message = null, $propertyPath = null) Assert that a directory exists.
+ * @method AssertionChain e164($message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method AssertionChain email($message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method AssertionChain endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars.
  * @method AssertionChain eq($value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ).

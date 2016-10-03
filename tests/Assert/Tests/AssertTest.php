@@ -893,6 +893,40 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider providesValidE164s
+     */
+    public function testValidE164s($e164)
+    {
+        Assertion::e164($e164);
+    }
+
+    /**
+     * @dataProvider providesInvalidE164s
+     */
+    public function testInvalidE164s($e164)
+    {
+        $this->setExpectedException('Assert\InvalidArgumentException');
+        Assertion::e164($e164);
+    }
+
+    static public function providesValidE164s()
+    {
+        return array(
+            array('+33626525690'),
+            array('33626525690'),
+            array('+16174552211'),
+        );
+    }
+
+    static public function providesInvalidE164s()
+    {
+        return array(
+            array('+3362652569e'),
+            array('+3361231231232652569'),
+        );
+    }
+
     public function testValidNotEmptyKey()
     {
         Assertion::notEmptyKey(array('keyExists' => 'notEmpty'), 'keyExists');

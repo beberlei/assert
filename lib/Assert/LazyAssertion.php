@@ -29,6 +29,7 @@ namespace Assert;
  * @method LazyAssertion date($format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format.
  * @method LazyAssertion digit($message = null, $propertyPath = null) Validates if an integer or integerish is a digit.
  * @method LazyAssertion directory($message = null, $propertyPath = null) Assert that a directory exists.
+ * @method LazyAssertion e164($message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method LazyAssertion email($message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method LazyAssertion endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars.
  * @method LazyAssertion eq($value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ).
