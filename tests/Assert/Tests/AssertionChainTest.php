@@ -62,7 +62,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_has_thatall_shortcut()
     {
-        \Assert\ThatAll(array(1, 2, 3))->integer();
+        \Assert\thatAll(array(1, 2, 3))->integer();
     }
 
     /**

@@ -392,7 +392,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array("test"),
             array(1),
             array(1.23),
-            array(new \StdClass),
+            array(new \stdClass),
             array(fopen('php://memory', 'r')),
         );
     }
@@ -644,10 +644,10 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testNotEq()
     {
-        Assertion::NotEq("1", false);
-        Assertion::NotEq(new \stdClass(), array());
+        Assertion::notEq("1", false);
+        Assertion::notEq(new \stdClass(), array());
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_EQ);
-        Assertion::NotEq("1", 1);
+        Assertion::notEq("1", 1);
     }
 
     public function testNotSame()
@@ -1058,7 +1058,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testIsObject()
     {
-        Assertion::isObject(new \StdClass);
+        Assertion::isObject(new \stdClass);
     }
 
     public function testIsObjectExpectingException()
