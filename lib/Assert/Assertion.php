@@ -1368,7 +1368,6 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_URL, $propertyPath);
         }
-
     }
 
     /**
@@ -1384,7 +1383,7 @@ class Assertion
     {
         try {
             static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
-        } catch(AssertionFailedException $e) {
+        } catch (AssertionFailedException $e) {
             $message = sprintf(
                 $message ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.',
                 static::stringify($value)
@@ -1658,7 +1657,6 @@ class Assertion
         self::notEmpty($values, $message, $propertyPath);
 
         foreach ($choices as $choice) {
-
             self::notEmptyKey($values, $choice, $message, $propertyPath);
         }
     }
@@ -1703,7 +1701,6 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
-
         }
     }
 
