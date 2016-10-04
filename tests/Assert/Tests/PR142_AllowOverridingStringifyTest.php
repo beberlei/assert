@@ -26,7 +26,10 @@ class PR142_AllowOverridingStringifyTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidStringWithOverriddenStringify($invalidString, $exceptionMessage)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', $exceptionMessage, Assertion::INVALID_STRING);
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionMessage($exceptionMessage);
+        $this->expectExceptionCode(Assertion::INVALID_STRING);
+
         PR142_OverrideStringify::string($invalidString);
     }
 }
