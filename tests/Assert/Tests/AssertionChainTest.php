@@ -36,7 +36,8 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_knowns_default_error_message()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', 'Not Null and such');
+        $this->expectException('Assert\InvalidArgumentException');
+        $this->expectExceptionMessage('Not Null and such');
 
         \Assert\that(null, 'Not Null and such')->notEmpty();
     }
