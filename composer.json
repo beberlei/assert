@@ -24,8 +24,8 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "@stable",
-    "friendsofphp/php-cs-fixer": "^1.12"
+    "friendsofphp/php-cs-fixer": "2.0.0-alpha",
+    "phpunit/phpunit": "@stable"
   },
   "autoload": {
     "psr-0": {
