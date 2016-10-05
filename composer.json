@@ -37,6 +37,7 @@
   },
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php",
+    "cs-guard": "php-cs-fixer fix --diff --verbose --dry-run",
     "cs-fix": "php-cs-fixer fix . -vv || true"
   }
 }
