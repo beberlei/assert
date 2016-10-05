@@ -3,10 +3,10 @@
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__);
 
-$rules = [
+$rules = array(
     'psr0' => false,
     '@PSR2' => true,
-];
+);
 
 return PhpCsFixer\Config::create()
     ->setRules($rules)
