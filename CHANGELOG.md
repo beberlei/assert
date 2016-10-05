@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 - `Assert\Assertion::between()`
 - `Assert\Assertion::betweenExclusive()`
 
+### Fixes
+- Allow `http://localhost` as a valid URL - fixes [Assertion::url('http://localhost') not a valid url?](https://github.com/beberlei/assert/issues/133)
+
+### Other changes
+- Upgraded regex and unit tests for `Assertion::url()` to latest from Syfony/Validator
+
 ## 2.6.4 - 2016-10-03
 ### Added assertions
 - `Assert\Assertion::e164()` - The international public telecommunication numbering plan
