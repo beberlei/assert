@@ -21,6 +21,8 @@ use BadMethodCallException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method static void allAlnum($value, $message = null, $propertyPath = null) Assert that value is alphanumeric for all values.
+ * @method static void allBetween($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
+ * @method static void allBetweenExclusive($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
  * @method static void allBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string length is between min,max lengths for all values.
  * @method static void allBoolean($value, $message = null, $propertyPath = null) Assert that value is php boolean for all values.
  * @method static void allChoice($value, $choices, $message = null, $propertyPath = null) Assert that value is in array of choices for all values.
@@ -91,6 +93,8 @@ use BadMethodCallException;
  * @method static void allUuid($value, $message = null, $propertyPath = null) Assert that the given string is a valid UUID for all values.
  * @method static void allWriteable($value, $message = null, $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static void nullOrAlnum($value, $message = null, $propertyPath = null) Assert that value is alphanumeric or that the value is null.
+ * @method static void nullOrBetween($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
+ * @method static void nullOrBetweenExclusive($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit or that the value is null.
  * @method static void nullOrBetweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string length is between min,max lengths or that the value is null.
  * @method static void nullOrBoolean($value, $message = null, $propertyPath = null) Assert that value is php boolean or that the value is null.
  * @method static void nullOrChoice($value, $choices, $message = null, $propertyPath = null) Assert that value is in array of choices or that the value is null.
@@ -227,6 +231,8 @@ class Assertion
     const INVALID_KEY_NOT_EXISTS    = 216;
     const INVALID_SATISFY           = 217;
     const INVALID_IP                = 218;
+    const INVALID_BETWEEN           = 219;
+    const INVALID_BETWEEN_EXCLUSIVE = 220;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1788,6 +1794,52 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
+     *
+     * @param mixed $value
+     * @param mixed $lowerLimit
+     * @param mixed $upperLimit
+     * @param string $message
+     * @param string $propertyPath
+     */
+    public static function between($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null)
+    {
+        if ($lowerLimit > $value || $value > $upperLimit) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is neither greater than or equal to "%s" nor less than or equal to "%s".',
+                static::stringify($value),
+                static::stringify($lowerLimit),
+                static::stringify($upperLimit)
+            );
+
+            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath);
+        }
+    }
+
+    /**
+     * Assert that a value is greater than a lower limit, and less than an upper limit.
+     *
+     * @param mixed $value
+     * @param mixed $lowerLimit
+     * @param mixed $upperLimit
+     * @param string $message
+     * @param string $propertyPath
+     */
+    public static function betweenExclusive($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null)
+    {
+        if ($lowerLimit >= $value || $value >= $upperLimit) {
+            $message = sprintf(
+                $message ?: 'Provided "%s" is neither greater than "%s" nor less than "%s".',
+                static::stringify($value),
+                static::stringify($lowerLimit),
+                static::stringify($upperLimit)
+            );
+
+            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath);
         }
     }
 

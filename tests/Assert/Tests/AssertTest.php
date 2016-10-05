@@ -3,6 +3,7 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use Webmozart\Assert\Assert;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
@@ -1363,6 +1364,115 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTERFACE);
         Assertion::interfaceExists("\\Countable");
+    }
+
+    /**
+     * @dataProvider providerInvalidBetween
+     *
+     * @param mixed $value
+     * @param mixed $lowerLimit
+     * @param mixed $upperLimit
+     */
+    public function testInvalidBetween($value, $lowerLimit, $upperLimit)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BETWEEN);
+
+        Assertion::between($value, $lowerLimit, $upperLimit);
+    }
+
+    /**
+     * @return array
+     */
+    public function providerInvalidBetween()
+    {
+        return array(
+            array(1, 2, 3),
+            array(3, 1, 2),
+            array('aaa', 'bbb', 'ccc'),
+            array('ddd', 'bbb', 'ccc'),
+            array(new \DateTime('yesterday'), new \DateTime('today'), new \DateTime('tomorrow')),
+            array(new \DateTime('tomorrow'), new \DateTime('yesterday'), new \DateTime('today')),
+        );
+    }
+
+    /**
+     * @dataProvider providerValidBetween
+     *
+     * @param mixed $value
+     * @param mixed $lowerLimit
+     * @param mixed $upperLimit
+     */
+    public function testValidBetween($value, $lowerLimit, $upperLimit)
+    {
+        $this->assertNull(Assertion::between($value, $lowerLimit, $upperLimit));
+    }
+
+    /**
+     * @return array
+     */
+    public function providerValidBetween()
+    {
+        return array(
+            array(2, 1, 3),
+            array(1, 1, 1),
+            array('bbb', 'aaa', 'ccc'),
+            array('aaa', 'aaa', 'aaa'),
+            array(new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')),
+            array(new \DateTime('today'), new \DateTime('today'), new \DateTime('today')),
+        );
+    }
+
+    /**
+     * @dataProvider providerInvalidBetweenExclusive
+     *
+     * @param mixed $value
+     * @param mixed $lowerLimit
+     * @param mixed $upperLimit
+     */
+    public function testInvalidBetweenExclusive($value, $lowerLimit, $upperLimit)
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BETWEEN_EXCLUSIVE);
+
+        Assertion::betweenExclusive($value, $lowerLimit, $upperLimit);
+    }
+
+    /**
+     * @return array
+     */
+    public function providerInvalidBetweenExclusive()
+    {
+        return array(
+            array(1, 1, 2),
+            array(2, 1, 2),
+            array('aaa', 'aaa', 'bbb'),
+            array('bbb', 'aaa', 'bbb'),
+            array(new \DateTime('today'), new \DateTime('today'), new \DateTime('tomorrow')),
+            array(new \DateTime('tomorrow'), new \DateTime('today'), new \DateTime('tomorrow')),
+        );
+    }
+
+    /**
+     * @dataProvider providerValidBetweenExclusive
+     *
+     * @param mixed $value
+     * @param mixed $lowerLimit
+     * @param mixed $upperLimit
+     */
+    public function testValidBetweenExclusive($value, $lowerLimit, $upperLimit)
+    {
+        $this->assertNull(Assertion::betweenExclusive($value, $lowerLimit, $upperLimit));
+    }
+
+    /**
+     * @return array
+     */
+    public function providerValidBetweenExclusive()
+    {
+        return array(
+            array(2, 1, 3),
+            array('bbb', 'aaa', 'ccc'),
+            array(new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')),
+        );
     }
 }
 

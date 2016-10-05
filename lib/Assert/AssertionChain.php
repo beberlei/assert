@@ -22,6 +22,8 @@ use ReflectionClass;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method AssertionChain alnum($message = null, $propertyPath = null) Assert that value is alphanumeric.
+ * @method AssertionChain between($lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
+ * @method AssertionChain betweenExclusive($lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit.
  * @method AssertionChain betweenLength($minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string length is between min,max lengths.
  * @method AssertionChain boolean($message = null, $propertyPath = null) Assert that value is php boolean.
  * @method AssertionChain choice($choices, $message = null, $propertyPath = null) Assert that value is in array of choices.

@@ -137,6 +137,8 @@ This can be useful for example to build a failure response for the user.
 use Assert\Assertion;
 
 Assertion::alnum($value);
+Assertion::between($value, $lowerLimit, $upperLimit);
+Assertion::betweenExclusive($value, $lowerLimit, $upperLimit);
 Assertion::betweenLength($value, $minLength, $maxLength);
 Assertion::boolean($value);
 Assertion::choice($value, $choices);
