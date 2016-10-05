@@ -24,6 +24,7 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
+    "friendsofphp/php-cs-fixer": "2.0.0-alpha",
     "phpunit/phpunit": "@stable"
   },
   "autoload": {
@@ -35,6 +36,8 @@
     ]
   },
   "scripts": {
-    "assert:generate-docs": "php bin/generate_method_docs.php"
+    "assert:generate-docs": "php bin/generate_method_docs.php",
+    "assert:cs-lint": "php-cs-fixer fix --diff --verbose --dry-run",
+    "assert:cs-fix": "php-cs-fixer fix . -vv || true"
   }
 }

@@ -19,4 +19,3 @@ interface AssertionFailedException
     public function getValue();
     public function getConstraints();
 }
-

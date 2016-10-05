@@ -140,7 +140,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::notEmpty("test");
         Assertion::notEmpty(1);
         Assertion::notEmpty(true);
-        Assertion::notEmpty( array("foo") );
+        Assertion::notEmpty(array("foo"));
     }
 
     public function testEmpty()
@@ -148,7 +148,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::noContent("");
         Assertion::noContent(0);
         Assertion::noContent(false);
-        Assertion::noContent( array() );
+        Assertion::noContent(array());
     }
 
     public static function dataInvalidEmpty()
@@ -410,8 +410,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testValidArray()
     {
         Assertion::isArray(array());
-        Assertion::isArray(array(1,2,3));
-        Assertion::isArray(array(array(),array()));
+        Assertion::isArray(array(1, 2, 3));
+        Assertion::isArray(array(array(), array()));
     }
 
     public function testInvalidKeyExists()
@@ -687,8 +687,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testSame()
     {
-        Assertion::same(1,1);
-        Assertion::same("foo","foo");
+        Assertion::same(1, 1);
+        Assertion::same("foo", "foo");
         Assertion::same($obj = new \stdClass(), $obj);
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SAME);
         Assertion::same(new \stdClass(), new \stdClass());
@@ -696,8 +696,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testEq()
     {
-        Assertion::eq(1,"1");
-        Assertion::eq("foo",true);
+        Assertion::eq(1, "1");
+        Assertion::eq("foo", true);
         Assertion::eq($obj = new \stdClass(), $obj);
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EQ);
         Assertion::eq("2", 1);
@@ -737,7 +737,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         try {
             Assertion::min(0, 1);
             $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e){
+        } catch (AssertionFailedException $e) {
             $this->assertEquals(Assertion::INVALID_MIN, $e->getCode());
             $this->assertEquals('Number "0" was expected to be at least "1".', $e->getMessage());
         }
@@ -745,7 +745,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         try {
             Assertion::min(0.5, 2.5);
             $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e){
+        } catch (AssertionFailedException $e) {
             $this->assertEquals(Assertion::INVALID_MIN, $e->getCode());
             $this->assertEquals('Number "0.5" was expected to be at least "2.5".', $e->getMessage());
         }
@@ -760,7 +760,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         try {
             Assertion::max(2, 1);
             $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e){
+        } catch (AssertionFailedException $e) {
             $this->assertEquals(Assertion::INVALID_MAX, $e->getCode());
             $this->assertEquals('Number "2" was expected to be at most "1".', $e->getMessage());
         }
@@ -768,7 +768,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         try {
             Assertion::max(2.5, 0.5);
             $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e){
+        } catch (AssertionFailedException $e) {
             $this->assertEquals(Assertion::INVALID_MAX, $e->getCode());
             $this->assertEquals('Number "2.5" was expected to be at most "0.5".', $e->getMessage());
         }
@@ -957,7 +957,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::uuid($uuid);
     }
 
-    static public function providesValidUuids()
+    public static function providesValidUuids()
     {
         return array(
             array('ff6f8cb0-c57d-11e1-9b21-0800200c9a66'),
@@ -969,7 +969,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function providesInvalidUuids()
+    public static function providesInvalidUuids()
     {
         return array(
             array('zf6f8cb0-c57d-11e1-9b21-0800200c9a66'),
@@ -997,7 +997,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::e164($e164);
     }
 
-    static public function providesValidE164s()
+    public static function providesValidE164s()
     {
         return array(
             array('+33626525690'),
@@ -1006,7 +1006,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function providesInvalidE164s()
+    public static function providesInvalidE164s()
     {
         return array(
             array('+3362652569e'),
@@ -1362,11 +1362,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validIpProvider
      */
-    public function testValidIp($value) {
+    public function testValidIp($value)
+    {
         Assertion::ip($value);
     }
 
-    public function validIpProvider() {
+    public function validIpProvider()
+    {
         return array(
             array('0.0.0.0'),
             array('14.32.152.216'),
@@ -1378,12 +1380,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidIpProvider
      */
-    public function testInvalidIp($value, $flag = null) {
+    public function testInvalidIp($value, $flag = null)
+    {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
         Assertion::ip($value, $flag);
     }
 
-    public function invalidIpProvider() {
+    public function invalidIpProvider()
+    {
         return array(
             array('invalid ip address'),
             array('14.32.152,216'),
@@ -1395,16 +1399,19 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testValidIpv4() {
+    public function testValidIpv4()
+    {
         Assertion::ipv4('109.188.127.26');
     }
 
-    public function testInvalidIpv4() {
+    public function testInvalidIpv4()
+    {
         $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
         Assertion::ipv4('2001:db8:85a3:8d3:1319:8a2e:370:7348');
     }
 
-    public function testValidIpv6() {
+    public function testValidIpv6()
+    {
         Assertion::ipv6('2001:db8:85a3:8d3:1319:8a2e:370:7348');
     }
 
@@ -1538,7 +1545,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
 class ChildStdClass extends \stdClass
 {
-
 }
 
 class OneCountable implements \Countable
@@ -1551,5 +1557,4 @@ class OneCountable implements \Countable
 
 function someCallable()
 {
-
 }

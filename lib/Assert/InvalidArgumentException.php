@@ -62,4 +62,3 @@ class InvalidArgumentException extends \InvalidArgumentException implements Asse
         return $this->constraints;
     }
 }
-

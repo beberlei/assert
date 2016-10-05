@@ -1,15 +1,11 @@
 <?php
 
-namespace Assert;
-
-use ReflectionClass;
-
 class MethodDocGenerator
 {
     public function generateChainDocs()
     {
         $phpFile           = __DIR__ . '/../lib/Assert/AssertionChain.php';
-        $skipParameterTest = function (\ReflectionParameter $parameter) {
+        $skipParameterTest = function (ReflectionParameter $parameter) {
             return $parameter->getPosition() === 0;
         };
 
@@ -19,14 +15,15 @@ class MethodDocGenerator
 
     private function generateMethodDocs($methods, $format, $skipParameterTest, $prefix = '')
     {
-        $lines = [];
+        $lines = array();
         asort($methods);
         foreach ($methods as $method) {
             $doc              = $method->getDocComment();
-            $shortDescription = trim(substr(explode("\n", $doc)[1], 7), '.');
+            list($void, $descriptionLine) = explode("\n", $doc);
+            $shortDescription = trim(substr($descriptionLine, 7), '.');
             $methodName       = $prefix . ($prefix ? ucfirst($method->getName()) : $method->getName());
 
-            $parameters = [];
+            $parameters = array();
 
             foreach ($method->getParameters() as $methodParameter) {
                 if ($skipParameterTest($methodParameter)) {
@@ -57,13 +54,13 @@ class MethodDocGenerator
         $reflClass = new ReflectionClass('Assert\Assertion');
 
         return array_filter(
-            $reflClass->getMethods(\ReflectionMethod::IS_STATIC),
+            $reflClass->getMethods(ReflectionMethod::IS_STATIC),
             function ($reflMethod) {
                 if ($reflMethod->isProtected()) {
                     return false;
                 }
 
-                if (in_array($reflMethod->getName(), ['__callStatic', 'createException', 'stringify'])) {
+                if (in_array($reflMethod->getName(), array('__callStatic', 'createException', 'stringify'))) {
                     return false;
                 }
 
@@ -104,7 +101,7 @@ class MethodDocGenerator
     public function generateAssertionDocs()
     {
         $phpFile           = __DIR__ . '/../lib/Assert/Assertion.php';
-        $skipParameterTest = function (\ReflectionParameter $parameter) {
+        $skipParameterTest = function (ReflectionParameter $parameter) {
             return false;
         };
 
@@ -119,8 +116,8 @@ class MethodDocGenerator
     public function generateReadMe()
     {
         $mdFile            = __DIR__ . '/../README.md';
-        $skipParameterTest = function (\ReflectionParameter $parameter) {
-            return in_array($parameter->getName(), ['message', 'propertyPath', 'encoding']);
+        $skipParameterTest = function (ReflectionParameter $parameter) {
+            return in_array($parameter->getName(), array('message', 'propertyPath', 'encoding'));
         };
 
         $docs = $this->generateMethodDocs($this->gatherAssertions(), 'Assertion::%s(%s);', $skipParameterTest);
@@ -148,13 +145,13 @@ class MethodDocGenerator
         $reflClass = new ReflectionClass('Assert\AssertionChain');
 
         return array_filter(
-            $reflClass->getMethods(\ReflectionMethod::IS_PUBLIC),
+            $reflClass->getMethods(ReflectionMethod::IS_PUBLIC),
             function ($reflMethod) {
                 if (!$reflMethod->isPublic()) {
                     return false;
                 }
 
-                if (in_array($reflMethod->getName(), ['__construct', '__call'])) {
+                if (in_array($reflMethod->getName(), array('__construct', '__call'))) {
                     return false;
                 }
 
