@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.6.* - unreleased
+### Added assertions
+- `Assert\Assertion::between()`
+- `Assert\Assertion::betweenExclusive()`
+
 ## 2.6.4 - 2016-10-03
 ### Added assertions
 - `Assert\Assertion::e164()` - The international public telecommunication numbering plan

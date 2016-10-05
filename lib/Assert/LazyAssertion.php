@@ -19,6 +19,8 @@ namespace Assert;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method LazyAssertion alnum($message = null, $propertyPath = null) Assert that value is alphanumeric.
+ * @method LazyAssertion between($lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
+ * @method LazyAssertion betweenExclusive($lowerLimit, $upperLimit, $message = null, $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit.
  * @method LazyAssertion betweenLength($minLength, $maxLength, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string length is between min,max lengths.
  * @method LazyAssertion boolean($message = null, $propertyPath = null) Assert that value is php boolean.
  * @method LazyAssertion choice($choices, $message = null, $propertyPath = null) Assert that value is in array of choices.
