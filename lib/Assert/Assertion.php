@@ -245,6 +245,14 @@ class Assertion
      * Helper method that handles building the assertion failure exceptions.
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
+     *
+     * @param mixed $value
+     * @param string $message
+     * @param int $code
+     * @param string|null $propertyPath
+     * @param array $constraints
+     *
+     * @return mixed
      */
     protected static function createException($value, $message, $code, $propertyPath, array $constraints = array())
     {
@@ -854,7 +862,10 @@ class Assertion
     /**
      * Alias of {@see choice()}
      *
-     * @throws \Assert\AssertionFailedException
+     * @param mixed $value
+     * @param array $choices
+     * @param string|null $message
+     * @param string|null $propertyPath
      */
     public static function inArray($value, array $choices, $message = null, $propertyPath = null)
     {
@@ -1613,6 +1624,11 @@ class Assertion
      * static call handler to implement:
      *  - "null or assertion" delegation
      *  - "all" delegation
+     *
+     * @param string $method
+     * @param array $args
+     *
+     * @return bool|mixed
      */
     public static function __callStatic($method, $args)
     {
