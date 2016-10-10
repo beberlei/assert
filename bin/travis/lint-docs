@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+composer assert:generate-docs
+UNCOMMITED_FILES=$(git status -s | wc -l)
+if [[ $UNCOMMITED_FILES -ne 0 ]]; then
+  echo "Please run composer assert:generate-docs and commit the changes";
+  exit 1;
+fi
