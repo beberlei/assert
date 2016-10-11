@@ -1,20 +1,54 @@
 language: php
 
-env:
-  - OPCODE_CACHE=apc
+git:
+  depth: 2
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
+env:
+  global:
+    - OPCODE_CACHE=apc
+
+matrix:
+  include:
+    - php: hhvm
+    - php: nightly
+    - php: 7.1
+    - php: 7.0
+      env:
+      - DISABLE_XDEBUG=true
+      - LINT=true
+    - php: 5.6
+      env:
+      - DISABLE_XDEBUG=true
+    - php: 5.5
+      env:
+      - DISABLE_XDEBUG=true
+    - php: 5.4
+      env:
+      - DISABLE_XDEBUG=true
+    - php: 5.3
+      env:
+      - DISABLE_XDEBUG=true
+
+  fast_finish: true
+  allow_failures:
+    - php: nightly
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
 
 install:
   - composer update
 
+before_script:
+  - if [[ $DISABLE_XDEBUG = true ]]; then
+      phpenv config-rm xdebug.ini;
+    fi
+
 script:
-  - composer assert:cs-lint
+  - if [[ $LINT = true ]]; then
+      composer assert:cs-lint;
+      ./bin/travis/lint-docs;
+    fi
   - php vendor/bin/phpunit
-  - composer assert:generate-docs && [[ -z $(git status -s) ]] || echo "Please run composer assert:generate-docs and commit the changes"
