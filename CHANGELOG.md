@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2.6.* - unreleased
+## 2.6.5 - 2016-10-11
 ### Added assertions
 - `Assert\Assertion::between()`
 - `Assert\Assertion::betweenExclusive()`
@@ -10,8 +10,9 @@ All notable changes to this project will be documented in this file.
 - Allow `http://localhost` as a valid URL - fixes [Assertion::url('http://localhost') not a valid url?](https://github.com/beberlei/assert/issues/133)
 
 ### Other changes
-- Upgraded regex and unit tests for `Assert\Assertion::url()` to latest from Syfony/Validator
+- Upgraded regex and unit tests for `Assert\Assertion::url()` to latest from Symfony/Validator
 - Added PHP-CS
+- Speed up of builds for Travis
 
 ## 2.6.4 - 2016-10-03
 ### Added assertions
