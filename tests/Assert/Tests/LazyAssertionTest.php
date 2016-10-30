@@ -62,4 +62,13 @@ EXC
             }, $ex->getErrorExceptions()));
         }
     }
+
+    public function testVerifyNowReturnsTrueIfAssertionsPass()
+    {
+        $this->assertTrue(
+            \Assert\lazy()
+                ->that(2, 'Two')->eq(2)
+                ->verifyNow()
+        );
+    }
 }
