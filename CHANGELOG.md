@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.6.* - unreleased
+
+### Other changes
+- [Make all assertions return true on success, so that it can be used inside PHP 7 assert()](https://github.com/beberlei/assert/issues/136)
+
 ## 2.6.5 - 2016-10-11
 ### Added assertions
 - `Assert\Assertion::between()`
