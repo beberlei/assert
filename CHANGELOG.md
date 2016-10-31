@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.6.* - Unreleased
+
+### Fixes
+- [Fix the interfaceExists assertion](https://github.com/beberlei/assert/pull/182)
+
 ## 2.6.6 - 2016-10-31
 
 ### Other changes
