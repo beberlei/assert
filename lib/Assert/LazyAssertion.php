@@ -125,11 +125,14 @@ class LazyAssertion
 
     /**
      * @throws \Assert\LazyAssertionException
+     * @return bool
      */
     public function verifyNow()
     {
         if ($this->errors) {
             throw LazyAssertionException::fromErrors($this->errors);
         }
+
+        return true;
     }
 }

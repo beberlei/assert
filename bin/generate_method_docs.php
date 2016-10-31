@@ -106,8 +106,8 @@ class MethodDocGenerator
         };
 
         $docs = array_merge(
-            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static void %s(%s) %s for all values.', $skipParameterTest, 'all'),
-            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static void %s(%s) %s or that the value is null.', $skipParameterTest, 'nullOr')
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static bool %s(%s) %s for all values.', $skipParameterTest, 'all'),
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static bool %s(%s) %s or that the value is null.', $skipParameterTest, 'nullOr')
         );
 
         $this->generateFile($phpFile, $docs, 'class');
