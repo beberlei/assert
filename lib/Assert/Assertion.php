@@ -1586,7 +1586,7 @@ class Assertion
      */
     public static function interfaceExists($value, $message = null, $propertyPath = null)
     {
-        if (! class_exists($value)) {
+        if (! interface_exists($value)) {
             $message = sprintf(
                 $message ?: 'Interface "%s" does not exist.',
                 static::stringify($value)
