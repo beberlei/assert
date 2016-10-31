@@ -1444,8 +1444,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     public function testValidInterfaceExists()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTERFACE);
-        Assertion::interfaceExists("\\Countable");
+        $this->assertTrue(Assertion::interfaceExists("\\Countable"));
     }
 
     /**
