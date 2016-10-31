@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2.6.* - unreleased
+## 2.6.6 - 2016-10-31
 
 ### Other changes
 - [Make all assertions return true on success, so that it can be used inside PHP 7 assert()](https://github.com/beberlei/assert/issues/136)
