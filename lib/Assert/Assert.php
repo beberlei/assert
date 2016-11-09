@@ -18,6 +18,9 @@ namespace Assert;
  */
 abstract class Assert
 {
+    /** @var string */
+    protected static $lazyAssertionExceptionClass = LazyAssertionException::class;
+
     /**
      * Start validation on a value, returns {@link AssertionChain}
      *
@@ -78,6 +81,8 @@ abstract class Assert
      */
     public static function lazy()
     {
-        return new LazyAssertion();
+        return (new LazyAssertion())
+            ->setExceptionClass(static::$lazyAssertionExceptionClass)
+        ;
     }
 }
