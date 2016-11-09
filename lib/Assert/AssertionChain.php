@@ -14,6 +14,7 @@
 
 namespace Assert;
 
+use LogicException;
 use ReflectionClass;
 
 /**
@@ -114,6 +115,9 @@ class AssertionChain
      */
     private $all = false;
 
+    /** @var string|Assertion Class to use for assertion calls */
+    private $assertionClassName = Assertion::class;
+
     public function __construct($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
         $this->value = $value;
@@ -135,11 +139,11 @@ class AssertionChain
             return $this;
         }
 
-        if (!method_exists('Assert\Assertion', $methodName)) {
+        if (!method_exists($this->assertionClassName, $methodName)) {
             throw new \RuntimeException("Assertion '" . $methodName . "' does not exist.");
         }
 
-        $reflClass = new ReflectionClass('Assert\Assertion');
+        $reflClass = new ReflectionClass($this->assertionClassName);
         $method = $reflClass->getMethod($methodName);
 
         array_unshift($args, $this->value);
@@ -163,7 +167,7 @@ class AssertionChain
             $methodName = 'all' . $methodName;
         }
 
-        call_user_func_array(array('Assert\Assertion', $methodName), $args);
+        call_user_func_array(array($this->assertionClassName, $methodName), $args);
 
         return $this;
     }
@@ -191,6 +195,20 @@ class AssertionChain
             $this->alwaysValid = true;
         }
 
+        return $this;
+    }
+
+    /**
+     * @param string $className
+     * @return $this
+     */
+    public function setAssertionClassName($className)
+    {
+        if ($className !== Assertion::class && !is_subclass_of($className, Assertion::class)) {
+            throw new LogicException($className . ' is not (a subclass of) ' . Assertion::class);
+        }
+
+        $this->assertionClassName = $className;
         return $this;
     }
 }
