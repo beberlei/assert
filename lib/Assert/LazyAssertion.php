@@ -13,6 +13,8 @@
 
 namespace Assert;
 
+use LogicException;
+
 /**
  * Chaining builder for lazy assertions
  *
@@ -99,10 +101,13 @@ class LazyAssertion
     private $currentChain;
     private $errors = array();
 
+    /** @var string|LazyAssertionException The class to use for exceptions */
+    private $exceptionClass = LazyAssertionException::class;
+
     public function that($value, $propertyPath, $defaultMessage = null)
     {
         $this->currentChainFailed = false;
-        $this->currentChain = \Assert\that($value, $defaultMessage, $propertyPath);
+        $this->currentChain = Assert::that($value, $defaultMessage, $propertyPath);
 
         return $this;
     }
@@ -130,9 +135,23 @@ class LazyAssertion
     public function verifyNow()
     {
         if ($this->errors) {
-            throw LazyAssertionException::fromErrors($this->errors);
+            throw call_user_func([$this->exceptionClass, 'fromErrors'], $this->errors);
         }
 
         return true;
+    }
+
+    /**
+     * @param string $className
+     * @return $this
+     */
+    public function setExceptionClass($className)
+    {
+        if ($className !== LazyAssertionException::class && !is_subclass_of($className, LazyAssertionException::class)) {
+            throw new LogicException($className . ' is not (a subclass of) ' . LazyAssertionException::class);
+        }
+
+        $this->exceptionClass = $className;
+        return $this;
     }
 }

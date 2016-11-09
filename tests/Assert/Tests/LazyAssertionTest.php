@@ -2,6 +2,7 @@
 
 namespace Assert\Tests;
 
+use Assert\Assert;
 use Assert\LazyAssertionException;
 
 class LazyAssertionTest extends \PHPUnit_Framework_TestCase
@@ -20,7 +21,7 @@ The following 3 assertions failed:
 EXC
         );
 
-        \Assert\lazy()
+        Assert::lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
             ->that('string', 'baz')->isArray()
@@ -39,7 +40,7 @@ The following 1 assertions failed:
 EXC
         );
 
-        \Assert\lazy()
+        Assert::lazy()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
@@ -47,7 +48,7 @@ EXC
     public function testLazyAssertionExceptionCanReturnAllErrors()
     {
         try {
-            \Assert\lazy()
+            Assert::lazy()
                 ->that(10, 'foo')->string()
                 ->that(null, 'bar')->notEmpty()
                 ->that('string', 'baz')->isArray()
@@ -66,7 +67,7 @@ EXC
     public function testVerifyNowReturnsTrueIfAssertionsPass()
     {
         $this->assertTrue(
-            \Assert\lazy()
+            Assert::lazy()
                 ->that(2, 'Two')->eq(2)
                 ->verifyNow()
         );
