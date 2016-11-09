@@ -21,6 +21,9 @@ abstract class Assert
     /** @var string */
     protected static $lazyAssertionExceptionClass = LazyAssertionException::class;
 
+    /** @var string */
+    protected static $assertionClass = Assertion::class;
+
     /**
      * Start validation on a value, returns {@link AssertionChain}
      *
@@ -43,7 +46,9 @@ abstract class Assert
      */
     public static function that($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
-        return new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
+        return (new AssertionChain($value, $defaultMessage, $defaultPropertyPath))
+            ->setAssertionClassName(static::$assertionClass)
+        ;
     }
 
     /**
