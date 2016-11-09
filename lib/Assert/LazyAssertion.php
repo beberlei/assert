@@ -102,7 +102,7 @@ class LazyAssertion
     public function that($value, $propertyPath, $defaultMessage = null)
     {
         $this->currentChainFailed = false;
-        $this->currentChain = \Assert\that($value, $defaultMessage, $propertyPath);
+        $this->currentChain = Assert::that($value, $defaultMessage, $propertyPath);
 
         return $this;
     }

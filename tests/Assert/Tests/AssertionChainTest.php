@@ -13,6 +13,8 @@
 
 namespace Assert\Tests;
 
+use Assert\Assert;
+
 class AssertionChainTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -20,7 +22,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_chains_assertions()
     {
-        \Assert\that(10)->notEmpty()->integer();
+        Assert::that(10)->notEmpty()->integer();
     }
 
     /**
@@ -28,7 +30,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_shifts_arguments_to_assertions_by_one()
     {
-        \Assert\that(10)->eq(10);
+        Assert::that(10)->eq(10);
     }
 
     /**
@@ -38,7 +40,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Assert\InvalidArgumentException', 'Not Null and such');
 
-        \Assert\that(null, 'Not Null and such')->notEmpty();
+        Assert::that(null, 'Not Null and such')->notEmpty();
     }
 
     /**
@@ -46,7 +48,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_skips_assertions_on_valid_null()
     {
-        \Assert\that(null)->nullOr()->integer()->eq(10);
+        Assert::that(null)->nullOr()->integer()->eq(10);
     }
 
     /**
@@ -54,7 +56,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_validates_all_inputs()
     {
-        \Assert\that(array(1, 2, 3))->all()->integer();
+        Assert::that(array(1, 2, 3))->all()->integer();
     }
 
     /**
@@ -62,7 +64,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_has_thatall_shortcut()
     {
-        \Assert\thatAll(array(1, 2, 3))->integer();
+        Assert::thatAll(array(1, 2, 3))->integer();
     }
 
     /**
@@ -70,7 +72,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_has_nullor_shortcut()
     {
-        \Assert\thatNullOr(null)->integer()->eq(10);
+        Assert::thatNullOr(null)->integer()->eq(10);
     }
 
     /**
@@ -80,7 +82,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_exception_for_unknown_assertion()
     {
-        \Assert\that(null)->unknownAssertion();
+        Assert::that(null)->unknownAssertion();
     }
 
     /**
@@ -88,7 +90,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function it_has_satisfy_shortcut()
     {
-        \Assert\that(null)->satisfy(function ($value) {
+        Assert::that(null)->satisfy(function ($value) {
             return is_null($value);
         });
     }
