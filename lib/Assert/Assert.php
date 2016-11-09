@@ -13,7 +13,11 @@
 
 namespace Assert;
 
-if (!function_exists(__NAMESPACE__ . '\that')) {
+/**
+ * AssertionChain factory
+ */
+abstract class Assert
+{
     /**
      * Start validation on a value, returns {@link AssertionChain}
      *
@@ -22,67 +26,57 @@ if (!function_exists(__NAMESPACE__ . '\that')) {
      *
      * @example
      *
-     *  \Assert\that($value)->notEmpty()->integer();
-     *  \Assert\that($value)->nullOr()->string()->startsWith("Foo");
+     *  Assert::that($value)->notEmpty()->integer();
+     *  Assert::that($value)->nullOr()->string()->startsWith("Foo");
      *
      * The assertion chain can be stateful, that means be careful when you reuse
      * it. You should never pass around the chain.
      *
-     * @param mixed  $value
+     * @param mixed $value
      * @param string $defaultMessage
      * @param string $defaultPropertyPath
      *
      * @return \Assert\AssertionChain
-     * @deprecated
      */
-    function that($value, $defaultMessage = null, $defaultPropertyPath = null)
+    public static function that($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
-        return Assert::that($value, $defaultMessage, $defaultPropertyPath);
+        return new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
     }
-}
 
-if (!function_exists(__NAMESPACE__ . '\thatAll')) {
     /**
      * Start validation on a set of values, returns {@link AssertionChain}
      *
-     * @param mixed  $values
+     * @param mixed $values
      * @param string $defaultMessage
      * @param string $defaultPropertyPath
      *
      * @return \Assert\AssertionChain
-     * @deprecated
      */
-    function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
+    public static function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
     {
-        return Assert::that($values, $defaultMessage, $defaultPropertyPath)->all();
+        return static::that($values, $defaultMessage, $defaultPropertyPath)->all();
     }
-}
 
-if (!function_exists(__NAMESPACE__ . '\thatNullOr')) {
     /**
      * Start validation and allow NULL, returns {@link AssertionChain}
      *
-     * @param mixed  $value
+     * @param mixed $value
      * @param string $defaultMessage
      * @param string $defaultPropertyPath
      *
      * @return \Assert\AssertionChain
-     * @deprecated
      */
-    function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
+    public static function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
-        return Assert::that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
+        return static::that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
     }
-}
 
-if (!function_exists(__NAMESPACE__ . '\lazy')) {
     /**
      * Create a lazy assertion object.
      *
      * @return \Assert\LazyAssertion
-     * @deprecated
      */
-    function lazy()
+    public static function lazy()
     {
         return new LazyAssertion();
     }
