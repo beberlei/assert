@@ -26,7 +26,7 @@ class MethodDocGenerator
             $parameters = array();
 
             foreach ($method->getParameters() as $methodParameter) {
-                if ($skipParameterTest($methodParameter)) {
+                if (is_callable($skipParameterTest) && call_user_func($skipParameterTest, $methodParameter)) {
                     continue;
                 }
 
