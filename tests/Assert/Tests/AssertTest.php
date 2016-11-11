@@ -3,7 +3,6 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
-use Webmozart\Assert\Assert;
 
 class AssertTest extends \PHPUnit_Framework_TestCase
 {
@@ -1555,7 +1554,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')),
         );
     }
-        
+
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
     {
         $string = str_repeat('1234567890', 11);
@@ -1563,6 +1562,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Assert\AssertionFailedException', '1234567...', Assertion::INVALID_FLOAT);
 
         $this->assertTrue(Assertion::float($string));
+    }
+
+    public function testStringifyReportsResourceType()
+    {
+        $this->setExpectedException('Assert\AssertionFailedException', 'stream', Assertion::INVALID_FLOAT);
+
+        $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
     }
 }
 
