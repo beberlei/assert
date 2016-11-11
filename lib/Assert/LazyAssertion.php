@@ -135,7 +135,7 @@ class LazyAssertion
     public function verifyNow()
     {
         if ($this->errors) {
-            throw call_user_func([$this->exceptionClass, 'fromErrors'], $this->errors);
+            throw call_user_func(array($this->exceptionClass, 'fromErrors'), $this->errors);
         }
 
         return true;

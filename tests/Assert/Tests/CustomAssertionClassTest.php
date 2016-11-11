@@ -41,7 +41,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
     {
         $string = 's' . uniqid();
         CustomAssert::that($string)->string();
-        $this->assertSame([['string', $string]], CustomAssertion::getCalls());
+        $this->assertSame(array(array('string', $string)), CustomAssertion::getCalls());
 
         $this->setExpectedException('Assert\Tests\CustomException');
         CustomAssert::that($string)->integer();
@@ -84,11 +84,11 @@ class CustomLazyAssertionException extends LazyAssertionException
 class CustomAssertion extends Assertion
 {
     protected static $exceptionClass = 'Assert\Tests\CustomException';
-    private static $calls = [];
+    private static $calls = array();
 
     public static function clearCalls()
     {
-        self::$calls = [];
+        self::$calls = array();
     }
 
     public static function getCalls()
@@ -98,7 +98,7 @@ class CustomAssertion extends Assertion
 
     public static function string($value, $message = null, $propertyPath = null)
     {
-        self::$calls[] = ['string', $value];
+        self::$calls[] = array('string', $value);
         return parent::string($value, $message, $propertyPath);
     }
 }
