@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixes
 - [Fix the interfaceExists assertion](https://github.com/beberlei/assert/pull/182)
+- Fixed issue in document generator (Thanks to [Taco van den Broek](https://github.com/tacovandenbroek))
 
 ## 2.6.6 - 2016-10-31
 
