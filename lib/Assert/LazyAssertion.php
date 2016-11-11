@@ -96,14 +96,15 @@ namespace Assert;
 class LazyAssertion
 {
     private $currentChainFailed = false;
-    private $shouldTryAll = false;
+    private $alwaysTryAll = false;
+    private $thisChainTryAll = false;
     private $currentChain;
     private $errors = array();
 
     public function that($value, $propertyPath, $defaultMessage = null)
     {
         $this->currentChainFailed = false;
-        $this->shouldTryAll = false;
+        $this->thisChainTryAll = false;
         $this->currentChain = \Assert\that($value, $defaultMessage, $propertyPath);
 
         return $this;
@@ -111,13 +112,21 @@ class LazyAssertion
 
     public function tryAll()
     {
-        $this->shouldTryAll = true;
+        if (!$this->currentChain) {
+            $this->alwaysTryAll = true;
+        }
+
+        $this->thisChainTryAll = true;
+
         return $this;
     }
 
     public function __call($method, $args)
     {
-        if ($this->shouldTryAll === false && $this->currentChainFailed === true) {
+        if ($this->alwaysTryAll === false
+            && $this->thisChainTryAll === false
+            && $this->currentChainFailed === true
+        ) {
             return $this;
         }
 

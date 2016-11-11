@@ -137,7 +137,17 @@ capture all of the resulting failed assertion error messages. Here's an example:
 ```php
 \Assert\lazy()
     ->that(10, 'foo')->tryAll()->integer()->between(5, 15)
+    ->that(null, 'foo')->tryAll()->notEmpty()->string()
     ->verifyAll();
+```
+
+The above shows how to use this functionality to finely tune the behavior of reporting failures, but to make catching all failures even easier, you may also call ``tryAll`` before making any assertions like below. This helps to reduce method calls, and has the same behavior as above.
+
+```php
+\Assert\lazy()->tryAll()
+    ->that(10, 'foo')->integer()->between(5, 15)
+    ->that(null, 'foo')->notEmpty()->string()
+    ->verifyNow();
 ```
 
 ## List of assertions

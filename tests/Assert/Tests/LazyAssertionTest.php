@@ -119,4 +119,21 @@ EXC
             ->that(null, 'foo')->tryAll()->notEmpty()->string()
             ->verifyNow();
     }
+
+    public function testCallsToTryAllOnLazyAlwaysReportAllGetReported()
+    {
+        $this->setExpectedException('\Assert\LazyAssertionException', <<<EXC
+The following 4 assertions failed:
+1) foo: Value "10" is not a float.
+2) foo: Provided "10" is not greater than "100".
+3) foo: Value "<NULL>" is empty, but non empty value was expected.
+4) foo: Value "<NULL>" expected to be string, type NULL given.
+
+EXC
+);
+        \Assert\lazy()->tryAll()
+            ->that(10, 'foo')->float()->greaterThan(100)
+            ->that(null, 'foo')->notEmpty()->string()
+            ->verifyNow();
+    }
 }
