@@ -46,7 +46,8 @@ abstract class Assert
      */
     public static function that($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
-        return (new AssertionChain($value, $defaultMessage, $defaultPropertyPath))
+        $assertionChain = new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
+        return $assertionChain
             ->setAssertionClassName(static::$assertionClass)
         ;
     }
@@ -86,7 +87,8 @@ abstract class Assert
      */
     public static function lazy()
     {
-        return (new LazyAssertion())
+        $lazyAssertion = new LazyAssertion();
+        return $lazyAssertion
             ->setExceptionClass(static::$lazyAssertionExceptionClass)
         ;
     }
