@@ -1555,6 +1555,15 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')),
         );
     }
+        
+    public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
+    {
+        $string = str_repeat('1234567890', 11);
+
+        $this->setExpectedException('Assert\AssertionFailedException', '1234567...', Assertion::INVALID_FLOAT);
+
+        $this->assertTrue(Assertion::float($string));
+    }
 }
 
 class ChildStdClass extends \stdClass
