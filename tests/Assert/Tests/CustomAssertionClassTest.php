@@ -30,7 +30,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_class()
     {
-        $this->expectException(CustomException::class);
+        $this->setExpectedException(CustomException::class);
         CustomAssertion::integer('foo');
     }
 
@@ -43,7 +43,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
         CustomAssert::that($string)->string();
         $this->assertSame([['string', $string]], CustomAssertion::getCalls());
 
-        $this->expectException(CustomException::class);
+        $this->setExpectedException(CustomException::class);
         CustomAssert::that($string)->integer();
     }
 
@@ -52,7 +52,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_for_lazy_assertion_chains()
     {
-        $this->expectException(CustomLazyAssertionException::class);
+        $this->setExpectedException(CustomLazyAssertionException::class);
         CustomAssert::lazy()
             ->that('foo', 'foo')->integer()
             ->verifyNow()
@@ -64,7 +64,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_for_lazy_assertion_chains_when_first_assertion_does_not_fail()
     {
-        $this->expectException(CustomLazyAssertionException::class);
+        $this->setExpectedException(CustomLazyAssertionException::class);
         CustomAssert::lazy()
             ->that('foo', 'foo')->string()
             ->that('bar', 'bar')->integer()
