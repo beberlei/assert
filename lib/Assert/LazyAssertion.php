@@ -102,7 +102,7 @@ class LazyAssertion
     private $errors = array();
 
     /** @var string|LazyAssertionException The class to use for exceptions */
-    private $exceptionClass = LazyAssertionException::class;
+    private $exceptionClass = 'Assert\LazyAssertionException';
 
     public function that($value, $propertyPath, $defaultMessage = null)
     {
@@ -147,8 +147,8 @@ class LazyAssertion
      */
     public function setExceptionClass($className)
     {
-        if ($className !== LazyAssertionException::class && !is_subclass_of($className, LazyAssertionException::class)) {
-            throw new LogicException($className . ' is not (a subclass of) ' . LazyAssertionException::class);
+        if ($className !== 'Assert\LazyAssertionException' && !is_subclass_of($className, 'Assert\LazyAssertionException')) {
+            throw new LogicException($className . ' is not (a subclass of) Assert\LazyAssertionException');
         }
 
         $this->exceptionClass = $className;

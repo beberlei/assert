@@ -30,7 +30,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_class()
     {
-        $this->setExpectedException(CustomException::class);
+        $this->setExpectedException('Assert\Tests\CustomException');
         CustomAssertion::integer('foo');
     }
 
@@ -43,7 +43,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
         CustomAssert::that($string)->string();
         $this->assertSame([['string', $string]], CustomAssertion::getCalls());
 
-        $this->setExpectedException(CustomException::class);
+        $this->setExpectedException('Assert\Tests\CustomException');
         CustomAssert::that($string)->integer();
     }
 
@@ -52,7 +52,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_for_lazy_assertion_chains()
     {
-        $this->setExpectedException(CustomLazyAssertionException::class);
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException');
         CustomAssert::lazy()
             ->that('foo', 'foo')->integer()
             ->verifyNow()
@@ -64,7 +64,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_for_lazy_assertion_chains_when_first_assertion_does_not_fail()
     {
-        $this->setExpectedException(CustomLazyAssertionException::class);
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException');
         CustomAssert::lazy()
             ->that('foo', 'foo')->string()
             ->that('bar', 'bar')->integer()
@@ -83,7 +83,7 @@ class CustomLazyAssertionException extends LazyAssertionException
 
 class CustomAssertion extends Assertion
 {
-    protected static $exceptionClass = CustomException::class;
+    protected static $exceptionClass = 'Assert\Tests\CustomException';
     private static $calls = [];
 
     public static function clearCalls()
@@ -105,6 +105,6 @@ class CustomAssertion extends Assertion
 
 class CustomAssert extends Assert
 {
-    protected static $assertionClass = CustomAssertion::class;
-    protected static $lazyAssertionExceptionClass = CustomLazyAssertionException::class;
+    protected static $assertionClass = 'Assert\Tests\CustomAssertion';
+    protected static $lazyAssertionExceptionClass = 'Assert\Tests\CustomLazyAssertionException';
 }

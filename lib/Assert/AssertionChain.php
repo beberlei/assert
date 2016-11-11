@@ -116,7 +116,7 @@ class AssertionChain
     private $all = false;
 
     /** @var string|Assertion Class to use for assertion calls */
-    private $assertionClassName = Assertion::class;
+    private $assertionClassName = 'Assert\Assertion';
 
     public function __construct($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
@@ -204,8 +204,8 @@ class AssertionChain
      */
     public function setAssertionClassName($className)
     {
-        if ($className !== Assertion::class && !is_subclass_of($className, Assertion::class)) {
-            throw new LogicException($className . ' is not (a subclass of) ' . Assertion::class);
+        if ($className !== 'Assert\Assertion' && !is_subclass_of($className, 'Assert\Assertion')) {
+            throw new LogicException($className . ' is not (a subclass of) Assert\Assertion');
         }
 
         $this->assertionClassName = $className;
