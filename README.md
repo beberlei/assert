@@ -85,8 +85,8 @@ Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');      // 
 ### Assert::that() Chaining
 
 Using the static API on values is very verbose when checking values against multiple assertions.
-Starting with 2.0 of Assert there is a much nicer fluent API for assertions, starting
-with ``Assert::that($value)`` and then receiving the assertions you want to call
+Starting with 2.6.7 of Assert the `Assert` class provides a much nicer fluent API for assertions, starting
+with `Assert::that($value)` and then receiving the assertions you want to call
 on the fluent interface. You only have to specify the `$value` once.
 
 ```php
@@ -96,8 +96,13 @@ Assert::that($value)->nullOr()->string()->startsWith("Foo");
 Assert::that($values)->all()->float();
 ```
 
-There are also two shortcut function ``Assert::thatNullOr()`` and ``Assert::thatAll()`` enabling
+There are also two shortcut function `Assert::thatNullOr()` and `Assert::thatAll()` enabling
 the "nullOr" or "all" helper respectively.
+
+### \Assert\that()
+Previously (starting with version 2.0 of Assert) this fluent interface was provided by the functions
+`\Assert\that()`, `\Assert\thatNullOr()` and `\Assert\thatAll()` respectively. These functions have
+been deprecated in favor of the static methods described above and will be removed in version 3.0 of Assert.
 
 ### Lazy Assertions
 
@@ -129,6 +134,10 @@ On failure ``verifyNow()`` will throw an exception
 
 You can also retrieve all the ``AssertionFailedException``s by calling ``getErrorExceptions()``.
 This can be useful for example to build a failure response for the user.
+
+### \Assert\lazy()
+As with the `Assert` chaining methods lazy assertions were initiated by the function `\Assert\lazy()` that
+has been deprecated since version 2.6.7. As of the release of version 3.0 this function will no longer be available.
 
 ## List of assertions
 
