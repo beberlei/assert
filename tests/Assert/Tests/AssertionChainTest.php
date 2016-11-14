@@ -14,6 +14,7 @@
 namespace Assert\Tests;
 
 use Assert\Assert;
+use Assert\AssertionChain;
 
 class AssertionChainTest extends \PHPUnit_Framework_TestCase
 {
@@ -93,5 +94,43 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
         Assert::that(null)->satisfy(function ($value) {
             return is_null($value);
         });
+    }
+
+    public function testThatCustomAssertionClassIsUsedWhenSet()
+    {
+        $assertionChain = new AssertionChain('foo');
+        $assertionChain->setAssertionClassName('Assert\Tests\CustomAssertion');
+
+        CustomAssertion::clearCalls();
+        $message = uniqid();
+        $assertionChain->string($message);
+
+        $this->assertSame(array(array('string', 'foo')), CustomAssertion::getCalls());
+    }
+
+    /**
+     * @dataProvider provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses
+     * @param $assertionClassName
+     */
+    public function testThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses($assertionClassName)
+    {
+        $lazyAssertion = new AssertionChain('foo');
+
+        $this->setExpectedException('LogicException');
+        $lazyAssertion->setAssertionClassName($assertionClassName);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses()
+    {
+        return [
+            'null' => [null],
+            'string' => ['foo'],
+            'array' => [[]],
+            'object' => [new \stdClass()],
+            'other class' => [__CLASS__],
+        ];
     }
 }
