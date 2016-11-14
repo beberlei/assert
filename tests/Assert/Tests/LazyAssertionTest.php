@@ -2,6 +2,8 @@
 
 namespace Assert\Tests;
 
+use Assert\Assert;
+use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
 
 class LazyAssertionTest extends \PHPUnit_Framework_TestCase
@@ -20,7 +22,7 @@ The following 3 assertions failed:
 EXC
         );
 
-        \Assert\lazy()
+        Assert::lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
             ->that('string', 'baz')->isArray()
@@ -39,7 +41,7 @@ The following 1 assertions failed:
 EXC
         );
 
-        \Assert\lazy()
+        Assert::lazy()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
@@ -47,7 +49,7 @@ EXC
     public function testLazyAssertionExceptionCanReturnAllErrors()
     {
         try {
-            \Assert\lazy()
+            Assert::lazy()
                 ->that(10, 'foo')->string()
                 ->that(null, 'bar')->notEmpty()
                 ->that('string', 'baz')->isArray()
@@ -66,7 +68,7 @@ EXC
     public function testVerifyNowReturnsTrueIfAssertionsPass()
     {
         $this->assertTrue(
-            \Assert\lazy()
+            Assert::lazy()
                 ->that(2, 'Two')->eq(2)
                 ->verifyNow()
         );
@@ -75,7 +77,7 @@ EXC
     public function testRestOfChainNotSkippedWhenTryAllUsed()
     {
         try {
-            \Assert\lazy()
+            Assert::lazy()
                 ->that(9.9, 'foo')->tryAll()->integer('must be int')->between(10, 20, 'must be between')
                 ->verifyNow();
         } catch (LazyAssertionException $ex) {
@@ -97,7 +99,7 @@ The following 1 assertions failed:
 EXC
         );
 
-        \Assert\lazy()
+        Assert::lazy()
             ->that(10, 'foo')->tryAll()->integer()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
@@ -114,7 +116,7 @@ The following 4 assertions failed:
 
 EXC
 );
-        \Assert\lazy()
+        Assert::lazy()
             ->that(10, 'foo')->tryAll()->float()->greaterThan(100)
             ->that(null, 'foo')->tryAll()->notEmpty()->string()
             ->verifyNow();
@@ -131,9 +133,48 @@ The following 4 assertions failed:
 
 EXC
 );
-        \Assert\lazy()->tryAll()
+        Assert::lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
+    }
+
+    public function testThatLazyAssertionThrowsCustomExceptionWhenSet()
+    {
+        $lazyAssertion = new LazyAssertion();
+        $lazyAssertion->setExceptionClass('Assert\Tests\CustomLazyAssertionException');
+
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException');
+        $lazyAssertion
+            ->that('foo', 'property')->integer()
+            ->verifyNow()
+        ;
+    }
+
+    /**
+     * @dataProvider provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses
+     * @param mixed $exceptionClass
+     */
+    public function testThatSetExceptionClassWillNotAcceptInvalidExceptionClasses($exceptionClass)
+    {
+        $lazyAssertion = new LazyAssertion();
+
+        $this->setExpectedException('LogicException');
+        $lazyAssertion->setExceptionClass($exceptionClass);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses()
+    {
+        return array(
+            'null' => array(null),
+            'string' => array('foo'),
+            'array' => array(array()),
+            'object' => array(new \stdClass()),
+            'other class' => array(__CLASS__),
+            'other exception' => array('Exception'),
+        );
     }
 }

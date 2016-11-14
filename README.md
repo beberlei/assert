@@ -82,34 +82,39 @@ Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass'); // 
 Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');      // exception
 ```
 
-### \Assert\that() Chaining
+### Assert::that() Chaining
 
 Using the static API on values is very verbose when checking values against multiple assertions.
-Starting with 2.0 of Assert there is a much nicer fluent API for assertions, starting
-with ``\Assert\that($value)`` and then receiving the assertions you want to call
+Starting with 2.6.7 of Assert the `Assert` class provides a much nicer fluent API for assertions, starting
+with `Assert::that($value)` and then receiving the assertions you want to call
 on the fluent interface. You only have to specify the `$value` once.
 
 ```php
 <?php
-\Assert\that($value)->notEmpty()->integer();
-\Assert\that($value)->nullOr()->string()->startsWith("Foo");
-\Assert\that($values)->all()->float();
+Assert::that($value)->notEmpty()->integer();
+Assert::that($value)->nullOr()->string()->startsWith("Foo");
+Assert::that($values)->all()->float();
 ```
 
-There are also two shortcut function ``\Assert\thatNullOr()`` and ``\Assert\thatAll()`` enabling
+There are also two shortcut function `Assert::thatNullOr()` and `Assert::thatAll()` enabling
 the "nullOr" or "all" helper respectively.
+
+### \Assert\that()
+Previously (starting with version 2.0 of Assert) this fluent interface was provided by the functions
+`\Assert\that()`, `\Assert\thatNullOr()` and `\Assert\thatAll()` respectively. These functions have
+been deprecated in favor of the static methods described above and will be removed in version 3.0 of Assert.
 
 ### Lazy Assertions
 
 There are many cases in web development, especially when involving forms, you want to collect several errors
 instead of aborting directly on the first error. This is what lazy assertions are for. Their API
-works exactly like the fluent ``\Assert\that()`` API, but instead of throwing an Exception directly,
+works exactly like the fluent ``Assert::that()`` API, but instead of throwing an Exception directly,
 they collect all errors and only trigger the exception when the method
 ``verifyNow()`` is called on the ``Assert\SoftAssertion`` object.
 
 ```php
 <?php
-\Assert\lazy()
+Assert::lazy()
     ->that(10, 'foo')->string()
     ->that(null, 'bar')->notEmpty()
     ->that('string', 'baz')->isArray()
@@ -135,10 +140,10 @@ you may follow your call to ``that`` with ``tryAll`` to run all assertions again
 capture all of the resulting failed assertion error messages. Here's an example:
 
 ```php
-\Assert\lazy()
+Assert::lazy()
     ->that(10, 'foo')->tryAll()->integer()->between(5, 15)
     ->that(null, 'foo')->tryAll()->notEmpty()->string()
-    ->verifyAll();
+    ->verifyNow();
 ```
 
 The above shows how to use this functionality to finely tune the behavior of reporting failures, but to make 
@@ -146,11 +151,15 @@ catching all failures even easier, you may also call ``tryAll`` before making an
 helps to reduce method calls, and has the same behavior as above.
 
 ```php
-\Assert\lazy()->tryAll()
+Assert::lazy()->tryAll()
     ->that(10, 'foo')->integer()->between(5, 15)
     ->that(null, 'foo')->notEmpty()->string()
     ->verifyNow();
 ```
+
+### \Assert\lazy()
+As with the `Assert` chaining methods lazy assertions were initiated by the function `\Assert\lazy()` that
+has been deprecated since version 2.6.7. As of the release of version 3.0 this function will no longer be available.
 
 ## List of assertions
 

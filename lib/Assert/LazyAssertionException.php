@@ -33,7 +33,7 @@ class LazyAssertionException extends \InvalidArgumentException
             $message .= sprintf("%d) %s: %s\n", $i++, $error->getPropertyPath(), $error->getMessage());
         }
 
-        return new self($message, $errors);
+        return new static($message, $errors);
     }
 
     public function __construct($message, array $errors)

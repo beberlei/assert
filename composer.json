@@ -35,6 +35,11 @@
       "lib/Assert/functions.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Assert\\Tests\\": "tests/Assert/Tests"
+    }
+  },
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php",
     "assert:cs-lint": "php-cs-fixer fix --diff --verbose --dry-run",

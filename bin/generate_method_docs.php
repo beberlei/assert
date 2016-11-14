@@ -174,7 +174,7 @@ class MethodDocGenerator
                     return false;
                 }
 
-                if (in_array($reflMethod->getName(), array('__construct', '__call'))) {
+                if (in_array($reflMethod->getName(), array('__construct', '__call', 'setAssertionClassName'))) {
                     return false;
                 }
 
