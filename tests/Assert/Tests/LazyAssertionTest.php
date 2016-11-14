@@ -3,6 +3,7 @@
 namespace Assert\Tests;
 
 use Assert\Assert;
+use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
 
 class LazyAssertionTest extends \PHPUnit_Framework_TestCase
@@ -71,5 +72,44 @@ EXC
                 ->that(2, 'Two')->eq(2)
                 ->verifyNow()
         );
+    }
+
+    public function testThatLazyAssertionThrowsCustomExceptionWhenSet()
+    {
+        $lazyAssertion = new LazyAssertion();
+        $lazyAssertion->setExceptionClass('Assert\Tests\CustomLazyAssertionException');
+
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException');
+        $lazyAssertion
+            ->that('foo', 'property')->integer()
+            ->verifyNow()
+        ;
+    }
+
+    /**
+     * @dataProvider provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses
+     * @param mixed $exceptionClass
+     */
+    public function testThatSetExceptionClassWillNotAcceptInvalidExceptionClasses($exceptionClass)
+    {
+        $lazyAssertion = new LazyAssertion();
+
+        $this->setExpectedException('LogicException');
+        $lazyAssertion->setExceptionClass($exceptionClass);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses()
+    {
+        return [
+            'null' => [null],
+            'string' => ['foo'],
+            'array' => [[]],
+            'object' => [new \stdClass()],
+            'other class' => [__CLASS__],
+            'other exception' => ['Exception'],
+        ];
     }
 }
