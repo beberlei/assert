@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2.6.* - Unreleased
+## 2.6.7 - 2016-11-14
 
 ### Fixes
 - [Fix the interfaceExists assertion](https://github.com/beberlei/assert/pull/182)
@@ -9,7 +9,13 @@ All notable changes to this project will be documented in this file.
 
 ### Other changes
 - [Added ability to capture multiple errors on a single value in a chain](https://github.com/beberlei/assert/pull/186) (Thanks to [Alec Carpenter](https://github.com/alecgunnar))
+- [Use static factory methods instead of functions in the Assert namespace](https://github.com/beberlei/assert/pull/184) (Thanks to [Taco van den Broek](https://github.com/tacovandenbroek))
 
+### Deprecation notice
+- The functions in the Assert namespace (`\Assert\that()`, `\Assert\thatAll()`, `\Assert\thatNullOr()` and `\Assert\lazy()`) are now marked as deprecated.
+  They will be removed in the next major release.
+  They have been replaced with the static methods `\Assert\Assert::that()`, `\Assert\Assert::thatAll()`, `\Assert\Assert::thatNullOr()` and `\Assert\Assert::lazy()`
+  
 ## 2.6.6 - 2016-10-31
 
 ### Other changes
