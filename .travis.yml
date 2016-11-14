@@ -32,7 +32,6 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
-    - php: 7.1 # Can fail due to https://bugs.php.net/bug.php?id=73426
 
 cache:
   directories:
