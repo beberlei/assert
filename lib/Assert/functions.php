@@ -33,7 +33,7 @@ if (!function_exists(__NAMESPACE__ . '\that')) {
      * @param string $defaultPropertyPath
      *
      * @return \Assert\AssertionChain
-     * @deprecated
+     * @deprecated In favour of Assert::that($value, $defaultMessage = null, $defaultPropertyPath = null)
      */
     function that($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
@@ -50,7 +50,7 @@ if (!function_exists(__NAMESPACE__ . '\thatAll')) {
      * @param string $defaultPropertyPath
      *
      * @return \Assert\AssertionChain
-     * @deprecated
+     * @deprecated In favour of Assert::thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
      */
     function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
     {
@@ -67,7 +67,7 @@ if (!function_exists(__NAMESPACE__ . '\thatNullOr')) {
      * @param string $defaultPropertyPath
      *
      * @return \Assert\AssertionChain
-     * @deprecated
+     * @deprecated In favour of Assert::thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
      */
     function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
@@ -80,10 +80,10 @@ if (!function_exists(__NAMESPACE__ . '\lazy')) {
      * Create a lazy assertion object.
      *
      * @return \Assert\LazyAssertion
-     * @deprecated
+     * @deprecated In favour of Assert::lazy()
      */
     function lazy()
     {
-        return new LazyAssertion();
+        return Assert::lazy();
     }
 }
