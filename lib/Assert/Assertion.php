@@ -2179,6 +2179,6 @@ class Assertion
             return '<NULL>';
         }
 
-        return 'unknown';
+        return gettype($value);
     }
 }
