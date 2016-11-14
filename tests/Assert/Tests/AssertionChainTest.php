@@ -125,12 +125,12 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
      */
     public function provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses()
     {
-        return [
+        return array(
             'null' => array(null),
             'string' => array('foo'),
             'array' => array(array()),
             'object' => array(new \stdClass()),
             'other class' => array(__CLASS__),
-        ];
+        );
     }
 }
