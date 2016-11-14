@@ -147,6 +147,10 @@ class LazyAssertion
      */
     public function setExceptionClass($className)
     {
+        if (!is_string($className)) {
+            throw new LogicException('Exception class name must be passed as a string');
+        }
+
         if ($className !== 'Assert\LazyAssertionException' && !is_subclass_of($className, 'Assert\LazyAssertionException')) {
             throw new LogicException($className . ' is not (a subclass of) Assert\LazyAssertionException');
         }
