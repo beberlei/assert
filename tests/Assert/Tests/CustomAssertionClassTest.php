@@ -16,7 +16,6 @@ namespace Assert\Tests;
 use Assert\Assert;
 use Assert\Assertion;
 use Assert\InvalidArgumentException;
-use Assert\LazyAssertionException;
 
 class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
 {
@@ -74,10 +73,6 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
 }
 
 class CustomException extends InvalidArgumentException
-{
-}
-
-class CustomLazyAssertionException extends LazyAssertionException
 {
 }
 
