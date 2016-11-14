@@ -98,6 +98,8 @@ use LogicException;
 class LazyAssertion
 {
     private $currentChainFailed = false;
+    private $alwaysTryAll = false;
+    private $thisChainTryAll = false;
     private $currentChain;
     private $errors = array();
 
@@ -107,14 +109,29 @@ class LazyAssertion
     public function that($value, $propertyPath, $defaultMessage = null)
     {
         $this->currentChainFailed = false;
+        $this->thisChainTryAll = false;
         $this->currentChain = Assert::that($value, $defaultMessage, $propertyPath);
+
+        return $this;
+    }
+
+    public function tryAll()
+    {
+        if (!$this->currentChain) {
+            $this->alwaysTryAll = true;
+        }
+
+        $this->thisChainTryAll = true;
 
         return $this;
     }
 
     public function __call($method, $args)
     {
-        if ($this->currentChainFailed === true) {
+        if ($this->alwaysTryAll === false
+            && $this->thisChainTryAll === false
+            && $this->currentChainFailed === true
+        ) {
             return $this;
         }
 

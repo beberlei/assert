@@ -2172,7 +2172,7 @@ class Assertion
         }
 
         if (is_resource($value)) {
-            return '<RESOURCE>';
+            return get_resource_type($value);
         }
 
         if ($value === null) {
