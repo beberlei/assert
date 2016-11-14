@@ -14,7 +14,6 @@
 namespace Assert\Tests;
 
 use Assert\Assert;
-use Assert\Assertion;
 use Assert\InvalidArgumentException;
 
 class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
@@ -74,28 +73,6 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
 
 class CustomException extends InvalidArgumentException
 {
-}
-
-class CustomAssertion extends Assertion
-{
-    protected static $exceptionClass = 'Assert\Tests\CustomException';
-    private static $calls = array();
-
-    public static function clearCalls()
-    {
-        self::$calls = array();
-    }
-
-    public static function getCalls()
-    {
-        return self::$calls;
-    }
-
-    public static function string($value, $message = null, $propertyPath = null)
-    {
-        self::$calls[] = array('string', $value);
-        return parent::string($value, $message, $propertyPath);
-    }
 }
 
 class CustomAssert extends Assert
