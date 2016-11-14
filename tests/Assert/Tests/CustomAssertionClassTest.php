@@ -69,6 +69,47 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
             ->verifyNow()
         ;
     }
+
+    /**
+     * @test
+     */
+    public function it_uses_custom_exception_for_lazy_assertion_chains_that_try_all_assertions_per_chain()
+    {
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException', <<< MESSAGE
+The following 4 assertions failed:
+1) foo: Value "foo" is not an integer.
+2) foo: Value "foo" is not an array.
+3) bar: Value "123" expected to be string, type integer given.
+4) bar: Value "123" is not an array.
+MESSAGE
+);
+        CustomAssert::lazy()
+            ->that('foo', 'foo')->tryAll()->integer()->isArray()
+            ->that(123, 'bar')->tryAll()->string()->isArray()
+            ->verifyNow()
+        ;
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_custom_exception_for_lazy_assertion_chains_that_try_all_assertions()
+    {
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException', <<< MESSAGE
+The following 4 assertions failed:
+1) foo: Value "foo" is not an integer.
+2) foo: Value "foo" is not an array.
+3) bar: Value "123" expected to be string, type integer given.
+4) bar: Value "123" is not an array.
+MESSAGE
+);
+        CustomAssert::lazy()
+            ->tryAll()
+            ->that('foo', 'foo')->integer()->isArray()
+            ->that(123, 'bar')->string()->isArray()
+            ->verifyNow()
+        ;
+    }
 }
 
 class CustomException extends InvalidArgumentException
