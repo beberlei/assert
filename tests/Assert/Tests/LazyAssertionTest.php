@@ -169,12 +169,12 @@ EXC
     public function provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses()
     {
         return [
-            'null' => [null],
-            'string' => ['foo'],
-            'array' => [[]],
-            'object' => [new \stdClass()],
-            'other class' => [__CLASS__],
-            'other exception' => ['Exception'],
+            'null' => array(null),
+            'string' => array('foo'),
+            'array' => array(array()),
+            'object' => array(new \stdClass()),
+            'other class' => array(__CLASS__),
+            'other exception' => array('Exception'),
         ];
     }
 }
