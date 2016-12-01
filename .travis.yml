@@ -14,20 +14,11 @@ matrix:
     - php: 7.1
     - php: 7.0
       env:
-      - DISABLE_XDEBUG=true
       - LINT=true
     - php: 5.6
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.5
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.4
-      env:
-      - DISABLE_XDEBUG=true
     - php: 5.3
-      env:
-      - DISABLE_XDEBUG=true
 
   fast_finish: true
   allow_failures:
@@ -42,9 +33,7 @@ install:
   - composer update
 
 before_script:
-  - if [[ $DISABLE_XDEBUG = true ]]; then
-      phpenv config-rm xdebug.ini;
-    fi
+  - phpenv config-rm xdebug.ini || true
 
 script:
   - if [[ $LINT = true ]]; then
