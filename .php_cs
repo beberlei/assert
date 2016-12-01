@@ -12,6 +12,5 @@ $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 
 return PhpCsFixer\Config::create()
     ->setRules($rules)
-    ->finder($finder)
-    ->setUsingCache(true)
+    ->setFinder($finder)
     ->setCacheFile($cacheDir . '/.php_cs.cache');
