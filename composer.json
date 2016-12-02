@@ -28,8 +28,8 @@
     "phpunit/phpunit": "@stable"
   },
   "autoload": {
-    "psr-0": {
-      "Assert": "lib/"
+    "psr-4": {
+      "Assert\\": "lib/Assert"
     },
     "files": [
       "lib/Assert/functions.php"
