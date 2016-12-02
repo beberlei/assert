@@ -19,6 +19,9 @@
     "assertion",
     "validation"
   ],
+  "config": {
+    "sort-packages": true
+  },
   "require": {
     "php": ">=5.3",
     "ext-mbstring": "*"
