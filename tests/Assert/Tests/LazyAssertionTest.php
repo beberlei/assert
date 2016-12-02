@@ -3,6 +3,7 @@
 namespace Assert\Tests;
 
 use Assert\Assert;
+use Assert\InvalidArgumentException;
 use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
 
@@ -176,5 +177,15 @@ EXC
             'other class' => array(__CLASS__),
             'other exception' => array('Exception'),
         );
+    }
+
+    public function testLazyAssertionExceptionExtendsInvalidArgumentException()
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        Assert::lazy()->tryAll()
+            ->that(10, 'foo')->float()->greaterThan(100)
+            ->that(null, 'foo')->notEmpty()->string()
+            ->verifyNow();
     }
 }
