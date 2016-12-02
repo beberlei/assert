@@ -177,4 +177,14 @@ EXC
             'other exception' => array('Exception'),
         );
     }
+
+    public function testLazyAssertionExceptionExtendsInvalidArgumentException()
+    {
+        $this->setExpectedException('\Assert\InvalidArgumentException');
+
+        Assert::lazy()->tryAll()
+            ->that(10, 'foo')->float()->greaterThan(100)
+            ->that(null, 'foo')->notEmpty()->string()
+            ->verifyNow();
+    }
 }

@@ -13,7 +13,7 @@
 
 namespace Assert;
 
-class LazyAssertionException extends \InvalidArgumentException
+class LazyAssertionException extends InvalidArgumentException
 {
     /**
      * @var InvalidArgumentException[]
@@ -38,7 +38,7 @@ class LazyAssertionException extends \InvalidArgumentException
 
     public function __construct($message, array $errors)
     {
-        parent::__construct($message, 0);
+        parent::__construct($message, 0, null, null);
 
         $this->errors = $errors;
     }
