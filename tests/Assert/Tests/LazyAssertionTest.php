@@ -3,7 +3,6 @@
 namespace Assert\Tests;
 
 use Assert\Assert;
-use Assert\InvalidArgumentException;
 use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
 
@@ -181,7 +180,7 @@ EXC
 
     public function testLazyAssertionExceptionExtendsInvalidArgumentException()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->setExpectedException('\Assert\InvalidArgumentException');
 
         Assert::lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
