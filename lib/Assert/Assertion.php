@@ -71,7 +71,7 @@ use BadMethodCallException;
  * @method static bool allNoContent($value, $message = null, $propertyPath = null) Assert that value is empty for all values.
  * @method static bool allNotBlank($value, $message = null, $propertyPath = null) Assert that value is not blank for all values.
  * @method static bool allNotEmpty($value, $message = null, $propertyPath = null) Assert that value is not empty for all values.
- * @method static bool allNotEmptyKey($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty for all values.
+ * @method static bool allNotEmptyKey($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty for all values.
  * @method static bool allNotEq($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ) for all values.
  * @method static bool allNotInArray($value, $choices, $message = null, $propertyPath = null) Assert that value is not in array of choices for all values.
  * @method static bool allNotIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name for all values.
@@ -143,7 +143,7 @@ use BadMethodCallException;
  * @method static bool nullOrNoContent($value, $message = null, $propertyPath = null) Assert that value is empty or that the value is null.
  * @method static bool nullOrNotBlank($value, $message = null, $propertyPath = null) Assert that value is not blank or that the value is null.
  * @method static bool nullOrNotEmpty($value, $message = null, $propertyPath = null) Assert that value is not empty or that the value is null.
- * @method static bool nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty or that the value is null.
+ * @method static bool nullOrNotEmptyKey($value, $key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty or that the value is null.
  * @method static bool nullOrNotEq($value1, $value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ) or that the value is null.
  * @method static bool nullOrNotInArray($value, $choices, $message = null, $propertyPath = null) Assert that value is not in array of choices or that the value is null.
  * @method static bool nullOrNotIsInstanceOf($value, $className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name or that the value is null.
@@ -1094,7 +1094,7 @@ class Assertion
     }
 
     /**
-     * Assert that key exists in an array/array-accessible object and it's value is not empty.
+     * Assert that key exists in an array/array-accessible object and its value is not empty.
      *
      * @param mixed $value
      * @param string|integer $key
