@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 ## 2.6.8 - 2016-12-05
 
 ### Fixes
-- All exceptions thrown by this library extend `\Assert\InvalidArgumentException`.
+- All exceptions thrown by this library extend `\Assert\InvalidArgumentException` (Thanks to [Richard Quadling](https://github.com/beberlei/assert/pull/187))
 
 ### Other changes
-- Fix grammar in documentation.
+- Update to php-cs-fixer ^2.0 release (Thanks to [Raphael Stolt](https://github.com/beberlei/assert/pull/188))
+- Simplify XDebug disabling for Travis (Thanks to [Raphael Stolt](https://github.com/beberlei/assert/pull/189))
+- Use PSR-4 autoloading (Thanks to [Andreas Möller](https://github.com/beberlei/assert/pull/190))
+- Enable Composer package sorting (Thanks to [Raphael Stolt](https://github.com/beberlei/assert/pull/191))
+- Fix grammar in documentation (Thanks to [Adrian Föder](https://github.com/beberlei/assert/pull/192))
 
 ## 2.6.7 - 2016-11-14
 
