@@ -71,7 +71,7 @@ use LogicException;
  * @method LazyAssertion noContent($message = null, $propertyPath = null) Assert that value is empty.
  * @method LazyAssertion notBlank($message = null, $propertyPath = null) Assert that value is not blank.
  * @method LazyAssertion notEmpty($message = null, $propertyPath = null) Assert that value is not empty.
- * @method LazyAssertion notEmptyKey($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and it's value is not empty.
+ * @method LazyAssertion notEmptyKey($key, $message = null, $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty.
  * @method LazyAssertion notEq($value2, $message = null, $propertyPath = null) Assert that two values are not equal (using == ).
  * @method LazyAssertion notInArray($choices, $message = null, $propertyPath = null) Assert that value is not in array of choices.
  * @method LazyAssertion notIsInstanceOf($className, $message = null, $propertyPath = null) Assert that value is not instance of given class-name.
