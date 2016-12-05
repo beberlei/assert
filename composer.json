@@ -43,6 +43,9 @@
       "Assert\\Tests\\": "tests/Assert/Tests"
     }
   },
+  "config": {
+    "sort-packages": true
+  },
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php",
     "assert:cs-lint": "php-cs-fixer fix --diff --verbose --dry-run",
