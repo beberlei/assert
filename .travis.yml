@@ -9,7 +9,10 @@ env:
 
 matrix:
   include:
-    - php: hhvm
+    - php: hhvm-3.9
+      sudo: required
+      dist: trusty
+      group: edge
     - php: nightly
     - php: 7.1
     - php: 7.0
