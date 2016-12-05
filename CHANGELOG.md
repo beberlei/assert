@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.6.8 - 2016-12-05
+
+### Fixes
+- All exceptions thrown by this library extend `\Assert\InvalidArgumentException`.
+
+### Other changes
+- Fix grammar in documentation.
+
 ## 2.6.7 - 2016-11-14
 
 ### Fixes
