@@ -178,6 +178,7 @@ Assertion::classExists($value);
 Assertion::contains($string, $needle);
 Assertion::count($countable, $count);
 Assertion::date($value, $format);
+Assertion::defined($constant);
 Assertion::digit($value);
 Assertion::directory($value);
 Assertion::e164($value);
