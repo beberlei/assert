@@ -4,7 +4,6 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__);
 
 $rules = array(
-    'psr0' => false,
     '@PSR2' => true,
 );
 
