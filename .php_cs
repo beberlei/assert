@@ -18,6 +18,7 @@ TXT;
 $rules = array(
     'psr0' => false,
     '@PSR2' => true,
+    'psr4' => true,
     'header_comment' => array(
         'header' => $header,
         'commentType' => PhpCsFixer\Fixer\Comment\HeaderCommentFixer::HEADER_PHPDOC,
@@ -27,6 +28,7 @@ $rules = array(
 $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 
 return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
     ->setRules($rules)
     ->setFinder($finder)
     ->setCacheFile($cacheDir . '/.php_cs.cache');
