@@ -32,11 +32,11 @@ cache:
     - $HOME/.composer/cache
     - $HOME/.php-cs-fixer
 
+before_install:
+  - phpenv config-rm xdebug.ini || true
+
 install:
   - composer update
-
-before_script:
-  - phpenv config-rm xdebug.ini || true
 
 script:
   - if [[ $LINT = true ]]; then
