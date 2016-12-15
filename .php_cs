@@ -16,7 +16,6 @@ to kontakt@beberlei.de so I can send you a copy immediately.
 TXT;
 
 $rules = array(
-    'psr0' => false,
     '@PSR2' => true,
     'psr4' => true,
     'header_comment' => array(
