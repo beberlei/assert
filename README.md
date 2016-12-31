@@ -184,6 +184,7 @@ Assertion::e164($value);
 Assertion::email($value);
 Assertion::endsWith($string, $needle);
 Assertion::eq($value, $value2);
+Assertion::extensionLoaded($value);
 Assertion::false($value);
 Assertion::file($value);
 Assertion::float($value);

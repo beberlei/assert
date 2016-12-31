@@ -1583,6 +1583,19 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
     }
+
+    public function testExtensionLoaded()
+    {
+        $this->assertTrue(Assertion::extensionLoaded('date'));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testExtensionNotLoaded()
+    {
+        Assertion::extensionLoaded('NOT_LOADED');
+    }
 }
 
 class ChildStdClass extends \stdClass
