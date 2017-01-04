@@ -1609,6 +1609,32 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::defined('NOT_A_CONSTANT');
     }
+
+    public function testValidVersion()
+    {
+        $this->assertTrue(Assertion::version('1.0.0', '<', '2.0.0'));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testInvalidVersion()
+    {
+        Assertion::version('1.0.0', 'eq', '2.0.0');
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testInvalidVersionOperator()
+    {
+        Assertion::version('1.0.0', null, '2.0.0');
+    }
+
+    public function testValidPhpVersion()
+    {
+        $this->assertTrue(Assertion::phpVersion('>', '4.0.0'));
+    }
 }
 
 class ChildStdClass extends \stdClass
