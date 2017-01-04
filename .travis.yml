@@ -43,4 +43,5 @@ script:
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
     fi
+  - composer assert:standards
   - php vendor/bin/phpunit
