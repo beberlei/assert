@@ -37,7 +37,6 @@ class MethodDocGenerator
     {
         $lines = array();
         asort($methods);
-        /** @var ReflectionMethod $method */
         foreach ($methods as $method) {
             $doc              = $method->getDocComment();
             list(, $descriptionLine) = explode("\n", $doc);
@@ -56,11 +55,26 @@ class MethodDocGenerator
 
                 $parameter = '$' . $methodParameter->getName();
 
+                $type = $methodParameter->getType();
+                if (is_null($type)) {
+                    preg_match(sprintf('`\* @param (?P<type>[^ ]++) +\%s`sim', $parameter), $doc, $matches);
+                    if (isset($matches['type'])) {
+                        $type = (
+                            $methodParameter->isOptional() &&
+                            null == $methodParameter->getDefaultValue()
+                        )
+                            ? str_replace('|null', '', $matches['type'])
+                            : $matches['type'];
+                    }
+                }
+                \Assert\Assertion::notEmpty($type, sprintf('No type defined for %s in %s', $parameter, $methodName));
+                $parameter = sprintf('%s %s', $type, $parameter);
+
                 if ($methodParameter->isOptional()) {
                     if (null === $methodParameter->getDefaultValue()) {
                         $parameter .= ' = null';
                     } else {
-                        $parameter .= sprintf(' = "%s"', $methodParameter->getDefaultValue());
+                        $parameter .= sprintf(' = \'%s\'', $methodParameter->getDefaultValue());
                     }
                 }
 
