@@ -15,6 +15,8 @@ matrix:
       group: edge
     - php: nightly
     - php: 7.1
+      env:
+      - LINT=true
     - php: 7.0
       env:
       - LINT=true
