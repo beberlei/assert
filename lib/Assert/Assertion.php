@@ -39,6 +39,7 @@ use BadMethodCallException;
  * @method static bool allEmail($value, $message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
  * @method static bool allEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars for all values.
  * @method static bool allEq($value, $value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ) for all values.
+ * @method static bool allExtensionLoaded($value, $message = null, $propertyPath = null) Assert that extension is loaded for all values.
  * @method static bool allFalse($value, $message = null, $propertyPath = null) Assert that the value is boolean False for all values.
  * @method static bool allFile($value, $message = null, $propertyPath = null) Assert that a file exists for all values.
  * @method static bool allFloat($value, $message = null, $propertyPath = null) Assert that value is a php float for all values.
@@ -112,6 +113,7 @@ use BadMethodCallException;
  * @method static bool nullOrEmail($value, $message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL) or that the value is null.
  * @method static bool nullOrEndsWith($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars or that the value is null.
  * @method static bool nullOrEq($value, $value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ) or that the value is null.
+ * @method static bool nullOrExtensionLoaded($value, $message = null, $propertyPath = null) Assert that extension is loaded or that the value is null.
  * @method static bool nullOrFalse($value, $message = null, $propertyPath = null) Assert that the value is boolean False or that the value is null.
  * @method static bool nullOrFile($value, $message = null, $propertyPath = null) Assert that a file exists or that the value is null.
  * @method static bool nullOrFloat($value, $message = null, $propertyPath = null) Assert that value is a php float or that the value is null.
@@ -236,6 +238,7 @@ class Assertion
     const INVALID_IP                = 218;
     const INVALID_BETWEEN           = 219;
     const INVALID_BETWEEN_EXCLUSIVE = 220;
+    const INVALID_EXTENSION         = 222;
     const INVALID_CONSTANT          = 221;
 
     /**
@@ -1995,6 +1998,29 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that extension is loaded.
+     *
+     * @param mixed $value
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return bool
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function extensionLoaded($value, $message = null, $propertyPath = null)
+    {
+        if (! extension_loaded($value)) {
+            $message = sprintf(
+                $message ?: 'Extension "%s" is required.',
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_EXTENSION, $propertyPath);
         }
 
         return true;

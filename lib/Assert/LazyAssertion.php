@@ -39,6 +39,7 @@ use LogicException;
  * @method LazyAssertion email($message = null, $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method LazyAssertion endsWith($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string ends with a sequence of chars.
  * @method LazyAssertion eq($value2, $message = null, $propertyPath = null) Assert that two values are equal (using == ).
+ * @method LazyAssertion extensionLoaded($message = null, $propertyPath = null) Assert that extension is loaded.
  * @method LazyAssertion false($message = null, $propertyPath = null) Assert that the value is boolean False.
  * @method LazyAssertion file($message = null, $propertyPath = null) Assert that a file exists.
  * @method LazyAssertion float($message = null, $propertyPath = null) Assert that value is a php float.
