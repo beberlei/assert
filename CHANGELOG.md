@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.6.9 - 2017-01-04
+### Added assertions
+- `Assert\Assertion::defined()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/193))
+- `Assert\Assertion::extensionLoaded()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/201))
+
+### Other changes
+- Added types to generated documentation.
+
 ## 2.6.8 - 2016-12-05
 
 ### Fixes
