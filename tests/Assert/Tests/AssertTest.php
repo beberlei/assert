@@ -820,7 +820,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataLengthUtf8Characters
      */
-    public function testLenghtUtf8Characters($value, $expected)
+    public function testLengthUtf8Characters($value, $expected)
     {
         $this->assertTrue(Assertion::length($value, $expected));
     }
@@ -889,7 +889,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailedNullOrMethodCall()
     {
-        Assertion::NullOrAssertionDoesNotExist();
+        Assertion::nullOrAssertionDoesNotExist();
     }
 
     public function testImplementsInterface()
@@ -1596,7 +1596,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::extensionLoaded('NOT_LOADED');
     }
- 
+
     public function testValidConstant()
     {
         $this->assertTrue(Assertion::defined('PHP_VERSION'));
