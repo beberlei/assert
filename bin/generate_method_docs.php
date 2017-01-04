@@ -16,7 +16,7 @@ class MethodDocGenerator
 {
     public function generateChainDocs()
     {
-        $phpFile           = __DIR__ . '/../lib/Assert/AssertionChain.php';
+        $phpFile = __DIR__.'/../lib/Assert/AssertionChain.php';
         $skipParameterTest = function (ReflectionParameter $parameter) {
             return $parameter->getPosition() === 0;
         };
@@ -38,10 +38,10 @@ class MethodDocGenerator
         $lines = array();
         asort($methods);
         foreach ($methods as $method) {
-            $doc              = $method->getDocComment();
+            $doc = $method->getDocComment();
             list(, $descriptionLine) = explode("\n", $doc);
             $shortDescription = trim(substr($descriptionLine, 7), '.');
-            $methodName       = $prefix . ($prefix ? ucfirst($method->getName()) : $method->getName());
+            $methodName = $prefix.($prefix ? ucfirst($method->getName()) : $method->getName());
 
             $parameters = array();
 
@@ -53,9 +53,11 @@ class MethodDocGenerator
                     continue;
                 }
 
-                $parameter = '$' . $methodParameter->getName();
+                $parameter = '$'.$methodParameter->getName();
 
-                $type = $methodParameter->getType();
+                if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+                    $type = $methodParameter->getType();
+                }
                 if (is_null($type)) {
                     preg_match(sprintf('`\* @param (?P<type>[^ ]++) +\%s`sim', $parameter), $doc, $matches);
                     if (isset($matches['type'])) {
@@ -140,13 +142,13 @@ class MethodDocGenerator
         $writtenBytes = file_put_contents($phpFile, $fileContent);
 
         if ($writtenBytes !== false) {
-            echo 'Generated ' . $phpFile . '.' . PHP_EOL;
+            echo 'Generated '.$phpFile.'.'.PHP_EOL;
         }
     }
 
     public function generateAssertionDocs()
     {
-        $phpFile           = __DIR__ . '/../lib/Assert/Assertion.php';
+        $phpFile = __DIR__.'/../lib/Assert/Assertion.php';
         $skipParameterTest = function () {
             return false;
         };
@@ -161,7 +163,7 @@ class MethodDocGenerator
 
     public function generateReadMe()
     {
-        $mdFile            = __DIR__ . '/../README.md';
+        $mdFile = __DIR__.'/../README.md';
         $skipParameterTest = function (ReflectionParameter $parameter) {
             return in_array($parameter->getName(), array('message', 'propertyPath', 'encoding'));
         };
@@ -173,7 +175,7 @@ class MethodDocGenerator
 
     public function generateLazyAssertionDocs()
     {
-        $phpFile           = __DIR__ . '/../lib/Assert/LazyAssertion.php';
+        $phpFile = __DIR__.'/../lib/Assert/LazyAssertion.php';
         $skipParameterTest = function (ReflectionParameter $parameter) {
             return $parameter->getPosition() === 0;
         };
@@ -210,7 +212,7 @@ class MethodDocGenerator
     }
 }
 
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__."/../vendor/autoload.php";
 
 $generator = new MethodDocGenerator();
 $generator->generateAssertionDocs();
