@@ -32,6 +32,7 @@ use LogicException;
  * @method LazyAssertion contains($needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string contains a sequence of chars.
  * @method LazyAssertion count($count, $message = null, $propertyPath = null) Assert that the count of countable is equal to count.
  * @method LazyAssertion date($format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format.
+ * @method LazyAssertion defined($message = null, $propertyPath = null) Assert that a constant is defined.
  * @method LazyAssertion digit($message = null, $propertyPath = null) Validates if an integer or integerish is a digit.
  * @method LazyAssertion directory($message = null, $propertyPath = null) Assert that a directory exists.
  * @method LazyAssertion e164($message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number.

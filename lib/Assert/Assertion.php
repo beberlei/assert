@@ -32,6 +32,7 @@ use BadMethodCallException;
  * @method static bool allContains($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string contains a sequence of chars for all values.
  * @method static bool allCount($countable, $count, $message = null, $propertyPath = null) Assert that the count of countable is equal to count for all values.
  * @method static bool allDate($value, $format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format for all values.
+ * @method static bool allDefined($constant, $message = null, $propertyPath = null) Assert that a constant is defined for all values.
  * @method static bool allDigit($value, $message = null, $propertyPath = null) Validates if an integer or integerish is a digit for all values.
  * @method static bool allDirectory($value, $message = null, $propertyPath = null) Assert that a directory exists for all values.
  * @method static bool allE164($value, $message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
@@ -105,6 +106,7 @@ use BadMethodCallException;
  * @method static bool nullOrContains($string, $needle, $message = null, $propertyPath = null, $encoding = "utf8") Assert that string contains a sequence of chars or that the value is null.
  * @method static bool nullOrCount($countable, $count, $message = null, $propertyPath = null) Assert that the count of countable is equal to count or that the value is null.
  * @method static bool nullOrDate($value, $format, $message = null, $propertyPath = null) Assert that date is valid and corresponds to the given format or that the value is null.
+ * @method static bool nullOrDefined($constant, $message = null, $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrDigit($value, $message = null, $propertyPath = null) Validates if an integer or integerish is a digit or that the value is null.
  * @method static bool nullOrDirectory($value, $message = null, $propertyPath = null) Assert that a directory exists or that the value is null.
  * @method static bool nullOrE164($value, $message = null, $propertyPath = null) Assert that the given string is a valid E164 Phone Number or that the value is null.
@@ -237,6 +239,7 @@ class Assertion
     const INVALID_BETWEEN           = 219;
     const INVALID_BETWEEN_EXCLUSIVE = 220;
     const INVALID_EXTENSION         = 222;
+    const INVALID_CONSTANT          = 221;
 
     /**
      * Exception to throw when an assertion failed.
@@ -2207,5 +2210,25 @@ class Assertion
         }
 
         return gettype($value);
+    }
+
+    /**
+     * Assert that a constant is defined.
+     *
+     * @param mixed $constant
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return bool
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function defined($constant, $message = null, $propertyPath = null)
+    {
+        if (!defined($constant)) {
+            $message = sprintf($message ?: 'Value "%s" expected to be a defined constant.', $constant);
+
+            throw static::createException($constant, $message, static::INVALID_CONSTANT, $propertyPath);
+        }
+
+        return true;
     }
 }

@@ -1596,6 +1596,19 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::extensionLoaded('NOT_LOADED');
     }
+ 
+    public function testValidConstant()
+    {
+        $this->assertTrue(Assertion::defined('PHP_VERSION'));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testInvalidConstant()
+    {
+        Assertion::defined('NOT_A_CONSTANT');
+    }
 }
 
 class ChildStdClass extends \stdClass
