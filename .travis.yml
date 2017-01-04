@@ -36,12 +36,13 @@ before_install:
   - phpenv config-rm xdebug.ini || true
 
 install:
-  - composer update --ignore-platform-reqs
+  - composer update
 
 script:
   - if [[ $LINT = true ]]; then
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
+      composer require --dev phpstan/phpstan;
       composer assert:standards;
     fi
   - php vendor/bin/phpunit
