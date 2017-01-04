@@ -907,7 +907,7 @@ class Assertion
             $message = sprintf(
                 $message ?: 'Value "%s" is not an element of the valid values: %s',
                 static::stringify($value),
-                implode(", ", array_map('Assert\Assertion::stringify', $choices))
+                implode(", ", array_map([static::class, 'stringify'], $choices))
             );
 
             throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
@@ -1065,7 +1065,7 @@ class Assertion
         if (array_key_exists($key, $value)) {
             $message = sprintf(
                 $message ?: 'Array contains an element with key "%s"',
-                self::stringify($key)
+                static::stringify($key)
             );
 
             throw static::createException($value, $message, static::INVALID_KEY_NOT_EXISTS, $propertyPath, array('key' => $key));
@@ -1798,10 +1798,10 @@ class Assertion
      */
     public static function choicesNotEmpty(array $values, array $choices, $message = null, $propertyPath = null)
     {
-        self::notEmpty($values, $message, $propertyPath);
+        static::notEmpty($values, $message, $propertyPath);
 
         foreach ($choices as $choice) {
-            self::notEmptyKey($values, $choice, $message, $propertyPath);
+            static::notEmptyKey($values, $choice, $message, $propertyPath);
         }
 
         return true;
@@ -1819,7 +1819,7 @@ class Assertion
      */
     public static function methodExists($value, $object, $message = null, $propertyPath = null)
     {
-        self::isObject($object, $message, $propertyPath);
+        static::isObject($object, $message, $propertyPath);
 
         if (!method_exists($object, $value)) {
             $message = sprintf(
@@ -2121,11 +2121,11 @@ class Assertion
      */
     public static function ip($value, $flag = null, $message = null, $propertyPath = null)
     {
-        self::string($value, $message, $propertyPath);
+        static::string($value, $message, $propertyPath);
         if (!filter_var($value, FILTER_VALIDATE_IP, $flag)) {
             $message = sprintf(
                 $message ?: 'Value "%s" was expected to be a valid IP address.',
-                self::stringify($value)
+                static::stringify($value)
             );
             throw static::createException($value, $message, static::INVALID_IP, $propertyPath);
         }
@@ -2147,7 +2147,7 @@ class Assertion
      */
     public static function ipv4($value, $flag = null, $message = null, $propertyPath = null)
     {
-        self::ip($value, $flag | FILTER_FLAG_IPV4, $message ?: 'Value "%s" was expected to be a valid IPv4 address.', $propertyPath);
+        static::ip($value, $flag | FILTER_FLAG_IPV4, $message ?: 'Value "%s" was expected to be a valid IPv4 address.', $propertyPath);
 
         return true;
     }
@@ -2166,7 +2166,7 @@ class Assertion
      */
     public static function ipv6($value, $flag = null, $message = null, $propertyPath = null)
     {
-        self::ip($value, $flag | FILTER_FLAG_IPV6, $message ?: 'Value "%s" was expected to be a valid IPv6 address.', $propertyPath);
+        static::ip($value, $flag | FILTER_FLAG_IPV6, $message ?: 'Value "%s" was expected to be a valid IPv6 address.', $propertyPath);
 
         return true;
     }
