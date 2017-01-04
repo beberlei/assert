@@ -42,6 +42,6 @@ script:
   - if [[ $LINT = true ]]; then
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
+      composer assert:standards;
     fi
-  - composer assert:standards
   - php vendor/bin/phpunit
