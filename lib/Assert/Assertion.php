@@ -907,7 +907,7 @@ class Assertion
             $message = sprintf(
                 $message ?: 'Value "%s" is not an element of the valid values: %s',
                 static::stringify($value),
-                implode(", ", array_map([static::class, 'stringify'], $choices))
+                implode(", ", array_map(array(get_called_class(), 'stringify'), $choices))
             );
 
             throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
