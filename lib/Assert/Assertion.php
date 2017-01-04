@@ -1413,7 +1413,7 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
         
-        $message = $message ?: 'Value "%s" was expected to be a valid e-mail address.'
+        $message = $message ?: 'Value "%s" was expected to be a valid e-mail address.';
 
         if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $message = sprintf($message, static::stringify($value));
