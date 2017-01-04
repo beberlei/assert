@@ -889,7 +889,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailedNullOrMethodCall()
     {
-        Assertion::nullOrAssertionDoesNotExist();
+        Assertion::nullOrAssertionDoesNotExist('');
     }
 
     public function testImplementsInterface()
