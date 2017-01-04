@@ -44,7 +44,6 @@
     }
   },
   "scripts": {
-    "assert:standards": "vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib",
     "assert:generate-docs": "php bin/generate_method_docs.php",
     "assert:cs-lint": "php-cs-fixer fix --diff -vvv --dry-run",
     "assert:cs-fix": "php-cs-fixer fix . -vvv || true"

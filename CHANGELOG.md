@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Other changes
 - Added types to generated documentation.
+- Added PHPStan analysis for PHP 7+
 
 ## 2.6.8 - 2016-12-05
 

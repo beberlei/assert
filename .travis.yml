@@ -43,6 +43,6 @@ script:
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
       composer require --dev phpstan/phpstan;
-      composer assert:standards;
+      vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib;
     fi
   - php vendor/bin/phpunit
