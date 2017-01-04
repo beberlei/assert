@@ -63,7 +63,7 @@ class MethodDocGenerator
                             $methodParameter->isOptional() &&
                             null == $methodParameter->getDefaultValue()
                         )
-                            ? str_replace('|null', '', $matches['type'])
+                            ? str_replace(['|null', 'null|'], '', $matches['type'])
                             : $matches['type'];
                     }
                 }

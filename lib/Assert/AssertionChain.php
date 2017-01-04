@@ -51,9 +51,9 @@ use ReflectionClass;
  * @method AssertionChain integer(string $message = null, string $propertyPath = null) Assert that value is a php integer.
  * @method AssertionChain integerish(string $message = null, string $propertyPath = null) Assert that value is a php integer'ish.
  * @method AssertionChain interfaceExists(string $message = null, string $propertyPath = null) Assert that the interface exists.
- * @method AssertionChain ip(null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address.
- * @method AssertionChain ipv4(null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address.
- * @method AssertionChain ipv6(null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address.
+ * @method AssertionChain ip(int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address.
+ * @method AssertionChain ipv4(int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address.
+ * @method AssertionChain ipv6(int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address.
  * @method AssertionChain isArray(string $message = null, string $propertyPath = null) Assert that value is an array.
  * @method AssertionChain isArrayAccessible(string $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method AssertionChain isCallable(string $message = null, string $propertyPath = null) Determines that the provided value is callable.

@@ -50,9 +50,9 @@ use LogicException;
  * @method LazyAssertion integer(string $message = null, string $propertyPath = null) Assert that value is a php integer.
  * @method LazyAssertion integerish(string $message = null, string $propertyPath = null) Assert that value is a php integer'ish.
  * @method LazyAssertion interfaceExists(string $message = null, string $propertyPath = null) Assert that the interface exists.
- * @method LazyAssertion ip(null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address.
- * @method LazyAssertion ipv4(null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address.
- * @method LazyAssertion ipv6(null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address.
+ * @method LazyAssertion ip(int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address.
+ * @method LazyAssertion ipv4(int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address.
+ * @method LazyAssertion ipv6(int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address.
  * @method LazyAssertion isArray(string $message = null, string $propertyPath = null) Assert that value is an array.
  * @method LazyAssertion isArrayAccessible(string $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method LazyAssertion isCallable(string $message = null, string $propertyPath = null) Determines that the provided value is callable.

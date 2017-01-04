@@ -50,9 +50,9 @@ use BadMethodCallException;
  * @method static bool allInteger(mixed $value, string $message = null, string $propertyPath = null) Assert that value is a php integer for all values.
  * @method static bool allIntegerish(mixed $value, string $message = null, string $propertyPath = null) Assert that value is a php integer'ish for all values.
  * @method static bool allInterfaceExists(mixed $value, string $message = null, string $propertyPath = null) Assert that the interface exists for all values.
- * @method static bool allIp(string $value, null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address for all values.
- * @method static bool allIpv4(string $value, null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address for all values.
- * @method static bool allIpv6(string $value, null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address for all values.
+ * @method static bool allIp(string $value, int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address for all values.
+ * @method static bool allIpv4(string $value, int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address for all values.
+ * @method static bool allIpv6(string $value, int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address for all values.
  * @method static bool allIsArray(mixed $value, string $message = null, string $propertyPath = null) Assert that value is an array for all values.
  * @method static bool allIsArrayAccessible(mixed $value, string $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
  * @method static bool allIsCallable(mixed $value, string $message = null, string $propertyPath = null) Determines that the provided value is callable for all values.
@@ -124,9 +124,9 @@ use BadMethodCallException;
  * @method static bool nullOrInteger(mixed $value, string $message = null, string $propertyPath = null) Assert that value is a php integer or that the value is null.
  * @method static bool nullOrIntegerish(mixed $value, string $message = null, string $propertyPath = null) Assert that value is a php integer'ish or that the value is null.
  * @method static bool nullOrInterfaceExists(mixed $value, string $message = null, string $propertyPath = null) Assert that the interface exists or that the value is null.
- * @method static bool nullOrIp(string $value, null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address or that the value is null.
- * @method static bool nullOrIpv4(string $value, null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address or that the value is null.
- * @method static bool nullOrIpv6(string $value, null|int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address or that the value is null.
+ * @method static bool nullOrIp(string $value, int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address or that the value is null.
+ * @method static bool nullOrIpv4(string $value, int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv4 address or that the value is null.
+ * @method static bool nullOrIpv6(string $value, int $flag = null, string $message = null, string $propertyPath = null) Assert that value is an IPv6 address or that the value is null.
  * @method static bool nullOrIsArray(mixed $value, string $message = null, string $propertyPath = null) Assert that value is an array or that the value is null.
  * @method static bool nullOrIsArrayAccessible(mixed $value, string $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object or that the value is null.
  * @method static bool nullOrIsCallable(mixed $value, string $message = null, string $propertyPath = null) Determines that the provided value is callable or that the value is null.
