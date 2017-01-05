@@ -111,6 +111,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses
+     *
      * @param $assertionClassName
      */
     public function testThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses($assertionClassName)

@@ -23,7 +23,7 @@ class PR142_AllowOverridingStringifyTest extends \PHPUnit_Framework_TestCase
         return array(
             array(1.23, 'Value "***1.23***" expected to be string, type double given.'),
             array(false, 'Value "***<FALSE>***" expected to be string, type boolean given.'),
-            array(new \ArrayObject, 'Value "***ArrayObject***" expected to be string, type object given.'),
+            array(new \ArrayObject(), 'Value "***ArrayObject***" expected to be string, type object given.'),
             array(null, 'Value "***<NULL>***" expected to be string, type NULL given.'),
             array(10, 'Value "***10***" expected to be string, type integer given.'),
             array(true, 'Value "***<TRUE>***" expected to be string, type boolean given.'),

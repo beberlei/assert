@@ -27,9 +27,9 @@ class MethodDocGenerator
 
     /**
      * @param ReflectionMethod[] $methods
-     * @param string $format
-     * @param callable|false $skipParameterTest
-     * @param string $prefix
+     * @param string             $format
+     * @param callable|false     $skipParameterTest
+     * @param string             $prefix
      *
      * @return array
      */
@@ -113,9 +113,9 @@ class MethodDocGenerator
     }
 
     /**
-     * @param string $phpFile
+     * @param string   $phpFile
      * @param string[] $lines
-     * @param string $fileType
+     * @param string   $fileType
      */
     private function generateFile($phpFile, $lines, $fileType)
     {
@@ -212,7 +212,7 @@ class MethodDocGenerator
     }
 }
 
-require_once __DIR__."/../vendor/autoload.php";
+require_once __DIR__.'/../vendor/autoload.php';
 
 $generator = new MethodDocGenerator();
 $generator->generateAssertionDocs();

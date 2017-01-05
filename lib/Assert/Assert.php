@@ -15,7 +15,7 @@
 namespace Assert;
 
 /**
- * AssertionChain factory
+ * AssertionChain factory.
  */
 abstract class Assert
 {
@@ -26,7 +26,7 @@ abstract class Assert
     protected static $assertionClass = 'Assert\Assertion';
 
     /**
-     * Start validation on a value, returns {@link AssertionChain}
+     * Start validation on a value, returns {@link AssertionChain}.
      *
      * The invocation of this method starts an assertion chain
      * that is happening on the passed value.
@@ -39,7 +39,7 @@ abstract class Assert
      * The assertion chain can be stateful, that means be careful when you reuse
      * it. You should never pass around the chain.
      *
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $defaultMessage
      * @param string $defaultPropertyPath
      *
@@ -48,15 +48,16 @@ abstract class Assert
     public static function that($value, $defaultMessage = null, $defaultPropertyPath = null)
     {
         $assertionChain = new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
+
         return $assertionChain
             ->setAssertionClassName(static::$assertionClass)
         ;
     }
 
     /**
-     * Start validation on a set of values, returns {@link AssertionChain}
+     * Start validation on a set of values, returns {@link AssertionChain}.
      *
-     * @param mixed $values
+     * @param mixed  $values
      * @param string $defaultMessage
      * @param string $defaultPropertyPath
      *
@@ -68,9 +69,9 @@ abstract class Assert
     }
 
     /**
-     * Start validation and allow NULL, returns {@link AssertionChain}
+     * Start validation and allow NULL, returns {@link AssertionChain}.
      *
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $defaultMessage
      * @param string $defaultPropertyPath
      *
@@ -89,6 +90,7 @@ abstract class Assert
     public static function lazy()
     {
         $lazyAssertion = new LazyAssertion();
+
         return $lazyAssertion
             ->setExceptionClass(static::$lazyAssertionExceptionClass)
         ;

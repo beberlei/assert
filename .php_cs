@@ -17,7 +17,10 @@ TXT;
 
 $rules = array(
     '@PSR2' => true,
+    '@Symfony' => true,
+    'concat_space' => false,
     'psr4' => true,
+    'phpdoc_align' => true,
     'header_comment' => array(
         'header' => $header,
         'commentType' => PhpCsFixer\Fixer\Comment\HeaderCommentFixer::HEADER_PHPDOC,

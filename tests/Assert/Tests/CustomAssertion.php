@@ -34,6 +34,7 @@ class CustomAssertion extends Assertion
     public static function string($value, $message = null, $propertyPath = null)
     {
         self::$calls[] = array('string', $value);
+
         return parent::string($value, $message, $propertyPath);
     }
 }

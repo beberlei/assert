@@ -15,7 +15,7 @@
 namespace Assert\Tests;
 
 /**
- * Test case specific for the deprecated functions creating assertion chains
+ * Test case specific for the deprecated functions creating assertion chains.
  */
 class AssertionChainFunctionsTest extends \PHPUnit_Framework_TestCase
 {

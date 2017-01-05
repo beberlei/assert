@@ -170,7 +170,7 @@ use Assert\Assertion;
 Assertion::alnum(mixed $value);
 Assertion::between(mixed $value, mixed $lowerLimit, mixed $upperLimit);
 Assertion::betweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit);
-Assertion::betweenLength(mixed $value, integer $minLength, integer $maxLength);
+Assertion::betweenLength(mixed $value, int $minLength, int $maxLength);
 Assertion::boolean(mixed $value);
 Assertion::choice(mixed $value, array $choices);
 Assertion::choicesNotEmpty(array $values, array $choices);
@@ -206,21 +206,21 @@ Assertion::isInstanceOf(mixed $value, string $className);
 Assertion::isJsonString(mixed $value);
 Assertion::isObject(mixed $value);
 Assertion::isTraversable(mixed $value);
-Assertion::keyExists(mixed $value, string|integer $key);
-Assertion::keyIsset(mixed $value, string|integer $key);
-Assertion::keyNotExists(mixed $value, string|integer $key);
+Assertion::keyExists(mixed $value, string|int $key);
+Assertion::keyIsset(mixed $value, string|int $key);
+Assertion::keyNotExists(mixed $value, string|int $key);
 Assertion::length(mixed $value, int $length);
 Assertion::lessOrEqualThan(mixed $value, mixed $limit);
 Assertion::lessThan(mixed $value, mixed $limit);
 Assertion::max(mixed $value, mixed $maxValue);
-Assertion::maxLength(mixed $value, integer $maxLength);
+Assertion::maxLength(mixed $value, int $maxLength);
 Assertion::methodExists(string $value, mixed $object);
 Assertion::min(mixed $value, mixed $minValue);
 Assertion::minLength(mixed $value, int $minLength);
 Assertion::noContent(mixed $value);
 Assertion::notBlank(mixed $value);
 Assertion::notEmpty(mixed $value);
-Assertion::notEmptyKey(mixed $value, string|integer $key);
+Assertion::notEmptyKey(mixed $value, string|int $key);
 Assertion::notEq(mixed $value1, mixed $value2);
 Assertion::notInArray(mixed $value, array $choices);
 Assertion::notIsInstanceOf(mixed $value, string $className);
@@ -271,6 +271,17 @@ try {
 implementation is ``Assert\InvalidArgumentException`` which extends the SPL
 ``InvalidArgumentException``. You can change the exception being used on a
 package based level.
+
+### Customised exception messages
+
+You can pass a callback as the message parameter, allowing you to construct your own
+message only if an assertion fails, rather than every time you run the test.
+
+The callback will be supplied with the name of the assertion and all the parameters
+passed to the assertion (with the exception of the message callback itself).
+
+The callback should return the string that will be used as the exception
+message.
 
 ## Your own Assertion class
 

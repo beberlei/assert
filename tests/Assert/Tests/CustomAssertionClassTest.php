@@ -76,7 +76,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_custom_exception_for_lazy_assertion_chains_that_try_all_assertions_per_chain()
     {
-        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException', <<< MESSAGE
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException', <<< 'MESSAGE'
 The following 4 assertions failed:
 1) foo: Value "foo" is not an integer.
 2) foo: Value "foo" is not an array.
@@ -96,7 +96,7 @@ MESSAGE
      */
     public function it_uses_custom_exception_for_lazy_assertion_chains_that_try_all_assertions()
     {
-        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException', <<< MESSAGE
+        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException', <<< 'MESSAGE'
 The following 4 assertions failed:
 1) foo: Value "foo" is not an integer.
 2) foo: Value "foo" is not an array.
