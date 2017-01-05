@@ -40,6 +40,7 @@ use LogicException;
  * @method LazyAssertion endsWith(string $needle, string $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method LazyAssertion eq(mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
  * @method LazyAssertion extensionLoaded(string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method LazyAssertion extensionVersion(string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method LazyAssertion false(string $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method LazyAssertion file(string $message = null, string $propertyPath = null) Assert that a file exists.
  * @method LazyAssertion float(string $message = null, string $propertyPath = null) Assert that value is a php float.
@@ -82,7 +83,7 @@ use LogicException;
  * @method LazyAssertion notSame(mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method LazyAssertion null(string $message = null, string $propertyPath = null) Assert that value is null.
  * @method LazyAssertion numeric(string $message = null, string $propertyPath = null) Assert that value is numeric.
- * @method LazyAssertion phpVersion(mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method LazyAssertion phpVersion(mixed $version, string $message = null, string $propertyPath = null) Assert on PHP version.
  * @method LazyAssertion range(mixed $minValue, mixed $maxValue, string $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method LazyAssertion readable(string $message = null, string $propertyPath = null) Assert that the value is something readable.
  * @method LazyAssertion regex(string $pattern, string $message = null, string $propertyPath = null) Assert that value matches a regex.
@@ -95,7 +96,7 @@ use LogicException;
  * @method LazyAssertion true(string $message = null, string $propertyPath = null) Assert that the value is boolean True.
  * @method LazyAssertion url(string $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method LazyAssertion uuid(string $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
- * @method LazyAssertion version(string $operator, string $version2, string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method LazyAssertion version(string $operator, string $version2, string $message = null, string $propertyPath = null) Assert comparison of two versions.
  * @method LazyAssertion writeable(string $message = null, string $propertyPath = null) Assert that the value is something writeable.
  * @method LazyAssertion all() Switch chain into validation mode for an array of values.
  * @method LazyAssertion nullOr() Switch chain into mode allowing nulls, ignoring further assertions.
