@@ -82,6 +82,7 @@ use LogicException;
  * @method LazyAssertion notSame(mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method LazyAssertion null(string $message = null, string $propertyPath = null) Assert that value is null.
  * @method LazyAssertion numeric(string $message = null, string $propertyPath = null) Assert that value is numeric.
+ * @method LazyAssertion phpVersion(mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method LazyAssertion range(mixed $minValue, mixed $maxValue, string $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method LazyAssertion readable(string $message = null, string $propertyPath = null) Assert that the value is something readable.
  * @method LazyAssertion regex(string $pattern, string $message = null, string $propertyPath = null) Assert that value matches a regex.
@@ -94,6 +95,7 @@ use LogicException;
  * @method LazyAssertion true(string $message = null, string $propertyPath = null) Assert that the value is boolean True.
  * @method LazyAssertion url(string $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method LazyAssertion uuid(string $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
+ * @method LazyAssertion version(string $operator, string $version2, string $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method LazyAssertion writeable(string $message = null, string $propertyPath = null) Assert that the value is something writeable.
  * @method LazyAssertion all() Switch chain into validation mode for an array of values.
  * @method LazyAssertion nullOr() Switch chain into mode allowing nulls, ignoring further assertions.

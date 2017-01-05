@@ -228,6 +228,7 @@ Assertion::notNull(mixed $value);
 Assertion::notSame(mixed $value1, mixed $value2);
 Assertion::null(mixed $value);
 Assertion::numeric(mixed $value);
+Assertion::phpVersion(string $operator, mixed $version);
 Assertion::range(mixed $value, mixed $minValue, mixed $maxValue);
 Assertion::readable(string $value);
 Assertion::regex(mixed $value, string $pattern);
@@ -240,6 +241,7 @@ Assertion::subclassOf(mixed $value, string $className);
 Assertion::true(mixed $value);
 Assertion::url(mixed $value);
 Assertion::uuid(string $value);
+Assertion::version(string $version1, string $operator, string $version2);
 Assertion::writeable(string $value);
 
 ```

@@ -82,6 +82,7 @@ use BadMethodCallException;
  * @method static bool allNotSame(mixed $value1, mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are not the same (using === ) for all values.
  * @method static bool allNull(mixed $value, string $message = null, string $propertyPath = null) Assert that value is null for all values.
  * @method static bool allNumeric(mixed $value, string $message = null, string $propertyPath = null) Assert that value is numeric for all values.
+ * @method static bool allPhpVersion(string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
  * @method static bool allRange(mixed $value, mixed $minValue, mixed $maxValue, string $message = null, string $propertyPath = null) Assert that value is in range of numbers for all values.
  * @method static bool allReadable(string $value, string $message = null, string $propertyPath = null) Assert that the value is something readable for all values.
  * @method static bool allRegex(mixed $value, string $pattern, string $message = null, string $propertyPath = null) Assert that value matches a regex for all values.
@@ -94,6 +95,7 @@ use BadMethodCallException;
  * @method static bool allTrue(mixed $value, string $message = null, string $propertyPath = null) Assert that the value is boolean True for all values.
  * @method static bool allUrl(mixed $value, string $message = null, string $propertyPath = null) Assert that value is an URL for all values.
  * @method static bool allUuid(string $value, string $message = null, string $propertyPath = null) Assert that the given string is a valid UUID for all values.
+ * @method static bool allVersion(string $version1, string $operator, string $version2, string $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
  * @method static bool allWriteable(string $value, string $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static bool nullOrAlnum(mixed $value, string $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
  * @method static bool nullOrBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
@@ -156,6 +158,7 @@ use BadMethodCallException;
  * @method static bool nullOrNotSame(mixed $value1, mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are not the same (using === ) or that the value is null.
  * @method static bool nullOrNull(mixed $value, string $message = null, string $propertyPath = null) Assert that value is null or that the value is null.
  * @method static bool nullOrNumeric(mixed $value, string $message = null, string $propertyPath = null) Assert that value is numeric or that the value is null.
+ * @method static bool nullOrPhpVersion(string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded or that the value is null.
  * @method static bool nullOrRange(mixed $value, mixed $minValue, mixed $maxValue, string $message = null, string $propertyPath = null) Assert that value is in range of numbers or that the value is null.
  * @method static bool nullOrReadable(string $value, string $message = null, string $propertyPath = null) Assert that the value is something readable or that the value is null.
  * @method static bool nullOrRegex(mixed $value, string $pattern, string $message = null, string $propertyPath = null) Assert that value matches a regex or that the value is null.
@@ -168,6 +171,7 @@ use BadMethodCallException;
  * @method static bool nullOrTrue(mixed $value, string $message = null, string $propertyPath = null) Assert that the value is boolean True or that the value is null.
  * @method static bool nullOrUrl(mixed $value, string $message = null, string $propertyPath = null) Assert that value is an URL or that the value is null.
  * @method static bool nullOrUuid(string $value, string $message = null, string $propertyPath = null) Assert that the given string is a valid UUID or that the value is null.
+ * @method static bool nullOrVersion(string $version1, string $operator, string $version2, string $message = null, string $propertyPath = null) Assert that extension is loaded or that the value is null.
  * @method static bool nullOrWriteable(string $value, string $message = null, string $propertyPath = null) Assert that the value is something writeable or that the value is null.
  */
 class Assertion
@@ -240,6 +244,7 @@ class Assertion
     const INVALID_BETWEEN_EXCLUSIVE = 220;
     const INVALID_EXTENSION         = 222;
     const INVALID_CONSTANT          = 221;
+    const INVALID_VERSION           = 223;
 
     /**
      * Exception to throw when an assertion failed.
@@ -2024,6 +2029,52 @@ class Assertion
         }
 
         return true;
+    }
+
+    /**
+     * Assert comparison of two versions.
+     *
+     * @param string $version1
+     * @param string $operator
+     * @param string $version2
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return bool
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function version($version1, $operator, $version2, $message = null, $propertyPath = null)
+    {
+        static::notEmpty($operator, 'versionCompare operator is required and cannot be empty.');
+
+        if (version_compare($version1, $version2, $operator) !== true) {
+            $message = sprintf(
+                $message ?: 'Version "%s" is not "%s" version "%s".',
+                static::stringify($version1),
+                static::stringify($operator),
+                static::stringify($version2)
+            );
+
+            throw static::createException($version1, $message, static::INVALID_VERSION, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert on PHP version.
+     *
+     * @param string $operator
+     * @param mixed $version
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return bool
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function phpVersion($operator, $version, $message = null, $propertyPath = null)
+    {
+        static::defined('PHP_VERSION');
+
+        return static::version(PHP_VERSION, $operator, $version, $message, $propertyPath);
     }
 
     /**

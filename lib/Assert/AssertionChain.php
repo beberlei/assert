@@ -83,6 +83,7 @@ use ReflectionClass;
  * @method AssertionChain notSame(mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method AssertionChain null(string $message = null, string $propertyPath = null) Assert that value is null.
  * @method AssertionChain numeric(string $message = null, string $propertyPath = null) Assert that value is numeric.
+ * @method AssertionChain phpVersion(mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method AssertionChain range(mixed $minValue, mixed $maxValue, string $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method AssertionChain readable(string $message = null, string $propertyPath = null) Assert that the value is something readable.
  * @method AssertionChain regex(string $pattern, string $message = null, string $propertyPath = null) Assert that value matches a regex.
@@ -95,6 +96,7 @@ use ReflectionClass;
  * @method AssertionChain true(string $message = null, string $propertyPath = null) Assert that the value is boolean True.
  * @method AssertionChain url(string $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method AssertionChain uuid(string $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
+ * @method AssertionChain version(string $operator, string $version2, string $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method AssertionChain writeable(string $message = null, string $propertyPath = null) Assert that the value is something writeable.
  */
 class AssertionChain
