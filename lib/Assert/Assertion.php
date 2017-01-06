@@ -824,30 +824,8 @@ class Assertion
     public static function betweenLength($value, $minLength, $maxLength, $message = null, $propertyPath = null, $encoding = 'utf8')
     {
         static::string($value, $message, $propertyPath);
-
-        if (mb_strlen($value, $encoding) < $minLength) {
-            $message = sprintf(
-                $message ?: 'Value "%s" is too short, it should have at least %d characters, but only has %d characters.',
-                static::stringify($value),
-                $minLength,
-                mb_strlen($value, $encoding)
-            );
-
-            $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
-        }
-
-        if (mb_strlen($value, $encoding) > $maxLength) {
-            $message = sprintf(
-                $message ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
-                static::stringify($value),
-                $maxLength,
-                mb_strlen($value, $encoding)
-            );
-
-            $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
-        }
+        static::minLength($value, $minLength, $message, $propertyPath, $encoding);
+        static::maxLength($value, $maxLength, $message, $propertyPath, $encoding);
 
         return true;
     }
