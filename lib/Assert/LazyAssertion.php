@@ -40,6 +40,7 @@ use LogicException;
  * @method LazyAssertion endsWith(string $needle, string $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method LazyAssertion eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
  * @method LazyAssertion extensionLoaded(string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method LazyAssertion extensionVersion(string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method LazyAssertion false(string $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method LazyAssertion file(string $message = null, string $propertyPath = null) Assert that a file exists.
  * @method LazyAssertion float(string|callable $message = null, string $propertyPath = null) Assert that value is a php float.

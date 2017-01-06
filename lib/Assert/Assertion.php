@@ -40,6 +40,7 @@ use BadMethodCallException;
  * @method static bool allEndsWith(mixed $string, string $needle, string $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
  * @method static bool allEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ) for all values.
  * @method static bool allExtensionLoaded(mixed $value, string $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
+ * @method static bool allExtensionVersion(string $extension, string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed for all values.
  * @method static bool allFalse(mixed $value, string $message = null, string $propertyPath = null) Assert that the value is boolean False for all values.
  * @method static bool allFile(string $value, string $message = null, string $propertyPath = null) Assert that a file exists for all values.
  * @method static bool allFloat(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php float for all values.
@@ -116,6 +117,7 @@ use BadMethodCallException;
  * @method static bool nullOrEndsWith(mixed $string, string $needle, string $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars or that the value is null.
  * @method static bool nullOrEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ) or that the value is null.
  * @method static bool nullOrExtensionLoaded(mixed $value, string $message = null, string $propertyPath = null) Assert that extension is loaded or that the value is null.
+ * @method static bool nullOrExtensionVersion(string $extension, string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed or that the value is null.
  * @method static bool nullOrFalse(mixed $value, string $message = null, string $propertyPath = null) Assert that the value is boolean False or that the value is null.
  * @method static bool nullOrFile(string $value, string $message = null, string $propertyPath = null) Assert that a file exists or that the value is null.
  * @method static bool nullOrFloat(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php float or that the value is null.
@@ -2237,6 +2239,24 @@ class Assertion
         static::defined('PHP_VERSION');
 
         return static::version(PHP_VERSION, $operator, $version, $message, $propertyPath);
+    }
+
+    /**
+     * Assert that extension is loaded and a specific version is installed.
+     *
+     * @param string $extension
+     * @param string $operator
+     * @param mixed $version
+     * @param string|null $message
+     * @param string|null $propertyPath
+     * @return bool
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function extensionVersion($extension, $operator, $version, $message = null, $propertyPath = null)
+    {
+        static::extensionLoaded($extension, $message, $propertyPath);
+
+        return static::version(phpversion($extension), $operator, $version, $message, $propertyPath);
     }
 
     /**

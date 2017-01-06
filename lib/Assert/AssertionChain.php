@@ -41,6 +41,7 @@ use ReflectionClass;
  * @method AssertionChain endsWith(string $needle, string $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method AssertionChain eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
  * @method AssertionChain extensionLoaded(string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method AssertionChain extensionVersion(string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method AssertionChain false(string $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method AssertionChain file(string $message = null, string $propertyPath = null) Assert that a file exists.
  * @method AssertionChain float(string|callable $message = null, string $propertyPath = null) Assert that value is a php float.
