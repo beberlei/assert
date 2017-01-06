@@ -1419,12 +1419,11 @@ class Assertion
     public static function email($value, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
+        
+        $message = $message ?: 'Value "%s" was expected to be a valid e-mail address.';
 
         if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $message = sprintf(
-                $message ?: 'Value "%s" was expected to be a valid e-mail address.',
-                static::stringify($value)
-            );
+            $message = sprintf($message, static::stringify($value));
 
             throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
         } else {
@@ -1432,10 +1431,7 @@ class Assertion
 
             // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
             if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
-                $message = sprintf(
-                    $message ?: 'Value "%s" was expected to be a valid e-mail address.',
-                    static::stringify($value)
-                );
+                $message = sprintf($message, static::stringify($value));
 
                 throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
             }
