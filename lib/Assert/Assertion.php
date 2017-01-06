@@ -2244,12 +2244,14 @@ class Assertion
     /**
      * Assert that extension is loaded and a specific version is installed.
      *
-     * @param string $extension
-     * @param string $operator
-     * @param mixed $version
+     * @param string      $extension
+     * @param string      $operator
+     * @param mixed       $version
      * @param string|null $message
      * @param string|null $propertyPath
+     *
      * @return bool
+     *
      * @throws \Assert\AssertionFailedException
      */
     public static function extensionVersion($extension, $operator, $version, $message = null, $propertyPath = null)
