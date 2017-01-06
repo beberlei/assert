@@ -47,7 +47,7 @@ use LogicException;
  * @method LazyAssertion greaterOrEqualThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit.
  * @method LazyAssertion greaterThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit.
  * @method LazyAssertion implementsInterface(string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface.
- * @method LazyAssertion inArray(array $choices, string|callable $message = null, string $propertyPath = null) Alias of {@see choice()}.
+ * @method LazyAssertion inArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice().
  * @method LazyAssertion integer(string|callable $message = null, string $propertyPath = null) Assert that value is a php integer.
  * @method LazyAssertion integerish(string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish.
  * @method LazyAssertion interfaceExists(string|callable $message = null, string $propertyPath = null) Assert that the interface exists.

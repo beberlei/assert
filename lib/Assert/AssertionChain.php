@@ -48,7 +48,7 @@ use ReflectionClass;
  * @method AssertionChain greaterOrEqualThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit.
  * @method AssertionChain greaterThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit.
  * @method AssertionChain implementsInterface(string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface.
- * @method AssertionChain inArray(array $choices, string|callable $message = null, string $propertyPath = null) Alias of {@see choice()}.
+ * @method AssertionChain inArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice().
  * @method AssertionChain integer(string|callable $message = null, string $propertyPath = null) Assert that value is a php integer.
  * @method AssertionChain integerish(string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish.
  * @method AssertionChain interfaceExists(string|callable $message = null, string $propertyPath = null) Assert that the interface exists.

@@ -47,7 +47,7 @@ use BadMethodCallException;
  * @method static bool allGreaterOrEqualThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit for all values.
  * @method static bool allGreaterThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit for all values.
  * @method static bool allImplementsInterface(mixed $class, string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface for all values.
- * @method static bool allInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Alias of {@see choice()} for all values.
+ * @method static bool allInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice() for all values.
  * @method static bool allInteger(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer for all values.
  * @method static bool allIntegerish(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish for all values.
  * @method static bool allInterfaceExists(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the interface exists for all values.
@@ -124,7 +124,7 @@ use BadMethodCallException;
  * @method static bool nullOrGreaterOrEqualThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit or that the value is null.
  * @method static bool nullOrGreaterThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit or that the value is null.
  * @method static bool nullOrImplementsInterface(mixed $class, string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface or that the value is null.
- * @method static bool nullOrInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Alias of {@see choice()} or that the value is null.
+ * @method static bool nullOrInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice() or that the value is null.
  * @method static bool nullOrInteger(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer or that the value is null.
  * @method static bool nullOrIntegerish(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish or that the value is null.
  * @method static bool nullOrInterfaceExists(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the interface exists or that the value is null.
@@ -975,7 +975,11 @@ class Assertion
     }
 
     /**
-     * Alias of {@see choice()}.
+     * Assert that value is in array of choices.
+     *
+     * This is an alias of {@see choice()}.
+     *
+     * @aliasOf choice()
      *
      * @param mixed                $value
      * @param array                $choices

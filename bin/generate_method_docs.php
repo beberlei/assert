@@ -43,6 +43,10 @@ class MethodDocGenerator
             $shortDescription = trim(substr($descriptionLine, 7), '.');
             $methodName = $prefix.($prefix ? ucfirst($method->getName()) : $method->getName());
 
+            if (preg_match('`\* @aliasOf (?P<aliasOf>[^\s]++)`sim', $doc, $aliasMatch)) {
+                $shortDescription .= sprintf('. This is an alias of Assertion::%s()', trim($aliasMatch['aliasOf'], '(){}'));
+            }
+
             $parameters = array();
 
             foreach ($method->getParameters() as $methodParameter) {
@@ -55,9 +59,8 @@ class MethodDocGenerator
 
                 $parameter = '$'.$methodParameter->getName();
 
-                if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
-                    $type = $methodParameter->getType();
-                }
+                $type = version_compare(PHP_VERSION, '7.0.0') >= 0 ? $methodParameter->getType() : null;
+
                 if (is_null($type)) {
                     preg_match(sprintf('`\* @param (?P<type>[^ ]++) +\%s`sim', $parameter), $doc, $matches);
                     if (isset($matches['type'])) {
