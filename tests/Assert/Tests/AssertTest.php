@@ -983,6 +983,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('ff6f8cb0-c57d-41e1-9b21-0800200c9a66'),
             array('ff6f8cb0-c57d-51e1-9b21-0800200c9a66'),
             array('FF6F8CB0-C57D-11E1-9B21-0800200C9A66'),
+            array('00000000-0000-0000-0000-000000000000'),
         );
     }
 
