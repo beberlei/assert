@@ -1635,6 +1635,27 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Assertion::phpVersion('>', '4.0.0'));
     }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testInvalidPhpVersion()
+    {
+        Assertion::phpVersion('<', '5.0.0');
+    }
+
+    public function testValidExtensionVersion()
+    {
+        $this->assertTrue(Assertion::extensionVersion('json', '>', '1.0.0'));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testInvalidExtensionVersion()
+    {
+        Assertion::extensionVersion('json', '<', '0.1.0');
+    }
 }
 
 class ChildStdClass extends \stdClass

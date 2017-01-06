@@ -41,6 +41,7 @@ use ReflectionClass;
  * @method AssertionChain endsWith(string $needle, string $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method AssertionChain eq(mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
  * @method AssertionChain extensionLoaded(string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method AssertionChain extensionVersion(string $operator, mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method AssertionChain false(string $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method AssertionChain file(string $message = null, string $propertyPath = null) Assert that a file exists.
  * @method AssertionChain float(string $message = null, string $propertyPath = null) Assert that value is a php float.
@@ -83,7 +84,7 @@ use ReflectionClass;
  * @method AssertionChain notSame(mixed $value2, string $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method AssertionChain null(string $message = null, string $propertyPath = null) Assert that value is null.
  * @method AssertionChain numeric(string $message = null, string $propertyPath = null) Assert that value is numeric.
- * @method AssertionChain phpVersion(mixed $version, string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method AssertionChain phpVersion(mixed $version, string $message = null, string $propertyPath = null) Assert on PHP version.
  * @method AssertionChain range(mixed $minValue, mixed $maxValue, string $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method AssertionChain readable(string $message = null, string $propertyPath = null) Assert that the value is something readable.
  * @method AssertionChain regex(string $pattern, string $message = null, string $propertyPath = null) Assert that value matches a regex.
@@ -96,7 +97,7 @@ use ReflectionClass;
  * @method AssertionChain true(string $message = null, string $propertyPath = null) Assert that the value is boolean True.
  * @method AssertionChain url(string $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method AssertionChain uuid(string $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
- * @method AssertionChain version(string $operator, string $version2, string $message = null, string $propertyPath = null) Assert that extension is loaded.
+ * @method AssertionChain version(string $operator, string $version2, string $message = null, string $propertyPath = null) Assert comparison of two versions.
  * @method AssertionChain writeable(string $message = null, string $propertyPath = null) Assert that the value is something writeable.
  */
 class AssertionChain
