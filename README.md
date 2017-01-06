@@ -280,8 +280,13 @@ package based level.
 You can pass a callback as the message parameter, allowing you to construct your own
 message only if an assertion fails, rather than every time you run the test.
 
-The callback will be supplied with the name of the assertion and all the parameters
-passed to the assertion (with the exception of the message callback itself).
+The callback will be supplied with an array of parameters that are for the assertion.
+
+As some assertions call other assertions, your callback will need to example the array
+to determine what assertion failed.
+
+The array will contain a key called `::assertion` that indicates which assertion
+failed.
 
 The callback should return the string that will be used as the exception
 message.

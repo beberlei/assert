@@ -19,11 +19,54 @@ use Assert\AssertionFailedException;
 
 class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
 {
-    public function testMessageCallback()
+    public function testMessageUsingCallbackForString()
     {
-        $this->setExpectedException(AssertionFailedException::class, 'The value of M_PI is not regarded as a string');
-        Assertion::string(M_PI, function ($value, $propertyPath = null) {
-            return 'The value of M_PI is not regarded as a string';
-        });
+        $this->setExpectedException(AssertionFailedException::class, 'The assertion Assert\Assertion::string() failed for 3.1415926535898');
+        Assertion::string(
+            M_PI,
+            function (array $parameters) {
+                return sprintf(
+                    'The assertion %s() failed for %s',
+                    $parameters['::assertion'],
+                    $parameters['value']
+                );
+            },
+            'M_PI'
+        );
+    }
+
+    public function testMessageUsingCallbackForRegexFailingAtTheStringAssertion()
+    {
+        $this->setExpectedException(AssertionFailedException::class, 'The assertion Assert\Assertion::string() failed for 3.1415926535898');
+        Assertion::regex(
+            M_PI,
+            '`[A-Z]++`',
+            function (array $parameters) {
+                return sprintf(
+                    'The assertion %s() failed for %s',
+                    $parameters['::assertion'],
+                    $parameters['value']
+                );
+            },
+            'M_PI'
+        );
+    }
+
+    public function testMessageUsingCallbackForRegexFailingAtTheRegexAssertion()
+    {
+        $this->setExpectedException(AssertionFailedException::class, 'The assertion Assert\Assertion::regex() failed for 3.1415926535898 against the pattern `^[0-9]++$`');
+        Assertion::regex(
+            (string) M_PI,
+            '`^[0-9]++$`',
+            function (array $parameters) {
+                return sprintf(
+                    'The assertion %s() failed for %s against the pattern %s',
+                    $parameters['::assertion'],
+                    $parameters['value'],
+                    $parameters['pattern']
+                );
+            },
+            'M_PI'
+        );
     }
 }
