@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.1 - 2017-01-06
+### Added assertions
+- `Assert\Assertion::extensionVersion()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/205))
+- `Assert\Assertion::phpVersion()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/203))
+- `Assert\Assertion::version()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/203))
+
+### Other changes
+- Exception messages can now be constructed via a callback.
+- Documentation now includes types.
+
 ## 2.6.9 - 2017-01-04
 ### Added assertions
 - `Assert\Assertion::defined()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/193))
