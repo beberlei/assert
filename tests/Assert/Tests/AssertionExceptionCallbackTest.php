@@ -21,7 +21,7 @@ class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageUsingCallbackForString()
     {
-        $this->setExpectedException(AssertionFailedException::class, 'The assertion Assert\Assertion::string() failed for 3.1415926535898');
+        $this->setExpectedException('Assert\AssertionFailedException', 'The assertion Assert\Assertion::string() failed for 3.1415926535898');
         Assertion::string(
             M_PI,
             function (array $parameters) {
@@ -37,7 +37,7 @@ class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testMessageUsingCallbackForRegexFailingAtTheStringAssertion()
     {
-        $this->setExpectedException(AssertionFailedException::class, 'The assertion Assert\Assertion::string() failed for 3.1415926535898');
+        $this->setExpectedException('Assert\AssertionFailedException', 'The assertion Assert\Assertion::string() failed for 3.1415926535898');
         Assertion::regex(
             M_PI,
             '`[A-Z]++`',
@@ -54,7 +54,7 @@ class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testMessageUsingCallbackForRegexFailingAtTheRegexAssertion()
     {
-        $this->setExpectedException(AssertionFailedException::class, 'The assertion Assert\Assertion::regex() failed for 3.1415926535898 against the pattern `^[0-9]++$`');
+        $this->setExpectedException('Assert\AssertionFailedException', 'The assertion Assert\Assertion::regex() failed for 3.1415926535898 against the pattern `^[0-9]++$`');
         Assertion::regex(
             (string) M_PI,
             '`^[0-9]++$`',
