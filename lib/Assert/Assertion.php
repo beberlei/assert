@@ -2437,7 +2437,7 @@ class Assertion
         if (is_callable($message)) {
             $traces = debug_backtrace(0, 2);
 
-            $parameters = [];
+            $parameters = array();
 
             foreach ((new \ReflectionClass($traces[1]['class']))->getMethod($traces[1]['function'])->getParameters() as $index => $parameter) {
                 if ($parameter->getName() !== 'message') {
