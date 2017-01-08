@@ -2451,7 +2451,7 @@ class Assertion
 
             $parameters['::assertion'] = sprintf('%s%s%s', $traces[1]['class'], $traces[1]['type'], $traces[1]['function']);
 
-            $message = call_user_func_array($message, [$parameters]);
+            $message = call_user_func_array($message, array($parameters));
         }
 
         return is_null($message) ? null : (string) $message;
