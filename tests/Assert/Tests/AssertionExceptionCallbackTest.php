@@ -15,7 +15,6 @@
 namespace Assert\Tests;
 
 use Assert\Assertion;
-use Assert\AssertionFailedException;
 
 class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
 {
