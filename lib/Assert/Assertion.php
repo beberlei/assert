@@ -2452,6 +2452,6 @@ class Assertion
             $message = call_user_func_array($message, [$parameters]);
         }
 
-        return is_string($message) ? $message : null;
+        return is_null($message) ? null : (string) $message;
     }
 }
