@@ -2439,7 +2439,9 @@ class Assertion
 
             $parameters = array();
 
-            foreach ((new \ReflectionClass($traces[1]['class']))->getMethod($traces[1]['function'])->getParameters() as $index => $parameter) {
+            $reflection = new \ReflectionClass($traces[1]['class']);
+            $method = $reflection->getMethod($traces[1]['function']);
+            foreach ($method->getParameters() as $index => $parameter) {
                 if ($parameter->getName() !== 'message') {
                     $parameters[$parameter->getName()] = array_key_exists($index, $traces[1]['args'])
                         ? $traces[1]['args'][$index]
