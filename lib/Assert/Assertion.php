@@ -2435,19 +2435,19 @@ class Assertion
     protected static function generateMessage($message = null)
     {
         if (is_callable($message)) {
-            $trace = debug_backtrace(0, 2)[1];
+            $traces = debug_backtrace(0, 2);
 
             $parameters = [];
 
-            foreach ((new \ReflectionClass($trace['class']))->getMethod($trace['function'])->getParameters() as $index => $parameter) {
+            foreach ((new \ReflectionClass($traces[1]['class']))->getMethod($traces[1]['function'])->getParameters() as $index => $parameter) {
                 if ($parameter->getName() !== 'message') {
-                    $parameters[$parameter->getName()] = array_key_exists($index, $trace['args'])
-                        ? $trace['args'][$index]
+                    $parameters[$parameter->getName()] = array_key_exists($index, $traces[1]['args'])
+                        ? $traces[1]['args'][$index]
                         : $parameter->getDefaultValue();
                 }
             }
 
-            $parameters['::assertion'] = sprintf('%s%s%s', $trace['class'], $trace['type'], $trace['function']);
+            $parameters['::assertion'] = sprintf('%s%s%s', $traces[1]['class'], $traces[1]['type'], $traces[1]['function']);
 
             $message = call_user_func_array($message, [$parameters]);
         }
