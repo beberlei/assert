@@ -2430,7 +2430,7 @@ class Assertion
      *
      * @param string|callable|null $message
      *
-     * @return string
+     * @return string|null
      */
     protected static function generateMessage($message = null)
     {
@@ -2452,6 +2452,6 @@ class Assertion
             $message = call_user_func_array($message, [$parameters]);
         }
 
-        return $message;
+        return is_string($message) ? $message : null;
     }
 }
