@@ -2435,7 +2435,7 @@ class Assertion
     protected static function generateMessage($message = null)
     {
         if (is_callable($message)) {
-            $traces = debug_backtrace(0, 2);
+            $traces = debug_backtrace(0);
 
             $parameters = array();
 
