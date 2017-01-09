@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.2 - 2017-01-09
+
+### Fixes
+- Backward compatibility fixes for PHP 5.3
+
 ## 2.7.1 - 2017-01-06
 ### Added assertions
 - `Assert\Assertion::extensionVersion()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/205))
