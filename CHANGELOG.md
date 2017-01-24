@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.3 - 2017-01-24
+
+### Fixes
+- Fix `Assert\Assertion::integerish()` when used with a resource (Thanks to [manuxi](https://github.com/beberlei/assert/issues/206))
+
 ## 2.7.2 - 2017-01-09
 
 ### Fixes

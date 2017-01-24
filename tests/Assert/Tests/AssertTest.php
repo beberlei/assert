@@ -89,6 +89,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('test'),
             array(null),
             array('1.23'),
+            array(fopen(__FILE__, 'r')),
         );
     }
 
