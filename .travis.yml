@@ -5,8 +5,6 @@ git:
 
 env:
   - COMPOSER_FLAGS=--prefer-lowest
-  global:
-    - OPCODE_CACHE=apc
 
 matrix:
   exclude:
