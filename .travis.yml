@@ -22,7 +22,7 @@ matrix:
     - nightly
     - hhvm
 
-fast_finish: true
+  fast_finish: true
   allow_failures:
     - php: nightly
 
