@@ -4,9 +4,9 @@ git:
   depth: 2
 
 env:
+  - COMPOSER_FLAGS=--prefer-lowest
   global:
     - OPCODE_CACHE=apc
-  - COMPOSER_FLAGS=--prefer-lowest
 
 matrix:
   exclude:
