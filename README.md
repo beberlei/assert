@@ -1,8 +1,11 @@
 # Assert
 
-Travis Status: [![Build Status](https://travis-ci.org/beberlei/assert.svg?branch=master)](https://travis-ci.org/beberlei/assert)
-
-Latest version: [![Latest Stable Version](https://poser.pugx.org/beberlei/assert/v/stable)](https://packagist.org/packages/beberlei/assert)
+[![Travis Status](https://travis-ci.org/beberlei/assert.png?branch=master)](https://travis-ci.org/beberlei/assert)
+[![Appveyor status](https://ci.appveyor.com/api/projects/status/9vag4892hfq6effr)](https://ci.appveyor.com/project/beberlei/assert)
+[![Code Coverage](https://scrutinizer-ci.com/g/beberlei/assert/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/beberlei/assert/)
+[![Latest Stable Version](https://poser.pugx.org/beberlei/assert/version.png)](https://packagist.org/packages/beberlei/assert)
+[![Total Downloads](https://poser.pugx.org/beberlei/assert/d/total.png)](https://packagist.org/packages/beberlei/assert)
+[![Join the chat at https://gitter.im/phinx-php/Lobby](https://badges.gitter.im/phinx-php/Lobby.svg)](https://gitter.im/phinx-php/Lobby)
 
 A simple php library which contains assertions and guard methods for input validation (not filtering!) in business-model, libraries and application low-level code.
 The library can be used to implement pre-/post-conditions on input data.
