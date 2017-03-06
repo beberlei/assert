@@ -6,13 +6,18 @@ git:
 env:
   global:
     - OPCODE_CACHE=apc
+  - COMPOSER_FLAGS=--prefer-lowest
 
 matrix:
+  exclude:
+    - php: hhvm
+      env: COMPOSER_FLAGS=--prefer-lowest
   include:
     - php: hhvm-3.9
       sudo: required
       dist: trusty
       group: edge
+      env: COMPOSER_FLAGS=
     - php: nightly
     - php: 7.1
       env:
@@ -36,9 +41,10 @@ cache:
 
 before_install:
   - phpenv config-rm xdebug.ini || true
-
-install:
-  - composer update
+  
+before_script:
+    - travis_retry composer self-update
+    - travis_retry composer update --no-interaction --prefer-source --prefer-stable ${COMPOSER_FLAGS}
 
 script:
   - if [[ $LINT = true ]]; then
@@ -47,4 +53,8 @@ script:
       composer require --dev phpstan/phpstan;
       vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib;
     fi
-  - php vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
