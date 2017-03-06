@@ -3,10 +3,6 @@ language: php
 git:
   depth: 2
 
-env:
-  global:
-    - COMPOSER_FLAGS=--prefer-lowest
-
 matrix:
   include:
     - php: 5.3
@@ -36,7 +32,7 @@ before_install:
   
 before_script:
     - travis_retry composer self-update
-    - travis_retry composer update --no-interaction --prefer-source --prefer-stable ${COMPOSER_FLAGS}
+    - travis_retry composer update --no-interaction --prefer-source --prefer-stable --prefer-lowest
 
 script:
   - if [[ $LINT = true ]]; then
