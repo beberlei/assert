@@ -28,7 +28,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.0",
-    "phpunit/phpunit": "@stable"
+    "phpunit/phpunit": "^4|^5"
   },
   "autoload": {
     "psr-4": {
