@@ -32,9 +32,8 @@ cache:
 
 before_install:
   - phpenv config-rm xdebug.ini || true
-  
+
 before_script:
-    - travis_retry composer self-update
     - travis_retry composer update --no-interaction --prefer-source --prefer-stable
 
 script:
