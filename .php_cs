@@ -19,6 +19,7 @@ $rules = array(
     '@PSR2' => true,
     '@Symfony' => true,
     'concat_space' => false,
+    'native_function_invocation' => true,
     'psr4' => true,
     'phpdoc_align' => true,
     'header_comment' => array(
