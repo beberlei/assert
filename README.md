@@ -1,6 +1,6 @@
 # Assert
 
-[![Travis Status](https://travis-ci.org/beberlei/assert.png?branch=master)](https://travis-ci.org/beberlei/assert)
+[![Travis Status](https://travis-ci.org/beberlei/assert.svg?branch=master)](https://travis-ci.org/beberlei/assert)
 [![Appveyor status](https://ci.appveyor.com/api/projects/status/9vag4892hfq6effr)](https://ci.appveyor.com/project/beberlei/assert)
 [![Code Coverage](https://scrutinizer-ci.com/g/beberlei/assert/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/beberlei/assert/)
 [![Latest Stable Version](https://poser.pugx.org/beberlei/assert/version.png)](https://packagist.org/packages/beberlei/assert)
@@ -148,8 +148,8 @@ Assert::lazy()
     ->verifyNow();
 ```
 
-The above shows how to use this functionality to finely tune the behavior of reporting failures, but to make 
-catching all failures even easier, you may also call ``tryAll`` before making any assertions like below. This 
+The above shows how to use this functionality to finely tune the behavior of reporting failures, but to make
+catching all failures even easier, you may also call ``tryAll`` before making any assertions like below. This
 helps to reduce method calls, and has the same behavior as above.
 
 ```php
