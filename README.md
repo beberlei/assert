@@ -1,7 +1,6 @@
 # Assert
 
 [![Travis Status](https://travis-ci.org/beberlei/assert.svg?branch=master)](https://travis-ci.org/beberlei/assert)
-[![Appveyor status](https://ci.appveyor.com/api/projects/status/9vag4892hfq6effr)](https://ci.appveyor.com/project/beberlei/assert)
 [![Code Coverage](https://scrutinizer-ci.com/g/beberlei/assert/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/beberlei/assert/)
 [![Latest Stable Version](https://poser.pugx.org/beberlei/assert/version.png)](https://packagist.org/packages/beberlei/assert)
 [![Total Downloads](https://poser.pugx.org/beberlei/assert/d/total.png)](https://packagist.org/packages/beberlei/assert)
