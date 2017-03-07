@@ -11,7 +11,7 @@ matrix:
     - php: 5.6
     - php: 7.0
       env:
-      - LINT=true
+      - LINT=true COVERAGE=true
     - php: 7.1
       env:
       - LINT=true
@@ -31,7 +31,8 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_install:
-  - phpenv config-rm xdebug.ini || true
+    - source .travis/xdebug.sh
+    - xdebug-disable
 
 before_script:
     - travis_retry composer update --no-interaction --prefer-source --prefer-stable
@@ -43,7 +44,13 @@ script:
       composer require --dev phpstan/phpstan;
       vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib;
     fi
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - if [[ "$COVERAGE" == "true" ]]; then
+        xdebug-enable;
+        vendor/bin/phpunit vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
+        xdebug-disable;
+    else
+        vendor/bin/phpunit;
+    fi
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
