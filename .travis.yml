@@ -31,11 +31,11 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_install:
-    - source .travis/xdebug.sh
-    - xdebug-disable
+  - source .travis/xdebug.sh
+  - xdebug-disable
 
 before_script:
-    - travis_retry composer update --no-interaction --prefer-source --prefer-stable
+  - travis_retry composer update --no-interaction --prefer-source --prefer-stable
 
 script:
   - if [[ $LINT = true ]]; then
@@ -45,13 +45,13 @@ script:
       vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib;
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
-        xdebug-enable;
-        vendor/bin/phpunit vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
-        xdebug-disable;
+      xdebug-enable;
+      vendor/bin/phpunit vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
+      xdebug-disable;
     else
-        vendor/bin/phpunit;
+      vendor/bin/phpunit;
     fi
 
 after_script:
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
