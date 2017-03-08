@@ -21,19 +21,11 @@ use Assert\LazyAssertionException;
 class LazyAssertionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @test
+     * @expectedException \Assert\LazyAssertionException
+     * @expectedExceptionMessage The following 3 assertions failed:
      */
-    public function it_collects_errors_until_assertall()
+    public function testThatLazyAssertionsCollectsAllErrorsUntilAssertAll()
     {
-        $this->setExpectedException('Assert\LazyAssertionException', <<<'EXC'
-The following 3 assertions failed:
-1) foo: Value "10" expected to be string, type integer given.
-2) bar: Value "<NULL>" is empty, but non empty value was expected.
-3) baz: Value "string" is not an array.
-
-EXC
-        );
-
         Assert::lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
@@ -42,17 +34,11 @@ EXC
     }
 
     /**
-     * @test
+     * @expectedException \Assert\LazyAssertionException
+     * @expectedExceptionMessage The following 1 assertions failed:
      */
-    public function it_skips_assertions_of_current_chain_after_failure()
+    public function testThatLazyAssertionsSkipsAssertionsOfCurrentChainAfterFailure()
     {
-        $this->setExpectedException('Assert\LazyAssertionException', <<<'EXC'
-The following 1 assertions failed:
-1) foo: Value "<NULL>" is empty, but non empty value was expected.
-
-EXC
-        );
-
         Assert::lazy()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
@@ -102,69 +88,60 @@ EXC
         }
     }
 
+    /**
+     * @expectedException \Assert\LazyAssertionException
+     * @expectedExceptionMessage The following 1 assertions failed:
+     */
     public function testCallsToThatFollowingTryAllSkipAssertionsAfterFailure()
     {
-        $this->setExpectedException('Assert\LazyAssertionException', <<<'EXC'
-The following 1 assertions failed:
-1) foo: Value "<NULL>" is empty, but non empty value was expected.
-
-EXC
-        );
-
         Assert::lazy()
             ->that(10, 'foo')->tryAll()->integer()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
 
+    /**
+     * @expectedException \Assert\LazyAssertionException
+     * @expectedExceptionMessage The following 4 assertions failed:
+     */
     public function testCallsToThatWithTryAllWithMultipleAssertionsAllGetReported()
     {
-        $this->setExpectedException('\Assert\LazyAssertionException', <<<'EXC'
-The following 4 assertions failed:
-1) foo: Value "10" is not a float.
-2) foo: Provided "10" is not greater than "100".
-3) foo: Value "<NULL>" is empty, but non empty value was expected.
-4) foo: Value "<NULL>" expected to be string, type NULL given.
-
-EXC
-);
         Assert::lazy()
             ->that(10, 'foo')->tryAll()->float()->greaterThan(100)
             ->that(null, 'foo')->tryAll()->notEmpty()->string()
             ->verifyNow();
     }
 
+    /**
+     * @expectedException \Assert\LazyAssertionException
+     * @expectedExceptionMessage The following 4 assertions failed:
+     */
     public function testCallsToTryAllOnLazyAlwaysReportAllGetReported()
     {
-        $this->setExpectedException('\Assert\LazyAssertionException', <<<'EXC'
-The following 4 assertions failed:
-1) foo: Value "10" is not a float.
-2) foo: Provided "10" is not greater than "100".
-3) foo: Value "<NULL>" is empty, but non empty value was expected.
-4) foo: Value "<NULL>" expected to be string, type NULL given.
-
-EXC
-);
         Assert::lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
 
+    /**
+     * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
+     * @expectedExceptionMessage The following 1 assertions failed:
+     */
     public function testThatLazyAssertionThrowsCustomExceptionWhenSet()
     {
         $lazyAssertion = new LazyAssertion();
-        $lazyAssertion->setExceptionClass('Assert\Tests\CustomLazyAssertionException');
+        $lazyAssertion->setExceptionClass('Assert\Tests\Fixtures\CustomLazyAssertionException');
 
-        $this->setExpectedException('Assert\Tests\CustomLazyAssertionException');
-        $lazyAssertion
+        var_dump($lazyAssertion
             ->that('foo', 'property')->integer()
             ->verifyNow()
-        ;
+        );
     }
 
     /**
      * @dataProvider provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses
+     * @expectedException \LogicException
      *
      * @param mixed $exceptionClass
      */
@@ -172,7 +149,6 @@ EXC
     {
         $lazyAssertion = new LazyAssertion();
 
-        $this->setExpectedException('LogicException');
         $lazyAssertion->setExceptionClass($exceptionClass);
     }
 
@@ -191,10 +167,12 @@ EXC
         );
     }
 
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionMessage The following 4 assertions failed:
+     */
     public function testLazyAssertionExceptionExtendsInvalidArgumentException()
     {
-        $this->setExpectedException('\Assert\InvalidArgumentException');
-
         Assert::lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()

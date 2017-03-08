@@ -12,14 +12,12 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-$loader = @include __DIR__.'/../vendor/autoload.php';
-if (!$loader) {
-    die(<<<'EOT'
-You must set up the project dependencies, run the following commands:
+namespace Assert\Tests\Fixtures;
 
-wget http://getcomposer.org/composer.phar
-php composer.phar install
-
-EOT
-    );
+class OneCountable implements \Countable
+{
+    public function count()
+    {
+        return 1;
+    }
 }

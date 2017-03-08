@@ -38,7 +38,7 @@ before_script:
   - travis_retry composer update --no-interaction --prefer-source --prefer-stable
 
 script:
-  - if [[ $LINT = true ]]; then
+  - if [[ "$LINT" == "true" ]]; then
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
       composer require --dev phpstan/phpstan;
@@ -46,12 +46,14 @@ script:
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
       xdebug-enable;
-      vendor/bin/phpunit vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
+      vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
       xdebug-disable;
     else
       vendor/bin/phpunit;
     fi
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - if [[ "$COVERAGE" == "true" ]]; then
+      wget https://scrutinizer-ci.com/ocular.phar;
+      php ocular.phar code-coverage:upload --format=php-clover coverage.clover;
+    fi

@@ -12,14 +12,12 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-$loader = @include __DIR__.'/../vendor/autoload.php';
-if (!$loader) {
-    die(<<<'EOT'
-You must set up the project dependencies, run the following commands:
+namespace Assert\Tests\Fixtures;
 
-wget http://getcomposer.org/composer.phar
-php composer.phar install
+use Assert\Assert;
 
-EOT
-    );
+class CustomAssert extends Assert
+{
+    protected static $assertionClass = 'Assert\Tests\Fixtures\CustomAssertion';
+    protected static $lazyAssertionExceptionClass = 'Assert\Tests\Fixtures\CustomLazyAssertionException';
 }

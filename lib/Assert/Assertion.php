@@ -2370,8 +2370,10 @@ class Assertion
      */
     protected static function stringify($value)
     {
+        $result = gettype($value);
+
         if (is_bool($value)) {
-            return $value ? '<TRUE>' : '<FALSE>';
+            $result = $value ? '<TRUE>' : '<FALSE>';
         }
 
         if (is_scalar($value)) {
@@ -2381,26 +2383,26 @@ class Assertion
                 $val = substr($val, 0, 97) . '...';
             }
 
-            return $val;
+            $result = $val;
         }
 
         if (is_array($value)) {
-            return '<ARRAY>';
+            $result = '<ARRAY>';
         }
 
         if (is_object($value)) {
-            return get_class($value);
+            $result = get_class($value);
         }
 
         if (is_resource($value)) {
-            return get_resource_type($value);
+            $result = get_resource_type($value);
         }
 
         if ($value === null) {
-            return '<NULL>';
+            $result = '<NULL>';
         }
 
-        return gettype($value);
+        return $result;
     }
 
     /**

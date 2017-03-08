@@ -12,10 +12,14 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-namespace Assert\Tests;
+namespace Assert\Tests\Fixtures;
 
-use Assert\LazyAssertionException;
+use Assert\Assertion;
 
-class CustomLazyAssertionException extends LazyAssertionException
+class PR142_OverrideStringify extends Assertion
 {
+    protected static function stringify($value)
+    {
+        return '***'.parent::stringify($value).'***';
+    }
 }

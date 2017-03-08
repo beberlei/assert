@@ -19,81 +19,60 @@ namespace Assert\Tests;
  */
 class AssertionChainFunctionsTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @test
-     */
-    public function it_chains_assertions()
+    public function testThatAssertionChainFunctionsReturnAnAssertionChain()
     {
-        \Assert\that(10)->notEmpty()->integer();
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(10)->notEmpty()->integer());
+    }
+
+    public function testThatAssertionChainFunctionsShiftsArgumentsBy1()
+    {
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(10)->eq(10));
     }
 
     /**
-     * @test
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionMessage Not Null and such
      */
-    public function it_shifts_arguments_to_assertions_by_one()
+    public function testThatAssertionChainFunctionsKnowsDefaultErrorMessage()
     {
-        \Assert\that(10)->eq(10);
-    }
-
-    /**
-     * @test
-     */
-    public function it_knowns_default_error_message()
-    {
-        $this->setExpectedException('Assert\InvalidArgumentException', 'Not Null and such');
-
         \Assert\that(null, 'Not Null and such')->notEmpty();
     }
 
-    /**
-     * @test
-     */
-    public function it_skips_assertions_on_valid_null()
+    public function testThatAssertionChainFunctionsSkipAssertionsOnValidNull()
     {
-        \Assert\that(null)->nullOr()->integer()->eq(10);
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(null)->nullOr()->integer()->eq(10));
     }
 
-    /**
-     * @test
-     */
-    public function it_validates_all_inputs()
+    public function testThatAssertionChainFunctionsValidatesAllInputs()
     {
-        \Assert\that(array(1, 2, 3))->all()->integer();
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(array(1, 2, 3))->all()->integer());
     }
 
-    /**
-     * @test
-     */
-    public function it_has_thatall_shortcut()
+    public function testAssertionChainFunctionsThatAllShortcut()
     {
-        \Assert\thatAll(array(1, 2, 3))->integer();
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\thatAll(array(1, 2, 3))->integer());
     }
 
-    /**
-     * @test
-     */
-    public function it_has_nullor_shortcut()
+    public function testAssertionChainFunctionsNullOrShortcut()
     {
-        \Assert\thatNullOr(null)->integer()->eq(10);
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\thatNullOr(null)->integer()->eq(10));
     }
 
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Assertion 'unknownAssertion' does not exist.
-     * @test
      */
-    public function it_throws_exception_for_unknown_assertion()
+    public function testThatAssertionChainFunctionsThrowsExceptionForUnknownAssertion()
     {
         \Assert\that(null)->unknownAssertion();
     }
 
-    /**
-     * @test
-     */
-    public function it_has_satisfy_shortcut()
+    public function testAssertionChainFunctionSatisfyShortcut()
     {
-        \Assert\that(null)->satisfy(function ($value) {
-            return is_null($value);
-        });
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(null)->satisfy(
+            function ($value) {
+                return is_null($value);
+            }
+        ));
     }
 }

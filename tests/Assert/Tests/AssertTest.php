@@ -33,10 +33,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidFloat
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     *
+     * @param mixed $nonFloat
      */
     public function testInvalidFloat($nonFloat)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_FLOAT);
         Assertion::float($nonFloat);
     }
 
@@ -62,10 +65,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidInteger
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_INTEGER
+     *
+     * @param mixed $nonInteger
      */
     public function testInvalidInteger($nonInteger)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTEGER);
         Assertion::integer($nonInteger);
     }
 
@@ -95,10 +101,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidIntegerish
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_INTEGERISH
+     *
+     * @param mixed $nonInteger
      */
     public function testInvalidIntegerish($nonInteger)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTEGERISH);
         Assertion::integerish($nonInteger);
     }
 
@@ -108,15 +117,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::boolean(false));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_BOOLEAN
+     */
     public function testInvalidBoolean()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BOOLEAN);
         Assertion::boolean(1);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_SCALAR
+     */
     public function testInvalidScalar()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SCALAR);
         Assertion::scalar(new \stdClass());
     }
 
@@ -141,10 +156,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidNotEmpty
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     *
+     * @param mixed $value
      */
     public function testInvalidNotEmpty($value)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_EMPTY);
         Assertion::notEmpty($value);
     }
 
@@ -177,10 +195,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidEmpty
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_NOT_EMPTY
+     *
+     * @param mixed $value
      */
     public function testInvalidEmpty($value)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NOT_EMPTY);
         Assertion::noContent($value);
     }
 
@@ -198,10 +219,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidNull
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_NOT_NULL
+     *
+     * @param mixed $value
      */
     public function testInvalidNull($value)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NOT_NULL);
         Assertion::null($value);
     }
 
@@ -219,9 +243,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::notNull(false));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_NULL
+     */
     public function testInvalidNotNull()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_NULL);
         Assertion::notNull(null);
     }
 
@@ -233,10 +260,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidString
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING
+     *
+     * @param mixed $invalidString
      */
     public function testInvalidString($invalidString)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
         Assertion::string($invalidString);
     }
 
@@ -257,21 +287,30 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::regex('some string', '/.*/'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_REGEX
+     */
     public function testInvalidRegex()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_REGEX);
         Assertion::regex('foo', '(bar)');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING
+     */
     public function testInvalidRegexValueNotString()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING);
         Assertion::regex(array('foo'), '(bar)');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN_LENGTH
+     */
     public function testInvalidMinLength()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN_LENGTH);
         Assertion::minLength('foo', 4);
     }
 
@@ -284,9 +323,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::minLength('址址', 2));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX_LENGTH
+     */
     public function testInvalidMaxLength()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_LENGTH);
         Assertion::maxLength('foo', 2);
     }
 
@@ -298,15 +340,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::maxLength('址址', 2));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN_LENGTH
+     */
     public function testInvalidBetweenLengthMin()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MIN_LENGTH);
         Assertion::betweenLength('foo', 4, 100);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX_LENGTH
+     */
     public function testInvalidBetweenLengthMax()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_MAX_LENGTH);
         Assertion::betweenLength('foo', 0, 2);
     }
 
@@ -316,15 +364,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::betweenLength('址址', 2, 2));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_START
+     */
     public function testInvalidStartsWith()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_START);
         Assertion::startsWith('foo', 'bar');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_START
+     */
     public function testInvalidStartsWithDueToWrongEncoding()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_START);
         Assertion::startsWith('址', '址址', null, null, 'ASCII');
     }
 
@@ -336,15 +390,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::startsWith('址foo', '址'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_END
+     */
     public function testInvalidEndsWith()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_END);
         Assertion::endsWith('foo', 'bar');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_END
+     */
     public function testInvalidEndsWithDueToWrongEncoding()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_END);
         Assertion::endsWith('址', '址址', null, null, 'ASCII');
     }
 
@@ -356,9 +416,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::endsWith('foo址', '址'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_CONTAINS
+     */
     public function testInvalidContains()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_STRING_CONTAINS);
         Assertion::contains('foo', 'bar');
     }
 
@@ -368,9 +431,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::contains('foo', 'oo'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_CHOICE
+     */
     public function testInvalidChoice()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);
         Assertion::choice('foo', array('bar', 'baz'));
     }
 
@@ -379,9 +445,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::choice('foo', array('foo')));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_CHOICE
+     */
     public function testInvalidInArray()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CHOICE);
         Assertion::inArray('bar', array('baz'));
     }
 
@@ -390,9 +459,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::inArray('foo', array('foo')));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NUMERIC
+     */
     public function testInvalidNumeric()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NUMERIC);
         Assertion::numeric('foo');
     }
 
@@ -418,10 +490,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidArray
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY
+     *
+     * @param mixed $value
      */
     public function testInvalidArray($value)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_ARRAY);
         Assertion::isArray($value);
     }
 
@@ -432,9 +507,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::isArray(array(array(), array())));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_EXISTS
+     */
     public function testInvalidKeyExists()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_KEY_EXISTS);
         Assertion::keyExists(array('foo' => 'bar'), 'baz');
     }
 
@@ -443,9 +521,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::keyExists(array('foo' => 'bar'), 'foo'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_NOT_EXISTS
+     */
     public function testInvalidKeyNotExists()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_KEY_NOT_EXISTS);
         Assertion::keyNotExists(array('foo' => 'bar'), 'foo');
     }
 
@@ -470,10 +551,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidNotBlank
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_BLANK
+     *
+     * @param mixed $notBlank
      */
     public function testInvalidNotBlank($notBlank)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_BLANK);
         Assertion::notBlank($notBlank);
     }
 
@@ -482,9 +566,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::notBlank('foo'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_INSTANCE_OF
+     */
     public function testInvalidNotInstanceOf()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_INSTANCE_OF);
         Assertion::notIsInstanceOf(new \stdClass(), 'stdClass');
     }
 
@@ -493,9 +580,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::notIsInstanceOf(new \stdClass(), 'PDO'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_INSTANCE_OF
+     */
     public function testInvalidInstanceOf()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INSTANCE_OF);
         Assertion::isInstanceOf(new \stdClass(), 'PDO');
     }
 
@@ -504,20 +594,26 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::isInstanceOf(new \stdClass(), 'stdClass'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_SUBCLASS_OF
+     */
     public function testInvalidSubclassOf()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SUBCLASS_OF);
         Assertion::subclassOf(new \stdClass(), 'PDO');
     }
 
     public function testValidSubclassOf()
     {
-        $this->assertTrue(Assertion::subclassOf(new ChildStdClass(), 'stdClass'));
+        $this->assertTrue(Assertion::subclassOf(new Fixtures\ChildStdClass(), 'stdClass'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_RANGE
+     */
     public function testInvalidRange()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_RANGE);
         Assertion::range(1, 2, 3);
         Assertion::range(1.5, 2, 3);
     }
@@ -530,9 +626,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::range(2.5, 2.25, 2.75));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_EMAIL
+     */
     public function testInvalidEmail()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EMAIL);
         Assertion::email('foo');
     }
 
@@ -543,11 +642,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidUrl
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_URL
+     *
+     * @param string $url
      */
     public function testInvalidUrl($url)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_URL);
-
         Assertion::url($url);
     }
 
@@ -576,6 +677,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataValidUrl
+     *
+     * @param string $url
      */
     public function testValidUrl($url)
     {
@@ -643,9 +746,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_DIGIT
+     */
     public function testInvalidDigit()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DIGIT);
         Assertion::digit(-1);
     }
 
@@ -664,9 +770,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::alnum('a1b2c3'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ALNUM
+     */
     public function testInvalidAlnum()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_ALNUM);
         Assertion::alnum('1a');
     }
 
@@ -675,9 +784,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::true(1 == 1));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_TRUE
+     */
     public function testInvalidTrue()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_TRUE);
         Assertion::true(false);
     }
 
@@ -686,15 +798,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::false(1 == 0));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FALSE
+     */
     public function testInvalidFalse()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_FALSE);
         Assertion::false(true);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_CLASS
+     */
     public function testInvalidClass()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CLASS);
         Assertion::classExists('Foo');
     }
 
@@ -703,47 +821,66 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::classExists('\\Exception'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_SAME
+     */
     public function testSame()
     {
         $this->assertTrue(Assertion::same(1, 1));
         $this->assertTrue(Assertion::same('foo', 'foo'));
         $this->assertTrue(Assertion::same($obj = new \stdClass(), $obj));
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SAME);
+
         Assertion::same(new \stdClass(), new \stdClass());
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_EQ
+     */
     public function testEq()
     {
         $this->assertTrue(Assertion::eq(1, '1'));
         $this->assertTrue(Assertion::eq('foo', true));
         $this->assertTrue(Assertion::eq($obj = new \stdClass(), $obj));
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_EQ);
+
         Assertion::eq('2', 1);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_EQ
+     */
     public function testNotEq()
     {
         $this->assertTrue(Assertion::notEq('1', false));
         $this->assertTrue(Assertion::notEq(new \stdClass(), array()));
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_EQ);
+
         Assertion::notEq('1', 1);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_SAME
+     */
     public function testNotSame()
     {
         $this->assertTrue(Assertion::notSame('1', 2));
         $this->assertTrue(Assertion::notSame(new \stdClass(), array()));
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_NOT_SAME);
+
         Assertion::notSame(1, 1);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_VALUE_IN_ARRAY
+     */
     public function testNotInArray()
     {
         $this->assertTrue(Assertion::notInArray(6, range(1, 5)));
+        $this->assertTrue(Assertion::notInArray('a', range('b', 'z')));
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_VALUE_IN_ARRAY);
         Assertion::notInArray(1, range(1, 5));
-        Assertion::notInArray(range('a', 'c'), range('a', 'd'));
     }
 
     public function testMin()
@@ -751,22 +888,28 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::min(1, 1));
         $this->assertTrue(Assertion::min(2, 1));
         $this->assertTrue(Assertion::min(2.5, 1));
+    }
 
-        try {
-            Assertion::min(0, 1);
-            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e) {
-            $this->assertEquals(Assertion::INVALID_MIN, $e->getCode());
-            $this->assertEquals('Number "0" was expected to be at least "1".', $e->getMessage());
-        }
+    /**
+     * @dataProvider dataInvalidMin
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN
+     * @expectedExceptionMessageRegExp /Number "(0\.5|0)" was expected to be at least "(1|2\.5)"/
+     *
+     * @param float|int $value
+     * @param float|int $min
+     */
+    public function testInvalidMin($value, $min)
+    {
+        Assertion::min($value, $min);
+    }
 
-        try {
-            Assertion::min(0.5, 2.5);
-            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e) {
-            $this->assertEquals(Assertion::INVALID_MIN, $e->getCode());
-            $this->assertEquals('Number "0.5" was expected to be at least "2.5".', $e->getMessage());
-        }
+    public function dataInvalidMin()
+    {
+        return array(
+            array(0, 1),
+            array(0.5, 2.5),
+        );
     }
 
     public function testMax()
@@ -774,22 +917,28 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::max(1, 1));
         $this->assertTrue(Assertion::max(0.5, 1));
         $this->assertTrue(Assertion::max(0, 1));
+    }
 
-        try {
-            Assertion::max(2, 1);
-            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e) {
-            $this->assertEquals(Assertion::INVALID_MAX, $e->getCode());
-            $this->assertEquals('Number "2" was expected to be at most "1".', $e->getMessage());
-        }
+    /**
+     * @dataProvider dataInvalidMax
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX
+     * @expectedExceptionMessageRegExp /Number "(2.5|2)" was expected to be at most "(1|0\.5)"/
+     *
+     * @param float|int $value
+     * @param float|int $min
+     */
+    public function testInvalidMax($value, $min)
+    {
+        Assertion::max($value, $min);
+    }
 
-        try {
-            Assertion::max(2.5, 0.5);
-            $this->fail('Expected exception `Assert\AssertionFailedException` not thrown');
-        } catch (AssertionFailedException $e) {
-            $this->assertEquals(Assertion::INVALID_MAX, $e->getCode());
-            $this->assertEquals('Number "2.5" was expected to be at most "0.5".', $e->getMessage());
-        }
+    public function dataInvalidMax()
+    {
+        return array(
+            array(2, 1),
+            array(2.5, 0.5),
+        );
     }
 
     public function testNullOr()
@@ -798,9 +947,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::nullOrMax(null, 2));
     }
 
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Missing the first argument.
+     */
     public function testNullOrWithNoValueThrows()
     {
-        $this->setExpectedException('BadMethodCallException');
         Assertion::nullOrMax();
     }
 
@@ -820,21 +972,30 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataLengthUtf8Characters
+     *
+     * @param string $value
+     * @param int    $expected
      */
     public function testLengthUtf8Characters($value, $expected)
     {
         $this->assertTrue(Assertion::length($value, $expected));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_LENGTH
+     */
     public function testLengthFailed()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
         Assertion::length('asdf', 3);
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_LENGTH
+     */
     public function testLengthFailedForWrongEncoding()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LENGTH);
         Assertion::length('址', 1, null, null, 'ASCII');
     }
 
@@ -848,39 +1009,54 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::file(__FILE__));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     */
     public function testFileWithEmptyFilename()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::VALUE_EMPTY);
         Assertion::file('');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FILE
+     */
     public function testFileDoesNotExists()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_FILE);
         Assertion::file(__DIR__ . '/does-not-exists');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_DIRECTORY
+     */
     public function testDirectory()
     {
         $this->assertTrue(Assertion::directory(__DIR__));
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DIRECTORY);
         Assertion::directory(__DIR__ . '/does-not-exist');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_READABLE
+     */
     public function testReadable()
     {
         $this->assertTrue(Assertion::readable(__FILE__));
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_READABLE);
         Assertion::readable(__DIR__ . '/does-not-exist');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_WRITEABLE
+     */
     public function testWriteable()
     {
         $this->assertTrue(Assertion::writeable(sys_get_temp_dir()));
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_WRITEABLE);
         Assertion::writeable(__DIR__ . '/does-not-exist');
     }
 
@@ -893,38 +1069,34 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::nullOrAssertionDoesNotExist('');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INTERFACE_NOT_IMPLEMENTED
+     */
     public function testImplementsInterface()
     {
-        $this->assertTrue(Assertion::implementsInterface(
-            '\ArrayIterator',
-            '\Traversable'
-        ));
+        $this->assertTrue(Assertion::implementsInterface('\ArrayIterator', '\Traversable'));
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INTERFACE_NOT_IMPLEMENTED);
-        Assertion::implementsInterface(
-            '\Exception',
-            '\Traversable'
-        );
+        Assertion::implementsInterface('\Exception', '\Traversable');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INTERFACE_NOT_IMPLEMENTED
+     */
     public function testImplementsInterfaceWithClassObject()
     {
         $class = new \ArrayObject();
 
-        $this->assertTrue(Assertion::implementsInterface(
-            $class,
-            '\Traversable'
-        ));
+        $this->assertTrue(Assertion::implementsInterface($class, '\Traversable'));
 
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INTERFACE_NOT_IMPLEMENTED);
-        Assertion::implementsInterface(
-            $class,
-            '\SplObserver'
-        );
+        Assertion::implementsInterface($class, '\SplObserver');
     }
 
     /**
      * @dataProvider isJsonStringDataprovider
+     *
+     * @param $content
      */
     public function testIsJsonString($content)
     {
@@ -943,10 +1115,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider isJsonStringInvalidStringDataprovider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_JSON_STRING
+     *
+     * @param $invalidString
      */
     public function testIsJsonStringExpectingException($invalidString)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_JSON_STRING);
         Assertion::isJsonString($invalidString);
     }
 
@@ -960,6 +1135,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providesValidUuids
+     *
+     * @param string $uuid
      */
     public function testValidUuids($uuid)
     {
@@ -968,10 +1145,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providesInvalidUuids
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_UUID
+     *
+     * @param string $uuid
      */
     public function testInvalidUuids($uuid)
     {
-        $this->setExpectedException('Assert\InvalidArgumentException');
         Assertion::uuid($uuid);
     }
 
@@ -1001,6 +1181,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providesValidE164s
+     *
+     * @param string $e164
      */
     public function testValidE164s($e164)
     {
@@ -1009,10 +1191,13 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providesInvalidE164s
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_E164
+     *
+     * @param string $e164
      */
     public function testInvalidE164s($e164)
     {
-        $this->setExpectedException('Assert\InvalidArgumentException');
         Assertion::e164($e164);
     }
 
@@ -1039,20 +1224,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidNotEmptyKeyDataprovider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
      */
-    public function testInvalidNotEmptyKey($invalidArray, $key)
+    public function testInvalidNotEmptyKeyEmptyKey()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException');
-        Assertion::notEmptyKey($invalidArray, $key);
+        Assertion::notEmptyKey(array('keyExists' => ''), 'keyExists');
     }
 
-    public static function invalidNotEmptyKeyDataprovider()
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_ISSET
+     */
+    public function testInvalidNotEmptyKeyKeyNotExists()
     {
-        return array(
-            'empty' => array(array('keyExists' => ''), 'keyExists'),
-            'key not exists' => array(array('key' => 'notEmpty'), 'keyNotExists'),
-        );
+        Assertion::notEmptyKey(array('key' => 'notEmpty'), 'keyNotExists');
     }
 
     public function testAllWithSimpleAssertion()
@@ -1060,9 +1246,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::allTrue(array(true, true)));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_TRUE
+     */
     public function testAllWithSimpleAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_TRUE);
         Assertion::allTrue(array(true, false));
     }
 
@@ -1071,39 +1260,48 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::allIsInstanceOf(array(new \stdClass(), new \stdClass()), 'stdClass'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_INSTANCE_OF
+     */
     public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', 'Assertion failed', Assertion::INVALID_INSTANCE_OF);
-
         Assertion::allIsInstanceOf(array(new \stdClass(), new \stdClass()), 'PDO', 'Assertion failed', 'foos');
     }
 
+    /**
+     * @expectedException \BadMethodCallException
+     */
     public function testAllWithNoValueThrows()
     {
-        $this->setExpectedException('BadMethodCallException');
         Assertion::allTrue();
     }
 
     public function testValidCount()
     {
         $this->assertTrue(Assertion::count(array('Hi'), 1));
-        $this->assertTrue(Assertion::count(new OneCountable(), 1));
+        $this->assertTrue(Assertion::count(new Fixtures\OneCountable(), 1));
     }
 
     public static function dataInvalidCount()
     {
         return array(
             array(array('Hi', 'There'), 3),
-            array(new OneCountable(), 2),
+            array(new Fixtures\OneCountable(), 2),
         );
     }
 
     /**
      * @dataProvider dataInvalidCount
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_COUNT
+     * @expectedExceptionMessageRegExp /List does not contain exactly "\d+" elements./
+     *
+     * @param mixed $countable
+     * @param int   $count
      */
     public function testInvalidCount($countable, $count)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', 'List does not contain exactly "'.$count.'" elements.', Assertion::INVALID_COUNT);
         Assertion::count($countable, $count);
     }
 
@@ -1117,14 +1315,24 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidChoicesProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     *
+     * @param $values
+     * @param $choices
      */
-    public function testChoicesNotEmptyExpectingException($values, $choices, $exceptionCode)
+    public function testChoicesNotEmptyExpectingExceptionEmptyValue($values, $choices)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, $exceptionCode);
-        Assertion::choicesNotEmpty(
-            $values,
-            $choices
-        );
+        Assertion::choicesNotEmpty($values, $choices);
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_ISSET
+     */
+    public function testChoicesNotEmptyExpectingExceptionInvalidKeyIsset()
+    {
+        Assertion::choicesNotEmpty(array('tux' => ''), array('invalidChoice'));
     }
 
     public function invalidChoicesProvider()
@@ -1132,7 +1340,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         return array(
             'empty values' => array(array(), array('tux'), Assertion::VALUE_EMPTY),
             'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion::VALUE_EMPTY),
-            'choice not found in values' => array(array('tux' => ''), array('invalidChoice'), Assertion::INVALID_KEY_ISSET),
         );
     }
 
@@ -1141,9 +1348,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::isObject(new \stdClass()));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_OBJECT
+     */
     public function testIsObjectExpectingException()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_OBJECT);
         Assertion::isObject('notAnObject');
     }
 
@@ -1152,16 +1362,16 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::methodExists('methodExists', new Assertion()));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_METHOD
+     */
     public function testMethodExistsFailure()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_METHOD);
         Assertion::methodExists('methodNotExists', new Assertion());
     }
 
-    /**
-     * @test
-     */
-    public function it_passes_values_and_constraints_to_exception()
+    public function testThatAssertionExceptionCanAccessValueAndSupplyConstraints()
     {
         try {
             Assertion::range(0, 10, 20);
@@ -1195,10 +1405,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidLessProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_LESS
+     *
+     * @param mixed $value
+     * @param mixed $limit
      */
     public function testLessThanThrowsException($value, $limit)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LESS);
         Assertion::lessThan($value, $limit);
     }
 
@@ -1224,10 +1438,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidLessOrEqualProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_LESS_OR_EQUAL
+     *
+     * @param mixed $value
+     * @param mixed $limit
      */
     public function testLessOrEqualThanThrowsException($value, $limit)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_LESS_OR_EQUAL);
         Assertion::lessOrEqualThan($value, $limit);
     }
 
@@ -1253,6 +1471,9 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider validDateProvider
+     *
+     * @param string $value
+     * @param string $format
      */
     public function testValidDate($value, $format)
     {
@@ -1271,10 +1492,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidGreaterProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_GREATER
+     *
+     * @param mixed $value
+     * @param mixed $limit
      */
     public function testGreaterThanThrowsException($value, $limit)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_GREATER);
         Assertion::greaterThan($value, $limit);
     }
 
@@ -1300,22 +1525,27 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidGreaterOrEqualProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_GREATER_OR_EQUAL
      *
      * @param mixed $value
      * @param mixed $limit
      */
     public function testGreaterOrEqualThanThrowsException($value, $limit)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_GREATER_OR_EQUAL);
         Assertion::greaterOrEqualThan($value, $limit);
     }
 
     /**
      * @dataProvider invalidDateProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_DATE
+     *
+     * @param string $value
+     * @param string $format
      */
     public function testInvalidDate($value, $format)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_DATE);
         Assertion::date($value, $format);
     }
 
@@ -1333,9 +1563,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::isTraversable(new \ArrayObject()));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_TRAVERSABLE
+     */
     public function testInvalidTraversable()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_TRAVERSABLE);
         Assertion::isTraversable('not traversable');
     }
 
@@ -1344,30 +1577,39 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::isArrayAccessible(new \ArrayObject()));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY_ACCESSIBLE
+     */
     public function testInvalidArrayAccessible()
     {
-        $this->setExpectedException('Assert\InvalidArgumentException', null, Assertion::INVALID_ARRAY_ACCESSIBLE);
         Assertion::isArrayAccessible('not array accessible');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_CALLABLE
+     */
     public function testInvalidCallable()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_CALLABLE);
         Assertion::isCallable('nonExistingFunction');
     }
 
     public function testValidCallable()
     {
         $this->assertTrue(Assertion::isCallable('\is_callable'));
-        $this->assertTrue(Assertion::isCallable(__NAMESPACE__ . '\\someCallable'));
-        $this->assertTrue(Assertion::isCallable(array(__NAMESPACE__ . '\\OneCountable', 'count')));
+        $this->assertTrue(Assertion::isCallable(__NAMESPACE__ . '\\Fixtures\\someCallable'));
+        $this->assertTrue(Assertion::isCallable(array(__NAMESPACE__ . '\\Fixtures\\OneCountable', 'count')));
         $this->assertTrue(Assertion::isCallable(function () {
         }));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_SATISFY
+     */
     public function testInvalidSatisfy()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_SATISFY);
         Assertion::satisfy(null, function ($value) {
             return !is_null($value);
         });
@@ -1390,6 +1632,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider validIpProvider
+     *
+     * @param string $value
      */
     public function testValidIp($value)
     {
@@ -1408,10 +1652,14 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidIpProvider
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_IP
+     *
+     * @param string   $value
+     * @param int|null $flag
      */
     public function testInvalidIp($value, $flag = null)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
         Assertion::ip($value, $flag);
     }
 
@@ -1433,9 +1681,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::ipv4('109.188.127.26'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_IP
+     */
     public function testInvalidIpv4()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
         Assertion::ipv4('2001:db8:85a3:8d3:1319:8a2e:370:7348');
     }
 
@@ -1444,15 +1695,21 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::ipv6('2001:db8:85a3:8d3:1319:8a2e:370:7348'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_IP
+     */
     public function testInvalidIpv6()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_IP);
         Assertion::ipv6('109.188.127.26');
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_INTERFACE
+     */
     public function testInvalidInterfaceExists()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_INTERFACE);
         Assertion::interfaceExists('Foo');
     }
 
@@ -1463,6 +1720,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerInvalidBetween
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_BETWEEN
      *
      * @param mixed $value
      * @param mixed $lowerLimit
@@ -1470,8 +1729,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidBetween($value, $lowerLimit, $upperLimit)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BETWEEN);
-
         Assertion::between($value, $lowerLimit, $upperLimit);
     }
 
@@ -1519,6 +1776,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerInvalidBetweenExclusive
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_BETWEEN_EXCLUSIVE
      *
      * @param mixed $value
      * @param mixed $lowerLimit
@@ -1526,8 +1785,6 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidBetweenExclusive($value, $lowerLimit, $upperLimit)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', null, Assertion::INVALID_BETWEEN_EXCLUSIVE);
-
         Assertion::betweenExclusive($value, $lowerLimit, $upperLimit);
     }
 
@@ -1570,19 +1827,25 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     * @expectedExceptionMessage 1234567...
+     */
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
     {
         $string = str_repeat('1234567890', 11);
 
-        $this->setExpectedException('Assert\AssertionFailedException', '1234567...', Assertion::INVALID_FLOAT);
-
         $this->assertTrue(Assertion::float($string));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     * @expectedExceptionMessage stream
+     */
     public function testStringifyReportsResourceType()
     {
-        $this->setExpectedException('Assert\AssertionFailedException', 'stream', Assertion::INVALID_FLOAT);
-
         $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
     }
 
@@ -1658,20 +1921,4 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::extensionVersion('json', '<', '0.1.0');
     }
-}
-
-class ChildStdClass extends \stdClass
-{
-}
-
-class OneCountable implements \Countable
-{
-    public function count()
-    {
-        return 1;
-    }
-}
-
-function someCallable()
-{
 }

@@ -14,8 +14,6 @@
 
 namespace Assert\Tests;
 
-use Assert\Assertion;
-
 class PR142_AllowOverridingStringifyTest extends \PHPUnit_Framework_TestCase
 {
     public static function dataInvalidString()
@@ -32,21 +30,14 @@ class PR142_AllowOverridingStringifyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataInvalidString
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING
      *
      * @param string $invalidString
      * @param string $exceptionMessage
      */
     public function testInvalidStringWithOverriddenStringify($invalidString, $exceptionMessage)
     {
-        $this->setExpectedException('Assert\AssertionFailedException', $exceptionMessage, Assertion::INVALID_STRING);
-        PR142_OverrideStringify::string($invalidString);
-    }
-}
-
-class PR142_OverrideStringify extends Assertion
-{
-    protected static function stringify($value)
-    {
-        return '***' . parent::stringify($value) . '***';
+        Fixtures\PR142_OverrideStringify::string($invalidString);
     }
 }
