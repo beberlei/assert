@@ -46,7 +46,7 @@ script:
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
       xdebug-enable;
-      vendor/bin/phpunit vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
+      vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover;
       xdebug-disable;
     else
       vendor/bin/phpunit;
