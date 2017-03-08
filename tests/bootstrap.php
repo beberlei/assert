@@ -12,7 +12,7 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-$loader = @include __DIR__ . '/../vendor/autoload.php';
+$loader = @include __DIR__.'/../vendor/autoload.php';
 if (!$loader) {
     die(<<<'EOT'
 You must set up the project dependencies, run the following commands:
@@ -22,4 +22,8 @@ php composer.phar install
 
 EOT
     );
+}
+
+if (!class_exists('\PHPUnit_Framework_TestCase', true)) {
+    class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
 }
