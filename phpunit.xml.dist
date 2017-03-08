@@ -6,7 +6,7 @@
     bootstrap="tests/bootstrap.php"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutOutputDuringTests="true"
-    beStrictAboutTestsThatDoNotTestAnything="false"
+    beStrictAboutTestsThatDoNotTestAnything="true"
     colors="true"
     columns="max"
     convertErrorsToExceptions="true"

@@ -12,13 +12,13 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-namespace Assert\Tests;
+namespace Assert\Tests\Fixtures;
 
 use Assert\Assertion;
 
 class CustomAssertion extends Assertion
 {
-    protected static $exceptionClass = 'Assert\Tests\CustomException';
+    protected static $exceptionClass = 'Assert\Tests\Fixtures\CustomException';
     private static $calls = array();
 
     public static function clearCalls()

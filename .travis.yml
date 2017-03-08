@@ -38,7 +38,7 @@ before_script:
   - travis_retry composer update --no-interaction --prefer-source --prefer-stable
 
 script:
-  - if [[ $LINT = true ]]; then
+  - if [[ "$LINT" == "true" ]]; then
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
       composer require --dev phpstan/phpstan;

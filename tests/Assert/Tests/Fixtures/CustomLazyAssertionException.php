@@ -12,7 +12,7 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-namespace Assert\Tests;
+namespace Assert\Tests\Fixtures;
 
 use Assert\LazyAssertionException;
 

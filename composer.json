@@ -41,7 +41,10 @@
   "autoload-dev": {
     "psr-4": {
       "Assert\\Tests\\": "tests/Assert/Tests"
-    }
+    },
+    "files": [
+      "tests/Assert/Tests/Fixtures/functions.php"
+    ]
   },
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php",
