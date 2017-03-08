@@ -17,7 +17,6 @@ namespace Assert\Tests;
 use Assert\Assert;
 use Assert\AssertionChain;
 use Assert\Tests\Fixtures\CustomAssertion;
-use Symfony\Component\Process\Exception\LogicException;
 
 class AssertionChainTest extends \PHPUnit_Framework_TestCase
 {
@@ -92,7 +91,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses
-     * @expectedException LogicException
+     * @expectedException \LogicException
      *
      * @param $assertionClassName
      */

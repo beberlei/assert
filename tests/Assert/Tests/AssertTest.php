@@ -880,7 +880,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::notInArray(6, range(1, 5)));
         $this->assertTrue(Assertion::notInArray('a', range('b', 'z')));
 
-        Assertion::notInArray(1, range(1,5));
+        Assertion::notInArray(1, range(1, 5));
     }
 
     public function testMin()
@@ -974,7 +974,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      * @dataProvider dataLengthUtf8Characters
      *
      * @param string $value
-     * @param int $expected
+     * @param int    $expected
      */
     public function testLengthUtf8Characters($value, $expected)
     {
@@ -1075,7 +1075,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testImplementsInterface()
     {
-        $this->assertTrue(Assertion::implementsInterface('\ArrayIterator','\Traversable'));
+        $this->assertTrue(Assertion::implementsInterface('\ArrayIterator', '\Traversable'));
 
         Assertion::implementsInterface('\Exception', '\Traversable');
     }
@@ -1298,7 +1298,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      * @expectedExceptionMessageRegExp /List does not contain exactly "\d+" elements./
      *
      * @param mixed $countable
-     * @param int $count
+     * @param int   $count
      */
     public function testInvalidCount($countable, $count)
     {
@@ -1655,7 +1655,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_IP
      *
-     * @param string $value
+     * @param string   $value
      * @param int|null $flag
      */
     public function testInvalidIp($value, $flag = null)
@@ -1922,4 +1922,3 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         Assertion::extensionVersion('json', '<', '0.1.0');
     }
 }
-

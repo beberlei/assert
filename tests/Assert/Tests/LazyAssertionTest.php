@@ -26,7 +26,7 @@ class LazyAssertionTest extends \PHPUnit_Framework_TestCase
      */
     public function testThatLazyAssertionsCollectsAllErrorsUntilAssertAll()
     {
-       Assert::lazy()
+        Assert::lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
             ->that('string', 'baz')->isArray()
