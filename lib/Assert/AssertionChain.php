@@ -84,7 +84,10 @@ use ReflectionClass;
  * @method AssertionChain notSame(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method AssertionChain null(string|callable $message = null, string $propertyPath = null) Assert that value is null.
  * @method AssertionChain numeric(string|callable $message = null, string $propertyPath = null) Assert that value is numeric.
+ * @method AssertionChain objectOrClass(string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists.
  * @method AssertionChain phpVersion(mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version.
+ * @method AssertionChain propertiesExist(mixed $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist.
+ * @method AssertionChain propertyExists(string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists.
  * @method AssertionChain range(mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method AssertionChain readable(string|callable $message = null, string $propertyPath = null) Assert that the value is something readable.
  * @method AssertionChain regex(string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value matches a regex.
