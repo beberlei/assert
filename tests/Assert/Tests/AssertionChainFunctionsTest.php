@@ -71,7 +71,7 @@ class AssertionChainFunctionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(null)->satisfy(
             function ($value) {
-                return is_null($value);
+                return \is_null($value);
             }
         ));
     }

@@ -27,7 +27,7 @@ class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
         Assertion::string(
             M_PI,
             function (array $parameters) {
-                return sprintf(
+                return \sprintf(
                     'The assertion %s() failed for %s',
                     $parameters['::assertion'],
                     $parameters['value']
@@ -47,7 +47,7 @@ class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
             M_PI,
             '`[A-Z]++`',
             function (array $parameters) {
-                return sprintf(
+                return \sprintf(
                     'The assertion %s() failed for %s',
                     $parameters['::assertion'],
                     $parameters['value']
@@ -67,7 +67,7 @@ class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
             (string) M_PI,
             '`^[0-9]++$`',
             function (array $parameters) {
-                return sprintf(
+                return \sprintf(
                     'The assertion %s() failed for %s against the pattern %s',
                     $parameters['::assertion'],
                     $parameters['value'],

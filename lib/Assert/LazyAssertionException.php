@@ -28,11 +28,11 @@ class LazyAssertionException extends InvalidArgumentException
      */
     public static function fromErrors(array $errors)
     {
-        $message = sprintf('The following %d assertions failed:', count($errors)) . "\n";
+        $message = \sprintf('The following %d assertions failed:', \count($errors)) . "\n";
 
         $i = 1;
         foreach ($errors as $error) {
-            $message .= sprintf("%d) %s: %s\n", $i++, $error->getPropertyPath(), $error->getMessage());
+            $message .= \sprintf("%d) %s: %s\n", $i++, $error->getPropertyPath(), $error->getMessage());
         }
 
         return new static($message, $errors);

@@ -72,7 +72,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('\Assert\AssertionChain', Assert::that(null)->satisfy(
             function ($value) {
-                return is_null($value);
+                return \is_null($value);
             }
         ));
     }
@@ -83,7 +83,7 @@ class AssertionChainTest extends \PHPUnit_Framework_TestCase
         $assertionChain->setAssertionClassName('Assert\Tests\Fixtures\CustomAssertion');
 
         CustomAssertion::clearCalls();
-        $message = uniqid();
+        $message = \uniqid();
         $assertionChain->string($message);
 
         $this->assertSame(array(array('string', 'foo')), CustomAssertion::getCalls());

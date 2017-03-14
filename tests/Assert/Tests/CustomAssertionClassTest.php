@@ -36,7 +36,7 @@ class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testThatCustomAssertionsUsesCustomExceptionForAssertionChains()
     {
-        $string = 's' . uniqid();
+        $string = 's' . \uniqid();
         Fixtures\CustomAssert::that($string)->string();
         $this->assertSame(array(array('string', $string)), CustomAssertion::getCalls());
 

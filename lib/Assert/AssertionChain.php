@@ -147,14 +147,14 @@ class AssertionChain
             return $this;
         }
 
-        if (!method_exists($this->assertionClassName, $methodName)) {
+        if (!\method_exists($this->assertionClassName, $methodName)) {
             throw new \RuntimeException("Assertion '" . $methodName . "' does not exist.");
         }
 
         $reflClass = new ReflectionClass($this->assertionClassName);
         $method = $reflClass->getMethod($methodName);
 
-        array_unshift($args, $this->value);
+        \array_unshift($args, $this->value);
         $params = $method->getParameters();
 
         foreach ($params as $idx => $param) {
@@ -175,7 +175,7 @@ class AssertionChain
             $methodName = 'all' . $methodName;
         }
 
-        call_user_func_array(array($this->assertionClassName, $methodName), $args);
+        \call_user_func_array(array($this->assertionClassName, $methodName), $args);
 
         return $this;
     }
@@ -213,11 +213,11 @@ class AssertionChain
      */
     public function setAssertionClassName($className)
     {
-        if (!is_string($className)) {
+        if (!\is_string($className)) {
             throw new LogicException('Exception class name must be passed as a string');
         }
 
-        if ($className !== 'Assert\Assertion' && !is_subclass_of($className, 'Assert\Assertion')) {
+        if ($className !== 'Assert\Assertion' && !\is_subclass_of($className, 'Assert\Assertion')) {
             throw new LogicException($className . ' is not (a subclass of) Assert\Assertion');
         }
 
