@@ -570,7 +570,7 @@ class Assertion
      */
     public static function notEmpty($value, $message = null, $propertyPath = null)
     {
-        if (empty($value)) {
+        if (empty($value) && '0' !== $value) {
             $message = sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is empty, but non empty value was expected.',
                 static::stringify($value)
