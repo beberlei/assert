@@ -1,0 +1,3 @@
+parameters:
+    ignoreErrors:
+        - '#Call to an undefined static method Assert\\Assertion::all#' # Static methods in docblocks not currently supported - waiting on release of https://github.com/phpstan/phpstan/pull/183
