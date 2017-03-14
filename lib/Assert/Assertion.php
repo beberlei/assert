@@ -290,7 +290,7 @@ class Assertion
     public static function eq($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value != $value2) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not equal expected value "%s".',
                 static::stringify($value),
                 static::stringify($value2)
@@ -317,7 +317,7 @@ class Assertion
     public static function same($value, $value2, $message = null, $propertyPath = null)
     {
         if ($value !== $value2) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not the same as expected value "%s".',
                 static::stringify($value),
                 static::stringify($value2)
@@ -344,7 +344,7 @@ class Assertion
     public static function notEq($value1, $value2, $message = null, $propertyPath = null)
     {
         if ($value1 == $value2) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is equal to expected value "%s".',
                 static::stringify($value1),
                 static::stringify($value2)
@@ -370,7 +370,7 @@ class Assertion
     public static function notSame($value1, $value2, $message = null, $propertyPath = null)
     {
         if ($value1 === $value2) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is the same as expected value "%s".',
                 static::stringify($value1),
                 static::stringify($value2)
@@ -395,8 +395,8 @@ class Assertion
      */
     public static function notInArray($value, array $choices, $message = null, $propertyPath = null)
     {
-        if (in_array($value, $choices) === true) {
-            $message = sprintf(
+        if (\in_array($value, $choices) === true) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is in given "%s".',
                 static::stringify($value),
                 static::stringify($choices)
@@ -420,8 +420,8 @@ class Assertion
      */
     public static function integer($value, $message = null, $propertyPath = null)
     {
-        if (!is_int($value)) {
-            $message = sprintf(
+        if (!\is_int($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an integer.',
                 static::stringify($value)
             );
@@ -445,8 +445,8 @@ class Assertion
      */
     public static function float($value, $message = null, $propertyPath = null)
     {
-        if (!is_float($value)) {
-            $message = sprintf(
+        if (!\is_float($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a float.',
                 static::stringify($value)
             );
@@ -470,8 +470,8 @@ class Assertion
      */
     public static function digit($value, $message = null, $propertyPath = null)
     {
-        if (!ctype_digit((string) $value)) {
-            $message = sprintf(
+        if (!\ctype_digit((string) $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a digit.',
                 static::stringify($value)
             );
@@ -495,8 +495,8 @@ class Assertion
      */
     public static function integerish($value, $message = null, $propertyPath = null)
     {
-        if (is_resource($value) || is_object($value) || strval(intval($value)) != $value || is_bool($value) || is_null($value)) {
-            $message = sprintf(
+        if (\is_resource($value) || \is_object($value) || \strval(\intval($value)) != $value || \is_bool($value) || \is_null($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an integer or a number castable to integer.',
                 static::stringify($value)
             );
@@ -520,8 +520,8 @@ class Assertion
      */
     public static function boolean($value, $message = null, $propertyPath = null)
     {
-        if (!is_bool($value)) {
-            $message = sprintf(
+        if (!\is_bool($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a boolean.',
                 static::stringify($value)
             );
@@ -545,8 +545,8 @@ class Assertion
      */
     public static function scalar($value, $message = null, $propertyPath = null)
     {
-        if (!is_scalar($value)) {
-            $message = sprintf(
+        if (!\is_scalar($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a scalar.',
                 static::stringify($value)
             );
@@ -571,7 +571,7 @@ class Assertion
     public static function notEmpty($value, $message = null, $propertyPath = null)
     {
         if (empty($value)) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is empty, but non empty value was expected.',
                 static::stringify($value)
             );
@@ -596,7 +596,7 @@ class Assertion
     public static function noContent($value, $message = null, $propertyPath = null)
     {
         if (!empty($value)) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not empty, but empty value was expected.',
                 static::stringify($value)
             );
@@ -621,7 +621,7 @@ class Assertion
     public static function null($value, $message = null, $propertyPath = null)
     {
         if ($value !== null) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not null, but null value was expected.',
                 static::stringify($value)
             );
@@ -646,7 +646,7 @@ class Assertion
     public static function notNull($value, $message = null, $propertyPath = null)
     {
         if ($value === null) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is null, but non null value was expected.',
                 static::stringify($value)
             );
@@ -670,11 +670,11 @@ class Assertion
      */
     public static function string($value, $message = null, $propertyPath = null)
     {
-        if (!is_string($value)) {
-            $message = sprintf(
+        if (!\is_string($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" expected to be string, type %s given.',
                 static::stringify($value),
-                gettype($value)
+                \gettype($value)
             );
 
             throw static::createException($value, $message, static::INVALID_STRING, $propertyPath);
@@ -699,8 +699,8 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (!preg_match($pattern, $value)) {
-            $message = sprintf(
+        if (!\preg_match($pattern, $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not match expression.',
                 static::stringify($value)
             );
@@ -728,12 +728,12 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) !== $length) {
-            $message = sprintf(
+        if (\mb_strlen($value, $encoding) !== $length) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" has to be %d exactly characters long, but length is %d.',
                 static::stringify($value),
                 $length,
-                mb_strlen($value, $encoding)
+                \mb_strlen($value, $encoding)
             );
 
             $constraints = array('length' => $length, 'encoding' => $encoding);
@@ -760,12 +760,12 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) < $minLength) {
-            $message = sprintf(
+        if (\mb_strlen($value, $encoding) < $minLength) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is too short, it should have at least %d characters, but only has %d characters.',
                 static::stringify($value),
                 $minLength,
-                mb_strlen($value, $encoding)
+                \mb_strlen($value, $encoding)
             );
 
             $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
@@ -792,12 +792,12 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (mb_strlen($value, $encoding) > $maxLength) {
-            $message = sprintf(
+        if (\mb_strlen($value, $encoding) > $maxLength) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is too long, it should have no more than %d characters, but has %d characters.',
                 static::stringify($value),
                 $maxLength,
-                mb_strlen($value, $encoding)
+                \mb_strlen($value, $encoding)
             );
 
             $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
@@ -847,8 +847,8 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (mb_strpos($string, $needle, null, $encoding) !== 0) {
-            $message = sprintf(
+        if (\mb_strpos($string, $needle, null, $encoding) !== 0) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not start with "%s".',
                 static::stringify($string),
                 static::stringify($needle)
@@ -878,10 +878,10 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        $stringPosition = mb_strlen($string, $encoding) - mb_strlen($needle, $encoding);
+        $stringPosition = \mb_strlen($string, $encoding) - \mb_strlen($needle, $encoding);
 
-        if (mb_strripos($string, $needle, null, $encoding) !== $stringPosition) {
-            $message = sprintf(
+        if (\mb_strripos($string, $needle, null, $encoding) !== $stringPosition) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not end with "%s".',
                 static::stringify($string),
                 static::stringify($needle)
@@ -911,8 +911,8 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (mb_strpos($string, $needle, null, $encoding) === false) {
-            $message = sprintf(
+        if (\mb_strpos($string, $needle, null, $encoding) === false) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not contain "%s".',
                 static::stringify($string),
                 static::stringify($needle)
@@ -939,11 +939,11 @@ class Assertion
      */
     public static function choice($value, array $choices, $message = null, $propertyPath = null)
     {
-        if (!in_array($value, $choices, true)) {
-            $message = sprintf(
+        if (!\in_array($value, $choices, true)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an element of the valid values: %s',
                 static::stringify($value),
-                implode(', ', array_map(array(get_called_class(), 'stringify'), $choices))
+                \implode(', ', \array_map(array(\get_called_class(), 'stringify'), $choices))
             );
 
             throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
@@ -984,8 +984,8 @@ class Assertion
      */
     public static function numeric($value, $message = null, $propertyPath = null)
     {
-        if (!is_numeric($value)) {
-            $message = sprintf(
+        if (!\is_numeric($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not numeric.',
                 static::stringify($value)
             );
@@ -1009,8 +1009,8 @@ class Assertion
      */
     public static function isArray($value, $message = null, $propertyPath = null)
     {
-        if (!is_array($value)) {
-            $message = sprintf(
+        if (!\is_array($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an array.',
                 static::stringify($value)
             );
@@ -1034,8 +1034,8 @@ class Assertion
      */
     public static function isTraversable($value, $message = null, $propertyPath = null)
     {
-        if (!is_array($value) && !$value instanceof \Traversable) {
-            $message = sprintf(
+        if (!\is_array($value) && !$value instanceof \Traversable) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an array and does not implement Traversable.',
                 static::stringify($value)
             );
@@ -1059,8 +1059,8 @@ class Assertion
      */
     public static function isArrayAccessible($value, $message = null, $propertyPath = null)
     {
-        if (!is_array($value) && !$value instanceof \ArrayAccess) {
-            $message = sprintf(
+        if (!\is_array($value) && !$value instanceof \ArrayAccess) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an array and does not implement ArrayAccess.',
                 static::stringify($value)
             );
@@ -1087,8 +1087,8 @@ class Assertion
     {
         static::isArray($value, $message, $propertyPath);
 
-        if (!array_key_exists($key, $value)) {
-            $message = sprintf(
+        if (!\array_key_exists($key, $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Array does not contain an element with key "%s"',
                 static::stringify($key)
             );
@@ -1115,8 +1115,8 @@ class Assertion
     {
         static::isArray($value, $message, $propertyPath);
 
-        if (array_key_exists($key, $value)) {
-            $message = sprintf(
+        if (\array_key_exists($key, $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Array contains an element with key "%s"',
                 static::stringify($key)
             );
@@ -1144,7 +1144,7 @@ class Assertion
         static::isArrayAccessible($value, $message, $propertyPath);
 
         if (!isset($value[$key])) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'The element with key "%s" was not found',
                 static::stringify($key)
             );
@@ -1188,8 +1188,8 @@ class Assertion
      */
     public static function notBlank($value, $message = null, $propertyPath = null)
     {
-        if (false === $value || (empty($value) && '0' != $value) || (is_string($value) && '' === trim($value))) {
-            $message = sprintf(
+        if (false === $value || (empty($value) && '0' != $value) || (\is_string($value) && '' === \trim($value))) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is blank, but was expected to contain a value.',
                 static::stringify($value)
             );
@@ -1215,7 +1215,7 @@ class Assertion
     public static function isInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if (!($value instanceof $className)) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Class "%s" was expected to be instanceof of "%s" but is not.',
                 static::stringify($value),
                 $className
@@ -1242,7 +1242,7 @@ class Assertion
     public static function notIsInstanceOf($value, $className, $message = null, $propertyPath = null)
     {
         if ($value instanceof $className) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Class "%s" was not expected to be instanceof of "%s".',
                 static::stringify($value),
                 $className
@@ -1268,8 +1268,8 @@ class Assertion
      */
     public static function subclassOf($value, $className, $message = null, $propertyPath = null)
     {
-        if (!is_subclass_of($value, $className)) {
-            $message = sprintf(
+        if (!\is_subclass_of($value, $className)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Class "%s" was expected to be subclass of "%s".',
                 static::stringify($value),
                 $className
@@ -1299,7 +1299,7 @@ class Assertion
         static::numeric($value, $message, $propertyPath);
 
         if ($value < $minValue || $value > $maxValue) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Number "%s" was expected to be at least "%d" and at most "%d".',
                 static::stringify($value),
                 static::stringify($minValue),
@@ -1329,7 +1329,7 @@ class Assertion
         static::numeric($value, $message, $propertyPath);
 
         if ($value < $minValue) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Number "%s" was expected to be at least "%s".',
                 static::stringify($value),
                 static::stringify($minValue)
@@ -1358,7 +1358,7 @@ class Assertion
         static::numeric($value, $message, $propertyPath);
 
         if ($value > $maxValue) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Number "%s" was expected to be at most "%s".',
                 static::stringify($value),
                 static::stringify($maxValue)
@@ -1386,8 +1386,8 @@ class Assertion
         static::string($value, $message, $propertyPath);
         static::notEmpty($value, $message, $propertyPath);
 
-        if (!is_file($value)) {
-            $message = sprintf(
+        if (!\is_file($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'File "%s" was expected to exist.',
                 static::stringify($value)
             );
@@ -1413,8 +1413,8 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (!is_dir($value)) {
-            $message = sprintf(
+        if (!\is_dir($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Path "%s" was expected to be a directory.',
                 static::stringify($value)
             );
@@ -1440,8 +1440,8 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (!is_readable($value)) {
-            $message = sprintf(
+        if (!\is_readable($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Path "%s" was expected to be readable.',
                 static::stringify($value)
             );
@@ -1467,8 +1467,8 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (!is_writable($value)) {
-            $message = sprintf(
+        if (!\is_writable($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Path "%s" was expected to be writeable.',
                 static::stringify($value)
             );
@@ -1494,19 +1494,19 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $message = sprintf(
+        if (!\filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" was expected to be a valid e-mail address.',
                 static::stringify($value)
             );
 
             throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
         } else {
-            $host = substr($value, strpos($value, '@') + 1);
+            $host = \substr($value, \strpos($value, '@') + 1);
 
             // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
-            if (version_compare(PHP_VERSION, '5.3.3', '<') && strpos($host, '.') === false) {
-                $message = sprintf(
+            if (\version_compare(PHP_VERSION, '5.3.3', '<') && \strpos($host, '.') === false) {
+                $message = \sprintf(
                     static::generateMessage($message) ?: 'Value "%s" was expected to be a valid e-mail address.',
                     static::stringify($value)
                 );
@@ -1556,10 +1556,10 @@ class Assertion
             (/?|/\S+|\?\S*|\#\S*)                   # a /, nothing, a / with something, a query or a fragment
         $~ixu';
 
-        $pattern = sprintf($pattern, implode('|', $protocols));
+        $pattern = \sprintf($pattern, \implode('|', $protocols));
 
-        if (!preg_match($pattern, $value)) {
-            $message = sprintf(
+        if (!\preg_match($pattern, $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" was expected to be a valid URL starting with http or https',
                 static::stringify($value)
             );
@@ -1586,7 +1586,7 @@ class Assertion
         try {
             static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
         } catch (AssertionFailedException $e) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.',
                 static::stringify($value)
             );
@@ -1611,7 +1611,7 @@ class Assertion
     public static function true($value, $message = null, $propertyPath = null)
     {
         if ($value !== true) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not TRUE.',
                 static::stringify($value)
             );
@@ -1636,7 +1636,7 @@ class Assertion
     public static function false($value, $message = null, $propertyPath = null)
     {
         if ($value !== false) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not FALSE.',
                 static::stringify($value)
             );
@@ -1660,8 +1660,8 @@ class Assertion
      */
     public static function classExists($value, $message = null, $propertyPath = null)
     {
-        if (!class_exists($value)) {
-            $message = sprintf(
+        if (!\class_exists($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Class "%s" does not exist.',
                 static::stringify($value)
             );
@@ -1685,8 +1685,8 @@ class Assertion
      */
     public static function interfaceExists($value, $message = null, $propertyPath = null)
     {
-        if (!interface_exists($value)) {
-            $message = sprintf(
+        if (!\interface_exists($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Interface "%s" does not exist.',
                 static::stringify($value)
             );
@@ -1713,7 +1713,7 @@ class Assertion
     {
         $reflection = new \ReflectionClass($class);
         if (!$reflection->implementsInterface($interfaceName)) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Class "%s" does not implement interface "%s".',
                 static::stringify($class),
                 static::stringify($interfaceName)
@@ -1744,8 +1744,8 @@ class Assertion
      */
     public static function isJsonString($value, $message = null, $propertyPath = null)
     {
-        if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
-            $message = sprintf(
+        if (null === \json_decode($value) && JSON_ERROR_NONE !== \json_last_error()) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a valid JSON string.',
                 static::stringify($value)
             );
@@ -1771,14 +1771,14 @@ class Assertion
      */
     public static function uuid($value, $message = null, $propertyPath = null)
     {
-        $value = str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
+        $value = \str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
 
         if ($value === '00000000-0000-0000-0000-000000000000') {
             return true;
         }
 
-        if (!preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
-            $message = sprintf(
+        if (!\preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a valid UUID.',
                 static::stringify($value)
             );
@@ -1804,8 +1804,8 @@ class Assertion
      */
     public static function e164($value, $message = null, $propertyPath = null)
     {
-        if (!preg_match('/^\+?[1-9]\d{1,14}$/', $value)) {
-            $message = sprintf(
+        if (!\preg_match('/^\+?[1-9]\d{1,14}$/', $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not a valid E164.',
                 static::stringify($value)
             );
@@ -1830,8 +1830,8 @@ class Assertion
      */
     public static function count($countable, $count, $message = null, $propertyPath = null)
     {
-        if ($count !== count($countable)) {
-            $message = sprintf(
+        if ($count !== \count($countable)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'List does not contain exactly "%d" elements.',
                 static::stringify($count)
             );
@@ -1854,8 +1854,8 @@ class Assertion
      */
     public static function __callStatic($method, $args)
     {
-        if (strpos($method, 'nullOr') === 0) {
-            if (!array_key_exists(0, $args)) {
+        if (\strpos($method, 'nullOr') === 0) {
+            if (!\array_key_exists(0, $args)) {
                 throw new BadMethodCallException('Missing the first argument.');
             }
 
@@ -1863,24 +1863,24 @@ class Assertion
                 return true;
             }
 
-            $method = substr($method, 6);
+            $method = \substr($method, 6);
 
-            return call_user_func_array(array(get_called_class(), $method), $args);
+            return \call_user_func_array(array(\get_called_class(), $method), $args);
         }
 
-        if (strpos($method, 'all') === 0) {
-            if (!array_key_exists(0, $args)) {
+        if (\strpos($method, 'all') === 0) {
+            if (!\array_key_exists(0, $args)) {
                 throw new BadMethodCallException('Missing the first argument.');
             }
 
             static::isTraversable($args[0]);
 
-            $method = substr($method, 3);
-            $values = array_shift($args);
-            $calledClass = get_called_class();
+            $method = \substr($method, 3);
+            $values = \array_shift($args);
+            $calledClass = \get_called_class();
 
             foreach ($values as $value) {
-                call_user_func_array(array($calledClass, $method), array_merge(array($value), $args));
+                \call_user_func_array(array($calledClass, $method), \array_merge(array($value), $args));
             }
 
             return true;
@@ -1926,8 +1926,8 @@ class Assertion
     {
         static::isObject($object, $message, $propertyPath);
 
-        if (!method_exists($object, $value)) {
-            $message = sprintf(
+        if (!\method_exists($object, $value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Expected "%s" does not exist in provided object.',
                 static::stringify($value)
             );
@@ -1949,8 +1949,8 @@ class Assertion
      */
     public static function isObject($value, $message = null, $propertyPath = null)
     {
-        if (!is_object($value)) {
-            $message = sprintf(
+        if (!\is_object($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is not a valid object.',
                 static::stringify($value)
             );
@@ -1974,7 +1974,7 @@ class Assertion
     public static function lessThan($value, $limit, $message = null, $propertyPath = null)
     {
         if ($value >= $limit) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is not less than "%s".',
                 static::stringify($value),
                 static::stringify($limit)
@@ -1999,7 +1999,7 @@ class Assertion
     public static function lessOrEqualThan($value, $limit, $message = null, $propertyPath = null)
     {
         if ($value > $limit) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is not less or equal than "%s".',
                 static::stringify($value),
                 static::stringify($limit)
@@ -2024,7 +2024,7 @@ class Assertion
     public static function greaterThan($value, $limit, $message = null, $propertyPath = null)
     {
         if ($value <= $limit) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is not greater than "%s".',
                 static::stringify($value),
                 static::stringify($limit)
@@ -2049,7 +2049,7 @@ class Assertion
     public static function greaterOrEqualThan($value, $limit, $message = null, $propertyPath = null)
     {
         if ($value < $limit) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is not greater or equal than "%s".',
                 static::stringify($value),
                 static::stringify($limit)
@@ -2075,7 +2075,7 @@ class Assertion
     public static function between($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null)
     {
         if ($lowerLimit > $value || $value > $upperLimit) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is neither greater than or equal to "%s" nor less than or equal to "%s".',
                 static::stringify($value),
                 static::stringify($lowerLimit),
@@ -2102,7 +2102,7 @@ class Assertion
     public static function betweenExclusive($value, $lowerLimit, $upperLimit, $message = null, $propertyPath = null)
     {
         if ($lowerLimit >= $value || $value >= $upperLimit) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is neither greater than "%s" nor less than "%s".',
                 static::stringify($value),
                 static::stringify($lowerLimit),
@@ -2128,8 +2128,8 @@ class Assertion
      */
     public static function extensionLoaded($value, $message = null, $propertyPath = null)
     {
-        if (!extension_loaded($value)) {
-            $message = sprintf(
+        if (!\extension_loaded($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Extension "%s" is required.',
                 static::stringify($value)
             );
@@ -2161,7 +2161,7 @@ class Assertion
         $dateTime = \DateTime::createFromFormat($format, $value);
 
         if (false === $dateTime || $value !== $dateTime->format($format)) {
-            $message = sprintf(
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Date "%s" is invalid or does not match format "%s".',
                 static::stringify($value),
                 static::stringify($format)
@@ -2190,8 +2190,8 @@ class Assertion
     {
         static::notEmpty($operator, 'versionCompare operator is required and cannot be empty.');
 
-        if (version_compare($version1, $version2, $operator) !== true) {
-            $message = sprintf(
+        if (\version_compare($version1, $version2, $operator) !== true) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Version "%s" is not "%s" version "%s".',
                 static::stringify($version1),
                 static::stringify($operator),
@@ -2240,7 +2240,7 @@ class Assertion
     {
         static::extensionLoaded($extension, $message, $propertyPath);
 
-        return static::version(phpversion($extension), $operator, $version, $message, $propertyPath);
+        return static::version(\phpversion($extension), $operator, $version, $message, $propertyPath);
     }
 
     /**
@@ -2254,8 +2254,8 @@ class Assertion
      */
     public static function isCallable($value, $message = null, $propertyPath = null)
     {
-        if (!is_callable($value)) {
-            $message = sprintf(
+        if (!\is_callable($value)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is not a callable.',
                 static::stringify($value)
             );
@@ -2282,8 +2282,8 @@ class Assertion
     {
         static::isCallable($callback);
 
-        if (call_user_func($callback, $value) === false) {
-            $message = sprintf(
+        if (\call_user_func($callback, $value) === false) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is invalid according to custom rule.',
                 static::stringify($value)
             );
@@ -2310,8 +2310,8 @@ class Assertion
     public static function ip($value, $flag = null, $message = null, $propertyPath = null)
     {
         static::string($value, $message, $propertyPath);
-        if (!filter_var($value, FILTER_VALIDATE_IP, $flag)) {
-            $message = sprintf(
+        if (!\filter_var($value, FILTER_VALIDATE_IP, $flag)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" was expected to be a valid IP address.',
                 static::stringify($value)
             );
@@ -2370,32 +2370,32 @@ class Assertion
      */
     protected static function stringify($value)
     {
-        $result = gettype($value);
+        $result = \gettype($value);
 
-        if (is_bool($value)) {
+        if (\is_bool($value)) {
             $result = $value ? '<TRUE>' : '<FALSE>';
         }
 
-        if (is_scalar($value)) {
+        if (\is_scalar($value)) {
             $val = (string) $value;
 
-            if (strlen($val) > 100) {
-                $val = substr($val, 0, 97) . '...';
+            if (\strlen($val) > 100) {
+                $val = \substr($val, 0, 97) . '...';
             }
 
             $result = $val;
         }
 
-        if (is_array($value)) {
+        if (\is_array($value)) {
             $result = '<ARRAY>';
         }
 
-        if (is_object($value)) {
-            $result = get_class($value);
+        if (\is_object($value)) {
+            $result = \get_class($value);
         }
 
-        if (is_resource($value)) {
-            $result = get_resource_type($value);
+        if (\is_resource($value)) {
+            $result = \get_resource_type($value);
         }
 
         if ($value === null) {
@@ -2418,8 +2418,8 @@ class Assertion
      */
     public static function defined($constant, $message = null, $propertyPath = null)
     {
-        if (!defined($constant)) {
-            $message = sprintf(static::generateMessage($message) ?: 'Value "%s" expected to be a defined constant.', $constant);
+        if (!\defined($constant)) {
+            $message = \sprintf(static::generateMessage($message) ?: 'Value "%s" expected to be a defined constant.', $constant);
 
             throw static::createException($constant, $message, static::INVALID_CONSTANT, $propertyPath);
         }
@@ -2436,8 +2436,8 @@ class Assertion
      */
     protected static function generateMessage($message = null)
     {
-        if (is_callable($message)) {
-            $traces = debug_backtrace(0);
+        if (\is_callable($message)) {
+            $traces = \debug_backtrace(0);
 
             $parameters = array();
 
@@ -2445,17 +2445,17 @@ class Assertion
             $method = $reflection->getMethod($traces[1]['function']);
             foreach ($method->getParameters() as $index => $parameter) {
                 if ($parameter->getName() !== 'message') {
-                    $parameters[$parameter->getName()] = array_key_exists($index, $traces[1]['args'])
+                    $parameters[$parameter->getName()] = \array_key_exists($index, $traces[1]['args'])
                         ? $traces[1]['args'][$index]
                         : $parameter->getDefaultValue();
                 }
             }
 
-            $parameters['::assertion'] = sprintf('%s%s%s', $traces[1]['class'], $traces[1]['type'], $traces[1]['function']);
+            $parameters['::assertion'] = \sprintf('%s%s%s', $traces[1]['class'], $traces[1]['type'], $traces[1]['function']);
 
-            $message = call_user_func_array($message, array($parameters));
+            $message = \call_user_func_array($message, array($parameters));
         }
 
-        return is_null($message) ? null : (string) $message;
+        return \is_null($message) ? null : (string) $message;
     }
 }

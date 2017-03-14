@@ -57,7 +57,7 @@ class LazyAssertionTest extends \PHPUnit_Framework_TestCase
                 'Value "10" expected to be string, type integer given.',
                 'Value "<NULL>" is empty, but non empty value was expected.',
                 'Value "string" is not an array.',
-            ), array_map(function (\Exception $ex) {
+            ), \array_map(function (\Exception $ex) {
                 return $ex->getMessage();
             }, $ex->getErrorExceptions()));
         }
@@ -82,7 +82,7 @@ class LazyAssertionTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(array(
                 'must be int',
                 'must be between',
-            ), array_map(function (\Exception $ex) {
+            ), \array_map(function (\Exception $ex) {
                 return $ex->getMessage();
             }, $ex->getErrorExceptions()));
         }
@@ -133,7 +133,7 @@ class LazyAssertionTest extends \PHPUnit_Framework_TestCase
         $lazyAssertion = new LazyAssertion();
         $lazyAssertion->setExceptionClass('Assert\Tests\Fixtures\CustomLazyAssertionException');
 
-        var_dump($lazyAssertion
+        \var_dump($lazyAssertion
             ->that('foo', 'property')->integer()
             ->verifyNow()
         );

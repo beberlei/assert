@@ -14,7 +14,7 @@
 
 namespace Assert;
 
-if (!function_exists(__NAMESPACE__ . '\that')) {
+if (!\function_exists(__NAMESPACE__ . '\that')) {
     /**
      * Start validation on a value, returns {@link AssertionChain}.
      *
@@ -43,7 +43,7 @@ if (!function_exists(__NAMESPACE__ . '\that')) {
     }
 }
 
-if (!function_exists(__NAMESPACE__ . '\thatAll')) {
+if (!\function_exists(__NAMESPACE__ . '\thatAll')) {
     /**
      * Start validation on a set of values, returns {@link AssertionChain}.
      *
@@ -61,7 +61,7 @@ if (!function_exists(__NAMESPACE__ . '\thatAll')) {
     }
 }
 
-if (!function_exists(__NAMESPACE__ . '\thatNullOr')) {
+if (!\function_exists(__NAMESPACE__ . '\thatNullOr')) {
     /**
      * Start validation and allow NULL, returns {@link AssertionChain}.
      *
@@ -79,7 +79,7 @@ if (!function_exists(__NAMESPACE__ . '\thatNullOr')) {
     }
 }
 
-if (!function_exists(__NAMESPACE__ . '\lazy')) {
+if (!\function_exists(__NAMESPACE__ . '\lazy')) {
     /**
      * Create a lazy assertion object.
      *

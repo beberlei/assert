@@ -142,7 +142,7 @@ class LazyAssertion
         }
 
         try {
-            call_user_func_array(array($this->currentChain, $method), $args);
+            \call_user_func_array(array($this->currentChain, $method), $args);
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e;
             $this->currentChainFailed = true;
@@ -159,7 +159,7 @@ class LazyAssertion
     public function verifyNow()
     {
         if ($this->errors) {
-            throw call_user_func(array($this->exceptionClass, 'fromErrors'), $this->errors);
+            throw \call_user_func(array($this->exceptionClass, 'fromErrors'), $this->errors);
         }
 
         return true;
@@ -172,11 +172,11 @@ class LazyAssertion
      */
     public function setExceptionClass($className)
     {
-        if (!is_string($className)) {
+        if (!\is_string($className)) {
             throw new LogicException('Exception class name must be passed as a string');
         }
 
-        if ($className !== 'Assert\LazyAssertionException' && !is_subclass_of($className, 'Assert\LazyAssertionException')) {
+        if ($className !== 'Assert\LazyAssertionException' && !\is_subclass_of($className, 'Assert\LazyAssertionException')) {
             throw new LogicException($className . ' is not (a subclass of) Assert\LazyAssertionException');
         }
 

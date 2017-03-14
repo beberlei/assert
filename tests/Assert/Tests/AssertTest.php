@@ -95,7 +95,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('test'),
             array(null),
             array('1.23'),
-            array(fopen(__FILE__, 'r')),
+            array(\fopen(__FILE__, 'r')),
         );
     }
 
@@ -484,7 +484,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(1),
             array(1.23),
             array(new \stdClass()),
-            array(fopen('php://memory', 'r')),
+            array(\fopen('php://memory', 'r')),
         );
     }
 
@@ -877,10 +877,10 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotInArray()
     {
-        $this->assertTrue(Assertion::notInArray(6, range(1, 5)));
-        $this->assertTrue(Assertion::notInArray('a', range('b', 'z')));
+        $this->assertTrue(Assertion::notInArray(6, \range(1, 5)));
+        $this->assertTrue(Assertion::notInArray('a', \range('b', 'z')));
 
-        Assertion::notInArray(1, range(1, 5));
+        Assertion::notInArray(1, \range(1, 5));
     }
 
     public function testMin()
@@ -1055,7 +1055,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteable()
     {
-        $this->assertTrue(Assertion::writeable(sys_get_temp_dir()));
+        $this->assertTrue(Assertion::writeable(\sys_get_temp_dir()));
 
         Assertion::writeable(__DIR__ . '/does-not-exist');
     }
@@ -1106,8 +1106,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public static function isJsonStringDataprovider()
     {
         return array(
-            '»null« value' => array(json_encode(null)),
-            '»false« value' => array(json_encode(false)),
+            '»null« value' => array(\json_encode(null)),
+            '»false« value' => array(\json_encode(false)),
             'array value' => array('["false"]'),
             'object value' => array('{"tux":"false"}'),
         );
@@ -1611,7 +1611,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function testInvalidSatisfy()
     {
         Assertion::satisfy(null, function ($value) {
-            return !is_null($value);
+            return !\is_null($value);
         });
     }
 
@@ -1619,12 +1619,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         // Should not fail with true return
         $this->assertTrue(Assertion::satisfy(null, function ($value) {
-            return is_null($value);
+            return \is_null($value);
         }));
 
         // Should not fail with void return
         $this->assertTrue(Assertion::satisfy(true, function ($value) {
-            if (!is_bool($value)) {
+            if (!\is_bool($value)) {
                 return false;
             }
         }));
@@ -1834,7 +1834,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
     {
-        $string = str_repeat('1234567890', 11);
+        $string = \str_repeat('1234567890', 11);
 
         $this->assertTrue(Assertion::float($string));
     }
@@ -1846,7 +1846,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringifyReportsResourceType()
     {
-        $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
+        $this->assertTrue(Assertion::float(\fopen('php://stdin', 'rb')));
     }
 
     public function testExtensionLoaded()
