@@ -1921,4 +1921,44 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::extensionVersion('json', '<', '0.1.0');
     }
+
+    public function testObjectOrClass()
+    {
+        self::assertTrue(Assertion::objectOrClass(new \stdClass()));
+        self::assertTrue(Assertion::objectOrClass('stdClass'));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testNotObjectOrClass()
+    {
+        Assertion::objectOrClass('InvalidClassName');
+    }
+
+    public function testPropertyExists()
+    {
+        self::assertTrue(Assertion::propertyExists(new \Exception(), 'message'));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testPropertyNotExists()
+    {
+        Assertion::propertyExists(new \Exception(), 'invalidProperty');
+    }
+
+    public function testPropertiesExist()
+    {
+        self::assertTrue(Assertion::propertiesExist(new \Exception(), array('message', 'code', 'previous')));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testPropertiesNotExist()
+    {
+        Assertion::propertiesExist(new \Exception(), array('invalidProperty'));
+    }
 }
