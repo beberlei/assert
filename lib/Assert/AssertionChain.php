@@ -86,7 +86,7 @@ use ReflectionClass;
  * @method AssertionChain numeric(string|callable $message = null, string $propertyPath = null) Assert that value is numeric.
  * @method AssertionChain objectOrClass(string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists.
  * @method AssertionChain phpVersion(mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version.
- * @method AssertionChain propertiesExist(mixed $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist.
+ * @method AssertionChain propertiesExist(array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist.
  * @method AssertionChain propertyExists(string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists.
  * @method AssertionChain range(mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method AssertionChain readable(string|callable $message = null, string $propertyPath = null) Assert that the value is something readable.

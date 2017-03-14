@@ -85,7 +85,7 @@ use LogicException;
  * @method LazyAssertion numeric(string|callable $message = null, string $propertyPath = null) Assert that value is numeric.
  * @method LazyAssertion objectOrClass(string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists.
  * @method LazyAssertion phpVersion(mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version.
- * @method LazyAssertion propertiesExist(mixed $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist.
+ * @method LazyAssertion propertiesExist(array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist.
  * @method LazyAssertion propertyExists(string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists.
  * @method LazyAssertion range(mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers.
  * @method LazyAssertion readable(string|callable $message = null, string $propertyPath = null) Assert that the value is something readable.

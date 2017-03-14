@@ -85,7 +85,7 @@ use BadMethodCallException;
  * @method static bool allNumeric(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric for all values.
  * @method static bool allObjectOrClass(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists for all values.
  * @method static bool allPhpVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version for all values.
- * @method static bool allPropertiesExist(mixed $value, mixed $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist for all values.
+ * @method static bool allPropertiesExist(mixed $value, array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist for all values.
  * @method static bool allPropertyExists(mixed $value, string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists for all values.
  * @method static bool allRange(mixed $value, mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers for all values.
  * @method static bool allReadable(string $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something readable for all values.
@@ -165,7 +165,7 @@ use BadMethodCallException;
  * @method static bool nullOrNumeric(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric or that the value is null.
  * @method static bool nullOrObjectOrClass(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists or that the value is null.
  * @method static bool nullOrPhpVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version or that the value is null.
- * @method static bool nullOrPropertiesExist(mixed $value, mixed $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist or that the value is null.
+ * @method static bool nullOrPropertiesExist(mixed $value, array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist or that the value is null.
  * @method static bool nullOrPropertyExists(mixed $value, string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists or that the value is null.
  * @method static bool nullOrRange(mixed $value, mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers or that the value is null.
  * @method static bool nullOrReadable(string $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something readable or that the value is null.
@@ -2193,7 +2193,7 @@ class Assertion
      */
     public static function objectOrClass($value, $message = null, $propertyPath = null)
     {
-        if (!is_object($value)) {
+        if (!\is_object($value)) {
             static::classExists($value, $message, $propertyPath);
         }
 
@@ -2216,8 +2216,8 @@ class Assertion
     {
         static::objectOrClass($value);
 
-        if (!property_exists($value, $property)) {
-            $message = sprintf(
+        if (!\property_exists($value, $property)) {
+            $message = \sprintf(
                 static::generateMessage($message) ?: 'Class "%s" does not have property "%s".',
                 static::stringify($value),
                 static::stringify($property)
@@ -2247,15 +2247,15 @@ class Assertion
 
         $invalidProperties = array();
         foreach ($properties as $property) {
-            if (!property_exists($value, $property)) {
+            if (!\property_exists($value, $property)) {
                 $invalidProperties[] = $property;
             }
 
             if ($invalidProperties) {
-                $message = sprintf(
+                $message = \sprintf(
                     static::generateMessage($message) ?: 'Class "%s" does not have these properties: %s.',
                     static::stringify($value),
-                    static::stringify(implode(', ', $invalidProperties))
+                    static::stringify(\implode(', ', $invalidProperties))
                 );
 
                 throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath);

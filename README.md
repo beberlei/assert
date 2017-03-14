@@ -232,7 +232,7 @@ Assertion::null(mixed $value);
 Assertion::numeric(mixed $value);
 Assertion::objectOrClass(mixed $value);
 Assertion::phpVersion(string $operator, mixed $version);
-Assertion::propertiesExist(mixed $value, mixed $properties);
+Assertion::propertiesExist(mixed $value, array $properties);
 Assertion::propertyExists(mixed $value, string $property);
 Assertion::range(mixed $value, mixed $minValue, mixed $maxValue);
 Assertion::readable(string $value);
