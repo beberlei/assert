@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.4 - 2017-03-14
+### Added assertions
+- `Assert\Assertion::objectOrClass()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/218))
+- `Assert\Assertion::propertyExists()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/218))
+- `Assert\Assertion::propertiesExist()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/218))
+
+### Other changes
+- Unit tests no longer using deprecated exception methods (Thanks to [Richard Quadling](https://github.com/beberlei/assert/pull/217))
+- All global namespaced functions have been optimised (Thanks to [Andreas Möller](https://github.com/beberlei/assert/pull/211))
+
 ## 2.7.3 - 2017-01-24
 
 ### Fixes
