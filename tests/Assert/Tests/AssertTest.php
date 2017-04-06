@@ -1943,6 +1943,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
      */
     public function testPropertyNotExists()
     {
@@ -1953,12 +1954,24 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         self::assertTrue(Assertion::propertiesExist(new \Exception(), array('message', 'code', 'previous')));
     }
+    
+    public function invalidPropertiesExistProvider()
+    {
+        return array(
+            array(array('invalidProperty')),
+            array(array('invalidProperty', 'anotherInvalidProperty')),
+        );
+    }
 
     /**
+     * @dataProvider invalidPropertiesExistProvider
      * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
+     *
+     * @param array $properties
      */
-    public function testPropertiesNotExist()
+    public function testPropertiesNotExist($properties)
     {
-        Assertion::propertiesExist(new \Exception(), array('invalidProperty'));
+        Assertion::propertiesExist(new \Exception(), $properties);
     }
 }
