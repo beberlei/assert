@@ -60,6 +60,7 @@ use BadMethodCallException;
  * @method static bool allIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for all values.
  * @method static bool allIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for all values.
  * @method static bool allIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
+ * @method static bool allIsResource(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource for all values.
  * @method static bool allIsTraversable(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object for all values.
  * @method static bool allKeyExists(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array for all values.
  * @method static bool allKeyIsset(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() for all values.
@@ -140,6 +141,7 @@ use BadMethodCallException;
  * @method static bool nullOrIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name or that the value is null.
  * @method static bool nullOrIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string or that the value is null.
  * @method static bool nullOrIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object or that the value is null.
+ * @method static bool nullOrIsResource(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource or that the value is null.
  * @method static bool nullOrIsTraversable(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object or that the value is null.
  * @method static bool nullOrKeyExists(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array or that the value is null.
  * @method static bool nullOrKeyIsset(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() or that the value is null.
@@ -254,6 +256,7 @@ class Assertion
     const INVALID_CONSTANT = 221;
     const INVALID_VERSION = 223;
     const INVALID_PROPERTY = 224;
+    const INVALID_RESOURCE = 225;
 
     /**
      * Exception to throw when an assertion failed.
@@ -998,6 +1001,31 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_NUMERIC, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that value is a resource.
+     *
+     * @param mixed                $value
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     *
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function isResource($value, $message = null, $propertyPath = null)
+    {
+        if (!\is_resource($value)) {
+            $message = \sprintf(
+                static::generateMessage($message) ?: 'Value "%s" is not a resource.',
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_RESOURCE, $propertyPath);
         }
 
         return true;
@@ -2233,7 +2261,7 @@ class Assertion
      * Assert that the value is an object or class, and that the properties all exist.
      *
      * @param mixed                $value
-     * @param mixed                $properties
+     * @param array                $properties
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *

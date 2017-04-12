@@ -61,6 +61,7 @@ use ReflectionClass;
  * @method AssertionChain isInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name.
  * @method AssertionChain isJsonString(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string.
  * @method AssertionChain isObject(string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object.
+ * @method AssertionChain isResource(string|callable $message = null, string $propertyPath = null) Assert that value is a resource.
  * @method AssertionChain isTraversable(string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object.
  * @method AssertionChain keyExists(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array.
  * @method AssertionChain keyIsset(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
