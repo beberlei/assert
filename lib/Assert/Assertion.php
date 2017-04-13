@@ -2233,7 +2233,7 @@ class Assertion
      * Assert that the value is an object or class, and that the properties all exist.
      *
      * @param mixed                $value
-     * @param mixed                $properties
+     * @param array                $properties
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *
