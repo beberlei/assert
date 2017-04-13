@@ -60,6 +60,7 @@ use LogicException;
  * @method LazyAssertion isInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name.
  * @method LazyAssertion isJsonString(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string.
  * @method LazyAssertion isObject(string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object.
+ * @method LazyAssertion isResource(string|callable $message = null, string $propertyPath = null) Assert that value is a resource.
  * @method LazyAssertion isTraversable(string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object.
  * @method LazyAssertion keyExists(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array.
  * @method LazyAssertion keyIsset(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().

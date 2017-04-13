@@ -207,6 +207,7 @@ Assertion::isCallable(mixed $value);
 Assertion::isInstanceOf(mixed $value, string $className);
 Assertion::isJsonString(mixed $value);
 Assertion::isObject(mixed $value);
+Assertion::isResource(mixed $value);
 Assertion::isTraversable(mixed $value);
 Assertion::keyExists(mixed $value, string|int $key);
 Assertion::keyIsset(mixed $value, string|int $key);

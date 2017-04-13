@@ -1961,4 +1961,17 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::propertiesExist(new \Exception(), array('invalidProperty'));
     }
+
+    public function testIsResource()
+    {
+        self::assertTrue(Assertion::isResource(\curl_init()));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     */
+    public function testIsNotResource()
+    {
+        Assertion::isResource(new \stdClass());
+    }
 }
