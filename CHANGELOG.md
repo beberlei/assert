@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.* - 2017-04-**
+### Added assertions
+- `Assert\Assertion:isResource()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/222))
+
+### Other changes
+- Corrected doc-block for `Assert\Assertion::propertiesExist()`.
+
 ## 2.7.4 - 2017-03-14
 ### Added assertions
 - `Assert\Assertion::objectOrClass()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/218))
