@@ -2271,6 +2271,7 @@ class Assertion
      */
     public static function propertiesExist($value, array $properties, $message = null, $propertyPath = null)
     {
+        static::objectOrClass($value);
         static::allString($properties, $message, $propertyPath);
 
         $invalidProperties = array();
@@ -2278,16 +2279,16 @@ class Assertion
             if (!\property_exists($value, $property)) {
                 $invalidProperties[] = $property;
             }
+        }
 
-            if ($invalidProperties) {
-                $message = \sprintf(
-                    static::generateMessage($message) ?: 'Class "%s" does not have these properties: %s.',
-                    static::stringify($value),
-                    static::stringify(\implode(', ', $invalidProperties))
-                );
+        if ($invalidProperties) {
+            $message = \sprintf(
+                static::generateMessage($message) ?: 'Class "%s" does not have these properties: %s.',
+                static::stringify($value),
+                static::stringify(\implode(', ', $invalidProperties))
+            );
 
-                throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath);
-            }
+            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath);
         }
 
         return true;
