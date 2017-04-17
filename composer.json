@@ -23,7 +23,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.4",
     "ext-mbstring": "*"
   },
   "require-dev": {
@@ -47,7 +47,7 @@
     ]
   },
   "scripts": {
-    "assert:generate-docs": "php bin/generate_method_docs.php",
+    "assert:generate": "php bin/generate_code.php",
     "assert:cs-lint": "php-cs-fixer fix --diff -vvv --dry-run",
     "assert:cs-fix": "php-cs-fixer fix . -vvv || true"
   }
