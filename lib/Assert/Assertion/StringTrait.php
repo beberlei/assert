@@ -16,6 +16,23 @@ namespace Assert\Assertion;
 
 use Assert\AssertionFailedException;
 
+const INVALID_STRING = 16;
+const INVALID_REGEX = 17;
+const INVALID_MIN_LENGTH = 18;
+const INVALID_MAX_LENGTH = 19;
+const INVALID_STRING_START = 20;
+const INVALID_STRING_CONTAINS = 21;
+const INVALID_ALNUM = 31;
+const INVALID_LENGTH = 37;
+const INVALID_STRING_END = 39;
+const INVALID_UUID = 40;
+const INVALID_E164 = 48;
+const INVALID_EMAIL = 201;
+const INVALID_URL = 203;
+const INVALID_JSON_STRING = 206;
+const INVALID_DATE = 214;
+const INVALID_IP = 218;
+
 trait StringTrait
 {
     /**
@@ -45,7 +62,7 @@ trait StringTrait
             );
 
             $constraints = ['length' => $length, 'encoding' => $encoding];
-            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, INVALID_LENGTH, $propertyPath, $constraints);
         }
 
         return true;
@@ -71,7 +88,7 @@ trait StringTrait
                 \gettype($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_STRING, $propertyPath);
+            throw static::createException($value, $message, INVALID_STRING, $propertyPath);
         }
 
         return true;
@@ -128,7 +145,7 @@ trait StringTrait
             );
 
             $constraints = ['min_length' => $minLength, 'encoding' => $encoding];
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, INVALID_MIN_LENGTH, $propertyPath, $constraints);
         }
 
         return true;
@@ -161,7 +178,7 @@ trait StringTrait
             );
 
             $constraints = ['max_length' => $maxLength, 'encoding' => $encoding];
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, INVALID_MAX_LENGTH, $propertyPath, $constraints);
         }
 
         return true;
@@ -192,7 +209,7 @@ trait StringTrait
             );
 
             $constraints = ['needle' => $needle, 'encoding' => $encoding];
-            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, $constraints);
+            throw static::createException($string, $message, INVALID_STRING_START, $propertyPath, $constraints);
         }
 
         return true;
@@ -225,7 +242,7 @@ trait StringTrait
             );
 
             $constraints = ['needle' => $needle, 'encoding' => $encoding];
-            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, $constraints);
+            throw static::createException($string, $message, INVALID_STRING_END, $propertyPath, $constraints);
         }
 
         return true;
@@ -256,7 +273,7 @@ trait StringTrait
             );
 
             $constraints = ['needle' => $needle, 'encoding' => $encoding];
-            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath,
+            throw static::createException($string, $message, INVALID_STRING_CONTAINS, $propertyPath,
                 $constraints);
         }
 
@@ -284,7 +301,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
+            throw static::createException($value, $message, INVALID_EMAIL, $propertyPath);
         } else {
             $host = \substr($value, \strpos($value, '@') + 1);
 
@@ -295,7 +312,7 @@ trait StringTrait
                     static::stringify($value)
                 );
 
-                throw static::createException($value, $message, static::INVALID_EMAIL, $propertyPath);
+                throw static::createException($value, $message, INVALID_EMAIL, $propertyPath);
             }
         }
 
@@ -348,7 +365,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_URL, $propertyPath);
+            throw static::createException($value, $message, INVALID_URL, $propertyPath);
         }
 
         return true;
@@ -376,7 +393,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_ALNUM, $propertyPath);
+            throw static::createException($value, $message, INVALID_ALNUM, $propertyPath);
         }
 
         return true;
@@ -404,7 +421,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_REGEX, $propertyPath,
+            throw static::createException($value, $message, INVALID_REGEX, $propertyPath,
                 ['pattern' => $pattern]);
         }
 
@@ -435,7 +452,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_JSON_STRING, $propertyPath);
+            throw static::createException($value, $message, INVALID_JSON_STRING, $propertyPath);
         }
 
         return true;
@@ -467,7 +484,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_UUID, $propertyPath);
+            throw static::createException($value, $message, INVALID_UUID, $propertyPath);
         }
 
         return true;
@@ -494,7 +511,7 @@ trait StringTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_E164, $propertyPath);
+            throw static::createException($value, $message, INVALID_E164, $propertyPath);
         }
 
         return true;
@@ -542,7 +559,7 @@ trait StringTrait
                 static::generateMessage($message) ?: 'Value "%s" was expected to be a valid IP address.',
                 static::stringify($value)
             );
-            throw static::createException($value, $message, static::INVALID_IP, $propertyPath);
+            throw static::createException($value, $message, INVALID_IP, $propertyPath);
         }
 
         return true;
@@ -596,7 +613,7 @@ trait StringTrait
                 static::stringify($format)
             );
 
-            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, ['format' => $format]);
+            throw static::createException($value, $message, INVALID_DATE, $propertyPath, ['format' => $format]);
         }
 
         return true;

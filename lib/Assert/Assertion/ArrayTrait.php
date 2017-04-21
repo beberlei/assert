@@ -14,6 +14,16 @@
 
 namespace Assert\Assertion;
 
+const INVALID_VALUE_IN_ARRAY = 47;
+const INVALID_CHOICE = 22;
+const INVALID_TRAVERSABLE = 44;
+const INVALID_ARRAY = 24;
+const INVALID_KEY_EXISTS = 26;
+const INVALID_KEY_NOT_EXISTS = 216;
+const INVALID_COUNT = 41;
+const INVALID_KEY_ISSET = 46;
+const INVALID_ARRAY_ACCESSIBLE = 45;
+
 trait ArrayTrait
 {
     /**
@@ -36,7 +46,7 @@ trait ArrayTrait
                 static::stringify($value),
                 static::stringify($choices)
             );
-            throw static::createException($value, $message, static::INVALID_VALUE_IN_ARRAY, $propertyPath);
+            throw static::createException($value, $message, INVALID_VALUE_IN_ARRAY, $propertyPath);
         }
 
         return true;
@@ -81,7 +91,7 @@ trait ArrayTrait
                 \implode(', ', \array_map([\get_called_class(), 'stringify'], $choices))
             );
 
-            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath,
+            throw static::createException($value, $message, INVALID_CHOICE, $propertyPath,
                 ['choices' => $choices]);
         }
 
@@ -107,7 +117,7 @@ trait ArrayTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_TRAVERSABLE, $propertyPath);
+            throw static::createException($value, $message, INVALID_TRAVERSABLE, $propertyPath);
         }
 
         return true;
@@ -135,7 +145,7 @@ trait ArrayTrait
                 static::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, ['key' => $key]);
+            throw static::createException($value, $message, INVALID_KEY_EXISTS, $propertyPath, ['key' => $key]);
         }
 
         return true;
@@ -160,7 +170,7 @@ trait ArrayTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_ARRAY, $propertyPath);
+            throw static::createException($value, $message, INVALID_ARRAY, $propertyPath);
         }
 
         return true;
@@ -188,7 +198,7 @@ trait ArrayTrait
                 static::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_NOT_EXISTS, $propertyPath,
+            throw static::createException($value, $message, INVALID_KEY_NOT_EXISTS, $propertyPath,
                 ['key' => $key]);
         }
 
@@ -215,7 +225,7 @@ trait ArrayTrait
                 static::stringify($count)
             );
 
-            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath,
+            throw static::createException($countable, $message, INVALID_COUNT, $propertyPath,
                 ['count' => $count]);
         }
 
@@ -285,7 +295,7 @@ trait ArrayTrait
                 static::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_ISSET, $propertyPath, ['key' => $key]);
+            throw static::createException($value, $message, INVALID_KEY_ISSET, $propertyPath, ['key' => $key]);
         }
 
         return true;
@@ -310,7 +320,7 @@ trait ArrayTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_ARRAY_ACCESSIBLE, $propertyPath);
+            throw static::createException($value, $message, INVALID_ARRAY_ACCESSIBLE, $propertyPath);
         }
 
         return true;

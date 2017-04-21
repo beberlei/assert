@@ -14,6 +14,16 @@
 
 namespace Assert\Assertion;
 
+const VALUE_EMPTY = 14;
+const VALUE_NULL = 15;
+const VALUE_NOT_NULL = 25;
+const INVALID_EQ = 33;
+const INVALID_SAME = 34;
+const INVALID_NOT_EQ = 42;
+const INVALID_NOT_SAME = 43;
+const VALUE_NOT_EMPTY = 205;
+const INVALID_NOT_BLANK = 27;
+
 trait CompareTrait
 {
     /**
@@ -37,7 +47,7 @@ trait CompareTrait
                 static::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath, ['expected' => $value2]);
+            throw static::createException($value, $message, INVALID_EQ, $propertyPath, ['expected' => $value2]);
         }
 
         return true;
@@ -64,7 +74,7 @@ trait CompareTrait
                 static::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath,
+            throw static::createException($value, $message, INVALID_SAME, $propertyPath,
                 ['expected' => $value2]);
         }
 
@@ -91,7 +101,7 @@ trait CompareTrait
                 static::stringify($value1),
                 static::stringify($value2)
             );
-            throw static::createException($value1, $message, static::INVALID_NOT_EQ, $propertyPath,
+            throw static::createException($value1, $message, INVALID_NOT_EQ, $propertyPath,
                 ['expected' => $value2]);
         }
 
@@ -118,7 +128,7 @@ trait CompareTrait
                 static::stringify($value1),
                 static::stringify($value2)
             );
-            throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath,
+            throw static::createException($value1, $message, INVALID_NOT_SAME, $propertyPath,
                 ['expected' => $value2]);
         }
 
@@ -144,7 +154,7 @@ trait CompareTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_EMPTY, $propertyPath);
+            throw static::createException($value, $message, VALUE_EMPTY, $propertyPath);
         }
 
         return true;
@@ -169,7 +179,7 @@ trait CompareTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_NOT_EMPTY, $propertyPath);
+            throw static::createException($value, $message, VALUE_NOT_EMPTY, $propertyPath);
         }
 
         return true;
@@ -194,7 +204,7 @@ trait CompareTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_NOT_NULL, $propertyPath);
+            throw static::createException($value, $message, VALUE_NOT_NULL, $propertyPath);
         }
 
         return true;
@@ -219,7 +229,7 @@ trait CompareTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::VALUE_NULL, $propertyPath);
+            throw static::createException($value, $message, VALUE_NULL, $propertyPath);
         }
 
         return true;
@@ -244,7 +254,7 @@ trait CompareTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_NOT_BLANK, $propertyPath);
+            throw static::createException($value, $message, INVALID_NOT_BLANK, $propertyPath);
         }
 
         return true;

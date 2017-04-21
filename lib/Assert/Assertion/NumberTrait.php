@@ -14,6 +14,21 @@
 
 namespace Assert\Assertion;
 
+const INVALID_BETWEEN = 219;
+const INVALID_BETWEEN_EXCLUSIVE = 220;
+const INVALID_INTEGER = 10;
+const INVALID_DIGIT = 11;
+const INVALID_INTEGERISH = 12;
+const INVALID_FLOAT = 9;
+const INVALID_RANGE = 30;
+const INVALID_NUMERIC = 23;
+const INVALID_MIN = 35;
+const INVALID_MAX = 36;
+const INVALID_LESS = 210;
+const INVALID_LESS_OR_EQUAL = 211;
+const INVALID_GREATER = 212;
+const INVALID_GREATER_OR_EQUAL = 213;
+
 trait NumberTrait
 {
     /**
@@ -35,7 +50,7 @@ trait NumberTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_INTEGER, $propertyPath);
+            throw static::createException($value, $message, INVALID_INTEGER, $propertyPath);
         }
 
         return true;
@@ -60,7 +75,7 @@ trait NumberTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_FLOAT, $propertyPath);
+            throw static::createException($value, $message, INVALID_FLOAT, $propertyPath);
         }
 
         return true;
@@ -85,7 +100,7 @@ trait NumberTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_DIGIT, $propertyPath);
+            throw static::createException($value, $message, INVALID_DIGIT, $propertyPath);
         }
 
         return true;
@@ -112,7 +127,7 @@ trait NumberTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_INTEGERISH, $propertyPath);
+            throw static::createException($value, $message, INVALID_INTEGERISH, $propertyPath);
         }
 
         return true;
@@ -143,7 +158,7 @@ trait NumberTrait
                 static::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath,
+            throw static::createException($value, $message, INVALID_RANGE, $propertyPath,
                 ['min' => $minValue, 'max' => $maxValue]);
         }
 
@@ -169,7 +184,7 @@ trait NumberTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_NUMERIC, $propertyPath);
+            throw static::createException($value, $message, INVALID_NUMERIC, $propertyPath);
         }
 
         return true;
@@ -198,7 +213,7 @@ trait NumberTrait
                 static::stringify($minValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath, ['min' => $minValue]);
+            throw static::createException($value, $message, INVALID_MIN, $propertyPath, ['min' => $minValue]);
         }
 
         return true;
@@ -227,7 +242,7 @@ trait NumberTrait
                 static::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath, ['max' => $maxValue]);
+            throw static::createException($value, $message, INVALID_MAX, $propertyPath, ['max' => $maxValue]);
         }
 
         return true;
@@ -252,7 +267,7 @@ trait NumberTrait
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_LESS, $propertyPath);
+            throw static::createException($value, $message, INVALID_LESS, $propertyPath);
         }
 
         return true;
@@ -277,7 +292,7 @@ trait NumberTrait
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_LESS_OR_EQUAL, $propertyPath);
+            throw static::createException($value, $message, INVALID_LESS_OR_EQUAL, $propertyPath);
         }
 
         return true;
@@ -302,7 +317,7 @@ trait NumberTrait
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_GREATER, $propertyPath);
+            throw static::createException($value, $message, INVALID_GREATER, $propertyPath);
         }
 
         return true;
@@ -327,7 +342,7 @@ trait NumberTrait
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath);
+            throw static::createException($value, $message, INVALID_GREATER_OR_EQUAL, $propertyPath);
         }
 
         return true;
@@ -355,7 +370,7 @@ trait NumberTrait
                 static::stringify($upperLimit)
             );
 
-            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath);
+            throw static::createException($value, $message, INVALID_BETWEEN, $propertyPath);
         }
 
         return true;
@@ -382,7 +397,7 @@ trait NumberTrait
                 static::stringify($upperLimit)
             );
 
-            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath);
+            throw static::createException($value, $message, INVALID_BETWEEN_EXCLUSIVE, $propertyPath);
         }
 
         return true;

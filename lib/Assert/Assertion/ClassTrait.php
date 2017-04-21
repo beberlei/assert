@@ -14,6 +14,13 @@
 
 namespace Assert\Assertion;
 
+const INVALID_NOT_INSTANCE_OF = 204;
+const INVALID_INSTANCE_OF = 28;
+const INVALID_SUBCLASS_OF = 29;
+const INVALID_CLASS = 105;
+const INVALID_INTERFACE = 106;
+const INTERFACE_NOT_IMPLEMENTED = 202;
+
 trait ClassTrait
 {
     /**
@@ -37,7 +44,7 @@ trait ClassTrait
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath,
+            throw static::createException($value, $message, INVALID_SUBCLASS_OF, $propertyPath,
                 ['class' => $className]);
         }
 
@@ -63,7 +70,7 @@ trait ClassTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_CLASS, $propertyPath);
+            throw static::createException($value, $message, INVALID_CLASS, $propertyPath);
         }
 
         return true;
@@ -88,7 +95,7 @@ trait ClassTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_INTERFACE, $propertyPath);
+            throw static::createException($value, $message, INVALID_INTERFACE, $propertyPath);
         }
 
         return true;
@@ -116,7 +123,7 @@ trait ClassTrait
                 static::stringify($interfaceName)
             );
 
-            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath,
+            throw static::createException($class, $message, INTERFACE_NOT_IMPLEMENTED, $propertyPath,
                 ['interface' => $interfaceName]);
         }
 
@@ -144,7 +151,7 @@ trait ClassTrait
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath,
+            throw static::createException($value, $message, INVALID_INSTANCE_OF, $propertyPath,
                 ['class' => $className]);
         }
 
@@ -172,7 +179,7 @@ trait ClassTrait
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath,
+            throw static::createException($value, $message, INVALID_NOT_INSTANCE_OF, $propertyPath,
                 ['class' => $className]);
         }
 

@@ -14,6 +14,10 @@
 
 namespace Assert\Assertion;
 
+const INVALID_OBJECT = 207;
+const INVALID_METHOD = 208;
+const INVALID_PROPERTY = 224;
+
 trait ObjectTrait
 {
     /**
@@ -38,7 +42,7 @@ trait ObjectTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_METHOD, $propertyPath);
+            throw static::createException($value, $message, INVALID_METHOD, $propertyPath);
         }
 
         return true;
@@ -61,7 +65,7 @@ trait ObjectTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_OBJECT, $propertyPath);
+            throw static::createException($value, $message, INVALID_OBJECT, $propertyPath);
         }
 
         return true;
@@ -90,7 +94,7 @@ trait ObjectTrait
                 static::stringify($property)
             );
 
-            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath);
+            throw static::createException($value, $message, INVALID_PROPERTY, $propertyPath);
         }
 
         return true;
@@ -147,7 +151,7 @@ trait ObjectTrait
                 static::stringify(\implode(', ', $invalidProperties))
             );
 
-            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath);
+            throw static::createException($value, $message, INVALID_PROPERTY, $propertyPath);
         }
 
         return true;

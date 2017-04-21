@@ -14,6 +14,10 @@
 
 namespace Assert\Assertion;
 
+const INVALID_BOOLEAN = 13;
+const INVALID_TRUE = 32;
+const INVALID_FALSE = 38;
+
 trait BoolTrait
 {
     /**
@@ -35,7 +39,7 @@ trait BoolTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_BOOLEAN, $propertyPath);
+            throw static::createException($value, $message, INVALID_BOOLEAN, $propertyPath);
         }
 
         return true;
@@ -60,7 +64,7 @@ trait BoolTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_TRUE, $propertyPath);
+            throw static::createException($value, $message, INVALID_TRUE, $propertyPath);
         }
 
         return true;
@@ -85,7 +89,7 @@ trait BoolTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_FALSE, $propertyPath);
+            throw static::createException($value, $message, INVALID_FALSE, $propertyPath);
         }
 
         return true;

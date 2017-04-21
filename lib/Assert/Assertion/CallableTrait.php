@@ -14,6 +14,9 @@
 
 namespace Assert\Assertion;
 
+const INVALID_CALLABLE = 215;
+const INVALID_SATISFY = 217;
+
 trait CallableTrait
 {
     /**
@@ -37,7 +40,7 @@ trait CallableTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_SATISFY, $propertyPath);
+            throw static::createException($value, $message, INVALID_SATISFY, $propertyPath);
         }
 
         return true;
@@ -60,7 +63,7 @@ trait CallableTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_CALLABLE, $propertyPath);
+            throw static::createException($value, $message, INVALID_CALLABLE, $propertyPath);
         }
 
         return true;

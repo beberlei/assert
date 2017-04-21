@@ -14,6 +14,10 @@
 
 namespace Assert\Assertion;
 
+const INVALID_EXTENSION = 222;
+const INVALID_VERSION = 223;
+const INVALID_CONSTANT = 221;
+
 trait EnvironmentTrait
 {
     /**
@@ -52,7 +56,7 @@ trait EnvironmentTrait
             $message = \sprintf(static::generateMessage($message) ?: 'Value "%s" expected to be a defined constant.',
                 $constant);
 
-            throw static::createException($constant, $message, static::INVALID_CONSTANT, $propertyPath);
+            throw static::createException($constant, $message, INVALID_CONSTANT, $propertyPath);
         }
 
         return true;
@@ -83,7 +87,7 @@ trait EnvironmentTrait
                 static::stringify($version2)
             );
 
-            throw static::createException($version1, $message, static::INVALID_VERSION, $propertyPath);
+            throw static::createException($version1, $message, INVALID_VERSION, $propertyPath);
         }
 
         return true;
@@ -128,7 +132,7 @@ trait EnvironmentTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_EXTENSION, $propertyPath);
+            throw static::createException($value, $message, INVALID_EXTENSION, $propertyPath);
         }
 
         return true;

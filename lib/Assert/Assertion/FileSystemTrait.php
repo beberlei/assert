@@ -14,6 +14,12 @@
 
 namespace Assert\Assertion;
 
+const INVALID_DIRECTORY = 101;
+const INVALID_FILE = 102;
+const INVALID_READABLE = 103;
+const INVALID_WRITEABLE = 104;
+const INVALID_RESOURCE = 225;
+
 trait FileSystemTrait
 {
     /**
@@ -38,7 +44,7 @@ trait FileSystemTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_FILE, $propertyPath);
+            throw static::createException($value, $message, INVALID_FILE, $propertyPath);
         }
 
         return true;
@@ -65,7 +71,7 @@ trait FileSystemTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_DIRECTORY, $propertyPath);
+            throw static::createException($value, $message, INVALID_DIRECTORY, $propertyPath);
         }
 
         return true;
@@ -92,7 +98,7 @@ trait FileSystemTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_READABLE, $propertyPath);
+            throw static::createException($value, $message, INVALID_READABLE, $propertyPath);
         }
 
         return true;
@@ -119,7 +125,7 @@ trait FileSystemTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_WRITEABLE, $propertyPath);
+            throw static::createException($value, $message, INVALID_WRITEABLE, $propertyPath);
         }
 
         return true;
@@ -144,7 +150,7 @@ trait FileSystemTrait
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_RESOURCE, $propertyPath);
+            throw static::createException($value, $message, INVALID_RESOURCE, $propertyPath);
         }
 
         return true;
