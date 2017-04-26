@@ -15,15 +15,13 @@
 namespace Assert;
 
 use Assert\Assertion\ArrayTrait;
-use Assert\Assertion\BoolTrait;
 use Assert\Assertion\CallableTrait;
 use Assert\Assertion\ClassTrait;
 use Assert\Assertion\CompareTrait;
 use Assert\Assertion\EnvironmentTrait;
 use Assert\Assertion\FileSystemTrait;
-use Assert\Assertion\NumberTrait;
 use Assert\Assertion\ObjectTrait;
-use Assert\Assertion\StringTrait;
+use Assert\Assertion\ScalarTrait;
 use BadMethodCallException;
 
 /**
@@ -197,17 +195,13 @@ use BadMethodCallException;
 class Assertion
 {
     use ArrayTrait;
-    use BoolTrait;
     use CallableTrait;
     use ClassTrait;
     use CompareTrait;
     use EnvironmentTrait;
     use FileSystemTrait;
-    use NumberTrait;
     use ObjectTrait;
-    use StringTrait;
-
-    const INVALID_SCALAR = 209;
+    use ScalarTrait;
 
     // constants linked for BC
     const INVALID_VALUE_IN_ARRAY = Assertion\INVALID_VALUE_IN_ARRAY;
@@ -219,9 +213,6 @@ class Assertion
     const INVALID_COUNT = Assertion\INVALID_COUNT;
     const INVALID_KEY_ISSET = Assertion\INVALID_KEY_ISSET;
     const INVALID_ARRAY_ACCESSIBLE = Assertion\INVALID_ARRAY_ACCESSIBLE;
-    const INVALID_BOOLEAN = Assertion\INVALID_BOOLEAN;
-    const INVALID_TRUE = Assertion\INVALID_TRUE;
-    const INVALID_FALSE = Assertion\INVALID_FALSE;
     const INVALID_CALLABLE = Assertion\INVALID_CALLABLE;
     const INVALID_SATISFY = Assertion\INVALID_SATISFY;
     const INVALID_NOT_INSTANCE_OF = Assertion\INVALID_NOT_INSTANCE_OF;
@@ -247,6 +238,13 @@ class Assertion
     const INVALID_READABLE = Assertion\INVALID_READABLE;
     const INVALID_WRITEABLE = Assertion\INVALID_WRITEABLE;
     const INVALID_RESOURCE = Assertion\INVALID_RESOURCE;
+    const INVALID_OBJECT = Assertion\INVALID_OBJECT;
+    const INVALID_METHOD = Assertion\INVALID_METHOD;
+    const INVALID_PROPERTY = Assertion\INVALID_PROPERTY;
+    const INVALID_SCALAR = Assertion\INVALID_SCALAR;
+    const INVALID_BOOLEAN = Assertion\INVALID_BOOLEAN;
+    const INVALID_TRUE = Assertion\INVALID_TRUE;
+    const INVALID_FALSE = Assertion\INVALID_FALSE;
     const INVALID_BETWEEN = Assertion\INVALID_BETWEEN;
     const INVALID_BETWEEN_EXCLUSIVE = Assertion\INVALID_BETWEEN_EXCLUSIVE;
     const INVALID_INTEGER = Assertion\INVALID_INTEGER;
@@ -261,9 +259,6 @@ class Assertion
     const INVALID_LESS_OR_EQUAL = Assertion\INVALID_LESS_OR_EQUAL;
     const INVALID_GREATER = Assertion\INVALID_GREATER;
     const INVALID_GREATER_OR_EQUAL = Assertion\INVALID_GREATER_OR_EQUAL;
-    const INVALID_OBJECT = Assertion\INVALID_OBJECT;
-    const INVALID_METHOD = Assertion\INVALID_METHOD;
-    const INVALID_PROPERTY = Assertion\INVALID_PROPERTY;
     const INVALID_STRING = Assertion\INVALID_STRING;
     const INVALID_REGEX = Assertion\INVALID_REGEX;
     const INVALID_MIN_LENGTH = Assertion\INVALID_MIN_LENGTH;
@@ -306,31 +301,6 @@ class Assertion
         $exceptionClass = static::$exceptionClass;
 
         return new $exceptionClass($message, $code, $propertyPath, $value, $constraints);
-    }
-
-    /**
-     * Assert that value is a PHP scalar.
-     *
-     * @param mixed                $value
-     * @param string|callable|null $message
-     * @param string|null          $propertyPath
-     *
-     * @return bool
-     *
-     * @throws \Assert\AssertionFailedException
-     */
-    public static function scalar($value, $message = null, $propertyPath = null)
-    {
-        if (!\is_scalar($value)) {
-            $message = \sprintf(
-                static::generateMessage($message) ?: 'Value "%s" is not a scalar.',
-                static::stringify($value)
-            );
-
-            throw static::createException($value, $message, static::INVALID_SCALAR, $propertyPath);
-        }
-
-        return true;
     }
 
     /**
