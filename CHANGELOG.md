@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2.7.* - 2017-04-**
+## 2.7.5 - 2017-04-29
 ### Added assertions
 - `Assert\Assertion:isResource()` (Thanks to [Timothy Younger](https://github.com/beberlei/assert/pull/222))
 
