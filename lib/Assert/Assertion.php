@@ -204,77 +204,362 @@ class Assertion
     use ScalarTrait;
 
     // constants linked for BC
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_VALUE_IN_ARRAY
+     */
     const INVALID_VALUE_IN_ARRAY = Assertion\INVALID_VALUE_IN_ARRAY;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_CHOICE
+     */
     const INVALID_CHOICE = Assertion\INVALID_CHOICE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_TRAVERSABLE
+     */
     const INVALID_TRAVERSABLE = Assertion\INVALID_TRAVERSABLE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_ARRAY
+     */
     const INVALID_ARRAY = Assertion\INVALID_ARRAY;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_KEY_EXISTS
+     */
     const INVALID_KEY_EXISTS = Assertion\INVALID_KEY_EXISTS;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_KEY_NOT_EXISTS
+     */
     const INVALID_KEY_NOT_EXISTS = Assertion\INVALID_KEY_NOT_EXISTS;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_COUNT
+     */
     const INVALID_COUNT = Assertion\INVALID_COUNT;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_KEY_ISSET
+     */
     const INVALID_KEY_ISSET = Assertion\INVALID_KEY_ISSET;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_ARRAY_ACCESSIBLE
+     */
     const INVALID_ARRAY_ACCESSIBLE = Assertion\INVALID_ARRAY_ACCESSIBLE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_CALLABLE
+     */
     const INVALID_CALLABLE = Assertion\INVALID_CALLABLE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_SATISFY
+     */
     const INVALID_SATISFY = Assertion\INVALID_SATISFY;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_NOT_INSTANCE_OF
+     */
     const INVALID_NOT_INSTANCE_OF = Assertion\INVALID_NOT_INSTANCE_OF;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_INSTANCE_OF
+     */
     const INVALID_INSTANCE_OF = Assertion\INVALID_INSTANCE_OF;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_SUBCLASS_OF
+     */
     const INVALID_SUBCLASS_OF = Assertion\INVALID_SUBCLASS_OF;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_CLASS
+     */
     const INVALID_CLASS = Assertion\INVALID_CLASS;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_INTERFACE
+     */
     const INVALID_INTERFACE = Assertion\INVALID_INTERFACE;
+    /**
+     * @deprecated
+     * @see Assertion\INTERFACE_NOT_IMPLEMENTED
+     */
     const INTERFACE_NOT_IMPLEMENTED = Assertion\INTERFACE_NOT_IMPLEMENTED;
+    /**
+     * @deprecated
+     * @see Assertion\VALUE_EMPTY
+     */
     const VALUE_EMPTY = Assertion\VALUE_EMPTY;
+    /**
+     * @deprecated
+     * @see Assertion\VALUE_NULL
+     */
     const VALUE_NULL = Assertion\VALUE_NULL;
+    /**
+     * @deprecated
+     * @see Assertion\VALUE_NOT_NULL
+     */
     const VALUE_NOT_NULL = Assertion\VALUE_NOT_NULL;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_EQ
+     */
     const INVALID_EQ = Assertion\INVALID_EQ;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_SAME
+     */
     const INVALID_SAME = Assertion\INVALID_SAME;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_NOT_EQ
+     */
     const INVALID_NOT_EQ = Assertion\INVALID_NOT_EQ;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_NOT_SAME
+     */
     const INVALID_NOT_SAME = Assertion\INVALID_NOT_SAME;
+    /**
+     * @deprecated
+     * @see Assertion\VALUE_NOT_EMPTY
+     */
     const VALUE_NOT_EMPTY = Assertion\VALUE_NOT_EMPTY;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_NOT_BLANK
+     */
     const INVALID_NOT_BLANK = Assertion\INVALID_NOT_BLANK;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_EXTENSION
+     */
     const INVALID_EXTENSION = Assertion\INVALID_EXTENSION;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_VERSION
+     */
     const INVALID_VERSION = Assertion\INVALID_VERSION;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_CONSTANT
+     */
     const INVALID_CONSTANT = Assertion\INVALID_CONSTANT;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_DIRECTORY
+     */
     const INVALID_DIRECTORY = Assertion\INVALID_DIRECTORY;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_FILE
+     */
     const INVALID_FILE = Assertion\INVALID_FILE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_READABLE
+     */
     const INVALID_READABLE = Assertion\INVALID_READABLE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_WRITEABLE
+     */
     const INVALID_WRITEABLE = Assertion\INVALID_WRITEABLE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_RESOURCE
+     */
     const INVALID_RESOURCE = Assertion\INVALID_RESOURCE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_OBJECT
+     */
     const INVALID_OBJECT = Assertion\INVALID_OBJECT;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_METHOD
+     */
     const INVALID_METHOD = Assertion\INVALID_METHOD;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_PROPERTY
+     */
     const INVALID_PROPERTY = Assertion\INVALID_PROPERTY;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_SCALAR
+     */
     const INVALID_SCALAR = Assertion\INVALID_SCALAR;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_BOOLEAN
+     */
     const INVALID_BOOLEAN = Assertion\INVALID_BOOLEAN;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_TRUE
+     */
     const INVALID_TRUE = Assertion\INVALID_TRUE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_FALSE
+     */
     const INVALID_FALSE = Assertion\INVALID_FALSE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_BETWEEN
+     */
     const INVALID_BETWEEN = Assertion\INVALID_BETWEEN;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_BETWEEN_EXCLUSIVE
+     */
     const INVALID_BETWEEN_EXCLUSIVE = Assertion\INVALID_BETWEEN_EXCLUSIVE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_INTEGER
+     */
     const INVALID_INTEGER = Assertion\INVALID_INTEGER;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_DIGIT
+     */
     const INVALID_DIGIT = Assertion\INVALID_DIGIT;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_INTEGERISH
+     */
     const INVALID_INTEGERISH = Assertion\INVALID_INTEGERISH;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_FLOAT
+     */
     const INVALID_FLOAT = Assertion\INVALID_FLOAT;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_RANGE
+     */
     const INVALID_RANGE = Assertion\INVALID_RANGE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_NUMERIC
+     */
     const INVALID_NUMERIC = Assertion\INVALID_NUMERIC;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_MIN
+     */
     const INVALID_MIN = Assertion\INVALID_MIN;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_MAX
+     */
     const INVALID_MAX = Assertion\INVALID_MAX;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_LESS
+     */
     const INVALID_LESS = Assertion\INVALID_LESS;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_LESS_OR_EQUAL
+     */
     const INVALID_LESS_OR_EQUAL = Assertion\INVALID_LESS_OR_EQUAL;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_GREATER
+     */
     const INVALID_GREATER = Assertion\INVALID_GREATER;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_GREATER_OR_EQUAL
+     */
     const INVALID_GREATER_OR_EQUAL = Assertion\INVALID_GREATER_OR_EQUAL;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_STRING
+     */
     const INVALID_STRING = Assertion\INVALID_STRING;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_REGEX
+     */
     const INVALID_REGEX = Assertion\INVALID_REGEX;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_MIN_LENGTH
+     */
     const INVALID_MIN_LENGTH = Assertion\INVALID_MIN_LENGTH;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_MAX_LENGTH
+     */
     const INVALID_MAX_LENGTH = Assertion\INVALID_MAX_LENGTH;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_STRING_START
+     */
     const INVALID_STRING_START = Assertion\INVALID_STRING_START;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_STRING_CONTAINS
+     */
     const INVALID_STRING_CONTAINS = Assertion\INVALID_STRING_CONTAINS;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_ALNUM
+     */
     const INVALID_ALNUM = Assertion\INVALID_ALNUM;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_LENGTH
+     */
     const INVALID_LENGTH = Assertion\INVALID_LENGTH;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_STRING_END
+     */
     const INVALID_STRING_END = Assertion\INVALID_STRING_END;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_UUID
+     */
     const INVALID_UUID = Assertion\INVALID_UUID;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_E164
+     */
     const INVALID_E164 = Assertion\INVALID_E164;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_EMAIL
+     */
     const INVALID_EMAIL = Assertion\INVALID_EMAIL;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_URL
+     */
     const INVALID_URL = Assertion\INVALID_URL;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_JSON_STRING
+     */
     const INVALID_JSON_STRING = Assertion\INVALID_JSON_STRING;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_DATE
+     */
     const INVALID_DATE = Assertion\INVALID_DATE;
+    /**
+     * @deprecated
+     * @see Assertion\INVALID_IP
+     */
     const INVALID_IP = Assertion\INVALID_IP;
+    // end constants linked for BC
 
     /**
      * Exception to throw when an assertion failed.

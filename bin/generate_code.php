@@ -143,8 +143,8 @@ class MethodDocGenerator
 
             case 'const':
                 $fileContent = \preg_replace(
-                    '`// constants linked for BC(?:\s*const [A-Z_\d\\\]+ = [A-Z_\d\\\]+;)+`sim',
-                    \sprintf("// constants linked for BC\n    %s", \trim(\implode("\n", $lines))),
+                    '`// constants linked for BC\n(.*)// end constants linked for BC\n`sim',
+                    \sprintf("// constants linked for BC\n    %s\n    // end constants linked for BC\n", \trim(\implode("\n", $lines))),
                     $fileContent
                 );
                 break;
@@ -255,7 +255,13 @@ class MethodDocGenerator
         return \array_map(function ($name) use ($namespace) {
             $const = \substr($name, \strlen($namespace));
 
-            return '    const ' . $const . ' = Assertion\\' . $const . ';';
+            return <<<CONST
+    /**
+     * @deprecated
+     * @see Assertion\\{$const}
+     */
+    const {$const} = Assertion\\{$const};
+CONST;
         }, $namespaceConstants);
     }
 }
