@@ -35,7 +35,8 @@
       "Assert\\": "lib/Assert"
     },
     "files": [
-      "lib/Assert/functions.php"
+      "lib/Assert/functions.php",
+      "lib/Assert/Assertion.php"
     ]
   },
   "autoload-dev": {

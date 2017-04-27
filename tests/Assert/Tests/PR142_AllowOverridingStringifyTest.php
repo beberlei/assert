@@ -31,7 +31,7 @@ class PR142_AllowOverridingStringifyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidString
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING
      *
      * @param string $invalidString
      * @param string $exceptionMessage

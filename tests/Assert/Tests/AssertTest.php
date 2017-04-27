@@ -34,7 +34,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidFloat
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     * @expectedExceptionCode \Assert\Assertion\INVALID_FLOAT
      *
      * @param mixed $nonFloat
      */
@@ -66,7 +66,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidInteger
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_INTEGER
+     * @expectedExceptionCode \Assert\Assertion\INVALID_INTEGER
      *
      * @param mixed $nonInteger
      */
@@ -102,7 +102,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidIntegerish
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_INTEGERISH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_INTEGERISH
      *
      * @param mixed $nonInteger
      */
@@ -119,7 +119,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_BOOLEAN
+     * @expectedExceptionCode \Assert\Assertion\INVALID_BOOLEAN
      */
     public function testInvalidBoolean()
     {
@@ -128,7 +128,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_SCALAR
+     * @expectedExceptionCode \Assert\Assertion\INVALID_SCALAR
      */
     public function testInvalidScalar()
     {
@@ -157,7 +157,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidNotEmpty
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     * @expectedExceptionCode \Assert\Assertion\VALUE_EMPTY
      *
      * @param mixed $value
      */
@@ -196,7 +196,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidEmpty
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_NOT_EMPTY
+     * @expectedExceptionCode \Assert\Assertion\VALUE_NOT_EMPTY
      *
      * @param mixed $value
      */
@@ -220,7 +220,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidNull
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_NOT_NULL
+     * @expectedExceptionCode \Assert\Assertion\VALUE_NOT_NULL
      *
      * @param mixed $value
      */
@@ -245,7 +245,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_NULL
+     * @expectedExceptionCode \Assert\Assertion\VALUE_NULL
      */
     public function testInvalidNotNull()
     {
@@ -261,7 +261,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidString
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING
      *
      * @param mixed $invalidString
      */
@@ -289,7 +289,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_REGEX
+     * @expectedExceptionCode \Assert\Assertion\INVALID_REGEX
      */
     public function testInvalidRegex()
     {
@@ -298,7 +298,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING
      */
     public function testInvalidRegexValueNotString()
     {
@@ -307,7 +307,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN_LENGTH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_MIN_LENGTH
      */
     public function testInvalidMinLength()
     {
@@ -325,7 +325,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX_LENGTH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_MAX_LENGTH
      */
     public function testInvalidMaxLength()
     {
@@ -342,7 +342,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN_LENGTH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_MIN_LENGTH
      */
     public function testInvalidBetweenLengthMin()
     {
@@ -351,7 +351,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX_LENGTH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_MAX_LENGTH
      */
     public function testInvalidBetweenLengthMax()
     {
@@ -366,7 +366,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_START
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING_START
      */
     public function testInvalidStartsWith()
     {
@@ -375,7 +375,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_START
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING_START
      */
     public function testInvalidStartsWithDueToWrongEncoding()
     {
@@ -392,7 +392,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_END
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING_END
      */
     public function testInvalidEndsWith()
     {
@@ -401,7 +401,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_END
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING_END
      */
     public function testInvalidEndsWithDueToWrongEncoding()
     {
@@ -418,7 +418,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_CONTAINS
+     * @expectedExceptionCode \Assert\Assertion\INVALID_STRING_CONTAINS
      */
     public function testInvalidContains()
     {
@@ -433,7 +433,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_CHOICE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_CHOICE
      */
     public function testInvalidChoice()
     {
@@ -447,7 +447,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_CHOICE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_CHOICE
      */
     public function testInvalidInArray()
     {
@@ -461,7 +461,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_NUMERIC
+     * @expectedExceptionCode \Assert\Assertion\INVALID_NUMERIC
      */
     public function testInvalidNumeric()
     {
@@ -491,7 +491,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidArray
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY
+     * @expectedExceptionCode \Assert\Assertion\INVALID_ARRAY
      *
      * @param mixed $value
      */
@@ -509,7 +509,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_EXISTS
+     * @expectedExceptionCode \Assert\Assertion\INVALID_KEY_EXISTS
      */
     public function testInvalidKeyExists()
     {
@@ -523,7 +523,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_NOT_EXISTS
+     * @expectedExceptionCode \Assert\Assertion\INVALID_KEY_NOT_EXISTS
      */
     public function testInvalidKeyNotExists()
     {
@@ -552,7 +552,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidNotBlank
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_BLANK
+     * @expectedExceptionCode \Assert\Assertion\INVALID_NOT_BLANK
      *
      * @param mixed $notBlank
      */
@@ -568,7 +568,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_INSTANCE_OF
+     * @expectedExceptionCode \Assert\Assertion\INVALID_NOT_INSTANCE_OF
      */
     public function testInvalidNotInstanceOf()
     {
@@ -582,7 +582,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_INSTANCE_OF
+     * @expectedExceptionCode \Assert\Assertion\INVALID_INSTANCE_OF
      */
     public function testInvalidInstanceOf()
     {
@@ -596,7 +596,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_SUBCLASS_OF
+     * @expectedExceptionCode \Assert\Assertion\INVALID_SUBCLASS_OF
      */
     public function testInvalidSubclassOf()
     {
@@ -610,7 +610,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_RANGE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_RANGE
      */
     public function testInvalidRange()
     {
@@ -628,7 +628,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_EMAIL
+     * @expectedExceptionCode \Assert\Assertion\INVALID_EMAIL
      */
     public function testInvalidEmail()
     {
@@ -643,7 +643,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidUrl
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_URL
+     * @expectedExceptionCode \Assert\Assertion\INVALID_URL
      *
      * @param string $url
      */
@@ -748,7 +748,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_DIGIT
+     * @expectedExceptionCode \Assert\Assertion\INVALID_DIGIT
      */
     public function testInvalidDigit()
     {
@@ -772,7 +772,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_ALNUM
+     * @expectedExceptionCode \Assert\Assertion\INVALID_ALNUM
      */
     public function testInvalidAlnum()
     {
@@ -786,7 +786,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_TRUE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_TRUE
      */
     public function testInvalidTrue()
     {
@@ -800,7 +800,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_FALSE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_FALSE
      */
     public function testInvalidFalse()
     {
@@ -809,7 +809,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_CLASS
+     * @expectedExceptionCode \Assert\Assertion\INVALID_CLASS
      */
     public function testInvalidClass()
     {
@@ -823,7 +823,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_SAME
+     * @expectedExceptionCode \Assert\Assertion\INVALID_SAME
      */
     public function testSame()
     {
@@ -836,7 +836,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_EQ
+     * @expectedExceptionCode \Assert\Assertion\INVALID_EQ
      */
     public function testEq()
     {
@@ -849,7 +849,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_EQ
+     * @expectedExceptionCode \Assert\Assertion\INVALID_NOT_EQ
      */
     public function testNotEq()
     {
@@ -861,7 +861,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_SAME
+     * @expectedExceptionCode \Assert\Assertion\INVALID_NOT_SAME
      */
     public function testNotSame()
     {
@@ -873,7 +873,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_VALUE_IN_ARRAY
+     * @expectedExceptionCode \Assert\Assertion\INVALID_VALUE_IN_ARRAY
      */
     public function testNotInArray()
     {
@@ -893,7 +893,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidMin
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN
+     * @expectedExceptionCode \Assert\Assertion\INVALID_MIN
      * @expectedExceptionMessageRegExp /Number "(0\.5|0)" was expected to be at least "(1|2\.5)"/
      *
      * @param float|int $value
@@ -922,7 +922,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidMax
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX
+     * @expectedExceptionCode \Assert\Assertion\INVALID_MAX
      * @expectedExceptionMessageRegExp /Number "(2.5|2)" was expected to be at most "(1|0\.5)"/
      *
      * @param float|int $value
@@ -983,7 +983,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_LENGTH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_LENGTH
      */
     public function testLengthFailed()
     {
@@ -992,7 +992,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_LENGTH
+     * @expectedExceptionCode \Assert\Assertion\INVALID_LENGTH
      */
     public function testLengthFailedForWrongEncoding()
     {
@@ -1011,7 +1011,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     * @expectedExceptionCode \Assert\Assertion\VALUE_EMPTY
      */
     public function testFileWithEmptyFilename()
     {
@@ -1020,7 +1020,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_FILE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_FILE
      */
     public function testFileDoesNotExists()
     {
@@ -1029,7 +1029,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_DIRECTORY
+     * @expectedExceptionCode \Assert\Assertion\INVALID_DIRECTORY
      */
     public function testDirectory()
     {
@@ -1040,7 +1040,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_READABLE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_READABLE
      */
     public function testReadable()
     {
@@ -1051,7 +1051,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_WRITEABLE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_WRITEABLE
      */
     public function testWriteable()
     {
@@ -1071,7 +1071,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INTERFACE_NOT_IMPLEMENTED
+     * @expectedExceptionCode \Assert\Assertion\INTERFACE_NOT_IMPLEMENTED
      */
     public function testImplementsInterface()
     {
@@ -1082,7 +1082,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INTERFACE_NOT_IMPLEMENTED
+     * @expectedExceptionCode \Assert\Assertion\INTERFACE_NOT_IMPLEMENTED
      */
     public function testImplementsInterfaceWithClassObject()
     {
@@ -1116,7 +1116,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider isJsonStringInvalidStringDataprovider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_JSON_STRING
+     * @expectedExceptionCode \Assert\Assertion\INVALID_JSON_STRING
      *
      * @param $invalidString
      */
@@ -1146,7 +1146,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providesInvalidUuids
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_UUID
+     * @expectedExceptionCode \Assert\Assertion\INVALID_UUID
      *
      * @param string $uuid
      */
@@ -1192,7 +1192,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providesInvalidE164s
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_E164
+     * @expectedExceptionCode \Assert\Assertion\INVALID_E164
      *
      * @param string $e164
      */
@@ -1225,7 +1225,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     * @expectedExceptionCode \Assert\Assertion\VALUE_EMPTY
      */
     public function testInvalidNotEmptyKeyEmptyKey()
     {
@@ -1234,7 +1234,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_ISSET
+     * @expectedExceptionCode \Assert\Assertion\INVALID_KEY_ISSET
      */
     public function testInvalidNotEmptyKeyKeyNotExists()
     {
@@ -1248,7 +1248,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_TRUE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_TRUE
      */
     public function testAllWithSimpleAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
@@ -1262,7 +1262,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_INSTANCE_OF
+     * @expectedExceptionCode \Assert\Assertion\INVALID_INSTANCE_OF
      */
     public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
@@ -1294,7 +1294,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidCount
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_COUNT
+     * @expectedExceptionCode \Assert\Assertion\INVALID_COUNT
      * @expectedExceptionMessageRegExp /List does not contain exactly "\d+" elements./
      *
      * @param mixed $countable
@@ -1316,7 +1316,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidChoicesProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
+     * @expectedExceptionCode \Assert\Assertion\VALUE_EMPTY
      *
      * @param $values
      * @param $choices
@@ -1328,7 +1328,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_KEY_ISSET
+     * @expectedExceptionCode \Assert\Assertion\INVALID_KEY_ISSET
      */
     public function testChoicesNotEmptyExpectingExceptionInvalidKeyIsset()
     {
@@ -1338,8 +1338,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     public function invalidChoicesProvider()
     {
         return array(
-            'empty values' => array(array(), array('tux'), Assertion::VALUE_EMPTY),
-            'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion::VALUE_EMPTY),
+            'empty values' => array(array(), array('tux'), Assertion\VALUE_EMPTY),
+            'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion\VALUE_EMPTY),
         );
     }
 
@@ -1350,7 +1350,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_OBJECT
+     * @expectedExceptionCode \Assert\Assertion\INVALID_OBJECT
      */
     public function testIsObjectExpectingException()
     {
@@ -1364,7 +1364,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_METHOD
+     * @expectedExceptionCode \Assert\Assertion\INVALID_METHOD
      */
     public function testMethodExistsFailure()
     {
@@ -1406,7 +1406,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidLessProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_LESS
+     * @expectedExceptionCode \Assert\Assertion\INVALID_LESS
      *
      * @param mixed $value
      * @param mixed $limit
@@ -1439,7 +1439,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidLessOrEqualProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_LESS_OR_EQUAL
+     * @expectedExceptionCode \Assert\Assertion\INVALID_LESS_OR_EQUAL
      *
      * @param mixed $value
      * @param mixed $limit
@@ -1493,7 +1493,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidGreaterProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_GREATER
+     * @expectedExceptionCode \Assert\Assertion\INVALID_GREATER
      *
      * @param mixed $value
      * @param mixed $limit
@@ -1526,7 +1526,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidGreaterOrEqualProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_GREATER_OR_EQUAL
+     * @expectedExceptionCode \Assert\Assertion\INVALID_GREATER_OR_EQUAL
      *
      * @param mixed $value
      * @param mixed $limit
@@ -1539,7 +1539,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidDateProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_DATE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_DATE
      *
      * @param string $value
      * @param string $format
@@ -1565,7 +1565,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_TRAVERSABLE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_TRAVERSABLE
      */
     public function testInvalidTraversable()
     {
@@ -1579,7 +1579,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY_ACCESSIBLE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_ARRAY_ACCESSIBLE
      */
     public function testInvalidArrayAccessible()
     {
@@ -1588,7 +1588,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_CALLABLE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_CALLABLE
      */
     public function testInvalidCallable()
     {
@@ -1606,7 +1606,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_SATISFY
+     * @expectedExceptionCode \Assert\Assertion\INVALID_SATISFY
      */
     public function testInvalidSatisfy()
     {
@@ -1653,7 +1653,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidIpProvider
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_IP
+     * @expectedExceptionCode \Assert\Assertion\INVALID_IP
      *
      * @param string   $value
      * @param int|null $flag
@@ -1683,7 +1683,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_IP
+     * @expectedExceptionCode \Assert\Assertion\INVALID_IP
      */
     public function testInvalidIpv4()
     {
@@ -1697,7 +1697,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_IP
+     * @expectedExceptionCode \Assert\Assertion\INVALID_IP
      */
     public function testInvalidIpv6()
     {
@@ -1706,7 +1706,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_INTERFACE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_INTERFACE
      */
     public function testInvalidInterfaceExists()
     {
@@ -1721,7 +1721,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerInvalidBetween
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_BETWEEN
+     * @expectedExceptionCode \Assert\Assertion\INVALID_BETWEEN
      *
      * @param mixed $value
      * @param mixed $lowerLimit
@@ -1777,7 +1777,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerInvalidBetweenExclusive
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_BETWEEN_EXCLUSIVE
+     * @expectedExceptionCode \Assert\Assertion\INVALID_BETWEEN_EXCLUSIVE
      *
      * @param mixed $value
      * @param mixed $lowerLimit
@@ -1829,7 +1829,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     * @expectedExceptionCode \Assert\Assertion\INVALID_FLOAT
      * @expectedExceptionMessage 1234567...
      */
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
@@ -1841,7 +1841,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     * @expectedExceptionCode \Assert\Assertion\INVALID_FLOAT
      * @expectedExceptionMessage stream
      */
     public function testStringifyReportsResourceType()
@@ -1943,7 +1943,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Assert\InvalidArgumentException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
+     * @expectedExceptionCode \Assert\Assertion\INVALID_PROPERTY
      */
     public function testInvalidPropertyExists()
     {
@@ -1966,7 +1966,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidPropertiesExistProvider
      * @expectedException \Assert\InvalidArgumentException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
+     * @expectedExceptionCode \Assert\Assertion\INVALID_PROPERTY
      *
      * @param array $properties
      */
