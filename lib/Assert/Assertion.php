@@ -2495,9 +2495,7 @@ class Assertion
 
         if (\is_bool($value)) {
             $result = $value ? '<TRUE>' : '<FALSE>';
-        }
-
-        else if (\is_scalar($value)) {
+        } elseif (\is_scalar($value)) {
             $val = (string) $value;
 
             if (\strlen($val) > 100) {
@@ -2505,21 +2503,13 @@ class Assertion
             }
 
             $result = $val;
-        }
-
-        else if (\is_array($value)) {
+        } elseif (\is_array($value)) {
             $result = '<ARRAY>';
-        }
-
-        else if (\is_object($value)) {
+        } elseif (\is_object($value)) {
             $result = \get_class($value);
-        }
-
-        else if (\is_resource($value)) {
+        } elseif (\is_resource($value)) {
             $result = \get_resource_type($value);
-        }
-
-        else if ($value === null) {
+        } elseif ($value === null) {
             $result = '<NULL>';
         }
 
