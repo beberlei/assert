@@ -788,7 +788,7 @@ class Assertion
     /**
      * Assert that string value is not longer than $maxLength chars.
      *
-     * @param mixed                $value
+     * @param string               $value
      * @param int                  $maxLength
      * @param string|callable|null $message
      * @param string|null          $propertyPath
