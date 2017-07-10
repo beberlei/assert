@@ -37,7 +37,7 @@ use ReflectionClass;
  * @method AssertionChain digit(string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit.
  * @method AssertionChain directory(string|callable $message = null, string $propertyPath = null) Assert that a directory exists.
  * @method AssertionChain e164(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
- * @method AssertionChain email(string|callable $message = null, string $propertyPath = null) Assert that value is an email adress (using input_filter/FILTER_VALIDATE_EMAIL).
+ * @method AssertionChain email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method AssertionChain endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method AssertionChain eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
  * @method AssertionChain extensionLoaded(string|callable $message = null, string $propertyPath = null) Assert that extension is loaded.
