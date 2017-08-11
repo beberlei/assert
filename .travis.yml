@@ -1,4 +1,5 @@
 language: php
+sudo: false
 
 git:
   depth: 2
@@ -6,6 +7,7 @@ git:
 matrix:
   include:
     - php: 5.3
+      dist: precise
     - php: 5.4
     - php: 5.5
     - php: 5.6
@@ -42,7 +44,7 @@ script:
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
       composer require --dev phpstan/phpstan;
-      vendor/bin/phpstan analyse --no-progress --ansi -c phpstan.neon -l 5 lib;
+      vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib;
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
       xdebug-enable;
