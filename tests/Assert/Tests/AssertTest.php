@@ -1994,4 +1994,20 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         Assertion::isResource(new \stdClass());
     }
+
+    public function testBase64()
+    {
+        $base64String = \base64_encode('content');
+
+        $this->assertTrue(Assertion::base64($base64String));
+    }
+
+    /**
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_BASE64
+     */
+    public function testNotBase64()
+    {
+        Assertion::base64('wrong-content');
+    }
 }

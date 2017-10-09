@@ -22,6 +22,7 @@ use BadMethodCallException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method static bool allAlnum(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for all values.
+ * @method static bool allBase64(string $base64String, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
  * @method static bool allBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
  * @method static bool allBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
  * @method static bool allBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths for all values.
@@ -103,6 +104,7 @@ use BadMethodCallException;
  * @method static bool allVersion(string $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
  * @method static bool allWriteable(string $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static bool nullOrAlnum(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
+ * @method static bool nullOrBase64(string $base64String, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
  * @method static bool nullOrBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit or that the value is null.
  * @method static bool nullOrBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths or that the value is null.
@@ -226,6 +228,7 @@ class Assertion
     const INVALID_KEY_ISSET = 46;
     const INVALID_VALUE_IN_ARRAY = 47;
     const INVALID_E164 = 48;
+    const INVALID_BASE64 = 49;
     const INVALID_DIRECTORY = 101;
     const INVALID_FILE = 102;
     const INVALID_READABLE = 103;
@@ -2533,6 +2536,28 @@ class Assertion
             $message = \sprintf(static::generateMessage($message) ?: 'Value "%s" expected to be a defined constant.', $constant);
 
             throw static::createException($constant, $message, static::INVALID_CONSTANT, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that a constant is defined.
+     *
+     * @param string               $base64String
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     *
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function base64($base64String, $message = null, $propertyPath = null)
+    {
+        if (\base64_decode($base64String, true) === false) {
+            $message = \sprintf(static::generateMessage($message) ?: 'Value "%s" is not a valid base64 string.', $base64String);
+
+            throw static::createException($base64String, $message, static::INVALID_BASE64, $propertyPath);
         }
 
         return true;
