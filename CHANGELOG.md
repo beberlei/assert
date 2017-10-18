@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.7 - 2017-10-18
+
+### Fixes
+- Basic Auth usernames and passwords can contain '.' (Thank to [Fede Isas](https://github.com/beberlei/assert/issues/234))
+
 ## 2.7.6 - 2017-05-04
 
 ### Fixes
