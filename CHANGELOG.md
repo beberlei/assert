@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.8 - 2017-10-20
+
+### Fixes
+- `Assertion::integerish([])` now throws exception as expected (Thank to [Thomas Flack](https://github.com/beberlei/assert/issues/235))
+
 ## 2.7.7 - 2017-10-18
 
 ### Fixes
