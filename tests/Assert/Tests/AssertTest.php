@@ -92,6 +92,7 @@ class AssertTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(1.23),
+            array(true),
             array(false),
             array('test'),
             array(null),
@@ -103,6 +104,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array(' -123'),
             array('456 '),
             array('-456 '),
+            array(array()),
+            array(new \stdClass()),
         );
     }
 
