@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.9 - ???
+
+### Deprecation notice
+- The functions `that()`, `thatAll()`, `thatNullOr()`, and `lazy()` are no longer marked as deprecated.
+
 ## 2.7.8 - 2017-10-20
 
 ### Fixes

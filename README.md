@@ -100,11 +100,6 @@ Assert::that($values)->all()->float();
 There are also two shortcut function `Assert::thatNullOr()` and `Assert::thatAll()` enabling
 the "nullOr" or "all" helper respectively.
 
-### \Assert\that()
-Previously (starting with version 2.0 of Assert) this fluent interface was provided by the functions
-`\Assert\that()`, `\Assert\thatNullOr()` and `\Assert\thatAll()` respectively. These functions have
-been deprecated in favor of the static methods described above and will be removed in version 3.0 of Assert.
-
 ### Lazy Assertions
 
 There are many cases in web development, especially when involving forms, you want to collect several errors
@@ -158,9 +153,16 @@ Assert::lazy()->tryAll()
     ->verifyNow();
 ```
 
-### \Assert\lazy()
-As with the `Assert` chaining methods lazy assertions were initiated by the function `\Assert\lazy()` that
-has been deprecated since version 2.6.7. As of the release of version 3.0 this function will no longer be available.
+### Functional Constructors
+
+The following functions exist as aliases to `Assert` static constructors:
+
+- `Assert\that()`
+- `Assert\thatAll()`
+- `Assert\thatNullOr()`
+- `Assert\lazy()`
+
+Using the functional or static constructors is entirely personal preference.
 
 ## List of assertions
 
