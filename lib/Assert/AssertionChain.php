@@ -31,7 +31,7 @@ use ReflectionClass;
  * @method AssertionChain choicesNotEmpty(array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content.
  * @method AssertionChain classExists(string|callable $message = null, string $propertyPath = null) Assert that the class exists.
  * @method AssertionChain contains(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars.
- * @method AssertionChain count(array|\Countable $count, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count.
+ * @method AssertionChain count(int $value, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count.
  * @method AssertionChain date(string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format.
  * @method AssertionChain defined(string|callable $message = null, string $propertyPath = null) Assert that a constant is defined.
  * @method AssertionChain digit(string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit.
