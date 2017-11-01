@@ -30,7 +30,7 @@ use LogicException;
  * @method LazyAssertion choicesNotEmpty(array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content.
  * @method LazyAssertion classExists(string|callable $message = null, string $propertyPath = null) Assert that the class exists.
  * @method LazyAssertion contains(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars.
- * @method LazyAssertion count(array|\Countable $count, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count.
+ * @method LazyAssertion count(int $value, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count.
  * @method LazyAssertion date(string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format.
  * @method LazyAssertion defined(string|callable $message = null, string $propertyPath = null) Assert that a constant is defined.
  * @method LazyAssertion digit(string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit.
