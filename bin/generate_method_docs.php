@@ -27,11 +27,12 @@ class MethodDocGenerator
 
     /**
      * @param ReflectionMethod[] $methods
-     * @param string             $format
-     * @param callable|false     $skipParameterTest
-     * @param string             $prefix
+     * @param string $format
+     * @param callable|false $skipParameterTest
+     * @param string $prefix
      *
      * @return array
+     * @throws \Assert\AssertionFailedException
      */
     private function generateMethodDocs(array $methods, $format, $skipParameterTest, $prefix = '')
     {
@@ -62,13 +63,13 @@ class MethodDocGenerator
                 $type = \version_compare(PHP_VERSION, '7.0.0') >= 0 ? $methodParameter->getType() : null;
 
                 if (\is_null($type)) {
-                    \preg_match(\sprintf('`\* @param (?P<type>[^ ]++) +\%s`sim', $parameter), $doc, $matches);
+                    \preg_match(\sprintf('`\* @param (?P<type>[^ ]++) +\%s\b`sim', $parameter), $doc, $matches);
                     if (isset($matches['type'])) {
                         $type = (
                             $methodParameter->isOptional() &&
                             null == $methodParameter->getDefaultValue()
                         )
-                            ? \str_replace(['|null', 'null|'], '', $matches['type'])
+                            ? \str_replace(array('|null', 'null|'), '', $matches['type'])
                             : $matches['type'];
                     }
                 }
