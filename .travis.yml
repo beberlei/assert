@@ -17,6 +17,7 @@ matrix:
     - php: 7.1
       env:
       - LINT=true
+    - php: 7.2
     - php: nightly
     - php: hhvm-3.9
       sudo: required
