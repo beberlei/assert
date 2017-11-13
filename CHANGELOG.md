@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.11 - 2017-11-13
+
+### Fixes
+- `Assertion::integerish(0)` and `Assertion::integerish('0')` now assert correctly.
+
 ## 2.7.10 - 2017-11-13
 
 ### Added assertions
