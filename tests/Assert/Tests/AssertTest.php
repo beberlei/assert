@@ -82,13 +82,33 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::integer(0));
     }
 
-    public function testValidIntegerish()
+    public function dataValidIntergerish()
     {
-        $this->assertTrue(Assertion::integerish(10));
-        $this->assertTrue(Assertion::integerish('10'));
-        $this->assertTrue(Assertion::integerish('-10'));
-        $this->assertTrue(Assertion::integerish('0123'));
-        $this->assertTrue(Assertion::integerish('00123'));
+        return array(
+            array(10),
+            array('10'),
+            array(-10),
+            array('-10'),
+            array(0123),
+            array('0123'),
+            array(0),
+            array('0'),
+            array(00123),
+            array('00123'),
+            array(00),
+            array('00'),
+        );
+    }
+
+    /**
+     * @param $value
+     *
+     * @throws AssertionFailedException
+     * @dataProvider dataValidIntergerish
+     */
+    public function testValidIntegerish($value)
+    {
+        $this->assertTrue(Assertion::integerish($value));
     }
 
     public static function dataInvalidIntegerish()

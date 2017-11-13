@@ -514,7 +514,12 @@ class Assertion
             \is_bool($value) ||
             \is_null($value) ||
             \is_array($value) ||
-            \strval(\intval($value)) !== ltrim(\strval($value), '0')
+            (
+                \strval(\intval($value)) !== \strval($value) &&
+                \strval(\intval($value)) !== \strval(trim($value,'0')) &&
+                \strval(\intval($value)) !== '' &&
+                \strval(trim($value,'0')) !== ''
+            )
         ) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an integer or a number castable to integer.',
