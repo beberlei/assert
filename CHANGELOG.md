@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.9 - 2017-11-13
+
+### Fixes
+- `Assertion::integerish([])` now correctly asserts integers with leading zeros in strings (Thank to [Albert Casademont](https://github.com/beberlei/assert/pull/227#issuecomment-343961009))
+
 ## 2.7.8 - 2017-10-20
 
 ### Fixes
