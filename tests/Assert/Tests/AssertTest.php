@@ -86,6 +86,8 @@ class AssertTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Assertion::integerish(10));
         $this->assertTrue(Assertion::integerish('10'));
         $this->assertTrue(Assertion::integerish('-10'));
+        $this->assertTrue(Assertion::integerish('0123'));
+        $this->assertTrue(Assertion::integerish('00123'));
     }
 
     public static function dataInvalidIntegerish()
@@ -106,6 +108,12 @@ class AssertTest extends \PHPUnit_Framework_TestCase
             array('-456 '),
             array(array()),
             array(new \stdClass()),
+            array(0.1),
+            array(0.01),
+            array(0.001),
+            array('0.1'),
+            array('0.01'),
+            array('0.001'),
         );
     }
 

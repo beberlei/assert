@@ -505,7 +505,14 @@ class Assertion
      */
     public static function integerish($value, $message = null, $propertyPath = null)
     {
-        if (\is_resource($value) || \is_object($value) || \is_bool($value) || \is_null($value) || \is_array($value) || \strval(\intval($value)) !== \strval($value)) {
+        if (
+            \is_resource($value) ||
+            \is_object($value) ||
+            \is_bool($value) ||
+            \is_null($value) ||
+            \is_array($value) ||
+            \strval(\intval($value)) !== ltrim(\strval($value), '0')
+        ) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not an integer or a number castable to integer.',
                 static::stringify($value)
