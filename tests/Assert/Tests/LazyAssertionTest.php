@@ -17,8 +17,9 @@ namespace Assert\Tests;
 use Assert\Assert;
 use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
+use PHPUnit\Framework\TestCase;
 
-class LazyAssertionTest extends \PHPUnit_Framework_TestCase
+class LazyAssertionTest extends TestCase
 {
     /**
      * @expectedException \Assert\LazyAssertionException
