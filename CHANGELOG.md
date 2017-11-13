@@ -1,15 +1,20 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.7.10 - 2017-11-13
+
+### Added assertions
+- `Assertion::base64()` (Thank to [Pablo Kowalczyk](https://github.com/beberlei/assert/pull/232))
+
 ## 2.7.9 - 2017-11-13
 
 ### Fixes
-- `Assertion::integerish([])` now correctly asserts integers with leading zeros in strings (Thank to [Albert Casademont](https://github.com/beberlei/assert/pull/227#issuecomment-343961009))
+- `Assertion::integerish()` now correctly asserts integers with leading zeros in strings (Thank to [Albert Casademont](https://github.com/beberlei/assert/pull/227#issuecomment-343961009))
 
 ## 2.7.8 - 2017-10-20
 
 ### Fixes
-- `Assertion::integerish([])` now throws exception as expected (Thank to [Thomas Flack](https://github.com/beberlei/assert/issues/235))
+- `Assertion::integerish()` now throws exception as expected (Thank to [Thomas Flack](https://github.com/beberlei/assert/issues/235))
 
 ## 2.7.7 - 2017-10-18
 
