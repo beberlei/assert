@@ -16,8 +16,9 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
 
-class AssertTest extends \PHPUnit_Framework_TestCase
+class AssertTest extends TestCase
 {
     public static function dataInvalidFloat()
     {

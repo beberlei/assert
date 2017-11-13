@@ -15,8 +15,9 @@
 namespace Assert\Tests;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
-class AssertionCodesUniqueTest extends \PHPUnit_Framework_TestCase
+class AssertionCodesUniqueTest extends TestCase
 {
     public function testAssertionCodesAreUnique()
     {

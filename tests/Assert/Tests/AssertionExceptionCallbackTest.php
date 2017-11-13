@@ -15,8 +15,9 @@
 namespace Assert\Tests;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
-class AssertionExceptionCallbackTest extends \PHPUnit_Framework_TestCase
+class AssertionExceptionCallbackTest extends TestCase
 {
     /**
      * @expectedException \Assert\AssertionFailedException
