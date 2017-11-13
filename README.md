@@ -169,6 +169,7 @@ has been deprecated since version 2.6.7. As of the release of version 3.0 this f
 use Assert\Assertion;
 
 Assertion::alnum(mixed $value);
+Assertion::base64(string $value);
 Assertion::between(mixed $value, mixed $lowerLimit, mixed $upperLimit);
 Assertion::betweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit);
 Assertion::betweenLength(mixed $value, int $minLength, int $maxLength);
