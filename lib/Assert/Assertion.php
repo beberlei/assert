@@ -514,11 +514,12 @@ class Assertion
             \is_bool($value) ||
             \is_null($value) ||
             \is_array($value) ||
+            (\is_string($value) && $value == '') ||
             (
                 \strval(\intval($value)) !== \strval($value) &&
-                \strval(\intval($value)) !== \strval(trim($value,'0')) &&
+                \strval(\intval($value)) !== \strval(ltrim($value,'0')) &&
                 \strval(\intval($value)) !== '' &&
-                \strval(trim($value,'0')) !== ''
+                \strval(ltrim($value,'0')) !== ''
             )
         ) {
             $message = \sprintf(

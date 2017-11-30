@@ -97,6 +97,7 @@ class AssertTest extends TestCase
             array('00123'),
             array(00),
             array('00'),
+            array('0040'),
         );
     }
 
@@ -114,27 +115,30 @@ class AssertTest extends TestCase
     public static function dataInvalidIntegerish()
     {
         return array(
-            array(1.23),
-            array(true),
-            array(false),
-            array('test'),
-            array(null),
-            array('1.23'),
-            array('-1.23'),
-            array(\fopen(__FILE__, 'r')),
-            array(' 1.23'),
-            array(' 123'),
-            array(' -123'),
-            array('456 '),
-            array('-456 '),
-            array(array()),
-            array(new \stdClass()),
-            array(0.1),
-            array(0.01),
-            array(0.001),
-            array('0.1'),
-            array('0.01'),
-            array('0.001'),
+            'A float' => array(1.23),
+            'Boolean true' => array(true),
+            'Boolean false' => array(false),
+            'A text string' => array('test'),
+            'A null' => array(null),
+            'A float in a string' => array('1.23'),
+            'A negative float in a string' => array('-1.23'),
+            'A file pointer' => array(\fopen(__FILE__, 'r')),
+            'A float in a string with a leading space' => array(' 1.23'),
+            'An integer in a string with a leading space' => array(' 123'),
+            'A negative integer in a string with a leading space' => array(' -123'),
+            'An integer in a string with a trailing space' => array('456 '),
+            'A negative integer in a string with a trailing space' => array('-456 '),
+            'An array' => array(array()),
+            'An object' => array(new \stdClass()),
+            'A float that is less than 1' => array(0.1),
+            'A float that is less than 0.1' => array(0.01),
+            'A float that is less than 0.01' => array(0.001),
+            'A float in a string that is less than 1' => array('0.1'),
+            'A float in a string that is less than 0.1' => array('0.01'),
+            'A float in a string that is less than 0.01' => array('0.001'),
+            'An empty string' => array(''),
+            'A single space string' => array(' '),
+            'A multiple spaced string' => array('  '),
         );
     }
 
@@ -1349,10 +1353,12 @@ class AssertTest extends TestCase
 
     public function testChoicesNotEmpty()
     {
-        $this->assertTrue(Assertion::choicesNotEmpty(
-            array('tux' => 'linux', 'Gnu' => 'dolphin'),
-            array('tux')
-        ));
+        $this->assertTrue(
+            Assertion::choicesNotEmpty(
+                array('tux' => 'linux', 'Gnu' => 'dolphin'),
+                array('tux')
+            )
+        );
     }
 
     /**
@@ -1642,8 +1648,12 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::isCallable('\is_callable'));
         $this->assertTrue(Assertion::isCallable(__NAMESPACE__ . '\\Fixtures\\someCallable'));
         $this->assertTrue(Assertion::isCallable(array(__NAMESPACE__ . '\\Fixtures\\OneCountable', 'count')));
-        $this->assertTrue(Assertion::isCallable(function () {
-        }));
+        $this->assertTrue(
+            Assertion::isCallable(
+                function () {
+                }
+            )
+        );
     }
 
     /**
@@ -1652,24 +1662,37 @@ class AssertTest extends TestCase
      */
     public function testInvalidSatisfy()
     {
-        Assertion::satisfy(null, function ($value) {
-            return !\is_null($value);
-        });
+        Assertion::satisfy(
+            null,
+            function ($value) {
+                return !\is_null($value);
+            }
+        );
     }
 
     public function testValidSatisfy()
     {
         // Should not fail with true return
-        $this->assertTrue(Assertion::satisfy(null, function ($value) {
-            return \is_null($value);
-        }));
+        $this->assertTrue(
+            Assertion::satisfy(
+                null,
+                function ($value) {
+                    return \is_null($value);
+                }
+            )
+        );
 
         // Should not fail with void return
-        $this->assertTrue(Assertion::satisfy(true, function ($value) {
-            if (!\is_bool($value)) {
-                return false;
-            }
-        }));
+        $this->assertTrue(
+            Assertion::satisfy(
+                true,
+                function ($value) {
+                    if (!\is_bool($value)) {
+                        return false;
+                    }
+                }
+            )
+        );
     }
 
     /**
