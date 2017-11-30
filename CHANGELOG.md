@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
   Hopefully these are now fixed.
   Thanks to [Erik Roelofs](https://github.com/beberlei/assert/issues/243) and [Michał Mleczko](https://github.com/beberlei/assert/issues/240)
 
+### Deprecation notice
+- The functions `\Assert\that()`, `\Assert\thatAll()`, `\Assert\thatNullOr()`, and `\Assert\lazy()` are no longer marked as deprecated.  
+  Both the functional and static constructors work together. Whichever you wish to use is a personal preference.  
+
 ## 2.7.11 - 2017-11-13
 
 ### Fixes
