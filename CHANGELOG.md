@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## x.y.z - ccyy-mm-dd
+## 2.8.1 - 2017-11-30
 
 ### Fixes
 - `Assertion::integerish()` has had several issues in the last couple of versions.  
