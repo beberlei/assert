@@ -18,7 +18,7 @@ class MethodDocGenerator
     {
         $phpFile = __DIR__.'/../lib/Assert/AssertionChain.php';
         $skipParameterTest = function (ReflectionParameter $parameter) {
-            return $parameter->getPosition() === 0;
+            return 0 === $parameter->getPosition();
         };
 
         $docs = $this->generateMethodDocs($this->gatherAssertions(), ' * @method AssertionChain %s(%s) %s.', $skipParameterTest);
@@ -27,11 +27,12 @@ class MethodDocGenerator
 
     /**
      * @param ReflectionMethod[] $methods
-     * @param string $format
-     * @param callable|false $skipParameterTest
-     * @param string $prefix
+     * @param string             $format
+     * @param callable|false     $skipParameterTest
+     * @param string             $prefix
      *
      * @return array
+     *
      * @throws \Assert\AssertionFailedException
      */
     private function generateMethodDocs(array $methods, $format, $skipParameterTest, $prefix = '')
@@ -145,7 +146,7 @@ class MethodDocGenerator
 
         $writtenBytes = \file_put_contents($phpFile, $fileContent);
 
-        if ($writtenBytes !== false) {
+        if (false !== $writtenBytes) {
             echo 'Generated '.$phpFile.'.'.PHP_EOL;
         }
     }
@@ -181,7 +182,7 @@ class MethodDocGenerator
     {
         $phpFile = __DIR__.'/../lib/Assert/LazyAssertion.php';
         $skipParameterTest = function (ReflectionParameter $parameter) {
-            return $parameter->getPosition() === 0;
+            return 0 === $parameter->getPosition();
         };
 
         $docs = \array_merge(

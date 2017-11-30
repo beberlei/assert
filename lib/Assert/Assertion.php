@@ -22,7 +22,7 @@ use BadMethodCallException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method static bool allAlnum(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for all values.
- * @method static bool allBase64(string $base64String, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
+ * @method static bool allBase64(string $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
  * @method static bool allBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
  * @method static bool allBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
  * @method static bool allBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths for all values.
@@ -104,7 +104,7 @@ use BadMethodCallException;
  * @method static bool allVersion(string $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
  * @method static bool allWriteable(string $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static bool nullOrAlnum(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
- * @method static bool nullOrBase64(string $base64String, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
+ * @method static bool nullOrBase64(string $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
  * @method static bool nullOrBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit or that the value is null.
  * @method static bool nullOrBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths or that the value is null.
@@ -408,7 +408,7 @@ class Assertion
      */
     public static function notInArray($value, array $choices, $message = null, $propertyPath = null)
     {
-        if (\in_array($value, $choices) === true) {
+        if (true === \in_array($value, $choices)) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is in given "%s".',
                 static::stringify($value),
@@ -514,12 +514,12 @@ class Assertion
             \is_bool($value) ||
             \is_null($value) ||
             \is_array($value) ||
-            (\is_string($value) && $value == '') ||
+            (\is_string($value) && '' == $value) ||
             (
                 \strval(\intval($value)) !== \strval($value) &&
-                \strval(\intval($value)) !== \strval(ltrim($value,'0')) &&
-                \strval(\intval($value)) !== '' &&
-                \strval(ltrim($value,'0')) !== ''
+                \strval(\intval($value)) !== \strval(\ltrim($value, '0')) &&
+                '' !== \strval(\intval($value)) &&
+                '' !== \strval(\ltrim($value, '0'))
             )
         ) {
             $message = \sprintf(
@@ -646,7 +646,7 @@ class Assertion
      */
     public static function null($value, $message = null, $propertyPath = null)
     {
-        if ($value !== null) {
+        if (null !== $value) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not null, but null value was expected.',
                 static::stringify($value)
@@ -671,7 +671,7 @@ class Assertion
      */
     public static function notNull($value, $message = null, $propertyPath = null)
     {
-        if ($value === null) {
+        if (null === $value) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is null, but non null value was expected.',
                 static::stringify($value)
@@ -873,7 +873,7 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (\mb_strpos($string, $needle, null, $encoding) !== 0) {
+        if (0 !== \mb_strpos($string, $needle, null, $encoding)) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not start with "%s".',
                 static::stringify($string),
@@ -937,7 +937,7 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (\mb_strpos($string, $needle, null, $encoding) === false) {
+        if (false === \mb_strpos($string, $needle, null, $encoding)) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" does not contain "%s".',
                 static::stringify($string),
@@ -1556,7 +1556,7 @@ class Assertion
             $host = \substr($value, \strpos($value, '@') + 1);
 
             // Likely not a FQDN, bug in PHP FILTER_VALIDATE_EMAIL prior to PHP 5.3.3
-            if (\version_compare(PHP_VERSION, '5.3.3', '<') && \strpos($host, '.') === false) {
+            if (\version_compare(PHP_VERSION, '5.3.3', '<') && false === \strpos($host, '.')) {
                 $message = \sprintf(
                     static::generateMessage($message) ?: 'Value "%s" was expected to be a valid e-mail address.',
                     static::stringify($value)
@@ -1661,7 +1661,7 @@ class Assertion
      */
     public static function true($value, $message = null, $propertyPath = null)
     {
-        if ($value !== true) {
+        if (true !== $value) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not TRUE.',
                 static::stringify($value)
@@ -1686,7 +1686,7 @@ class Assertion
      */
     public static function false($value, $message = null, $propertyPath = null)
     {
-        if ($value !== false) {
+        if (false !== $value) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Value "%s" is not FALSE.',
                 static::stringify($value)
@@ -1824,7 +1824,7 @@ class Assertion
     {
         $value = \str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
 
-        if ($value === '00000000-0000-0000-0000-000000000000') {
+        if ('00000000-0000-0000-0000-000000000000' === $value) {
             return true;
         }
 
@@ -1905,12 +1905,12 @@ class Assertion
      */
     public static function __callStatic($method, $args)
     {
-        if (\strpos($method, 'nullOr') === 0) {
+        if (0 === \strpos($method, 'nullOr')) {
             if (!\array_key_exists(0, $args)) {
                 throw new BadMethodCallException('Missing the first argument.');
             }
 
-            if ($args[0] === null) {
+            if (null === $args[0]) {
                 return true;
             }
 
@@ -1919,7 +1919,7 @@ class Assertion
             return \call_user_func_array(array(\get_called_class(), $method), $args);
         }
 
-        if (\strpos($method, 'all') === 0) {
+        if (0 === \strpos($method, 'all')) {
             if (!\array_key_exists(0, $args)) {
                 throw new BadMethodCallException('Missing the first argument.');
             }
@@ -2327,7 +2327,7 @@ class Assertion
     {
         static::notEmpty($operator, 'versionCompare operator is required and cannot be empty.');
 
-        if (\version_compare($version1, $version2, $operator) !== true) {
+        if (true !== \version_compare($version1, $version2, $operator)) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Version "%s" is not "%s" version "%s".',
                 static::stringify($version1),
@@ -2419,7 +2419,7 @@ class Assertion
     {
         static::isCallable($callback);
 
-        if (\call_user_func($callback, $value) === false) {
+        if (false === \call_user_func($callback, $value)) {
             $message = \sprintf(
                 static::generateMessage($message) ?: 'Provided "%s" is invalid according to custom rule.',
                 static::stringify($value)
@@ -2525,7 +2525,7 @@ class Assertion
             $result = \get_class($value);
         } elseif (\is_resource($value)) {
             $result = \get_resource_type($value);
-        } elseif ($value === null) {
+        } elseif (null === $value) {
             $result = '<NULL>';
         }
 
@@ -2557,7 +2557,7 @@ class Assertion
     /**
      * Assert that a constant is defined.
      *
-     * @param string               $base64String
+     * @param string               $value
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *
@@ -2565,12 +2565,12 @@ class Assertion
      *
      * @throws \Assert\AssertionFailedException
      */
-    public static function base64($base64String, $message = null, $propertyPath = null)
+    public static function base64($value, $message = null, $propertyPath = null)
     {
-        if (\base64_decode($base64String, true) === false) {
-            $message = \sprintf(static::generateMessage($message) ?: 'Value "%s" is not a valid base64 string.', $base64String);
+        if (false === \base64_decode($value, true)) {
+            $message = \sprintf(static::generateMessage($message) ?: 'Value "%s" is not a valid base64 string.', $value);
 
-            throw static::createException($base64String, $message, static::INVALID_BASE64, $propertyPath);
+            throw static::createException($value, $message, static::INVALID_BASE64, $propertyPath);
         }
 
         return true;
@@ -2593,7 +2593,7 @@ class Assertion
             $reflection = new \ReflectionClass($traces[1]['class']);
             $method = $reflection->getMethod($traces[1]['function']);
             foreach ($method->getParameters() as $index => $parameter) {
-                if ($parameter->getName() !== 'message') {
+                if ('message' !== $parameter->getName()) {
                     $parameters[$parameter->getName()] = \array_key_exists($index, $traces[1]['args'])
                         ? $traces[1]['args'][$index]
                         : $parameter->getDefaultValue();

@@ -145,7 +145,7 @@ class AssertionChain
      */
     public function __call($methodName, $args)
     {
-        if ($this->alwaysValid === true) {
+        if (true === $this->alwaysValid) {
             return $this;
         }
 
@@ -164,11 +164,11 @@ class AssertionChain
                 continue;
             }
 
-            if ($param->getName() == 'message') {
+            if ('message' == $param->getName()) {
                 $args[$idx] = $this->defaultMessage;
             }
 
-            if ($param->getName() == 'propertyPath') {
+            if ('propertyPath' == $param->getName()) {
                 $args[$idx] = $this->defaultPropertyPath;
             }
         }
@@ -201,7 +201,7 @@ class AssertionChain
      */
     public function nullOr()
     {
-        if ($this->value === null) {
+        if (null === $this->value) {
             $this->alwaysValid = true;
         }
 
@@ -219,7 +219,7 @@ class AssertionChain
             throw new LogicException('Exception class name must be passed as a string');
         }
 
-        if ($className !== 'Assert\Assertion' && !\is_subclass_of($className, 'Assert\Assertion')) {
+        if ('Assert\Assertion' !== $className && !\is_subclass_of($className, 'Assert\Assertion')) {
             throw new LogicException($className . ' is not (a subclass of) Assert\Assertion');
         }
 

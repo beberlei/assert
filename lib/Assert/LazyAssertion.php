@@ -139,9 +139,9 @@ class LazyAssertion
 
     public function __call($method, $args)
     {
-        if ($this->alwaysTryAll === false
-            && $this->thisChainTryAll === false
-            && $this->currentChainFailed === true
+        if (false === $this->alwaysTryAll
+            && false === $this->thisChainTryAll
+            && true === $this->currentChainFailed
         ) {
             return $this;
         }
@@ -181,7 +181,7 @@ class LazyAssertion
             throw new LogicException('Exception class name must be passed as a string');
         }
 
-        if ($className !== 'Assert\LazyAssertionException' && !\is_subclass_of($className, 'Assert\LazyAssertionException')) {
+        if ('Assert\LazyAssertionException' !== $className && !\is_subclass_of($className, 'Assert\LazyAssertionException')) {
             throw new LogicException($className . ' is not (a subclass of) Assert\LazyAssertionException');
         }
 
