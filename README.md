@@ -164,6 +164,9 @@ The following functions exist as aliases to `Assert` static constructors:
 
 Using the functional or static constructors is entirely personal preference.
 
+**Note:** The functional constructors will not work with an [`Assertion` extension](#your-own-assertion-class).
+However it is trivial to recreate these functions in a way that point to the extended class.
+
 ## List of assertions
 
 ```php
