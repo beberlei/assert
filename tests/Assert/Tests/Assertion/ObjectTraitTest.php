@@ -17,11 +17,12 @@ declare(strict_types=1);
 namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\ObjectTrait
  */
-class ObjectTraitTest extends \PHPUnit_Framework_TestCase
+class ObjectTraitTest extends TestCase
 {
     public function testMethodExists()
     {

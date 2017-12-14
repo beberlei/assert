@@ -14,10 +14,12 @@
 
 namespace Assert\Tests;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Test case specific for the deprecated functions creating assertion chains.
  */
-class AssertionChainFunctionsTest extends \PHPUnit_Framework_TestCase
+class AssertionChainFunctionsTest extends TestCase
 {
     public function testThatAssertionChainFunctionsReturnAnAssertionChain()
     {

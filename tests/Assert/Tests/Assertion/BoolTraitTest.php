@@ -17,11 +17,12 @@ declare(strict_types=1);
 namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\BoolTrait
  */
-class BoolTraitTest extends \PHPUnit_Framework_TestCase
+class BoolTraitTest extends TestCase
 {
     public static function dataInvalidIntegerish()
     {

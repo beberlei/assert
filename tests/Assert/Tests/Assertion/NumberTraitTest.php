@@ -18,11 +18,12 @@ namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\NumberTrait
  */
-class NumberTraitTest extends \PHPUnit_Framework_TestCase
+class NumberTraitTest extends TestCase
 {
     public static function dataInvalidInteger()
     {

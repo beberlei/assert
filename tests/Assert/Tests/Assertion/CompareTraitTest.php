@@ -21,7 +21,7 @@ use Assert\Assertion;
 /**
  * @covers \Assert\Assertion\CompareTrait
  */
-class CompareTraitTest extends \PHPUnit_Framework_TestCase
+class CompareTraitTest extends TestCase
 {
     /**
      * @expectedException \Assert\AssertionFailedException

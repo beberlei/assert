@@ -14,12 +14,11 @@
 
 namespace Assert\Tests;
 
-use Assert\Assert;
 use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
 use PHPUnit\Framework\TestCase;
 
-class LazyAssertionTest extends TestCase
+class LazyFunctionAssertionTest extends TestCase
 {
     /**
      * @expectedException \Assert\LazyAssertionException
@@ -27,7 +26,7 @@ class LazyAssertionTest extends TestCase
      */
     public function testThatLazyAssertionsCollectsAllErrorsUntilAssertAll()
     {
-        Assert::lazy()
+        \Assert\lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
             ->that('string', 'baz')->isArray()
@@ -40,7 +39,7 @@ class LazyAssertionTest extends TestCase
      */
     public function testThatLazyAssertionsSkipsAssertionsOfCurrentChainAfterFailure()
     {
-        Assert::lazy()
+        \Assert\lazy()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
@@ -48,7 +47,7 @@ class LazyAssertionTest extends TestCase
     public function testLazyAssertionExceptionCanReturnAllErrors()
     {
         try {
-            Assert::lazy()
+            \Assert\lazy()
                 ->that(10, 'foo')->string()
                 ->that(null, 'bar')->notEmpty()
                 ->that('string', 'baz')->isArray()
@@ -67,7 +66,7 @@ class LazyAssertionTest extends TestCase
     public function testVerifyNowReturnsTrueIfAssertionsPass()
     {
         $this->assertTrue(
-            Assert::lazy()
+            \Assert\lazy()
                 ->that(2, 'Two')->eq(2)
                 ->verifyNow()
         );
@@ -76,7 +75,7 @@ class LazyAssertionTest extends TestCase
     public function testRestOfChainNotSkippedWhenTryAllUsed()
     {
         try {
-            Assert::lazy()
+            \Assert\lazy()
                 ->that(9.9, 'foo')->tryAll()->integer('must be int')->between(10, 20, 'must be between')
                 ->verifyNow();
         } catch (LazyAssertionException $ex) {
@@ -95,7 +94,7 @@ class LazyAssertionTest extends TestCase
      */
     public function testCallsToThatFollowingTryAllSkipAssertionsAfterFailure()
     {
-        Assert::lazy()
+        \Assert\lazy()
             ->that(10, 'foo')->tryAll()->integer()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
@@ -107,7 +106,7 @@ class LazyAssertionTest extends TestCase
      */
     public function testCallsToThatWithTryAllWithMultipleAssertionsAllGetReported()
     {
-        Assert::lazy()
+        \Assert\lazy()
             ->that(10, 'foo')->tryAll()->float()->greaterThan(100)
             ->that(null, 'foo')->tryAll()->notEmpty()->string()
             ->verifyNow();
@@ -119,7 +118,7 @@ class LazyAssertionTest extends TestCase
      */
     public function testCallsToTryAllOnLazyAlwaysReportAllGetReported()
     {
-        Assert::lazy()->tryAll()
+        \Assert\lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
@@ -174,7 +173,7 @@ class LazyAssertionTest extends TestCase
      */
     public function testLazyAssertionExceptionExtendsInvalidArgumentException()
     {
-        Assert::lazy()->tryAll()
+        \Assert\lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();

@@ -17,11 +17,12 @@ declare(strict_types=1);
 namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\StringTrait
  */
-class StringTraitTest extends \PHPUnit_Framework_TestCase
+class StringTraitTest extends TestCase
 {
     public function testLength()
     {

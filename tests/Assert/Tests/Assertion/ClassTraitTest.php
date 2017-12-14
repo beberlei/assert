@@ -22,7 +22,7 @@ use Assert\Tests\Fixtures\ChildStdClass;
 /**
  * @covers \Assert\Assertion\ClassTrait
  */
-class ClassTraitTest extends \PHPUnit_Framework_TestCase
+class ClassTraitTest extends TestCase
 {
     /**
      * @expectedException \Assert\AssertionFailedException
