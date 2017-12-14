@@ -16,8 +16,9 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use PHPUnit\Framework\TestCase;
 
-class PR142_AllowOverridingStringifyTest extends \PHPUnit_Framework_TestCase
+class PR142_AllowOverridingStringifyTest extends TestCase
 {
     public static function dataInvalidString()
     {

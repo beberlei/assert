@@ -15,8 +15,9 @@
 namespace Assert\Tests;
 
 use Assert\Tests\Fixtures\CustomAssertion;
+use PHPUnit\Framework\TestCase;
 
-class CustomAssertionClassTest extends \PHPUnit_Framework_TestCase
+class CustomAssertionClassTest extends TestCase
 {
     protected function setUp()
     {

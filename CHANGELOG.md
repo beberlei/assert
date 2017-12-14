@@ -1,6 +1,42 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.8.1 - 2017-11-30
+
+### Fixes
+- `Assertion::integerish()` has had several issues in the last couple of versions.  
+  Hopefully these are now fixed.
+  Thanks to [Erik Roelofs](https://github.com/beberlei/assert/issues/243) and [Michał Mleczko](https://github.com/beberlei/assert/issues/240)
+
+### Deprecation notice
+- The functions `\Assert\that()`, `\Assert\thatAll()`, `\Assert\thatNullOr()`, and `\Assert\lazy()` are no longer marked as deprecated.  
+  Both the functional and static constructors work together. Whichever you wish to use is a personal preference.  
+
+## 2.7.11 - 2017-11-13
+
+### Fixes
+- `Assertion::integerish(0)` and `Assertion::integerish('0')` now assert correctly.
+
+## 2.7.10 - 2017-11-13
+
+### Added assertions
+- `Assertion::base64()` (Thank to [Pablo Kowalczyk](https://github.com/beberlei/assert/pull/232))
+
+## 2.7.9 - 2017-11-13
+
+### Fixes
+- `Assertion::integerish()` now correctly asserts integers with leading zeros in strings (Thank to [Albert Casademont](https://github.com/beberlei/assert/pull/227#issuecomment-343961009))
+
+## 2.7.8 - 2017-10-20
+
+### Fixes
+- `Assertion::integerish()` now throws exception as expected (Thank to [Thomas Flack](https://github.com/beberlei/assert/issues/235))
+
+## 2.7.7 - 2017-10-18
+
+### Fixes
+- Basic Auth usernames and passwords can contain '.' (Thank to [Fede Isas](https://github.com/beberlei/assert/issues/234))
+
 ## 2.7.6 - 2017-05-04
 
 ### Fixes

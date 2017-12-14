@@ -17,8 +17,9 @@ namespace Assert\Tests;
 use Assert\Assert;
 use Assert\AssertionChain;
 use Assert\Tests\Fixtures\CustomAssertion;
+use PHPUnit\Framework\TestCase;
 
-class AssertionChainTest extends \PHPUnit_Framework_TestCase
+class AssertionChainTest extends TestCase
 {
     public function testThatAssertionChainReturnAnAssertionChain()
     {

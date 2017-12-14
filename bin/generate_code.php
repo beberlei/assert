@@ -18,7 +18,7 @@ class MethodDocGenerator
     {
         $phpFile = __DIR__.'/../lib/Assert/AssertionChain.php';
         $skipParameterTest = function (ReflectionParameter $parameter) {
-            return $parameter->getPosition() === 0;
+            return 0 === $parameter->getPosition();
         };
 
         $docs = $this->generateMethodDocs($this->gatherAssertions(), ' * @method AssertionChain %s(%s) %s.', $skipParameterTest);
@@ -32,6 +32,8 @@ class MethodDocGenerator
      * @param string             $prefix
      *
      * @return array
+     *
+     * @throws \Assert\AssertionFailedException
      */
     private function generateMethodDocs(array $methods, $format, $skipParameterTest, $prefix = '')
     {
@@ -62,13 +64,13 @@ class MethodDocGenerator
                 $type = \version_compare(PHP_VERSION, '7.0.0') >= 0 ? $methodParameter->getType() : null;
 
                 if (\is_null($type)) {
-                    \preg_match(\sprintf('`\* @param (?P<type>[^ ]++) +\%s`sim', $parameter), $doc, $matches);
+                    \preg_match(\sprintf('`\* @param (?P<type>[^ ]++) +\%s\b`sim', $parameter), $doc, $matches);
                     if (isset($matches['type'])) {
                         $type = (
                             $methodParameter->isOptional() &&
                             null == $methodParameter->getDefaultValue()
                         )
-                            ? \str_replace(['|null', 'null|'], '', $matches['type'])
+                            ? \str_replace(array('|null', 'null|'), '', $matches['type'])
                             : $matches['type'];
                     }
                 }
@@ -152,7 +154,7 @@ class MethodDocGenerator
 
         $writtenBytes = \file_put_contents($phpFile, $fileContent);
 
-        if ($writtenBytes !== false) {
+        if (false !== $writtenBytes) {
             echo 'Generated '.$phpFile.'.'.PHP_EOL;
         }
     }
@@ -188,7 +190,7 @@ class MethodDocGenerator
     {
         $phpFile = __DIR__.'/../lib/Assert/LazyAssertion.php';
         $skipParameterTest = function (ReflectionParameter $parameter) {
-            return $parameter->getPosition() === 0;
+            return 0 === $parameter->getPosition();
         };
 
         $docs = \array_merge(
