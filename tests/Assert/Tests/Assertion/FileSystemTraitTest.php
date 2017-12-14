@@ -17,11 +17,12 @@ declare(strict_types=1);
 namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\FileSystemTrait
  */
-class FileSystemTraitTest extends \PHPUnit_Framework_TestCase
+class FileSystemTraitTest extends TestCase
 {
     public function testFile()
     {

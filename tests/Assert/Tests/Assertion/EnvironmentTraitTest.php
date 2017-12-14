@@ -17,11 +17,12 @@ declare(strict_types=1);
 namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\EnvironmentTrait
  */
-class EnvironmentTraitTest extends \PHPUnit_Framework_TestCase
+class EnvironmentTraitTest extends TestCase
 {
     public function testValidPhpVersion()
     {

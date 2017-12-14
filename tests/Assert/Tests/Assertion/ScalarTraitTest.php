@@ -17,11 +17,12 @@ declare(strict_types=1);
 namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\ScalarTrait
  */
-class ScalarTraitTest extends \PHPUnit_Framework_TestCase
+class ScalarTraitTest extends TestCase
 {
     /**
      * @expectedException \Assert\AssertionFailedException

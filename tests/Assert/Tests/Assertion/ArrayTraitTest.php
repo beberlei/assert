@@ -16,11 +16,12 @@ namespace Assert\Tests\Assertion;
 
 use Assert\Assertion;
 use Assert\Tests\Fixtures\OneCountable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Assert\Assertion\ArrayTrait
  */
-class ArrayTraitTest extends \PHPUnit_Framework_TestCase
+class ArrayTraitTest extends TestCase
 {
     /**
      * @expectedException \Assert\AssertionFailedException

@@ -21,7 +21,7 @@ use Assert\Assertion;
 /**
  * @covers \Assert\Assertion\CallableTrait
  */
-class CallableTraitTest extends \PHPUnit_Framework_TestCase
+class CallableTraitTest extends TestCase
 {
     /**
      * @expectedException \Assert\AssertionFailedException
