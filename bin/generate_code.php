@@ -104,7 +104,7 @@ class MethodDocGenerator
         return \array_filter(
             $reflClass->getMethods(ReflectionMethod::IS_STATIC),
             function (ReflectionMethod $reflMethod) {
-                if ($reflMethod->isProtected()) {
+                if (!$reflMethod->isPublic()) {
                     return false;
                 }
 
@@ -139,6 +139,14 @@ class MethodDocGenerator
                 $fileContent = \preg_replace(
                     '/```php\n<\?php\nuse Assert\\\Assertion;\n\nAssertion::.*?```/sim',
                     \sprintf("```php\n<?php\nuse Assert\\Assertion;\n\n%s\n\n```", \implode("\n", $lines)),
+                    $fileContent
+                );
+                break;
+
+            case 'const':
+                $fileContent = \preg_replace(
+                    '`// constants linked for BC\n(.*)// end constants linked for BC\n`sim',
+                    \sprintf("// constants linked for BC\n    %s\n    // end constants linked for BC\n", \trim(\implode("\n", $lines))),
                     $fileContent
                 );
                 break;
@@ -215,11 +223,55 @@ class MethodDocGenerator
             }
         );
     }
+
+    public function generateConstants()
+    {
+        $phpFile = __DIR__.'/../lib/Assert/Assertion.php';
+        $constants = $this->gatherConstants();
+
+        $this->generateFile($phpFile, $constants, 'const');
+    }
+
+    /**
+     * @return string[]
+     */
+    private function gatherConstants()
+    {
+        $namespace = 'Assert\\Assertion\\';
+
+        // load class to load all traits and fill namespace with constants
+        /* @noinspection ExceptionsAnnotatingAndHandlingInspection */
+        \Assert\Assertion::string($namespace);
+
+        $constants = \get_defined_constants(true);
+        if (!isset($constants['user'])) {
+            return [];
+        }
+
+        $constants = \array_keys($constants['user']);
+
+        $namespaceConstants = \array_filter($constants, function ($name) use ($namespace) {
+            return 0 === \strpos($name, $namespace);
+        });
+
+        return \array_map(function ($name) use ($namespace) {
+            $const = \substr($name, \strlen($namespace));
+
+            return <<<CONST
+    /**
+     * @deprecated
+     * @see Assertion\\{$const}
+     */
+    const {$const} = Assertion\\{$const};
+CONST;
+        }, $namespaceConstants);
+    }
 }
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 $generator = new MethodDocGenerator();
+$generator->generateConstants();
 $generator->generateAssertionDocs();
 $generator->generateChainDocs();
 $generator->generateLazyAssertionDocs();

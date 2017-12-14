@@ -43,7 +43,7 @@ class PR142_AllowOverridingStringifyTest extends TestCase
         try {
             Fixtures\PR142_OverrideStringify::string($invalidString);
         } catch (AssertionFailedException $ex) {
-            $this->assertSame(Assertion::INVALID_STRING, $ex->getCode());
+            $this->assertSame(Assertion\INVALID_STRING, $ex->getCode());
             $this->assertSame($exceptionMessage, $ex->getMessage());
         }
     }
