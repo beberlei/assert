@@ -92,6 +92,7 @@ abstract class Assert
         $lazyAssertion = new LazyAssertion();
 
         return $lazyAssertion
+            ->setAssertClass(get_called_class())
             ->setExceptionClass(static::$lazyAssertionExceptionClass)
         ;
     }

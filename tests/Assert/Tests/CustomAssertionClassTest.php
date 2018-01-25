@@ -14,6 +14,7 @@
 
 namespace Assert\Tests;
 
+use Assert\LazyAssertionException;
 use Assert\Tests\Fixtures\CustomAssertion;
 use PHPUnit\Framework\TestCase;
 
@@ -65,6 +66,18 @@ class CustomAssertionClassTest extends TestCase
             ->that('bar', 'bar')->integer()
             ->verifyNow()
         ;
+    }
+
+    public function testThatCustomLazyAssertionContainsOnlyCustomAssertionExceptions()
+    {
+        try {
+            Fixtures\CustomAssert::lazy()
+                ->that('foo', 'foo')->integer()
+                ->verifyNow()
+            ;
+        } catch (LazyAssertionException $ex) {
+            $this->assertContainsOnlyInstancesOf('\Assert\Tests\Fixtures\CustomException', $ex->getErrorExceptions());
+        }
     }
 
     /**

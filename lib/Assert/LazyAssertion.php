@@ -114,6 +114,9 @@ class LazyAssertion
     private $currentChain;
     private $errors = array();
 
+    /** @var string The class to use as AssertionChain factory */
+    private $assertClass = 'Assert\Assert';
+
     /** @var string|LazyAssertionException The class to use for exceptions */
     private $exceptionClass = 'Assert\LazyAssertionException';
 
@@ -121,7 +124,8 @@ class LazyAssertion
     {
         $this->currentChainFailed = false;
         $this->thisChainTryAll = false;
-        $this->currentChain = Assert::that($value, $defaultMessage, $propertyPath);
+        $assertClass = $this->assertClass;
+        $this->currentChain = $assertClass::that($value, $defaultMessage, $propertyPath);
 
         return $this;
     }
@@ -168,6 +172,26 @@ class LazyAssertion
         }
 
         return true;
+    }
+
+    /**
+     * @param string $className
+     *
+     * @return $this
+     */
+    public function setAssertClass($className)
+    {
+        if (!\is_string($className)) {
+            throw new LogicException('Assert class name must be passed as a string');
+        }
+
+        if ('Assert\Assert' !== $className && !\is_subclass_of($className, 'Assert\Assert')) {
+            throw new LogicException($className . ' is not (a subclass of) Assert\Assert');
+        }
+
+        $this->assertClass = $className;
+
+        return $this;
     }
 
     /**
