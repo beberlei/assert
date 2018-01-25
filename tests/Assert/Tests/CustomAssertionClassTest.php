@@ -68,6 +68,17 @@ class CustomAssertionClassTest extends TestCase
         ;
     }
 
+    public function testThatCustomLazyAssertionUsesCustomAssertion()
+    {
+        $string = 's' . \uniqid();
+        Fixtures\CustomAssert::lazy()
+            ->that($string, 'foo')->string()
+            ->verifyNow()
+        ;
+
+        $this->assertSame(array(array('string', $string)), CustomAssertion::getCalls());
+    }
+
     public function testThatCustomLazyAssertionContainsOnlyCustomAssertionExceptions()
     {
         try {
@@ -84,7 +95,7 @@ class CustomAssertionClassTest extends TestCase
      * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
      * @expectedExceptionMessageRegex /The following 4 assertions failed:\s+1) foo: Value "foo" is not an integer.\s+2) foo: Value "foo" is not an array.\s+3) bar: Value "123" expected to be string, type integer given.\s+4) bar: Value "123" is not an array./
      */
-    public function testThatCustomAsserionsExceptionsForLazyAssertionChainsTryAllTheAssertionsPerChain()
+    public function testThatCustomAssertionsExceptionsForLazyAssertionChainsTryAllTheAssertionsPerChain()
     {
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->tryAll()->integer()->isArray()
@@ -97,7 +108,7 @@ class CustomAssertionClassTest extends TestCase
      * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
      * @expectedExceptionMessageRegex /The following 4 assertions failed:\s+1) foo: Value "foo" is not an integer.\s+2) foo: Value "foo" is not an array.\s+3) bar: Value "123" expected to be string, type integer given.\s+4) bar: Value "123" is not an array./
      */
-    public function testThatCustomAsserionsExceptionsForLazyAssertionChainsTryAllTheAssertions()
+    public function testThatCustomAssertionsExceptionsForLazyAssertionChainsTryAllTheAssertions()
     {
         Fixtures\CustomAssert::lazy()
             ->tryAll()
