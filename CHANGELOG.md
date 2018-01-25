@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.2 - 2018-01-25
+
+### Fixes
+- Usage of custom extended Assertion class in LazyAssertion (Thanks to [Marek Štípek](https://github.com/beberlei/assert/pull/245))
+
 ## 2.9.1 - 2018-01-25
 
 ### Deprecation notice

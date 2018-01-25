@@ -323,6 +323,9 @@ class Assertion extends BaseAssertion
 }
 ```
 
+As of V2.9.2, [Lazy Assertions](#lazy-assertions) now have access to any additional
+assertions present in your own assertion classes.
+
 ## Contributing
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
 
