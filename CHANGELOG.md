@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## x.y.z - ccyy-mm-dd
+
+### Fixes
+- `\Assert\Assertion::generateMessage()` will now receive the default message for an assertion if one is not supplied (Thanks to [Romans Malinovskis](https://github.com/beberlei/assert/issues/225))
+
 ## 2.8.1 - 2017-11-30
 
 ### Fixes
@@ -20,27 +25,27 @@ All notable changes to this project will be documented in this file.
 ## 2.7.10 - 2017-11-13
 
 ### Added assertions
-- `Assertion::base64()` (Thank to [Pablo Kowalczyk](https://github.com/beberlei/assert/pull/232))
+- `Assertion::base64()` (Thanks to [Pablo Kowalczyk](https://github.com/beberlei/assert/pull/232))
 
 ## 2.7.9 - 2017-11-13
 
 ### Fixes
-- `Assertion::integerish()` now correctly asserts integers with leading zeros in strings (Thank to [Albert Casademont](https://github.com/beberlei/assert/pull/227#issuecomment-343961009))
+- `Assertion::integerish()` now correctly asserts integers with leading zeros in strings (Thanks to [Albert Casademont](https://github.com/beberlei/assert/pull/227#issuecomment-343961009))
 
 ## 2.7.8 - 2017-10-20
 
 ### Fixes
-- `Assertion::integerish()` now throws exception as expected (Thank to [Thomas Flack](https://github.com/beberlei/assert/issues/235))
+- `Assertion::integerish()` now throws exception as expected (Thanks to [Thomas Flack](https://github.com/beberlei/assert/issues/235))
 
 ## 2.7.7 - 2017-10-18
 
 ### Fixes
-- Basic Auth usernames and passwords can contain '.' (Thank to [Fede Isas](https://github.com/beberlei/assert/issues/234))
+- Basic Auth usernames and passwords can contain '.' (Thanks to [Fede Isas](https://github.com/beberlei/assert/issues/234))
 
 ## 2.7.6 - 2017-05-04
 
 ### Fixes
-- Fixed stringification of booleans (Thank to [Philipp Rieber](https://github.com/beberlei/assert/issues/226))
+- Fixed stringification of booleans (Thanks to [Philipp Rieber](https://github.com/beberlei/assert/issues/226))
 
 ## 2.7.5 - 2017-04-29
 ### Added assertions

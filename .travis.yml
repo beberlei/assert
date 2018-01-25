@@ -18,6 +18,8 @@ matrix:
       env:
       - LINT=true
     - php: 7.2
+      env:
+      - LINT=true
     - php: nightly
     - php: hhvm-3.9
       sudo: required
@@ -45,7 +47,7 @@ script:
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
       composer require --dev phpstan/phpstan;
-      vendor/bin/phpstan analyse --no-progress --ansi -l 5 lib;
+      vendor/bin/phpstan analyse --no-progress --ansi -l 7 lib;
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
       xdebug-enable;
