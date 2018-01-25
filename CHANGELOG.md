@@ -1,7 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## x.y.z - ccyy-mm-dd
+## 2.9.1 - 2018-01-25
+
+### Deprecation notice
+- Support for PHP 5 will be dropped at the end of 2018, in line with PHP's [supported versions](http://php.net/supported-versions.php). 
 
 ### Fixes
 - `\Assert\Assertion::generateMessage()` will now receive the default message for an assertion if one is not supplied (Thanks to [Romans Malinovskis](https://github.com/beberlei/assert/issues/225))
