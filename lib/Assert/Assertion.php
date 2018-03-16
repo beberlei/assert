@@ -1971,8 +1971,6 @@ class Assertion
      * @param string|null          $propertyPath
      *
      * @return bool
-     *
-     * @throws
      */
     public static function methodExists($value, $object, $message = null, $propertyPath = null)
     {
