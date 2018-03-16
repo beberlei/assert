@@ -1326,6 +1326,7 @@ class AssertTest extends TestCase
     public function testValidCount()
     {
         $this->assertTrue(Assertion::count(array('Hi'), 1));
+        $this->assertTrue(Assertion::count(array('Hi', 'There'), 2));
         $this->assertTrue(Assertion::count(new Fixtures\OneCountable(), 1));
     }
 
@@ -1334,6 +1335,8 @@ class AssertTest extends TestCase
         return array(
             array(array('Hi', 'There'), 3),
             array(new Fixtures\OneCountable(), 2),
+            array(new Fixtures\OneCountable(), 0),
+            array(array(), 2),
         );
     }
 
@@ -1341,7 +1344,7 @@ class AssertTest extends TestCase
      * @dataProvider dataInvalidCount
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_COUNT
-     * @expectedExceptionMessageRegExp /List does not contain exactly "\d+" elements./
+     * @expectedExceptionMessageRegExp /List does not contain exactly \d+ elements \(\d+ given\)./
      *
      * @param mixed $countable
      * @param int   $count
