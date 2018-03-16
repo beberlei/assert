@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.3 - 2018-03-16
+
+### Changes
+- Expand error for `\Assert\Assertion::count()` to include the supplied count (Thanks to [Yoann Blot](https://github.com/beberlei/assert/issues/247))
+
 ## 2.9.2 - 2018-01-25
 
 ### Fixes
