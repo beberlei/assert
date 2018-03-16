@@ -12,6 +12,9 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
+/**
+ * Class MethodDocGenerator.
+ */
 class MethodDocGenerator
 {
     public function generateChainDocs()
