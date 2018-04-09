@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.4 - 2018-04-09
+
+### Fixes
+- Prevent date overflow in Assertion::date() by reset preset date value (Thanks to [Nobuhiro Nakamura](https://github.com/beberlei/assert/issues/250))
+
 ## 2.9.3 - 2018-03-16
 
 ### Changes
