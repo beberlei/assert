@@ -2208,7 +2208,7 @@ class Assertion
         static::string($value, $message, $propertyPath);
         static::string($format, $message, $propertyPath);
 
-        $dateTime = \DateTime::createFromFormat($format, $value);
+        $dateTime = \DateTime::createFromFormat('!' . $format, $value);
 
         if (false === $dateTime || $value !== $dateTime->format($format)) {
             $message = \sprintf(
