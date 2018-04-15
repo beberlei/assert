@@ -983,8 +983,6 @@ class Assertion
      *
      * This is an alias of {@see choice()}.
      *
-     * @aliasOf choice()
-     *
      * @param mixed                $value
      * @param array                $choices
      * @param string|callable|null $message
