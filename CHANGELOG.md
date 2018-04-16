@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.5 - 2018-04-16
+
+### Fixes
+- Remove DocBlock entry causing exception in third party DocBlock parser (Thanks to [Koutsoumpos Valantis](https://github.com/beberlei/assert/issues/251))
+
 ## 2.9.4 - 2018-04-09
 
 ### Fixes
