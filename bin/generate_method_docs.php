@@ -48,7 +48,7 @@ class MethodDocGenerator
             $shortDescription = \trim(\substr($descriptionLine, 7), '.');
             $methodName = $prefix.($prefix ? \ucfirst($method->getName()) : $method->getName());
 
-            if (\preg_match('`\* @aliasOf (?P<aliasOf>[^\s]++)`sim', $doc, $aliasMatch)) {
+            if (\preg_match('`\* This is an alias of {@see (?P<aliasOf>[^\s\}]++)`sim', $doc, $aliasMatch)) {
                 $shortDescription .= \sprintf('. This is an alias of Assertion::%s()', \trim($aliasMatch['aliasOf'], '(){}'));
             }
 
