@@ -2124,7 +2124,7 @@ class Assertion
                 static::stringify($upperLimit)
             );
 
-            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath, $array('lower' => $lowerLimit, 'upper' => $upperLimit));
+            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath, array('lower' => $lowerLimit, 'upper' => $upperLimit));
         }
 
         return true;
@@ -2151,7 +2151,7 @@ class Assertion
                 static::stringify($upperLimit)
             );
 
-            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath, $array('lower' => $lowerLimit, 'upper' => $upperLimit));
+            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath, array('lower' => $lowerLimit, 'upper' => $upperLimit));
         }
 
         return true;
