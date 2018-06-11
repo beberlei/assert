@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.6 - 2018-04-16
+
+### Fixes
+- Made constraints in exceptions consistent for all assertions (Thanks to [Peter Kruithof](https://github.com/beberlei/assert/pull/255))
+
 ## 2.9.5 - 2018-04-16
 
 ### Fixes
