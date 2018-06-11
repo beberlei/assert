@@ -762,8 +762,7 @@ class Assertion
                 \mb_strlen($value, $encoding)
             );
 
-            $constraints = array('length' => $length, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, array('length' => $length, 'encoding' => $encoding));
         }
 
         return true;
@@ -794,8 +793,7 @@ class Assertion
                 \mb_strlen($value, $encoding)
             );
 
-            $constraints = array('min_length' => $minLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, array('min_length' => $minLength, 'encoding' => $encoding));
         }
 
         return true;
@@ -826,8 +824,7 @@ class Assertion
                 \mb_strlen($value, $encoding)
             );
 
-            $constraints = array('max_length' => $maxLength, 'encoding' => $encoding);
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, $constraints);
+            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, array('max_length' => $maxLength, 'encoding' => $encoding));
         }
 
         return true;
@@ -880,8 +877,7 @@ class Assertion
                 static::stringify($needle)
             );
 
-            $constraints = array('needle' => $needle, 'encoding' => $encoding);
-            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, $constraints);
+            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, array('needle' => $needle, 'encoding' => $encoding));
         }
 
         return true;
@@ -913,8 +909,7 @@ class Assertion
                 static::stringify($needle)
             );
 
-            $constraints = array('needle' => $needle, 'encoding' => $encoding);
-            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, $constraints);
+            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, array('needle' => $needle, 'encoding' => $encoding));
         }
 
         return true;
@@ -944,8 +939,7 @@ class Assertion
                 static::stringify($needle)
             );
 
-            $constraints = array('needle' => $needle, 'encoding' => $encoding);
-            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, $constraints);
+            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, array('needle' => $needle, 'encoding' => $encoding));
         }
 
         return true;
@@ -2130,8 +2124,7 @@ class Assertion
                 static::stringify($upperLimit)
             );
 
-            $constraints = array('lower' => $lowerLimit, 'upper' => $upperLimit);
-            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath, $constraints);
+            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath, $array('lower' => $lowerLimit, 'upper' => $upperLimit));
         }
 
         return true;
@@ -2158,8 +2151,7 @@ class Assertion
                 static::stringify($upperLimit)
             );
 
-            $constraints = array('lower' => $lowerLimit, 'upper' => $upperLimit);
-            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath, $constraints);
+            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath, $array('lower' => $lowerLimit, 'upper' => $upperLimit));
         }
 
         return true;
