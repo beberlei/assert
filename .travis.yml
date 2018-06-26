@@ -41,7 +41,6 @@ script:
   - if [[ "$LINT" == "true" ]]; then
       composer assert:cs-lint;
       ./bin/travis/lint-docs;
-      composer require --dev phpstan/phpstan;
       vendor/bin/phpstan analyse --no-progress --ansi -l 7 lib;
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
