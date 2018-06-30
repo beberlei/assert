@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.0.0 - 2018-06-30
+
+### Changes
+- Deprecate support for PHP < 7.0
+
+### Fixes
+- An `AssertionFailedException` must be a `Throwable` (Thanks to [Marco Pivetta](https://github.com/beberlei/assert/pull/256))
+
 ## 2.9.6 - 2018-04-16
 
 ### Fixes
