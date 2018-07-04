@@ -22,14 +22,14 @@ class AssertTest extends TestCase
 {
     public static function dataInvalidFloat()
     {
-        return array(
-            array(1),
-            array(false),
-            array('test'),
-            array(null),
-            array('1.23'),
-            array('10'),
-        );
+        return [
+            [1],
+            [false],
+            ['test'],
+            [null],
+            ['1.23'],
+            ['10'],
+        ];
     }
 
     /**
@@ -53,15 +53,15 @@ class AssertTest extends TestCase
 
     public static function dataInvalidInteger()
     {
-        return array(
-            array(1.23),
-            array(false),
-            array('test'),
-            array(null),
-            array('1.23'),
-            array('10'),
-            array(new \DateTime()),
-        );
+        return [
+            [1.23],
+            [false],
+            ['test'],
+            [null],
+            ['1.23'],
+            ['10'],
+            [new \DateTime()],
+        ];
     }
 
     /**
@@ -84,21 +84,21 @@ class AssertTest extends TestCase
 
     public function dataValidIntergerish()
     {
-        return array(
-            array(10),
-            array('10'),
-            array(-10),
-            array('-10'),
-            array(0123),
-            array('0123'),
-            array(0),
-            array('0'),
-            array(00123),
-            array('00123'),
-            array(00),
-            array('00'),
-            array('0040'),
-        );
+        return [
+            [10],
+            ['10'],
+            [-10],
+            ['-10'],
+            [0123],
+            ['0123'],
+            [0],
+            ['0'],
+            [00123],
+            ['00123'],
+            [00],
+            ['00'],
+            ['0040'],
+        ];
     }
 
     /**
@@ -114,32 +114,32 @@ class AssertTest extends TestCase
 
     public static function dataInvalidIntegerish()
     {
-        return array(
-            'A float' => array(1.23),
-            'Boolean true' => array(true),
-            'Boolean false' => array(false),
-            'A text string' => array('test'),
-            'A null' => array(null),
-            'A float in a string' => array('1.23'),
-            'A negative float in a string' => array('-1.23'),
-            'A file pointer' => array(\fopen(__FILE__, 'r')),
-            'A float in a string with a leading space' => array(' 1.23'),
-            'An integer in a string with a leading space' => array(' 123'),
-            'A negative integer in a string with a leading space' => array(' -123'),
-            'An integer in a string with a trailing space' => array('456 '),
-            'A negative integer in a string with a trailing space' => array('-456 '),
-            'An array' => array(array()),
-            'An object' => array(new \stdClass()),
-            'A float that is less than 1' => array(0.1),
-            'A float that is less than 0.1' => array(0.01),
-            'A float that is less than 0.01' => array(0.001),
-            'A float in a string that is less than 1' => array('0.1'),
-            'A float in a string that is less than 0.1' => array('0.01'),
-            'A float in a string that is less than 0.01' => array('0.001'),
-            'An empty string' => array(''),
-            'A single space string' => array(' '),
-            'A multiple spaced string' => array('  '),
-        );
+        return [
+            'A float' => [1.23],
+            'Boolean true' => [true],
+            'Boolean false' => [false],
+            'A text string' => ['test'],
+            'A null' => [null],
+            'A float in a string' => ['1.23'],
+            'A negative float in a string' => ['-1.23'],
+            'A file pointer' => [\fopen(__FILE__, 'r')],
+            'A float in a string with a leading space' => [' 1.23'],
+            'An integer in a string with a leading space' => [' 123'],
+            'A negative integer in a string with a leading space' => [' -123'],
+            'An integer in a string with a trailing space' => ['456 '],
+            'A negative integer in a string with a trailing space' => ['-456 '],
+            'An array' => [[]],
+            'An object' => [new \stdClass()],
+            'A float that is less than 1' => [0.1],
+            'A float that is less than 0.1' => [0.01],
+            'A float that is less than 0.01' => [0.001],
+            'A float in a string that is less than 1' => ['0.1'],
+            'A float in a string that is less than 0.1' => ['0.01'],
+            'A float in a string that is less than 0.01' => ['0.001'],
+            'An empty string' => [''],
+            'A single space string' => [' '],
+            'A multiple spaced string' => ['  '],
+        ];
     }
 
     /**
@@ -188,13 +188,13 @@ class AssertTest extends TestCase
 
     public static function dataInvalidNotEmpty()
     {
-        return array(
-            array(''),
-            array(false),
-            array(0),
-            array(null),
-            array(array()),
-        );
+        return [
+            [''],
+            [false],
+            [0],
+            [null],
+            [[]],
+        ];
     }
 
     /**
@@ -214,7 +214,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::notEmpty('test'));
         $this->assertTrue(Assertion::notEmpty(1));
         $this->assertTrue(Assertion::notEmpty(true));
-        $this->assertTrue(Assertion::notEmpty(array('foo')));
+        $this->assertTrue(Assertion::notEmpty(['foo']));
     }
 
     public function testEmpty()
@@ -222,18 +222,18 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::noContent(''));
         $this->assertTrue(Assertion::noContent(0));
         $this->assertTrue(Assertion::noContent(false));
-        $this->assertTrue(Assertion::noContent(array()));
+        $this->assertTrue(Assertion::noContent([]));
     }
 
     public static function dataInvalidEmpty()
     {
-        return array(
-            array('foo'),
-            array(true),
-            array(12),
-            array(array('foo')),
-            array(new \stdClass()),
-        );
+        return [
+            ['foo'],
+            [true],
+            [12],
+            [['foo']],
+            [new \stdClass()],
+        ];
     }
 
     /**
@@ -250,14 +250,14 @@ class AssertTest extends TestCase
 
     public static function dataInvalidNull()
     {
-        return array(
-            array('foo'),
-            array(''),
-            array(false),
-            array(12),
-            array(0),
-            array(array()),
-        );
+        return [
+            ['foo'],
+            [''],
+            [false],
+            [12],
+            [0],
+            [[]],
+        ];
     }
 
     /**
@@ -282,7 +282,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::notNull('1'));
         $this->assertTrue(Assertion::notNull(1));
         $this->assertTrue(Assertion::notNull(0));
-        $this->assertTrue(Assertion::notNull(array()));
+        $this->assertTrue(Assertion::notNull([]));
         $this->assertTrue(Assertion::notNull(false));
     }
 
@@ -315,14 +315,14 @@ class AssertTest extends TestCase
 
     public static function dataInvalidString()
     {
-        return array(
-            array(1.23),
-            array(false),
-            array(new \ArrayObject()),
-            array(null),
-            array(10),
-            array(true),
-        );
+        return [
+            [1.23],
+            [false],
+            [new \ArrayObject()],
+            [null],
+            [10],
+            [true],
+        ];
     }
 
     public function testValidRegex()
@@ -345,7 +345,7 @@ class AssertTest extends TestCase
      */
     public function testInvalidRegexValueNotString()
     {
-        Assertion::regex(array('foo'), '(bar)');
+        Assertion::regex(['foo'], '(bar)');
     }
 
     /**
@@ -480,12 +480,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidChoice()
     {
-        Assertion::choice('foo', array('bar', 'baz'));
+        Assertion::choice('foo', ['bar', 'baz']);
     }
 
     public function testValidChoice()
     {
-        $this->assertTrue(Assertion::choice('foo', array('foo')));
+        $this->assertTrue(Assertion::choice('foo', ['foo']));
     }
 
     /**
@@ -494,12 +494,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidInArray()
     {
-        Assertion::inArray('bar', array('baz'));
+        Assertion::inArray('bar', ['baz']);
     }
 
     public function testValidInArray()
     {
-        $this->assertTrue(Assertion::inArray('foo', array('foo')));
+        $this->assertTrue(Assertion::inArray('foo', ['foo']));
     }
 
     /**
@@ -520,15 +520,15 @@ class AssertTest extends TestCase
 
     public static function dataInvalidArray()
     {
-        return array(
-            array(null),
-            array(false),
-            array('test'),
-            array(1),
-            array(1.23),
-            array(new \stdClass()),
-            array(\fopen('php://memory', 'r')),
-        );
+        return [
+            [null],
+            [false],
+            ['test'],
+            [1],
+            [1.23],
+            [new \stdClass()],
+            [\fopen('php://memory', 'r')],
+        ];
     }
 
     /**
@@ -545,9 +545,9 @@ class AssertTest extends TestCase
 
     public function testValidArray()
     {
-        $this->assertTrue(Assertion::isArray(array()));
-        $this->assertTrue(Assertion::isArray(array(1, 2, 3)));
-        $this->assertTrue(Assertion::isArray(array(array(), array())));
+        $this->assertTrue(Assertion::isArray([]));
+        $this->assertTrue(Assertion::isArray([1, 2, 3]));
+        $this->assertTrue(Assertion::isArray([[], []]));
     }
 
     /**
@@ -556,12 +556,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidKeyExists()
     {
-        Assertion::keyExists(array('foo' => 'bar'), 'baz');
+        Assertion::keyExists(['foo' => 'bar'], 'baz');
     }
 
     public function testValidKeyExists()
     {
-        $this->assertTrue(Assertion::keyExists(array('foo' => 'bar'), 'foo'));
+        $this->assertTrue(Assertion::keyExists(['foo' => 'bar'], 'foo'));
     }
 
     /**
@@ -570,26 +570,26 @@ class AssertTest extends TestCase
      */
     public function testInvalidKeyNotExists()
     {
-        Assertion::keyNotExists(array('foo' => 'bar'), 'foo');
+        Assertion::keyNotExists(['foo' => 'bar'], 'foo');
     }
 
     public function testValidKeyNotExists()
     {
-        $this->assertTrue(Assertion::keyNotExists(array('foo' => 'bar'), 'baz'));
+        $this->assertTrue(Assertion::keyNotExists(['foo' => 'bar'], 'baz'));
     }
 
     public static function dataInvalidNotBlank()
     {
-        return array(
-            array(''),
-            array(' '),
-            array("\t"),
-            array("\n"),
-            array("\r"),
-            array(false),
-            array(null),
-            array(array()),
-        );
+        return [
+            [''],
+            [' '],
+            ["\t"],
+            ["\n"],
+            ["\r"],
+            [false],
+            [null],
+            [[]],
+        ];
     }
 
     /**
@@ -697,25 +697,25 @@ class AssertTest extends TestCase
 
     public static function dataInvalidUrl()
     {
-        return array(
-            array('google.com'),
-            array('://google.com'),
-            array('http ://google.com'),
-            array('http:/google.com'),
-            array('http://goog_le.com'),
-            array('http://google.com::aa'),
-            array('http://google.com:aa'),
-            array('ftp://google.fr'),
-            array('faked://google.fr'),
-            array('http://127.0.0.1:aa/'),
-            array('ftp://[::1]/'),
-            array('http://[::1'),
-            array('http://hello.☎/'),
-            array('http://:password@symfony.com'),
-            array('http://:password@@symfony.com'),
-            array('http://username:passwordsymfony.com'),
-            array('http://usern@me:password@symfony.com'),
-        );
+        return [
+            ['google.com'],
+            ['://google.com'],
+            ['http ://google.com'],
+            ['http:/google.com'],
+            ['http://goog_le.com'],
+            ['http://google.com::aa'],
+            ['http://google.com:aa'],
+            ['ftp://google.fr'],
+            ['faked://google.fr'],
+            ['http://127.0.0.1:aa/'],
+            ['ftp://[::1]/'],
+            ['http://[::1'],
+            ['http://hello.☎/'],
+            ['http://:password@symfony.com'],
+            ['http://:password@@symfony.com'],
+            ['http://username:passwordsymfony.com'],
+            ['http://usern@me:password@symfony.com'],
+        ];
     }
 
     /**
@@ -730,66 +730,66 @@ class AssertTest extends TestCase
 
     public static function dataValidUrl()
     {
-        return array(
-            array('http://a.pl'),
-            array('http://www.google.com'),
-            array('http://www.google.com.'),
-            array('http://www.google.museum'),
-            array('https://google.com/'),
-            array('https://google.com:80/'),
-            array('http://www.example.coop/'),
-            array('http://www.test-example.com/'),
-            array('http://www.symfony.com/'),
-            array('http://symfony.fake/blog/'),
-            array('http://symfony.com/?'),
-            array('http://symfony.com/search?type=&q=url+validator'),
-            array('http://symfony.com/#'),
-            array('http://symfony.com/#?'),
-            array('http://www.symfony.com/doc/current/book/validation.html#supported-constraints'),
-            array('http://very.long.domain.name.com/'),
-            array('http://localhost/'),
-            array('http://myhost123/'),
-            array('http://127.0.0.1/'),
-            array('http://127.0.0.1:80/'),
-            array('http://[::1]/'),
-            array('http://[::1]:80/'),
-            array('http://[1:2:3::4:5:6:7]/'),
-            array('http://sãopaulo.com/'),
-            array('http://xn--sopaulo-xwa.com/'),
-            array('http://sãopaulo.com.br/'),
-            array('http://xn--sopaulo-xwa.com.br/'),
-            array('http://пример.испытание/'),
-            array('http://xn--e1afmkfd.xn--80akhbyknj4f/'),
-            array('http://مثال.إختبار/'),
-            array('http://xn--mgbh0fb.xn--kgbechtv/'),
-            array('http://例子.测试/'),
-            array('http://xn--fsqu00a.xn--0zwm56d/'),
-            array('http://例子.測試/'),
-            array('http://xn--fsqu00a.xn--g6w251d/'),
-            array('http://例え.テスト/'),
-            array('http://xn--r8jz45g.xn--zckzah/'),
-            array('http://مثال.آزمایشی/'),
-            array('http://xn--mgbh0fb.xn--hgbk6aj7f53bba/'),
-            array('http://실례.테스트/'),
-            array('http://xn--9n2bp8q.xn--9t4b11yi5a/'),
-            array('http://العربية.idn.icann.org/'),
-            array('http://xn--ogb.idn.icann.org/'),
-            array('http://xn--e1afmkfd.xn--80akhbyknj4f.xn--e1afmkfd/'),
-            array('http://xn--espaa-rta.xn--ca-ol-fsay5a/'),
-            array('http://xn--d1abbgf6aiiy.xn--p1ai/'),
-            array('http://☎.com/'),
-            array('http://username:password@symfony.com'),
-            array('http://user.name:password@symfony.com'),
-            array('http://username:pass.word@symfony.com'),
-            array('http://user.name:pass.word@symfony.com'),
-            array('http://user-name@symfony.com'),
-            array('http://symfony.com?'),
-            array('http://symfony.com?query=1'),
-            array('http://symfony.com/?query=1'),
-            array('http://symfony.com#'),
-            array('http://symfony.com#fragment'),
-            array('http://symfony.com/#fragment'),
-        );
+        return [
+            ['http://a.pl'],
+            ['http://www.google.com'],
+            ['http://www.google.com.'],
+            ['http://www.google.museum'],
+            ['https://google.com/'],
+            ['https://google.com:80/'],
+            ['http://www.example.coop/'],
+            ['http://www.test-example.com/'],
+            ['http://www.symfony.com/'],
+            ['http://symfony.fake/blog/'],
+            ['http://symfony.com/?'],
+            ['http://symfony.com/search?type=&q=url+validator'],
+            ['http://symfony.com/#'],
+            ['http://symfony.com/#?'],
+            ['http://www.symfony.com/doc/current/book/validation.html#supported-constraints'],
+            ['http://very.long.domain.name.com/'],
+            ['http://localhost/'],
+            ['http://myhost123/'],
+            ['http://127.0.0.1/'],
+            ['http://127.0.0.1:80/'],
+            ['http://[::1]/'],
+            ['http://[::1]:80/'],
+            ['http://[1:2:3::4:5:6:7]/'],
+            ['http://sãopaulo.com/'],
+            ['http://xn--sopaulo-xwa.com/'],
+            ['http://sãopaulo.com.br/'],
+            ['http://xn--sopaulo-xwa.com.br/'],
+            ['http://пример.испытание/'],
+            ['http://xn--e1afmkfd.xn--80akhbyknj4f/'],
+            ['http://مثال.إختبار/'],
+            ['http://xn--mgbh0fb.xn--kgbechtv/'],
+            ['http://例子.测试/'],
+            ['http://xn--fsqu00a.xn--0zwm56d/'],
+            ['http://例子.測試/'],
+            ['http://xn--fsqu00a.xn--g6w251d/'],
+            ['http://例え.テスト/'],
+            ['http://xn--r8jz45g.xn--zckzah/'],
+            ['http://مثال.آزمایشی/'],
+            ['http://xn--mgbh0fb.xn--hgbk6aj7f53bba/'],
+            ['http://실례.테스트/'],
+            ['http://xn--9n2bp8q.xn--9t4b11yi5a/'],
+            ['http://العربية.idn.icann.org/'],
+            ['http://xn--ogb.idn.icann.org/'],
+            ['http://xn--e1afmkfd.xn--80akhbyknj4f.xn--e1afmkfd/'],
+            ['http://xn--espaa-rta.xn--ca-ol-fsay5a/'],
+            ['http://xn--d1abbgf6aiiy.xn--p1ai/'],
+            ['http://☎.com/'],
+            ['http://username:password@symfony.com'],
+            ['http://user.name:password@symfony.com'],
+            ['http://username:pass.word@symfony.com'],
+            ['http://user.name:pass.word@symfony.com'],
+            ['http://user-name@symfony.com'],
+            ['http://symfony.com?'],
+            ['http://symfony.com?query=1'],
+            ['http://symfony.com/?query=1'],
+            ['http://symfony.com#'],
+            ['http://symfony.com#fragment'],
+            ['http://symfony.com/#fragment'],
+        ];
     }
 
     /**
@@ -900,7 +900,7 @@ class AssertTest extends TestCase
     public function testNotEq()
     {
         $this->assertTrue(Assertion::notEq('1', false));
-        $this->assertTrue(Assertion::notEq(new \stdClass(), array()));
+        $this->assertTrue(Assertion::notEq(new \stdClass(), []));
 
         Assertion::notEq('1', 1);
     }
@@ -912,7 +912,7 @@ class AssertTest extends TestCase
     public function testNotSame()
     {
         $this->assertTrue(Assertion::notSame('1', 2));
-        $this->assertTrue(Assertion::notSame(new \stdClass(), array()));
+        $this->assertTrue(Assertion::notSame(new \stdClass(), []));
 
         Assertion::notSame(1, 1);
     }
@@ -952,10 +952,10 @@ class AssertTest extends TestCase
 
     public function dataInvalidMin()
     {
-        return array(
-            array(0, 1),
-            array(0.5, 2.5),
-        );
+        return [
+            [0, 1],
+            [0.5, 2.5],
+        ];
     }
 
     public function testMax()
@@ -981,10 +981,10 @@ class AssertTest extends TestCase
 
     public function dataInvalidMax()
     {
-        return array(
-            array(2, 1),
-            array(2.5, 0.5),
-        );
+        return [
+            [2, 1],
+            [2.5, 0.5],
+        ];
     }
 
     public function testNullOr()
@@ -1010,10 +1010,10 @@ class AssertTest extends TestCase
 
     public static function dataLengthUtf8Characters()
     {
-        return array(
-            array('址', 1),
-            array('ل', 1),
-        );
+        return [
+            ['址', 1],
+            ['ل', 1],
+        ];
     }
 
     /**
@@ -1142,7 +1142,7 @@ class AssertTest extends TestCase
     /**
      * @dataProvider isJsonStringDataprovider
      *
-     * @param $content
+     * @param mixed $content
      */
     public function testIsJsonString($content)
     {
@@ -1151,12 +1151,12 @@ class AssertTest extends TestCase
 
     public static function isJsonStringDataprovider()
     {
-        return array(
-            '»null« value' => array(\json_encode(null)),
-            '»false« value' => array(\json_encode(false)),
-            'array value' => array('["false"]'),
-            'object value' => array('{"tux":"false"}'),
-        );
+        return [
+            '»null« value' => [\json_encode(null)],
+            '»false« value' => [\json_encode(false)],
+            'array value' => ['["false"]'],
+            'object value' => ['{"tux":"false"}'],
+        ];
     }
 
     /**
@@ -1164,7 +1164,7 @@ class AssertTest extends TestCase
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_JSON_STRING
      *
-     * @param $invalidString
+     * @param mixed $invalidString
      */
     public function testIsJsonStringExpectingException($invalidString)
     {
@@ -1173,10 +1173,10 @@ class AssertTest extends TestCase
 
     public static function isJsonStringInvalidStringDataprovider()
     {
-        return array(
-            'no json string' => array('invalid json encoded string'),
-            'error in json string' => array('{invalid json encoded string}'),
-        );
+        return [
+            'no json string' => ['invalid json encoded string'],
+            'error in json string' => ['{invalid json encoded string}'],
+        ];
     }
 
     /**
@@ -1203,26 +1203,26 @@ class AssertTest extends TestCase
 
     public static function providesValidUuids()
     {
-        return array(
-            array('ff6f8cb0-c57d-11e1-9b21-0800200c9a66'),
-            array('ff6f8cb0-c57d-21e1-9b21-0800200c9a66'),
-            array('ff6f8cb0-c57d-31e1-9b21-0800200c9a66'),
-            array('ff6f8cb0-c57d-41e1-9b21-0800200c9a66'),
-            array('ff6f8cb0-c57d-51e1-9b21-0800200c9a66'),
-            array('FF6F8CB0-C57D-11E1-9B21-0800200C9A66'),
-            array('00000000-0000-0000-0000-000000000000'),
-        );
+        return [
+            ['ff6f8cb0-c57d-11e1-9b21-0800200c9a66'],
+            ['ff6f8cb0-c57d-21e1-9b21-0800200c9a66'],
+            ['ff6f8cb0-c57d-31e1-9b21-0800200c9a66'],
+            ['ff6f8cb0-c57d-41e1-9b21-0800200c9a66'],
+            ['ff6f8cb0-c57d-51e1-9b21-0800200c9a66'],
+            ['FF6F8CB0-C57D-11E1-9B21-0800200C9A66'],
+            ['00000000-0000-0000-0000-000000000000'],
+        ];
     }
 
     public static function providesInvalidUuids()
     {
-        return array(
-            array('zf6f8cb0-c57d-11e1-9b21-0800200c9a66'),
-            array('af6f8cb0c57d11e19b210800200c9a66'),
-            array('ff6f8cb0-c57da-51e1-9b21-0800200c9a66'),
-            array('af6f8cb-c57d-11e1-9b21-0800200c9a66'),
-            array('3f6f8cb0-c57d-11e1-9b21-0800200c9a6'),
-        );
+        return [
+            ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66'],
+            ['af6f8cb0c57d11e19b210800200c9a66'],
+            ['ff6f8cb0-c57da-51e1-9b21-0800200c9a66'],
+            ['af6f8cb-c57d-11e1-9b21-0800200c9a66'],
+            ['3f6f8cb0-c57d-11e1-9b21-0800200c9a6'],
+        ];
     }
 
     /**
@@ -1249,24 +1249,24 @@ class AssertTest extends TestCase
 
     public static function providesValidE164s()
     {
-        return array(
-            array('+33626525690'),
-            array('33626525690'),
-            array('+16174552211'),
-        );
+        return [
+            ['+33626525690'],
+            ['33626525690'],
+            ['+16174552211'],
+        ];
     }
 
     public static function providesInvalidE164s()
     {
-        return array(
-            array('+3362652569e'),
-            array('+3361231231232652569'),
-        );
+        return [
+            ['+3362652569e'],
+            ['+3361231231232652569'],
+        ];
     }
 
     public function testValidNotEmptyKey()
     {
-        $this->assertTrue(Assertion::notEmptyKey(array('keyExists' => 'notEmpty'), 'keyExists'));
+        $this->assertTrue(Assertion::notEmptyKey(['keyExists' => 'notEmpty'], 'keyExists'));
     }
 
     /**
@@ -1275,7 +1275,7 @@ class AssertTest extends TestCase
      */
     public function testInvalidNotEmptyKeyEmptyKey()
     {
-        Assertion::notEmptyKey(array('keyExists' => ''), 'keyExists');
+        Assertion::notEmptyKey(['keyExists' => ''], 'keyExists');
     }
 
     /**
@@ -1284,12 +1284,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidNotEmptyKeyKeyNotExists()
     {
-        Assertion::notEmptyKey(array('key' => 'notEmpty'), 'keyNotExists');
+        Assertion::notEmptyKey(['key' => 'notEmpty'], 'keyNotExists');
     }
 
     public function testAllWithSimpleAssertion()
     {
-        $this->assertTrue(Assertion::allTrue(array(true, true)));
+        $this->assertTrue(Assertion::allTrue([true, true]));
     }
 
     /**
@@ -1298,12 +1298,12 @@ class AssertTest extends TestCase
      */
     public function testAllWithSimpleAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
-        Assertion::allTrue(array(true, false));
+        Assertion::allTrue([true, false]);
     }
 
     public function testAllWithComplexAssertion()
     {
-        $this->assertTrue(Assertion::allIsInstanceOf(array(new \stdClass(), new \stdClass()), 'stdClass'));
+        $this->assertTrue(Assertion::allIsInstanceOf([new \stdClass(), new \stdClass()], 'stdClass'));
     }
 
     /**
@@ -1312,7 +1312,7 @@ class AssertTest extends TestCase
      */
     public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
-        Assertion::allIsInstanceOf(array(new \stdClass(), new \stdClass()), 'PDO', 'Assertion failed', 'foos');
+        Assertion::allIsInstanceOf([new \stdClass(), new \stdClass()], 'PDO', 'Assertion failed', 'foos');
     }
 
     /**
@@ -1325,19 +1325,19 @@ class AssertTest extends TestCase
 
     public function testValidCount()
     {
-        $this->assertTrue(Assertion::count(array('Hi'), 1));
-        $this->assertTrue(Assertion::count(array('Hi', 'There'), 2));
+        $this->assertTrue(Assertion::count(['Hi'], 1));
+        $this->assertTrue(Assertion::count(['Hi', 'There'], 2));
         $this->assertTrue(Assertion::count(new Fixtures\OneCountable(), 1));
     }
 
     public static function dataInvalidCount()
     {
-        return array(
-            array(array('Hi', 'There'), 3),
-            array(new Fixtures\OneCountable(), 2),
-            array(new Fixtures\OneCountable(), 0),
-            array(array(), 2),
-        );
+        return [
+            [['Hi', 'There'], 3],
+            [new Fixtures\OneCountable(), 2],
+            [new Fixtures\OneCountable(), 0],
+            [[], 2],
+        ];
     }
 
     /**
@@ -1358,8 +1358,8 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(
             Assertion::choicesNotEmpty(
-                array('tux' => 'linux', 'Gnu' => 'dolphin'),
-                array('tux')
+                ['tux' => 'linux', 'Gnu' => 'dolphin'],
+                ['tux']
             )
         );
     }
@@ -1369,8 +1369,8 @@ class AssertTest extends TestCase
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::VALUE_EMPTY
      *
-     * @param $values
-     * @param $choices
+     * @param mixed $values
+     * @param mixed $choices
      */
     public function testChoicesNotEmptyExpectingExceptionEmptyValue($values, $choices)
     {
@@ -1383,15 +1383,15 @@ class AssertTest extends TestCase
      */
     public function testChoicesNotEmptyExpectingExceptionInvalidKeyIsset()
     {
-        Assertion::choicesNotEmpty(array('tux' => ''), array('invalidChoice'));
+        Assertion::choicesNotEmpty(['tux' => ''], ['invalidChoice']);
     }
 
     public function invalidChoicesProvider()
     {
-        return array(
-            'empty values' => array(array(), array('tux'), Assertion::VALUE_EMPTY),
-            'empty recodes in $values' => array(array('tux' => ''), array('tux'), Assertion::VALUE_EMPTY),
-        );
+        return [
+            'empty values' => [[], ['tux'], Assertion::VALUE_EMPTY],
+            'empty recodes in $values' => [['tux' => ''], ['tux'], Assertion::VALUE_EMPTY],
+        ];
     }
 
     public function testIsObject()
@@ -1430,7 +1430,7 @@ class AssertTest extends TestCase
             $this->fail('Exception expected');
         } catch (AssertionFailedException $e) {
             $this->assertEquals(0, $e->getValue());
-            $this->assertEquals(array('min' => 10, 'max' => 20), $e->getConstraints());
+            $this->assertEquals(['min' => 10, 'max' => 20], $e->getConstraints());
         }
     }
 
@@ -1444,14 +1444,14 @@ class AssertTest extends TestCase
 
     public function invalidLessProvider()
     {
-        return array(
-            array(2, 1),
-            array(2, 2),
-            array('aaa', 'aaa'),
-            array('aaaa', 'aaa'),
-            array(new \DateTime('today'), new \DateTime('yesterday')),
-            array(new \DateTime('today'), new \DateTime('today')),
-        );
+        return [
+            [2, 1],
+            [2, 2],
+            ['aaa', 'aaa'],
+            ['aaaa', 'aaa'],
+            [new \DateTime('today'), new \DateTime('yesterday')],
+            [new \DateTime('today'), new \DateTime('today')],
+        ];
     }
 
     /**
@@ -1480,11 +1480,11 @@ class AssertTest extends TestCase
 
     public function invalidLessOrEqualProvider()
     {
-        return array(
-            array(2, 1),
-            array('aaaa', 'aaa'),
-            array(new \DateTime('today'), new \DateTime('yesterday')),
-        );
+        return [
+            [2, 1],
+            ['aaaa', 'aaa'],
+            [new \DateTime('today'), new \DateTime('yesterday')],
+        ];
     }
 
     /**
@@ -1510,14 +1510,14 @@ class AssertTest extends TestCase
 
     public function invalidGreaterProvider()
     {
-        return array(
-            array(1, 2),
-            array(2, 2),
-            array('aaa', 'aaa'),
-            array('aaa', 'aaaa'),
-            array(new \DateTime('yesterday'), new \DateTime('today')),
-            array(new \DateTime('today'), new \DateTime('today')),
-        );
+        return [
+            [1, 2],
+            [2, 2],
+            ['aaa', 'aaa'],
+            ['aaa', 'aaaa'],
+            [new \DateTime('yesterday'), new \DateTime('today')],
+            [new \DateTime('today'), new \DateTime('today')],
+        ];
     }
 
     /**
@@ -1533,12 +1533,12 @@ class AssertTest extends TestCase
 
     public function validDateProvider()
     {
-        return array(
-            array('2012-03-13', 'Y-m-d'),
-            array('29.02.2012 12:03:36.432563', 'd.m.Y H:i:s.u'),
-            array('13.08.2015 17:08:23 Thu Thursday th 224 August Aug 8 15 17 432563 UTC UTC', 'd.m.Y H:i:s D l S z F M n y H u e T'),
-            array('1439486158', 'U'),
-        );
+        return [
+            ['2012-03-13', 'Y-m-d'],
+            ['29.02.2012 12:03:36.432563', 'd.m.Y H:i:s.u'],
+            ['13.08.2015 17:08:23 Thu Thursday th 224 August Aug 8 15 17 432563 UTC UTC', 'd.m.Y H:i:s D l S z F M n y H u e T'],
+            ['1439486158', 'U'],
+        ];
     }
 
     /**
@@ -1567,11 +1567,11 @@ class AssertTest extends TestCase
 
     public function invalidGreaterOrEqualProvider()
     {
-        return array(
-            array(1, 2),
-            array('aaa', 'aaaa'),
-            array(new \DateTime('yesterday'), new \DateTime('tomorrow')),
-        );
+        return [
+            [1, 2],
+            ['aaa', 'aaaa'],
+            [new \DateTime('yesterday'), new \DateTime('tomorrow')],
+        ];
     }
 
     /**
@@ -1602,11 +1602,11 @@ class AssertTest extends TestCase
 
     public function invalidDateProvider()
     {
-        return array(
-            array('this is not the date', 'Y-m-d'),
-            array('2011-02-29', 'Y-m-d'),
-            array('2012.02.29 12:60:36.432563', 'Y.m.d H:i:s.u'),
-        );
+        return [
+            ['this is not the date', 'Y-m-d'],
+            ['2011-02-29', 'Y-m-d'],
+            ['2012.02.29 12:60:36.432563', 'Y.m.d H:i:s.u'],
+        ];
     }
 
     public function testValidTraversable()
@@ -1650,7 +1650,7 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::isCallable('\is_callable'));
         $this->assertTrue(Assertion::isCallable(__NAMESPACE__ . '\\Fixtures\\someCallable'));
-        $this->assertTrue(Assertion::isCallable(array(__NAMESPACE__ . '\\Fixtures\\OneCountable', 'count')));
+        $this->assertTrue(Assertion::isCallable([__NAMESPACE__ . '\\Fixtures\\OneCountable', 'count']));
         $this->assertTrue(
             Assertion::isCallable(
                 function () {
@@ -1710,12 +1710,12 @@ class AssertTest extends TestCase
 
     public function validIpProvider()
     {
-        return array(
-            array('0.0.0.0'),
-            array('14.32.152.216'),
-            array('255.255.255.255'),
-            array('2001:db8:85a3:8d3:1319:8a2e:370:7348'),
-        );
+        return [
+            ['0.0.0.0'],
+            ['14.32.152.216'],
+            ['255.255.255.255'],
+            ['2001:db8:85a3:8d3:1319:8a2e:370:7348'],
+        ];
     }
 
     /**
@@ -1733,15 +1733,15 @@ class AssertTest extends TestCase
 
     public function invalidIpProvider()
     {
-        return array(
-            array('invalid ip address'),
-            array('14.32.152,216'),
-            array('14.32.256.216'),
-            array('192.168.0.10', FILTER_FLAG_NO_PRIV_RANGE),
-            array('127.0.0.1', FILTER_FLAG_NO_RES_RANGE),
-            array('2001:db8:85a3:8d3:1319:8g2e:370:7348'),
-            array('fdb9:75b9:9e69:5d08:1:1:1:1', FILTER_FLAG_NO_PRIV_RANGE),
-        );
+        return [
+            ['invalid ip address'],
+            ['14.32.152,216'],
+            ['14.32.256.216'],
+            ['192.168.0.10', FILTER_FLAG_NO_PRIV_RANGE],
+            ['127.0.0.1', FILTER_FLAG_NO_RES_RANGE],
+            ['2001:db8:85a3:8d3:1319:8g2e:370:7348'],
+            ['fdb9:75b9:9e69:5d08:1:1:1:1', FILTER_FLAG_NO_PRIV_RANGE],
+        ];
     }
 
     public function testValidIpv4()
@@ -1805,14 +1805,14 @@ class AssertTest extends TestCase
      */
     public function providerInvalidBetween()
     {
-        return array(
-            array(1, 2, 3),
-            array(3, 1, 2),
-            array('aaa', 'bbb', 'ccc'),
-            array('ddd', 'bbb', 'ccc'),
-            array(new \DateTime('yesterday'), new \DateTime('today'), new \DateTime('tomorrow')),
-            array(new \DateTime('tomorrow'), new \DateTime('yesterday'), new \DateTime('today')),
-        );
+        return [
+            [1, 2, 3],
+            [3, 1, 2],
+            ['aaa', 'bbb', 'ccc'],
+            ['ddd', 'bbb', 'ccc'],
+            [new \DateTime('yesterday'), new \DateTime('today'), new \DateTime('tomorrow')],
+            [new \DateTime('tomorrow'), new \DateTime('yesterday'), new \DateTime('today')],
+        ];
     }
 
     /**
@@ -1832,14 +1832,14 @@ class AssertTest extends TestCase
      */
     public function providerValidBetween()
     {
-        return array(
-            array(2, 1, 3),
-            array(1, 1, 1),
-            array('bbb', 'aaa', 'ccc'),
-            array('aaa', 'aaa', 'aaa'),
-            array(new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')),
-            array(new \DateTime('today'), new \DateTime('today'), new \DateTime('today')),
-        );
+        return [
+            [2, 1, 3],
+            [1, 1, 1],
+            ['bbb', 'aaa', 'ccc'],
+            ['aaa', 'aaa', 'aaa'],
+            [new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')],
+            [new \DateTime('today'), new \DateTime('today'), new \DateTime('today')],
+        ];
     }
 
     /**
@@ -1861,14 +1861,14 @@ class AssertTest extends TestCase
      */
     public function providerInvalidBetweenExclusive()
     {
-        return array(
-            array(1, 1, 2),
-            array(2, 1, 2),
-            array('aaa', 'aaa', 'bbb'),
-            array('bbb', 'aaa', 'bbb'),
-            array(new \DateTime('today'), new \DateTime('today'), new \DateTime('tomorrow')),
-            array(new \DateTime('tomorrow'), new \DateTime('today'), new \DateTime('tomorrow')),
-        );
+        return [
+            [1, 1, 2],
+            [2, 1, 2],
+            ['aaa', 'aaa', 'bbb'],
+            ['bbb', 'aaa', 'bbb'],
+            [new \DateTime('today'), new \DateTime('today'), new \DateTime('tomorrow')],
+            [new \DateTime('tomorrow'), new \DateTime('today'), new \DateTime('tomorrow')],
+        ];
     }
 
     /**
@@ -1888,11 +1888,11 @@ class AssertTest extends TestCase
      */
     public function providerValidBetweenExclusive()
     {
-        return array(
-            array(2, 1, 3),
-            array('bbb', 'aaa', 'ccc'),
-            array(new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')),
-        );
+        return [
+            [2, 1, 3],
+            ['bbb', 'aaa', 'ccc'],
+            [new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')],
+        ];
     }
 
     /**
@@ -2020,15 +2020,15 @@ class AssertTest extends TestCase
 
     public function testPropertiesExist()
     {
-        self::assertTrue(Assertion::propertiesExist(new \Exception(), array('message', 'code', 'previous')));
+        self::assertTrue(Assertion::propertiesExist(new \Exception(), ['message', 'code', 'previous']));
     }
 
     public function invalidPropertiesExistProvider()
     {
-        return array(
-            array(array('invalidProperty')),
-            array(array('invalidProperty', 'anotherInvalidProperty')),
-        );
+        return [
+            [['invalidProperty']],
+            [['invalidProperty', 'anotherInvalidProperty']],
+        ];
     }
 
     /**

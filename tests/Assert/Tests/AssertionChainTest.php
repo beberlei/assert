@@ -47,12 +47,12 @@ class AssertionChainTest extends TestCase
 
     public function testThatAssertionChainValidatesAllInputs()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that(array(1, 2, 3))->all()->integer());
+        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that([1, 2, 3])->all()->integer());
     }
 
     public function testAssertionChainThatAllShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::thatAll(array(1, 2, 3))->integer());
+        $this->assertInstanceOf('\Assert\AssertionChain', Assert::thatAll([1, 2, 3])->integer());
     }
 
     public function testAssertionChainNullOrShortcut()
@@ -87,14 +87,14 @@ class AssertionChainTest extends TestCase
         $message = \uniqid();
         $assertionChain->string($message);
 
-        $this->assertSame(array(array('string', 'foo')), CustomAssertion::getCalls());
+        $this->assertSame([['string', 'foo']], CustomAssertion::getCalls());
     }
 
     /**
      * @dataProvider provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses
      * @expectedException \LogicException
      *
-     * @param $assertionClassName
+     * @param mixed $assertionClassName
      */
     public function testThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses($assertionClassName)
     {
@@ -108,12 +108,12 @@ class AssertionChainTest extends TestCase
      */
     public function provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses()
     {
-        return array(
-            'null' => array(null),
-            'string' => array('foo'),
-            'array' => array(array()),
-            'object' => array(new \stdClass()),
-            'other class' => array(__CLASS__),
-        );
+        return [
+            'null' => [null],
+            'string' => ['foo'],
+            'array' => [[]],
+            'object' => [new \stdClass()],
+            'other class' => [__CLASS__],
+        ];
     }
 }

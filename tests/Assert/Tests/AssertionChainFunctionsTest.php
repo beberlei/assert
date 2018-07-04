@@ -47,12 +47,12 @@ class AssertionChainFunctionsTest extends TestCase
 
     public function testThatAssertionChainFunctionsValidatesAllInputs()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(array(1, 2, 3))->all()->integer());
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that([1, 2, 3])->all()->integer());
     }
 
     public function testAssertionChainFunctionsThatAllShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\thatAll(array(1, 2, 3))->integer());
+        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\thatAll([1, 2, 3])->integer());
     }
 
     public function testAssertionChainFunctionsNullOrShortcut()

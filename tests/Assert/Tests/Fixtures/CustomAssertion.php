@@ -19,11 +19,11 @@ use Assert\Assertion;
 class CustomAssertion extends Assertion
 {
     protected static $exceptionClass = 'Assert\Tests\Fixtures\CustomException';
-    private static $calls = array();
+    private static $calls = [];
 
     public static function clearCalls()
     {
-        self::$calls = array();
+        self::$calls = [];
     }
 
     public static function getCalls()
@@ -33,7 +33,7 @@ class CustomAssertion extends Assertion
 
     public static function string($value, $message = null, $propertyPath = null)
     {
-        self::$calls[] = array('string', $value);
+        self::$calls[] = ['string', $value];
 
         return parent::string($value, $message, $propertyPath);
     }

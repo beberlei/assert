@@ -41,7 +41,8 @@ before_script:
 script:
   - if [[ "$LINT" == "true" ]]; then
       composer assert:cs-lint;
-      composer assert:sa;
+      composer assert:sa-code;
+      composer assert:sa-tests;
       ./bin/travis/lint-docs;
     fi
   - if [[ "$COVERAGE" == "true" ]]; then

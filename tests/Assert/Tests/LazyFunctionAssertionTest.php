@@ -53,11 +53,11 @@ class LazyFunctionAssertionTest extends TestCase
                 ->that('string', 'baz')->isArray()
                 ->verifyNow();
         } catch (LazyAssertionException $ex) {
-            self::assertEquals(array(
+            self::assertEquals([
                 'Value "10" expected to be string, type integer given.',
                 'Value "<NULL>" is empty, but non empty value was expected.',
                 'Value "string" is not an array.',
-            ), \array_map(function (\Exception $ex) {
+            ], \array_map(function (\Exception $ex) {
                 return $ex->getMessage();
             }, $ex->getErrorExceptions()));
         }
@@ -79,10 +79,10 @@ class LazyFunctionAssertionTest extends TestCase
                 ->that(9.9, 'foo')->tryAll()->integer('must be int')->between(10, 20, 'must be between')
                 ->verifyNow();
         } catch (LazyAssertionException $ex) {
-            $this->assertEquals(array(
+            $this->assertEquals([
                 'must be int',
                 'must be between',
-            ), \array_map(function (\Exception $ex) {
+            ], \array_map(function (\Exception $ex) {
                 return $ex->getMessage();
             }, $ex->getErrorExceptions()));
         }
@@ -157,14 +157,14 @@ class LazyFunctionAssertionTest extends TestCase
      */
     public function provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses()
     {
-        return array(
-            'null' => array(null),
-            'string' => array('foo'),
-            'array' => array(array()),
-            'object' => array(new \stdClass()),
-            'other class' => array(__CLASS__),
-            'other exception' => array('Exception'),
-        );
+        return [
+            'null' => [null],
+            'string' => ['foo'],
+            'array' => [[]],
+            'object' => [new \stdClass()],
+            'other class' => [__CLASS__],
+            'other exception' => ['Exception'],
+        ];
     }
 
     /**

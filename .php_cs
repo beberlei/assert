@@ -22,6 +22,7 @@ $rules = array(
     'native_function_invocation' => true,
     'psr4' => true,
     'phpdoc_align' => true,
+    'array_syntax' => ['syntax' => 'short'],
     'header_comment' => array(
         'header' => $header,
         'commentType' => PhpCsFixer\Fixer\Comment\HeaderCommentFixer::HEADER_PHPDOC,

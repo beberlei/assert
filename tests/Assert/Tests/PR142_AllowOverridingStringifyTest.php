@@ -22,14 +22,14 @@ class PR142_AllowOverridingStringifyTest extends TestCase
 {
     public static function dataInvalidString()
     {
-        return array(
-            array(1.23, 'Value "***1.23***" expected to be string, type double given.'),
-            array(false, 'Value "***<FALSE>***" expected to be string, type boolean given.'),
-            array(new \ArrayObject(), 'Value "***ArrayObject***" expected to be string, type object given.'),
-            array(null, 'Value "***<NULL>***" expected to be string, type NULL given.'),
-            array(10, 'Value "***10***" expected to be string, type integer given.'),
-            array(true, 'Value "***<TRUE>***" expected to be string, type boolean given.'),
-        );
+        return [
+            [1.23, 'Value "***1.23***" expected to be string, type double given.'],
+            [false, 'Value "***<FALSE>***" expected to be string, type boolean given.'],
+            [new \ArrayObject(), 'Value "***ArrayObject***" expected to be string, type object given.'],
+            [null, 'Value "***<NULL>***" expected to be string, type NULL given.'],
+            [10, 'Value "***10***" expected to be string, type integer given.'],
+            [true, 'Value "***<TRUE>***" expected to be string, type boolean given.'],
+        ];
     }
 
     /**

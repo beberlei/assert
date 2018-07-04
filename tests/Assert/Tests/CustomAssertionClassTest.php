@@ -40,7 +40,7 @@ class CustomAssertionClassTest extends TestCase
     {
         $string = 's' . \uniqid();
         Fixtures\CustomAssert::that($string)->string();
-        $this->assertSame(array(array('string', $string)), CustomAssertion::getCalls());
+        $this->assertSame([['string', $string]], CustomAssertion::getCalls());
 
         Fixtures\CustomAssert::that($string)->integer();
     }
@@ -76,7 +76,7 @@ class CustomAssertionClassTest extends TestCase
             ->verifyNow()
         ;
 
-        $this->assertSame(array(array('string', $string)), CustomAssertion::getCalls());
+        $this->assertSame([['string', $string]], CustomAssertion::getCalls());
     }
 
     public function testThatCustomLazyAssertionContainsOnlyCustomAssertionExceptions()
