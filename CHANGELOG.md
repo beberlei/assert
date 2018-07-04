@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 3.0.0 - 2018-06-30
+## 3.0.0 - 2018-07-04
 
 ### Changes
 - Deprecate support for PHP < 7.0
