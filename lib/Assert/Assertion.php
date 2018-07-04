@@ -25,7 +25,7 @@ use BadMethodCallException;
  * @method static bool allBase64(string $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
  * @method static bool allBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
  * @method static bool allBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
- * @method static bool allBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths for all values.
+ * @method static bool allBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths for all values.
  * @method static bool allBoolean(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is php boolean for all values.
  * @method static bool allChoice(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices for all values.
  * @method static bool allChoicesNotEmpty(array $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content for all values.
@@ -39,7 +39,7 @@ use BadMethodCallException;
  * @method static bool allE164(string $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
  * @method static bool allEmail(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
  * @method static bool allEndsWith(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
- * @method static bool allEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ) for all values.
+ * @method static bool allEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for all values.
  * @method static bool allExtensionLoaded(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
  * @method static bool allExtensionVersion(string $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed for all values.
  * @method static bool allFalse(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False for all values.
@@ -107,7 +107,7 @@ use BadMethodCallException;
  * @method static bool nullOrBase64(string $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrBetween(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
  * @method static bool nullOrBetweenExclusive(mixed $value, mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit or that the value is null.
- * @method static bool nullOrBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths or that the value is null.
+ * @method static bool nullOrBetweenLength(mixed $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths or that the value is null.
  * @method static bool nullOrBoolean(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is php boolean or that the value is null.
  * @method static bool nullOrChoice(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices or that the value is null.
  * @method static bool nullOrChoicesNotEmpty(array $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content or that the value is null.
@@ -121,7 +121,7 @@ use BadMethodCallException;
  * @method static bool nullOrE164(string $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number or that the value is null.
  * @method static bool nullOrEmail(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) or that the value is null.
  * @method static bool nullOrEndsWith(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars or that the value is null.
- * @method static bool nullOrEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ) or that the value is null.
+ * @method static bool nullOrEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) or that the value is null.
  * @method static bool nullOrExtensionLoaded(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded or that the value is null.
  * @method static bool nullOrExtensionVersion(string $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed or that the value is null.
  * @method static bool nullOrFalse(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False or that the value is null.
@@ -281,7 +281,7 @@ class Assertion
      *
      * @return mixed
      */
-    protected static function createException($value, $message, $code, $propertyPath = null, array $constraints = array())
+    protected static function createException($value, $message, $code, $propertyPath = null, array $constraints = [])
     {
         $exceptionClass = static::$exceptionClass;
 
@@ -289,7 +289,7 @@ class Assertion
     }
 
     /**
-     * Assert that two values are equal (using == ).
+     * Assert that two values are equal (using ==).
      *
      * @param mixed                $value
      * @param mixed                $value2
@@ -309,7 +309,7 @@ class Assertion
                 static::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath, array('expected' => $value2));
+            throw static::createException($value, $message, static::INVALID_EQ, $propertyPath, ['expected' => $value2]);
         }
 
         return true;
@@ -336,7 +336,7 @@ class Assertion
                 static::stringify($value2)
             );
 
-            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath, array('expected' => $value2));
+            throw static::createException($value, $message, static::INVALID_SAME, $propertyPath, ['expected' => $value2]);
         }
 
         return true;
@@ -362,7 +362,7 @@ class Assertion
                 static::stringify($value1),
                 static::stringify($value2)
             );
-            throw static::createException($value1, $message, static::INVALID_NOT_EQ, $propertyPath, array('expected' => $value2));
+            throw static::createException($value1, $message, static::INVALID_NOT_EQ, $propertyPath, ['expected' => $value2]);
         }
 
         return true;
@@ -388,7 +388,7 @@ class Assertion
                 static::stringify($value1),
                 static::stringify($value2)
             );
-            throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath, array('expected' => $value2));
+            throw static::createException($value1, $message, static::INVALID_NOT_SAME, $propertyPath, ['expected' => $value2]);
         }
 
         return true;
@@ -414,7 +414,7 @@ class Assertion
                 static::stringify($value),
                 static::stringify($choices)
             );
-            throw static::createException($value, $message, static::INVALID_VALUE_IN_ARRAY, $propertyPath, array('choices' => $choices));
+            throw static::createException($value, $message, static::INVALID_VALUE_IN_ARRAY, $propertyPath, ['choices' => $choices]);
         }
 
         return true;
@@ -731,7 +731,7 @@ class Assertion
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_REGEX, $propertyPath, array('pattern' => $pattern));
+            throw static::createException($value, $message, static::INVALID_REGEX, $propertyPath, ['pattern' => $pattern]);
         }
 
         return true;
@@ -762,7 +762,7 @@ class Assertion
                 \mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, array('length' => $length, 'encoding' => $encoding));
+            throw static::createException($value, $message, static::INVALID_LENGTH, $propertyPath, ['length' => $length, 'encoding' => $encoding]);
         }
 
         return true;
@@ -793,7 +793,7 @@ class Assertion
                 \mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, array('min_length' => $minLength, 'encoding' => $encoding));
+            throw static::createException($value, $message, static::INVALID_MIN_LENGTH, $propertyPath, ['min_length' => $minLength, 'encoding' => $encoding]);
         }
 
         return true;
@@ -824,14 +824,14 @@ class Assertion
                 \mb_strlen($value, $encoding)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, array('max_length' => $maxLength, 'encoding' => $encoding));
+            throw static::createException($value, $message, static::INVALID_MAX_LENGTH, $propertyPath, ['max_length' => $maxLength, 'encoding' => $encoding]);
         }
 
         return true;
     }
 
     /**
-     * Assert that string length is between min,max lengths.
+     * Assert that string length is between min and max lengths.
      *
      * @param mixed                $value
      * @param int                  $minLength
@@ -877,7 +877,7 @@ class Assertion
                 static::stringify($needle)
             );
 
-            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, array('needle' => $needle, 'encoding' => $encoding));
+            throw static::createException($string, $message, static::INVALID_STRING_START, $propertyPath, ['needle' => $needle, 'encoding' => $encoding]);
         }
 
         return true;
@@ -909,7 +909,7 @@ class Assertion
                 static::stringify($needle)
             );
 
-            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, array('needle' => $needle, 'encoding' => $encoding));
+            throw static::createException($string, $message, static::INVALID_STRING_END, $propertyPath, ['needle' => $needle, 'encoding' => $encoding]);
         }
 
         return true;
@@ -939,7 +939,7 @@ class Assertion
                 static::stringify($needle)
             );
 
-            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, array('needle' => $needle, 'encoding' => $encoding));
+            throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, ['needle' => $needle, 'encoding' => $encoding]);
         }
 
         return true;
@@ -963,10 +963,10 @@ class Assertion
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is not an element of the valid values: %s'),
                 static::stringify($value),
-                \implode(', ', \array_map(array(\get_called_class(), 'stringify'), $choices))
+                \implode(', ', \array_map([\get_called_class(), 'stringify'], $choices))
             );
 
-            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, array('choices' => $choices));
+            throw static::createException($value, $message, static::INVALID_CHOICE, $propertyPath, ['choices' => $choices]);
         }
 
         return true;
@@ -1136,7 +1136,7 @@ class Assertion
                 static::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, array('key' => $key));
+            throw static::createException($value, $message, static::INVALID_KEY_EXISTS, $propertyPath, ['key' => $key]);
         }
 
         return true;
@@ -1164,7 +1164,7 @@ class Assertion
                 static::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_NOT_EXISTS, $propertyPath, array('key' => $key));
+            throw static::createException($value, $message, static::INVALID_KEY_NOT_EXISTS, $propertyPath, ['key' => $key]);
         }
 
         return true;
@@ -1192,7 +1192,7 @@ class Assertion
                 static::stringify($key)
             );
 
-            throw static::createException($value, $message, static::INVALID_KEY_ISSET, $propertyPath, array('key' => $key));
+            throw static::createException($value, $message, static::INVALID_KEY_ISSET, $propertyPath, ['key' => $key]);
         }
 
         return true;
@@ -1264,7 +1264,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath, array('class' => $className));
+            throw static::createException($value, $message, static::INVALID_INSTANCE_OF, $propertyPath, ['class' => $className]);
         }
 
         return true;
@@ -1291,7 +1291,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath, array('class' => $className));
+            throw static::createException($value, $message, static::INVALID_NOT_INSTANCE_OF, $propertyPath, ['class' => $className]);
         }
 
         return true;
@@ -1318,7 +1318,7 @@ class Assertion
                 $className
             );
 
-            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath, array('class' => $className));
+            throw static::createException($value, $message, static::INVALID_SUBCLASS_OF, $propertyPath, ['class' => $className]);
         }
 
         return true;
@@ -1349,7 +1349,7 @@ class Assertion
                 static::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath, array('min' => $minValue, 'max' => $maxValue));
+            throw static::createException($value, $message, static::INVALID_RANGE, $propertyPath, ['min' => $minValue, 'max' => $maxValue]);
         }
 
         return true;
@@ -1378,7 +1378,7 @@ class Assertion
                 static::stringify($minValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath, array('min' => $minValue));
+            throw static::createException($value, $message, static::INVALID_MIN, $propertyPath, ['min' => $minValue]);
         }
 
         return true;
@@ -1407,7 +1407,7 @@ class Assertion
                 static::stringify($maxValue)
             );
 
-            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath, array('max' => $maxValue));
+            throw static::createException($value, $message, static::INVALID_MAX, $propertyPath, ['max' => $maxValue]);
         }
 
         return true;
@@ -1581,14 +1581,14 @@ class Assertion
     {
         static::string($value, $message, $propertyPath);
 
-        $protocols = array('http', 'https');
+        $protocols = ['http', 'https'];
 
         $pattern = '~^
             (%s)://                                     # protocol
             (([\.\pL\pN-]+:)?([\.\pL\pN-]+)@)?          # basic auth
             (
                 ([\pL\pN\pS-\.])+(\.?([\pL\pN]|xn\-\-[\pL\pN-]+)+\.?) # a domain name
-                    |                                                 # or
+                   |                                                # or
                 \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}                    # an IP address
                     |                                                 # or
                 \[
@@ -1762,7 +1762,7 @@ class Assertion
                 static::stringify($interfaceName)
             );
 
-            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath, array('interface' => $interfaceName));
+            throw static::createException($class, $message, static::INTERFACE_NOT_IMPLEMENTED, $propertyPath, ['interface' => $interfaceName]);
         }
 
         return true;
@@ -1814,7 +1814,7 @@ class Assertion
      */
     public static function uuid($value, $message = null, $propertyPath = null)
     {
-        $value = \str_replace(array('urn:', 'uuid:', '{', '}'), '', $value);
+        $value = \str_replace(['urn:', 'uuid:', '{', '}'], '', $value);
 
         if ('00000000-0000-0000-0000-000000000000' === $value) {
             return true;
@@ -1880,7 +1880,7 @@ class Assertion
                 static::stringify(\count($countable))
             );
 
-            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, array('count' => $count));
+            throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, ['count' => $count]);
         }
 
         return true;
@@ -1909,7 +1909,7 @@ class Assertion
 
             $method = \substr($method, 6);
 
-            return \call_user_func_array(array(\get_called_class(), $method), $args);
+            return \call_user_func_array([\get_called_class(), $method], $args);
         }
 
         if (0 === \strpos($method, 'all')) {
@@ -1924,13 +1924,13 @@ class Assertion
             $calledClass = \get_called_class();
 
             foreach ($values as $value) {
-                \call_user_func_array(array($calledClass, $method), \array_merge(array($value), $args));
+                \call_user_func_array([$calledClass, $method], \array_merge([$value], $args));
             }
 
             return true;
         }
 
-        throw new BadMethodCallException('No assertion Assertion#' . $method . ' exists.');
+        throw new BadMethodCallException('No assertion Assertion#'.$method.' exists.');
     }
 
     /**
@@ -1974,7 +1974,7 @@ class Assertion
                 static::stringify($value)
             );
 
-            throw static::createException($value, $message, static::INVALID_METHOD, $propertyPath, array('object' => \get_class($object)));
+            throw static::createException($value, $message, static::INVALID_METHOD, $propertyPath, ['object' => \get_class($object)]);
         }
 
         return true;
@@ -2022,7 +2022,7 @@ class Assertion
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_LESS, $propertyPath, array('limit' => $limit));
+            throw static::createException($value, $message, static::INVALID_LESS, $propertyPath, ['limit' => $limit]);
         }
 
         return true;
@@ -2047,7 +2047,7 @@ class Assertion
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_LESS_OR_EQUAL, $propertyPath, array('limit' => $limit));
+            throw static::createException($value, $message, static::INVALID_LESS_OR_EQUAL, $propertyPath, ['limit' => $limit]);
         }
 
         return true;
@@ -2072,7 +2072,7 @@ class Assertion
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_GREATER, $propertyPath, array('limit' => $limit));
+            throw static::createException($value, $message, static::INVALID_GREATER, $propertyPath, ['limit' => $limit]);
         }
 
         return true;
@@ -2097,7 +2097,7 @@ class Assertion
                 static::stringify($limit)
             );
 
-            throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath, array('limit' => $limit));
+            throw static::createException($value, $message, static::INVALID_GREATER_OR_EQUAL, $propertyPath, ['limit' => $limit]);
         }
 
         return true;
@@ -2124,7 +2124,7 @@ class Assertion
                 static::stringify($upperLimit)
             );
 
-            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath, array('lower' => $lowerLimit, 'upper' => $upperLimit));
+            throw static::createException($value, $message, static::INVALID_BETWEEN, $propertyPath, ['lower' => $lowerLimit, 'upper' => $upperLimit]);
         }
 
         return true;
@@ -2151,7 +2151,7 @@ class Assertion
                 static::stringify($upperLimit)
             );
 
-            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath, array('lower' => $lowerLimit, 'upper' => $upperLimit));
+            throw static::createException($value, $message, static::INVALID_BETWEEN_EXCLUSIVE, $propertyPath, ['lower' => $lowerLimit, 'upper' => $upperLimit]);
         }
 
         return true;
@@ -2200,7 +2200,7 @@ class Assertion
         static::string($value, $message, $propertyPath);
         static::string($format, $message, $propertyPath);
 
-        $dateTime = \DateTime::createFromFormat('!' . $format, $value);
+        $dateTime = \DateTime::createFromFormat('!'.$format, $value);
 
         if (false === $dateTime || $value !== $dateTime->format($format)) {
             $message = \sprintf(
@@ -2209,7 +2209,7 @@ class Assertion
                 static::stringify($format)
             );
 
-            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, array('format' => $format));
+            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, ['format' => $format]);
         }
 
         return true;
@@ -2258,7 +2258,7 @@ class Assertion
                 static::stringify($property)
             );
 
-            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath, array('property' => $property));
+            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath, ['property' => $property]);
         }
 
         return true;
@@ -2281,7 +2281,7 @@ class Assertion
         static::objectOrClass($value);
         static::allString($properties, $message, $propertyPath);
 
-        $invalidProperties = array();
+        $invalidProperties = [];
         foreach ($properties as $property) {
             if (!\property_exists($value, $property)) {
                 $invalidProperties[] = $property;
@@ -2295,7 +2295,7 @@ class Assertion
                 static::stringify(\implode(', ', $invalidProperties))
             );
 
-            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath, array('properties' => $properties));
+            throw static::createException($value, $message, static::INVALID_PROPERTY, $propertyPath, ['properties' => $properties]);
         }
 
         return true;
@@ -2326,7 +2326,7 @@ class Assertion
                 static::stringify($version2)
             );
 
-            throw static::createException($version1, $message, static::INVALID_VERSION, $propertyPath, array('operator' => $operator, 'version' => $version2));
+            throw static::createException($version1, $message, static::INVALID_VERSION, $propertyPath, ['operator' => $operator, 'version' => $version2]);
         }
 
         return true;
@@ -2443,7 +2443,7 @@ class Assertion
                 static::generateMessage($message ?: 'Value "%s" was expected to be a valid IP address.'),
                 static::stringify($value)
             );
-            throw static::createException($value, $message, static::INVALID_IP, $propertyPath, array('flag' => $flag));
+            throw static::createException($value, $message, static::INVALID_IP, $propertyPath, ['flag' => $flag]);
         }
 
         return true;
@@ -2506,7 +2506,7 @@ class Assertion
             $val = (string) $value;
 
             if (\strlen($val) > 100) {
-                $val = \substr($val, 0, 97) . '...';
+                $val = \substr($val, 0, 97).'...';
             }
 
             $result = $val;
@@ -2579,7 +2579,7 @@ class Assertion
         if (\is_callable($message)) {
             $traces = \debug_backtrace(0);
 
-            $parameters = array();
+            $parameters = [];
 
             $reflection = new \ReflectionClass($traces[1]['class']);
             $method = $reflection->getMethod($traces[1]['function']);
@@ -2593,7 +2593,7 @@ class Assertion
 
             $parameters['::assertion'] = \sprintf('%s%s%s', $traces[1]['class'], $traces[1]['type'], $traces[1]['function']);
 
-            $message = \call_user_func_array($message, array($parameters));
+            $message = \call_user_func_array($message, [$parameters]);
         }
 
         return \is_null($message) ? null : (string) $message;

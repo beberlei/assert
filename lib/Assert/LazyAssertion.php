@@ -25,7 +25,7 @@ use LogicException;
  * @method LazyAssertion base64(string|callable $message = null, string $propertyPath = null) Assert that a constant is defined.
  * @method LazyAssertion between(mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
  * @method LazyAssertion betweenExclusive(mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit.
- * @method LazyAssertion betweenLength(int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths.
+ * @method LazyAssertion betweenLength(int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths.
  * @method LazyAssertion boolean(string|callable $message = null, string $propertyPath = null) Assert that value is php boolean.
  * @method LazyAssertion choice(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices.
  * @method LazyAssertion choicesNotEmpty(array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content.
@@ -39,7 +39,7 @@ use LogicException;
  * @method LazyAssertion e164(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method LazyAssertion email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method LazyAssertion endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
- * @method LazyAssertion eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
+ * @method LazyAssertion eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==).
  * @method LazyAssertion extensionLoaded(string|callable $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method LazyAssertion extensionVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method LazyAssertion false(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False.
@@ -112,7 +112,7 @@ class LazyAssertion
     private $alwaysTryAll = false;
     private $thisChainTryAll = false;
     private $currentChain;
-    private $errors = array();
+    private $errors = [];
 
     /** @var string The class to use as AssertionChain factory */
     private $assertClass = 'Assert\Assert';
@@ -151,7 +151,7 @@ class LazyAssertion
         }
 
         try {
-            \call_user_func_array(array($this->currentChain, $method), $args);
+            \call_user_func_array([$this->currentChain, $method], $args);
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e;
             $this->currentChainFailed = true;
@@ -168,7 +168,7 @@ class LazyAssertion
     public function verifyNow()
     {
         if ($this->errors) {
-            throw \call_user_func(array($this->exceptionClass, 'fromErrors'), $this->errors);
+            throw \call_user_func([$this->exceptionClass, 'fromErrors'], $this->errors);
         }
 
         return true;
@@ -186,7 +186,7 @@ class LazyAssertion
         }
 
         if ('Assert\Assert' !== $className && !\is_subclass_of($className, 'Assert\Assert')) {
-            throw new LogicException($className . ' is not (a subclass of) Assert\Assert');
+            throw new LogicException($className.' is not (a subclass of) Assert\Assert');
         }
 
         $this->assertClass = $className;
@@ -206,7 +206,7 @@ class LazyAssertion
         }
 
         if ('Assert\LazyAssertionException' !== $className && !\is_subclass_of($className, 'Assert\LazyAssertionException')) {
-            throw new LogicException($className . ' is not (a subclass of) Assert\LazyAssertionException');
+            throw new LogicException($className.' is not (a subclass of) Assert\LazyAssertionException');
         }
 
         $this->exceptionClass = $className;

@@ -102,7 +102,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      *
      * @throws AssertionFailedException
      * @dataProvider dataValidIntergerish

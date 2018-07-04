@@ -41,8 +41,8 @@ before_script:
 script:
   - if [[ "$LINT" == "true" ]]; then
       composer assert:cs-lint;
+      composer assert:sa;
       ./bin/travis/lint-docs;
-      vendor/bin/phpstan analyse --no-progress --ansi -l 7 lib;
     fi
   - if [[ "$COVERAGE" == "true" ]]; then
       xdebug-enable;

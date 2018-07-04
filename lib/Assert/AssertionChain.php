@@ -26,7 +26,7 @@ use ReflectionClass;
  * @method AssertionChain base64(string|callable $message = null, string $propertyPath = null) Assert that a constant is defined.
  * @method AssertionChain between(mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
  * @method AssertionChain betweenExclusive(mixed $lowerLimit, mixed $upperLimit, string $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit.
- * @method AssertionChain betweenLength(int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min,max lengths.
+ * @method AssertionChain betweenLength(int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths.
  * @method AssertionChain boolean(string|callable $message = null, string $propertyPath = null) Assert that value is php boolean.
  * @method AssertionChain choice(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices.
  * @method AssertionChain choicesNotEmpty(array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content.
@@ -40,7 +40,7 @@ use ReflectionClass;
  * @method AssertionChain e164(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method AssertionChain email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method AssertionChain endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
- * @method AssertionChain eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using == ).
+ * @method AssertionChain eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==).
  * @method AssertionChain extensionLoaded(string|callable $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method AssertionChain extensionVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method AssertionChain false(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False.
@@ -150,7 +150,7 @@ class AssertionChain
         }
 
         if (!\method_exists($this->assertionClassName, $methodName)) {
-            throw new \RuntimeException("Assertion '" . $methodName . "' does not exist.");
+            throw new \RuntimeException("Assertion '".$methodName."' does not exist.");
         }
 
         $reflClass = new ReflectionClass($this->assertionClassName);
@@ -174,10 +174,10 @@ class AssertionChain
         }
 
         if ($this->all) {
-            $methodName = 'all' . $methodName;
+            $methodName = 'all'.$methodName;
         }
 
-        \call_user_func_array(array($this->assertionClassName, $methodName), $args);
+        \call_user_func_array([$this->assertionClassName, $methodName], $args);
 
         return $this;
     }
@@ -220,7 +220,7 @@ class AssertionChain
         }
 
         if ('Assert\Assertion' !== $className && !\is_subclass_of($className, 'Assert\Assertion')) {
-            throw new LogicException($className . ' is not (a subclass of) Assert\Assertion');
+            throw new LogicException($className.' is not (a subclass of) Assert\Assertion');
         }
 
         $this->assertionClassName = $className;

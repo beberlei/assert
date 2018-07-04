@@ -1,7 +1,7 @@
 {
   "name": "beberlei/assert",
   "description": "Thin assertion library for input validation in business models.",
-  "version": "v2.9.6",
+  "version": "v3.0.0",
   "authors": [
     {
       "name": "Benjamin Eberlei",
@@ -51,6 +51,7 @@
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php",
     "assert:cs-lint": "php-cs-fixer fix --diff -vvv --dry-run",
-    "assert:cs-fix": "php-cs-fixer fix . -vvv || true"
+    "assert:cs-fix": "php-cs-fixer fix . -vvv || true",
+    "assert:sa": "vendor/bin/phpstan analyse --no-progress --ansi -l 7 lib tests"
   }
 }
