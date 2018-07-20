@@ -358,7 +358,7 @@ class Assertion
     {
         if ($value1 == $value2) {
             $message = \sprintf(
-                static::generateMessage($message ?: 'Value "%s" is equal to expected value "%s".'),
+                static::generateMessage($message ?: 'Value "%s" was not expected to be equal to value "%s".'),
                 static::stringify($value1),
                 static::stringify($value2)
             );
@@ -384,7 +384,7 @@ class Assertion
     {
         if ($value1 === $value2) {
             $message = \sprintf(
-                static::generateMessage($message ?: 'Value "%s" is the same as expected value "%s".'),
+                static::generateMessage($message ?: 'Value "%s" was not expected to be the same as value "%s".'),
                 static::stringify($value1),
                 static::stringify($value2)
             );
@@ -410,7 +410,7 @@ class Assertion
     {
         if (true === \in_array($value, $choices)) {
             $message = \sprintf(
-                static::generateMessage($message ?: 'Value "%s" is in given "%s".'),
+                static::generateMessage($message ?: 'Value "%s" was not expected to be an element of the values: %s'),
                 static::stringify($value),
                 static::stringify($choices)
             );
