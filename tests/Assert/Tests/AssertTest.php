@@ -348,6 +348,20 @@ class AssertTest extends TestCase
         Assertion::regex(['foo'], '(bar)');
     }
 
+    public function testValidNotRegex()
+    {
+        $this->assertTrue(Assertion::notRegex('some string', '/[0-9]+/'));
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_REGEX
+     */
+    public function testInvalidNotRegex()
+    {
+        Assertion::notRegex('some string', '/.*/');
+    }
+
     /**
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_MIN_LENGTH
@@ -1093,6 +1107,17 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::readable(__FILE__));
 
         Assertion::readable(__DIR__ . '/does-not-exist');
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FILE_NOT_EXISTS
+     */
+    public function testFileExists()
+    {
+        $this->assertTrue(Assertion::fileExists(__FILE__));
+
+        Assertion::fileExists(__DIR__ . '/does-not-exist');
     }
 
     /**

@@ -229,12 +229,14 @@ class Assertion
     const INVALID_VALUE_IN_ARRAY = 47;
     const INVALID_E164 = 48;
     const INVALID_BASE64 = 49;
+    const INVALID_NOT_REGEX = 50;
     const INVALID_DIRECTORY = 101;
     const INVALID_FILE = 102;
     const INVALID_READABLE = 103;
     const INVALID_WRITEABLE = 104;
     const INVALID_CLASS = 105;
     const INVALID_INTERFACE = 106;
+    const INVALID_FILE_NOT_EXISTS = 107;
     const INVALID_EMAIL = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL = 203;
@@ -732,6 +734,34 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_REGEX, $propertyPath, ['pattern' => $pattern]);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that value does not match a regex.
+     *
+     * @param mixed                $value
+     * @param string               $pattern
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     *
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function notRegex($value, $pattern, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (\preg_match($pattern, $value)) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" does match expression.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_NOT_REGEX, $propertyPath, ['pattern' => $pattern]);
         }
 
         return true;
@@ -1463,6 +1493,33 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_DIRECTORY, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that the value is a existing file or directory.
+     *
+     * @param string               $value
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     *
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function fileExists($value, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (!\file_exists($value)) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Path "%s" was expected to be exsting.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_FILE_NOT_EXISTS, $propertyPath);
         }
 
         return true;
