@@ -44,6 +44,7 @@ use LogicException;
  * @method LazyAssertion extensionVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method LazyAssertion false(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method LazyAssertion file(string|callable $message = null, string $propertyPath = null) Assert that a file exists.
+ * @method LazyAssertion fileExists(string|callable $message = null, string $propertyPath = null) Assert that the value is a existing file or directory.
  * @method LazyAssertion float(string|callable $message = null, string $propertyPath = null) Assert that value is a php float.
  * @method LazyAssertion greaterOrEqualThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit.
  * @method LazyAssertion greaterThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit.
@@ -82,6 +83,7 @@ use LogicException;
  * @method LazyAssertion notInArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices.
  * @method LazyAssertion notIsInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name.
  * @method LazyAssertion notNull(string|callable $message = null, string $propertyPath = null) Assert that value is not null.
+ * @method LazyAssertion notRegex(string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex.
  * @method LazyAssertion notSame(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method LazyAssertion null(string|callable $message = null, string $propertyPath = null) Assert that value is null.
  * @method LazyAssertion numeric(string|callable $message = null, string $propertyPath = null) Assert that value is numeric.
