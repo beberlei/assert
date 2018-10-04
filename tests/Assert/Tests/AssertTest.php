@@ -1111,17 +1111,6 @@ class AssertTest extends TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionCode \Assert\Assertion::INVALID_FILE_NOT_EXISTS
-     */
-    public function testFileExists()
-    {
-        $this->assertTrue(Assertion::fileExists(__FILE__));
-
-        Assertion::fileExists(__DIR__ . '/does-not-exist');
-    }
-
-    /**
-     * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_WRITEABLE
      */
     public function testWriteable()

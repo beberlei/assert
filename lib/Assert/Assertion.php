@@ -1503,33 +1503,6 @@ class Assertion
     }
 
     /**
-     * Assert that the value is a existing file or directory.
-     *
-     * @param string               $value
-     * @param string|callable|null $message
-     * @param string|null          $propertyPath
-     *
-     * @return bool
-     *
-     * @throws \Assert\AssertionFailedException
-     */
-    public static function fileExists($value, $message = null, $propertyPath = null)
-    {
-        static::string($value, $message, $propertyPath);
-
-        if (!\file_exists($value)) {
-            $message = \sprintf(
-                static::generateMessage($message ?: 'Path "%s" was expected to be exsting.'),
-                static::stringify($value)
-            );
-
-            throw static::createException($value, $message, static::INVALID_FILE_NOT_EXISTS, $propertyPath);
-        }
-
-        return true;
-    }
-
-    /**
      * Assert that the value is something readable.
      *
      * @param string               $value
