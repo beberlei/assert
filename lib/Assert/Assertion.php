@@ -761,7 +761,7 @@ class Assertion
 
         if (\preg_match($pattern, $value)) {
             $message = \sprintf(
-                static::generateMessage($message ?: 'Value "%s" does match expression.'),
+                static::generateMessage($message ?: 'Value "%s" matches expression.'),
                 static::stringify($value)
             );
 
