@@ -204,7 +204,6 @@ Assertion::extensionLoaded(mixed $value);
 Assertion::extensionVersion(string $extension, string $operator, mixed $version);
 Assertion::false(mixed $value);
 Assertion::file(string $value);
-Assertion::fileExists(string $value);
 Assertion::float(mixed $value);
 Assertion::greaterOrEqualThan(mixed $value, mixed $limit);
 Assertion::greaterThan(mixed $value, mixed $limit);

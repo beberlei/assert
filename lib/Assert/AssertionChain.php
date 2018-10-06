@@ -45,7 +45,6 @@ use ReflectionClass;
  * @method AssertionChain extensionVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method AssertionChain false(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method AssertionChain file(string|callable $message = null, string $propertyPath = null) Assert that a file exists.
- * @method AssertionChain fileExists(string|callable $message = null, string $propertyPath = null) Assert that the value is a existing file or directory.
  * @method AssertionChain float(string|callable $message = null, string $propertyPath = null) Assert that value is a php float.
  * @method AssertionChain greaterOrEqualThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit.
  * @method AssertionChain greaterThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit.

@@ -44,7 +44,6 @@ use LogicException;
  * @method LazyAssertion extensionVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method LazyAssertion false(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False.
  * @method LazyAssertion file(string|callable $message = null, string $propertyPath = null) Assert that a file exists.
- * @method LazyAssertion fileExists(string|callable $message = null, string $propertyPath = null) Assert that the value is a existing file or directory.
  * @method LazyAssertion float(string|callable $message = null, string $propertyPath = null) Assert that value is a php float.
  * @method LazyAssertion greaterOrEqualThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit.
  * @method LazyAssertion greaterThan(mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit.
