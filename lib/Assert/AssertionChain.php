@@ -83,6 +83,7 @@ use ReflectionClass;
  * @method AssertionChain notInArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices.
  * @method AssertionChain notIsInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name.
  * @method AssertionChain notNull(string|callable $message = null, string $propertyPath = null) Assert that value is not null.
+ * @method AssertionChain notRegex(string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex.
  * @method AssertionChain notSame(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method AssertionChain null(string|callable $message = null, string $propertyPath = null) Assert that value is null.
  * @method AssertionChain numeric(string|callable $message = null, string $propertyPath = null) Assert that value is numeric.
