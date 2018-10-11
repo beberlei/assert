@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.0.1 - 2018-07-04
+
+### Added assertions
+- `Assertion::notRegex()` (Thanks to [Thomas Müller](https://github.com/beberlei/assert/pull/261))
+
 ## 3.0.0 - 2018-07-04
 
 ### Changes
