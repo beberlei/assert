@@ -16,6 +16,7 @@ namespace Assert\Tests;
 
 use Assert\LazyAssertion;
 use Assert\LazyAssertionException;
+use Assert\Tests\Fixtures\CustomLazyAssertionException;
 use PHPUnit\Framework\TestCase;
 
 class LazyFunctionAssertionTest extends TestCase
@@ -131,40 +132,12 @@ class LazyFunctionAssertionTest extends TestCase
     public function testThatLazyAssertionThrowsCustomExceptionWhenSet()
     {
         $lazyAssertion = new LazyAssertion();
-        $lazyAssertion->setExceptionClass('Assert\Tests\Fixtures\CustomLazyAssertionException');
+        $lazyAssertion->setExceptionClass(CustomLazyAssertionException::class);
 
         \var_dump($lazyAssertion
             ->that('foo', 'property')->integer()
             ->verifyNow()
         );
-    }
-
-    /**
-     * @dataProvider provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses
-     * @expectedException \LogicException
-     *
-     * @param mixed $exceptionClass
-     */
-    public function testThatSetExceptionClassWillNotAcceptInvalidExceptionClasses($exceptionClass)
-    {
-        $lazyAssertion = new LazyAssertion();
-
-        $lazyAssertion->setExceptionClass($exceptionClass);
-    }
-
-    /**
-     * @return array
-     */
-    public function provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses()
-    {
-        return [
-            'null' => [null],
-            'string' => ['foo'],
-            'array' => [[]],
-            'object' => [new \stdClass()],
-            'other class' => [__CLASS__],
-            'other exception' => ['Exception'],
-        ];
     }
 
     /**

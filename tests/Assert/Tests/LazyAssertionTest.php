@@ -144,41 +144,13 @@ class LazyAssertionTest extends TestCase
     public function testThatLazyAssertionThrowsCustomExceptionWhenSet()
     {
         $lazyAssertion = new LazyAssertion();
-        $lazyAssertion->setExceptionClass('Assert\Tests\Fixtures\CustomLazyAssertionException');
+        $lazyAssertion->setExceptionClass(Fixtures\CustomLazyAssertionException::class);
 
         \var_dump(
             $lazyAssertion
                 ->that('foo', 'property')->integer()
                 ->verifyNow()
         );
-    }
-
-    /**
-     * @dataProvider provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses
-     * @expectedException \LogicException
-     *
-     * @param mixed $exceptionClass
-     */
-    public function testThatSetExceptionClassWillNotAcceptInvalidExceptionClasses($exceptionClass)
-    {
-        $lazyAssertion = new LazyAssertion();
-
-        $lazyAssertion->setExceptionClass($exceptionClass);
-    }
-
-    /**
-     * @return array
-     */
-    public function provideDataToTestThatSetExceptionClassWillNotAcceptInvalidExceptionClasses()
-    {
-        return [
-            'null' => [null],
-            'string' => ['foo'],
-            'array' => [[]],
-            'object' => [new \stdClass()],
-            'other class' => [__CLASS__],
-            'other exception' => ['Exception'],
-        ];
     }
 
     /**
@@ -191,5 +163,25 @@ class LazyAssertionTest extends TestCase
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
+    }
+
+    /**
+     * @expectedException \LogicException
+     * @expectedExceptionMessage stdClass is not (a subclass of) Assert\LazyAssertionException
+     */
+    public function testLazyAssertionThrowsExceptionWhenPassingInvalidClassToSetExceptionClass()
+    {
+        $lazyAssertion = new LazyAssertion();
+        $lazyAssertion->setExceptionClass(\stdClass::class);
+    }
+
+    /**
+     * @expectedException \LogicException
+     * @expectedExceptionMessage stdClass is not (a subclass of) Assert\Assert
+     */
+    public function testLazyAssertionThrowsExceptionWhenPassingInvalidClassToSetAssertClass()
+    {
+        $lazyAssertion = new LazyAssertion();
+        $lazyAssertion->setAssertClass(\stdClass::class);
     }
 }

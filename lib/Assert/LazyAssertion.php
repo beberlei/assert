@@ -115,10 +115,10 @@ class LazyAssertion
     private $errors = [];
 
     /** @var string The class to use as AssertionChain factory */
-    private $assertClass = 'Assert\Assert';
+    private $assertClass = Assert::class;
 
     /** @var string|LazyAssertionException The class to use for exceptions */
-    private $exceptionClass = 'Assert\LazyAssertionException';
+    private $exceptionClass = LazyAssertionException::class;
 
     public function that($value, $propertyPath, $defaultMessage = null)
     {
@@ -161,7 +161,7 @@ class LazyAssertion
     }
 
     /**
-     * @throws \Assert\LazyAssertionException
+     * @throws LazyAssertionException
      *
      * @return bool
      */
@@ -179,14 +179,10 @@ class LazyAssertion
      *
      * @return $this
      */
-    public function setAssertClass($className)
+    public function setAssertClass(string $className)
     {
-        if (!\is_string($className)) {
-            throw new LogicException('Assert class name must be passed as a string');
-        }
-
-        if ('Assert\Assert' !== $className && !\is_subclass_of($className, 'Assert\Assert')) {
-            throw new LogicException($className.' is not (a subclass of) Assert\Assert');
+        if (Assert::class !== $className && !\is_subclass_of($className, Assert::class)) {
+            throw new LogicException($className.' is not (a subclass of) '. Assert::class);
         }
 
         $this->assertClass = $className;
@@ -199,14 +195,10 @@ class LazyAssertion
      *
      * @return $this
      */
-    public function setExceptionClass($className)
+    public function setExceptionClass(string $className)
     {
-        if (!\is_string($className)) {
-            throw new LogicException('Exception class name must be passed as a string');
-        }
-
-        if ('Assert\LazyAssertionException' !== $className && !\is_subclass_of($className, 'Assert\LazyAssertionException')) {
-            throw new LogicException($className.' is not (a subclass of) Assert\LazyAssertionException');
+        if (LazyAssertionException::class !== $className && !\is_subclass_of($className, LazyAssertionException::class)) {
+            throw new LogicException($className.' is not (a subclass of) '.LazyAssertionException::class);
         }
 
         $this->exceptionClass = $className;

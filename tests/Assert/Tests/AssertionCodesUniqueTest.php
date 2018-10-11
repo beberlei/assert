@@ -21,7 +21,7 @@ class AssertionCodesUniqueTest extends TestCase
 {
     public function testAssertionCodesAreUnique()
     {
-        $assertReflection = new \ReflectionClass('Assert\Assertion');
+        $assertReflection = new \ReflectionClass(Assertion::class);
         $constants = $assertReflection->getConstants();
 
         $this->assertTrue(Assertion::eq(\count($constants), \count(\array_unique($constants))));

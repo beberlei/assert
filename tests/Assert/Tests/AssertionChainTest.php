@@ -23,12 +23,12 @@ class AssertionChainTest extends TestCase
 {
     public function testThatAssertionChainReturnAnAssertionChain()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that(10)->notEmpty()->integer());
+        $this->assertInstanceOf(AssertionChain::class, Assert::that(10)->notEmpty()->integer());
     }
 
     public function testThatAssertionChainShiftsArgumentsBy1()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that(10)->eq(10));
+        $this->assertInstanceOf(AssertionChain::class, Assert::that(10)->eq(10));
     }
 
     /**
@@ -42,22 +42,22 @@ class AssertionChainTest extends TestCase
 
     public function testThatAssertionChainSkipAssertionsOnValidNull()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that(null)->nullOr()->integer()->eq(10));
+        $this->assertInstanceOf(AssertionChain::class, Assert::that(null)->nullOr()->integer()->eq(10));
     }
 
     public function testThatAssertionChainValidatesAllInputs()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that([1, 2, 3])->all()->integer());
+        $this->assertInstanceOf(AssertionChain::class, Assert::that([1, 2, 3])->all()->integer());
     }
 
     public function testAssertionChainThatAllShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::thatAll([1, 2, 3])->integer());
+        $this->assertInstanceOf(AssertionChain::class, Assert::thatAll([1, 2, 3])->integer());
     }
 
     public function testAssertionChainNullOrShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::thatNullOr(null)->integer()->eq(10));
+        $this->assertInstanceOf(AssertionChain::class, Assert::thatNullOr(null)->integer()->eq(10));
     }
 
     /**
@@ -71,7 +71,8 @@ class AssertionChainTest extends TestCase
 
     public function testAssertionChainSatisfyShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', Assert::that(null)->satisfy(
+        $this->assertInstanceOf(
+            AssertionChain::class, Assert::that(null)->satisfy(
             function ($value) {
                 return \is_null($value);
             }
@@ -81,7 +82,7 @@ class AssertionChainTest extends TestCase
     public function testThatCustomAssertionClassIsUsedWhenSet()
     {
         $assertionChain = new AssertionChain('foo');
-        $assertionChain->setAssertionClassName('Assert\Tests\Fixtures\CustomAssertion');
+        $assertionChain->setAssertionClassName(CustomAssertion::class);
 
         CustomAssertion::clearCalls();
         $message = \uniqid();

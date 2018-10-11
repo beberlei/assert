@@ -16,7 +16,10 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use Assert\Tests\Fixtures\OneCountable;
+use PDO;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class AssertTest extends TestCase
 {
@@ -129,7 +132,7 @@ class AssertTest extends TestCase
             'An integer in a string with a trailing space' => ['456 '],
             'A negative integer in a string with a trailing space' => ['-456 '],
             'An array' => [[]],
-            'An object' => [new \stdClass()],
+            'An object' => [new stdClass()],
             'A float that is less than 1' => [0.1],
             'A float that is less than 0.1' => [0.01],
             'A float that is less than 0.01' => [0.001],
@@ -175,7 +178,7 @@ class AssertTest extends TestCase
      */
     public function testInvalidScalar()
     {
-        Assertion::scalar(new \stdClass());
+        Assertion::scalar(new stdClass());
     }
 
     public function testValidScalar()
@@ -232,7 +235,7 @@ class AssertTest extends TestCase
             [true],
             [12],
             [['foo']],
-            [new \stdClass()],
+            [new stdClass()],
         ];
     }
 
@@ -526,7 +529,7 @@ class AssertTest extends TestCase
             ['test'],
             [1],
             [1.23],
-            [new \stdClass()],
+            [new stdClass()],
             [\fopen('php://memory', 'r')],
         ];
     }
@@ -615,12 +618,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidNotInstanceOf()
     {
-        Assertion::notIsInstanceOf(new \stdClass(), 'stdClass');
+        Assertion::notIsInstanceOf(new stdClass(), stdClass::class);
     }
 
     public function testValidNotIsInstanceOf()
     {
-        $this->assertTrue(Assertion::notIsInstanceOf(new \stdClass(), 'PDO'));
+        $this->assertTrue(Assertion::notIsInstanceOf(new stdClass(), PDO::class));
     }
 
     /**
@@ -629,12 +632,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidInstanceOf()
     {
-        Assertion::isInstanceOf(new \stdClass(), 'PDO');
+        Assertion::isInstanceOf(new stdClass(), PDO::class);
     }
 
     public function testValidInstanceOf()
     {
-        $this->assertTrue(Assertion::isInstanceOf(new \stdClass(), 'stdClass'));
+        $this->assertTrue(Assertion::isInstanceOf(new stdClass(), stdClass::class));
     }
 
     /**
@@ -643,12 +646,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidSubclassOf()
     {
-        Assertion::subclassOf(new \stdClass(), 'PDO');
+        Assertion::subclassOf(new stdClass(), PDO::class);
     }
 
     public function testValidSubclassOf()
     {
-        $this->assertTrue(Assertion::subclassOf(new Fixtures\ChildStdClass(), 'stdClass'));
+        $this->assertTrue(Assertion::subclassOf(new Fixtures\ChildStdClass(), stdClass::class));
     }
 
     /**
@@ -859,12 +862,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidClass()
     {
-        Assertion::classExists('Foo');
+        Assertion::classExists(\Foo::class);
     }
 
     public function testValidClass()
     {
-        $this->assertTrue(Assertion::classExists('\\Exception'));
+        $this->assertTrue(Assertion::classExists(\Exception::class));
     }
 
     /**
@@ -875,9 +878,9 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::same(1, 1));
         $this->assertTrue(Assertion::same('foo', 'foo'));
-        $this->assertTrue(Assertion::same($obj = new \stdClass(), $obj));
+        $this->assertTrue(Assertion::same($obj = new stdClass(), $obj));
 
-        Assertion::same(new \stdClass(), new \stdClass());
+        Assertion::same(new stdClass(), new stdClass());
     }
 
     /**
@@ -888,7 +891,7 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::eq(1, '1'));
         $this->assertTrue(Assertion::eq('foo', true));
-        $this->assertTrue(Assertion::eq($obj = new \stdClass(), $obj));
+        $this->assertTrue(Assertion::eq($obj = new stdClass(), $obj));
 
         Assertion::eq('2', 1);
     }
@@ -900,7 +903,7 @@ class AssertTest extends TestCase
     public function testNotEq()
     {
         $this->assertTrue(Assertion::notEq('1', false));
-        $this->assertTrue(Assertion::notEq(new \stdClass(), []));
+        $this->assertTrue(Assertion::notEq(new stdClass(), []));
 
         Assertion::notEq('1', 1);
     }
@@ -912,7 +915,7 @@ class AssertTest extends TestCase
     public function testNotSame()
     {
         $this->assertTrue(Assertion::notSame('1', 2));
-        $this->assertTrue(Assertion::notSame(new \stdClass(), []));
+        $this->assertTrue(Assertion::notSame(new stdClass(), []));
 
         Assertion::notSame(1, 1);
     }
@@ -1121,9 +1124,9 @@ class AssertTest extends TestCase
      */
     public function testImplementsInterface()
     {
-        $this->assertTrue(Assertion::implementsInterface('\ArrayIterator', '\Traversable'));
+        $this->assertTrue(Assertion::implementsInterface(\ArrayIterator::class, \Traversable::class));
 
-        Assertion::implementsInterface('\Exception', '\Traversable');
+        Assertion::implementsInterface(\Exception::class, \Traversable::class);
     }
 
     /**
@@ -1134,9 +1137,21 @@ class AssertTest extends TestCase
     {
         $class = new \ArrayObject();
 
-        $this->assertTrue(Assertion::implementsInterface($class, '\Traversable'));
+        $this->assertTrue(Assertion::implementsInterface($class, \Traversable::class));
 
-        Assertion::implementsInterface($class, '\SplObserver');
+        Assertion::implementsInterface($class, \SplObserver::class);
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INTERFACE_NOT_IMPLEMENTED
+     * @expectedExceptionMessage Class "not_a_class" failed reflection
+     */
+    public function testImplementsInterfaceThrowsExceptionForInvalidSubject()
+    {
+        $this->assertTrue(Assertion::implementsInterface('not_a_class', \Traversable::class));
+
+        Assertion::implementsInterface(\Exception::class, \Traversable::class);
     }
 
     /**
@@ -1303,7 +1318,7 @@ class AssertTest extends TestCase
 
     public function testAllWithComplexAssertion()
     {
-        $this->assertTrue(Assertion::allIsInstanceOf([new \stdClass(), new \stdClass()], 'stdClass'));
+        $this->assertTrue(Assertion::allIsInstanceOf([new stdClass(), new stdClass()], stdClass::class));
     }
 
     /**
@@ -1312,7 +1327,7 @@ class AssertTest extends TestCase
      */
     public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
-        Assertion::allIsInstanceOf([new \stdClass(), new \stdClass()], 'PDO', 'Assertion failed', 'foos');
+        Assertion::allIsInstanceOf([new stdClass(), new stdClass()], PDO::class, 'Assertion failed', 'foos');
     }
 
     /**
@@ -1396,7 +1411,7 @@ class AssertTest extends TestCase
 
     public function testIsObject()
     {
-        $this->assertTrue(Assertion::isObject(new \stdClass()));
+        $this->assertTrue(Assertion::isObject(new stdClass()));
     }
 
     /**
@@ -1650,7 +1665,7 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::isCallable('\is_callable'));
         $this->assertTrue(Assertion::isCallable(__NAMESPACE__ . '\\Fixtures\\someCallable'));
-        $this->assertTrue(Assertion::isCallable([__NAMESPACE__ . '\\Fixtures\\OneCountable', 'count']));
+        $this->assertTrue(Assertion::isCallable([OneCountable::class, 'count']));
         $this->assertTrue(
             Assertion::isCallable(
                 function () {
@@ -1783,7 +1798,7 @@ class AssertTest extends TestCase
 
     public function testValidInterfaceExists()
     {
-        $this->assertTrue(Assertion::interfaceExists('\\Countable'));
+        $this->assertTrue(Assertion::interfaceExists(\Countable::class));
     }
 
     /**
@@ -1992,8 +2007,8 @@ class AssertTest extends TestCase
 
     public function testObjectOrClass()
     {
-        self::assertTrue(Assertion::objectOrClass(new \stdClass()));
-        self::assertTrue(Assertion::objectOrClass('stdClass'));
+        self::assertTrue(Assertion::objectOrClass(new stdClass()));
+        self::assertTrue(Assertion::objectOrClass(stdClass::class));
     }
 
     /**
@@ -2053,7 +2068,7 @@ class AssertTest extends TestCase
      */
     public function testIsNotResource()
     {
-        Assertion::isResource(new \stdClass());
+        Assertion::isResource(new stdClass());
     }
 
     public function testBase64()

@@ -87,7 +87,7 @@ class CustomAssertionClassTest extends TestCase
                 ->verifyNow()
             ;
         } catch (LazyAssertionException $ex) {
-            $this->assertContainsOnlyInstancesOf('\Assert\Tests\Fixtures\CustomException', $ex->getErrorExceptions());
+            $this->assertContainsOnlyInstancesOf(Fixtures\CustomException::class, $ex->getErrorExceptions());
         }
     }
 

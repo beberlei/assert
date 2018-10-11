@@ -24,8 +24,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7",
-    "ext-mbstring": "*"
+    "php": "^7"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.1.1",

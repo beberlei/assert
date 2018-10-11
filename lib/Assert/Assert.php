@@ -20,10 +20,10 @@ namespace Assert;
 abstract class Assert
 {
     /** @var string */
-    protected static $lazyAssertionExceptionClass = 'Assert\LazyAssertionException';
+    protected static $lazyAssertionExceptionClass = LazyAssertionException::class;
 
     /** @var string */
-    protected static $assertionClass = 'Assert\Assertion';
+    protected static $assertionClass = Assertion::class;
 
     /**
      * Start validation on a value, returns {@link AssertionChain}.
@@ -49,9 +49,7 @@ abstract class Assert
     {
         $assertionChain = new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
 
-        return $assertionChain
-            ->setAssertionClassName(static::$assertionClass)
-        ;
+        return $assertionChain->setAssertionClassName(static::$assertionClass);
     }
 
     /**

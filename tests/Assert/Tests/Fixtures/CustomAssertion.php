@@ -18,7 +18,7 @@ use Assert\Assertion;
 
 class CustomAssertion extends Assertion
 {
-    protected static $exceptionClass = 'Assert\Tests\Fixtures\CustomException';
+    protected static $exceptionClass = CustomException::class;
     private static $calls = [];
 
     public static function clearCalls()

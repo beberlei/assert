@@ -14,6 +14,7 @@
 
 namespace Assert\Tests;
 
+use Assert\AssertionChain;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,12 +24,12 @@ class AssertionChainFunctionsTest extends TestCase
 {
     public function testThatAssertionChainFunctionsReturnAnAssertionChain()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(10)->notEmpty()->integer());
+        $this->assertInstanceOf(AssertionChain::class, \Assert\that(10)->notEmpty()->integer());
     }
 
     public function testThatAssertionChainFunctionsShiftsArgumentsBy1()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(10)->eq(10));
+        $this->assertInstanceOf(AssertionChain::class, \Assert\that(10)->eq(10));
     }
 
     /**
@@ -42,22 +43,22 @@ class AssertionChainFunctionsTest extends TestCase
 
     public function testThatAssertionChainFunctionsSkipAssertionsOnValidNull()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(null)->nullOr()->integer()->eq(10));
+        $this->assertInstanceOf(AssertionChain::class, \Assert\that(null)->nullOr()->integer()->eq(10));
     }
 
     public function testThatAssertionChainFunctionsValidatesAllInputs()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that([1, 2, 3])->all()->integer());
+        $this->assertInstanceOf(AssertionChain::class, \Assert\that([1, 2, 3])->all()->integer());
     }
 
     public function testAssertionChainFunctionsThatAllShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\thatAll([1, 2, 3])->integer());
+        $this->assertInstanceOf(AssertionChain::class, \Assert\thatAll([1, 2, 3])->integer());
     }
 
     public function testAssertionChainFunctionsNullOrShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\thatNullOr(null)->integer()->eq(10));
+        $this->assertInstanceOf(AssertionChain::class, \Assert\thatNullOr(null)->integer()->eq(10));
     }
 
     /**
@@ -71,7 +72,8 @@ class AssertionChainFunctionsTest extends TestCase
 
     public function testAssertionChainFunctionSatisfyShortcut()
     {
-        $this->assertInstanceOf('\Assert\AssertionChain', \Assert\that(null)->satisfy(
+        $this->assertInstanceOf(
+            AssertionChain::class, \Assert\that(null)->satisfy(
             function ($value) {
                 return \is_null($value);
             }
