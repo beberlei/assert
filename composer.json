@@ -1,7 +1,6 @@
 {
   "name": "beberlei/assert",
   "description": "Thin assertion library for input validation in business models.",
-  "version": "v3.0.0",
   "authors": [
     {
       "name": "Benjamin Eberlei",
