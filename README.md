@@ -242,6 +242,7 @@ Assertion::notEq(mixed $value1, mixed $value2);
 Assertion::notInArray(mixed $value, array $choices);
 Assertion::notIsInstanceOf(mixed $value, string $className);
 Assertion::notNull(mixed $value);
+Assertion::notRegex(mixed $value, string $pattern);
 Assertion::notSame(mixed $value1, mixed $value2);
 Assertion::null(mixed $value);
 Assertion::numeric(mixed $value);

@@ -82,6 +82,7 @@ use BadMethodCallException;
  * @method static bool allNotInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices for all values.
  * @method static bool allNotIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name for all values.
  * @method static bool allNotNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null for all values.
+ * @method static bool allNotRegex(mixed $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex for all values.
  * @method static bool allNotSame(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using === ) for all values.
  * @method static bool allNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is null for all values.
  * @method static bool allNumeric(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric for all values.
@@ -164,6 +165,7 @@ use BadMethodCallException;
  * @method static bool nullOrNotInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices or that the value is null.
  * @method static bool nullOrNotIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name or that the value is null.
  * @method static bool nullOrNotNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null or that the value is null.
+ * @method static bool nullOrNotRegex(mixed $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex or that the value is null.
  * @method static bool nullOrNotSame(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using === ) or that the value is null.
  * @method static bool nullOrNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is null or that the value is null.
  * @method static bool nullOrNumeric(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric or that the value is null.
@@ -229,12 +231,14 @@ class Assertion
     const INVALID_VALUE_IN_ARRAY = 47;
     const INVALID_E164 = 48;
     const INVALID_BASE64 = 49;
+    const INVALID_NOT_REGEX = 50;
     const INVALID_DIRECTORY = 101;
     const INVALID_FILE = 102;
     const INVALID_READABLE = 103;
     const INVALID_WRITEABLE = 104;
     const INVALID_CLASS = 105;
     const INVALID_INTERFACE = 106;
+    const INVALID_FILE_NOT_EXISTS = 107;
     const INVALID_EMAIL = 201;
     const INTERFACE_NOT_IMPLEMENTED = 202;
     const INVALID_URL = 203;
@@ -732,6 +736,34 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_REGEX, $propertyPath, ['pattern' => $pattern]);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that value does not match a regex.
+     *
+     * @param mixed                $value
+     * @param string               $pattern
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     *
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function notRegex($value, $pattern, $message = null, $propertyPath = null)
+    {
+        static::string($value, $message, $propertyPath);
+
+        if (\preg_match($pattern, $value)) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" matches expression.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_NOT_REGEX, $propertyPath, ['pattern' => $pattern]);
         }
 
         return true;

@@ -82,6 +82,7 @@ use LogicException;
  * @method LazyAssertion notInArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices.
  * @method LazyAssertion notIsInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name.
  * @method LazyAssertion notNull(string|callable $message = null, string $propertyPath = null) Assert that value is not null.
+ * @method LazyAssertion notRegex(string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex.
  * @method LazyAssertion notSame(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using === ).
  * @method LazyAssertion null(string|callable $message = null, string $propertyPath = null) Assert that value is null.
  * @method LazyAssertion numeric(string|callable $message = null, string $propertyPath = null) Assert that value is numeric.
