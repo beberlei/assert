@@ -275,10 +275,10 @@ class Assertion
     /**
      * Assert that two values are equal (using ==).
      *
-     * @param mixed $value
-     * @param mixed $value2
+     * @param mixed                $value
+     * @param mixed                $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -300,10 +300,10 @@ class Assertion
     /**
      * Assert that two values are the same (using ===).
      *
-     * @param mixed $value
-     * @param mixed $value2
+     * @param mixed                $value
+     * @param mixed                $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -325,10 +325,10 @@ class Assertion
     /**
      * Assert that two values are not equal (using == ).
      *
-     * @param mixed $value1
-     * @param mixed $value2
+     * @param mixed                $value1
+     * @param mixed                $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -349,10 +349,10 @@ class Assertion
     /**
      * Assert that two values are not the same (using === ).
      *
-     * @param mixed $value1
-     * @param mixed $value2
+     * @param mixed                $value1
+     * @param mixed                $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -373,10 +373,10 @@ class Assertion
     /**
      * Assert that value is not in array of choices.
      *
-     * @param mixed $value
-     * @param array $choices
+     * @param mixed                $value
+     * @param array                $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -397,9 +397,9 @@ class Assertion
     /**
      * Assert that value is a php integer.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -420,9 +420,9 @@ class Assertion
     /**
      * Assert that value is a php float.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -443,9 +443,9 @@ class Assertion
     /**
      * Validates if an integer or integerish is a digit.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -466,9 +466,9 @@ class Assertion
     /**
      * Assert that value is a php integer'ish.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -502,9 +502,9 @@ class Assertion
     /**
      * Assert that value is php boolean.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -525,9 +525,9 @@ class Assertion
     /**
      * Assert that value is a PHP scalar.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -548,9 +548,9 @@ class Assertion
     /**
      * Assert that value is not empty.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -571,9 +571,9 @@ class Assertion
     /**
      * Assert that value is empty.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -594,9 +594,9 @@ class Assertion
     /**
      * Assert that value is null.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -617,9 +617,9 @@ class Assertion
     /**
      * Assert that value is not null.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -640,9 +640,9 @@ class Assertion
     /**
      * Assert that value is a string.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -664,10 +664,10 @@ class Assertion
     /**
      * Assert that value matches a regex.
      *
-     * @param mixed $value
-     * @param string $pattern
+     * @param mixed                $value
+     * @param string               $pattern
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -718,11 +718,11 @@ class Assertion
     /**
      * Assert that string has a given length.
      *
-     * @param mixed $value
-     * @param int $length
+     * @param mixed                $value
+     * @param int                  $length
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -747,11 +747,11 @@ class Assertion
     /**
      * Assert that a string is at least $minLength chars long.
      *
-     * @param mixed $value
-     * @param int $minLength
+     * @param mixed                $value
+     * @param int                  $minLength
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -776,11 +776,11 @@ class Assertion
     /**
      * Assert that string value is not longer than $maxLength chars.
      *
-     * @param mixed $value
-     * @param int $maxLength
+     * @param mixed                $value
+     * @param int                  $maxLength
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -805,12 +805,12 @@ class Assertion
     /**
      * Assert that string length is between min and max lengths.
      *
-     * @param mixed $value
-     * @param int $minLength
-     * @param int $maxLength
+     * @param mixed                $value
+     * @param int                  $minLength
+     * @param int                  $maxLength
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -826,11 +826,11 @@ class Assertion
     /**
      * Assert that string starts with a sequence of chars.
      *
-     * @param mixed $string
-     * @param string $needle
+     * @param mixed                $string
+     * @param string               $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -854,11 +854,11 @@ class Assertion
     /**
      * Assert that string ends with a sequence of chars.
      *
-     * @param mixed $string
-     * @param string $needle
+     * @param mixed                $string
+     * @param string               $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -884,11 +884,11 @@ class Assertion
     /**
      * Assert that string contains a sequence of chars.
      *
-     * @param mixed $string
-     * @param string $needle
+     * @param mixed                $string
+     * @param string               $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     * @param string $encoding
+     * @param string|null          $propertyPath
+     * @param string               $encoding
      *
      * @return bool
      */
@@ -912,10 +912,10 @@ class Assertion
     /**
      * Assert that value is in array of choices.
      *
-     * @param mixed $value
-     * @param array $choices
+     * @param mixed                $value
+     * @param array                $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -939,10 +939,10 @@ class Assertion
      *
      * This is an alias of {@see choice()}.
      *
-     * @param mixed $value
-     * @param array $choices
+     * @param mixed                $value
+     * @param array                $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -954,9 +954,9 @@ class Assertion
     /**
      * Assert that value is numeric.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -977,9 +977,9 @@ class Assertion
     /**
      * Assert that value is a resource.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1000,9 +1000,9 @@ class Assertion
     /**
      * Assert that value is an array.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1023,9 +1023,9 @@ class Assertion
     /**
      * Assert that value is an array or a traversable object.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1046,9 +1046,9 @@ class Assertion
     /**
      * Assert that value is an array or an array-accessible object.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1069,10 +1069,10 @@ class Assertion
     /**
      * Assert that key exists in an array.
      *
-     * @param mixed $value
-     * @param string|int $key
+     * @param mixed                $value
+     * @param string|int           $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1095,10 +1095,10 @@ class Assertion
     /**
      * Assert that key does not exist in an array.
      *
-     * @param mixed $value
-     * @param string|int $key
+     * @param mixed                $value
+     * @param string|int           $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1121,10 +1121,10 @@ class Assertion
     /**
      * Assert that key exists in an array/array-accessible object using isset().
      *
-     * @param mixed $value
-     * @param string|int $key
+     * @param mixed                $value
+     * @param string|int           $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1147,10 +1147,10 @@ class Assertion
     /**
      * Assert that key exists in an array/array-accessible object and its value is not empty.
      *
-     * @param mixed $value
-     * @param string|int $key
+     * @param mixed                $value
+     * @param string|int           $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1165,9 +1165,9 @@ class Assertion
     /**
      * Assert that value is not blank.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1188,10 +1188,10 @@ class Assertion
     /**
      * Assert that value is instance of given class-name.
      *
-     * @param mixed $value
-     * @param string $className
+     * @param mixed                $value
+     * @param string               $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1213,10 +1213,10 @@ class Assertion
     /**
      * Assert that value is not instance of given class-name.
      *
-     * @param mixed $value
-     * @param string $className
+     * @param mixed                $value
+     * @param string               $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1238,10 +1238,10 @@ class Assertion
     /**
      * Assert that value is subclass of given class-name.
      *
-     * @param mixed $value
-     * @param string $className
+     * @param mixed                $value
+     * @param string               $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1263,11 +1263,11 @@ class Assertion
     /**
      * Assert that value is in range of numbers.
      *
-     * @param mixed $value
-     * @param mixed $minValue
-     * @param mixed $maxValue
+     * @param mixed                $value
+     * @param mixed                $minValue
+     * @param mixed                $maxValue
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1292,10 +1292,10 @@ class Assertion
     /**
      * Assert that a value is at least as big as a given limit.
      *
-     * @param mixed $value
-     * @param mixed $minValue
+     * @param mixed                $value
+     * @param mixed                $minValue
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1319,10 +1319,10 @@ class Assertion
     /**
      * Assert that a number is smaller as a given limit.
      *
-     * @param mixed $value
-     * @param mixed $maxValue
+     * @param mixed                $value
+     * @param mixed                $maxValue
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1346,9 +1346,9 @@ class Assertion
     /**
      * Assert that a file exists.
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1372,9 +1372,9 @@ class Assertion
     /**
      * Assert that a directory exists.
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1397,9 +1397,9 @@ class Assertion
     /**
      * Assert that the value is something readable.
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1422,9 +1422,9 @@ class Assertion
     /**
      * Assert that the value is something writeable.
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1447,9 +1447,9 @@ class Assertion
     /**
      * Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1474,9 +1474,9 @@ class Assertion
      *
      * This code snipped was taken from the Symfony project and modified to the special demands of this method.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      *
@@ -1522,9 +1522,9 @@ class Assertion
     /**
      * Assert that value is alphanumeric.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1547,9 +1547,9 @@ class Assertion
     /**
      * Assert that the value is boolean True.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1570,9 +1570,9 @@ class Assertion
     /**
      * Assert that the value is boolean False.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1593,9 +1593,9 @@ class Assertion
     /**
      * Assert that the class exists.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1616,9 +1616,9 @@ class Assertion
     /**
      * Assert that the interface exists.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1639,10 +1639,10 @@ class Assertion
     /**
      * Assert that the class implements the interface.
      *
-     * @param mixed $class
-     * @param string $interfaceName
+     * @param mixed                $class
+     * @param string               $interfaceName
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1679,9 +1679,9 @@ class Assertion
      * content afterwards, just to decode and check for yourself instead
      * of using this assertion.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1704,9 +1704,9 @@ class Assertion
      *
      * Uses code from {@link https://github.com/ramsey/uuid} that is MIT licensed.
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1735,9 +1735,9 @@ class Assertion
      *
      * @see https://en.wikipedia.org/wiki/E.164
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1759,9 +1759,9 @@ class Assertion
      * Assert that the count of countable is equal to count.
      *
      * @param array|\Countable $countable
-     * @param int $count
-     * @param string|null $message
-     * @param string|null $propertyPath
+     * @param int              $count
+     * @param string|null      $message
+     * @param string|null      $propertyPath
      *
      * @return bool
      */
@@ -1786,7 +1786,7 @@ class Assertion
      *  - "all" delegation.
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      *
      * @return bool|mixed
      */
@@ -1830,10 +1830,10 @@ class Assertion
     /**
      * Determines if the values array has every choice as key and that this choice has content.
      *
-     * @param array $values
-     * @param array $choices
+     * @param array                $values
+     * @param array                $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1851,10 +1851,10 @@ class Assertion
     /**
      * Determines that the named method is defined in the provided object.
      *
-     * @param string $value
-     * @param mixed $object
+     * @param string               $value
+     * @param mixed                $object
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1877,9 +1877,9 @@ class Assertion
     /**
      * Determines that the provided value is an object.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1900,10 +1900,10 @@ class Assertion
     /**
      * Determines if the value is less than given limit.
      *
-     * @param mixed $value
-     * @param mixed $limit
+     * @param mixed                $value
+     * @param mixed                $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1925,10 +1925,10 @@ class Assertion
     /**
      * Determines if the value is less or equal than given limit.
      *
-     * @param mixed $value
-     * @param mixed $limit
+     * @param mixed                $value
+     * @param mixed                $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1950,10 +1950,10 @@ class Assertion
     /**
      * Determines if the value is greater than given limit.
      *
-     * @param mixed $value
-     * @param mixed $limit
+     * @param mixed                $value
+     * @param mixed                $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -1975,10 +1975,10 @@ class Assertion
     /**
      * Determines if the value is greater or equal than given limit.
      *
-     * @param mixed $value
-     * @param mixed $limit
+     * @param mixed                $value
+     * @param mixed                $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2000,9 +2000,9 @@ class Assertion
     /**
      * Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
      *
-     * @param mixed $value
-     * @param mixed $lowerLimit
-     * @param mixed $upperLimit
+     * @param mixed  $value
+     * @param mixed  $lowerLimit
+     * @param mixed  $upperLimit
      * @param string $message
      * @param string $propertyPath
      *
@@ -2027,9 +2027,9 @@ class Assertion
     /**
      * Assert that a value is greater than a lower limit, and less than an upper limit.
      *
-     * @param mixed $value
-     * @param mixed $lowerLimit
-     * @param mixed $upperLimit
+     * @param mixed  $value
+     * @param mixed  $lowerLimit
+     * @param mixed  $upperLimit
      * @param string $message
      * @param string $propertyPath
      *
@@ -2054,9 +2054,9 @@ class Assertion
     /**
      * Assert that extension is loaded.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2077,11 +2077,11 @@ class Assertion
     /**
      * Assert that date is valid and corresponds to the given format.
      *
-     * @param string $value
-     * @param string $format supports all of the options date(), except for the following:
+     * @param string               $value
+     * @param string               $format       supports all of the options date(), except for the following:
      *                                           N, w, W, t, L, o, B, a, A, g, h, I, O, P, Z, c, r
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      *
@@ -2110,9 +2110,9 @@ class Assertion
     /**
      * Assert that the value is an object, or a class that exists.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2128,10 +2128,10 @@ class Assertion
     /**
      * Assert that the value is an object or class, and that the property exists.
      *
-     * @param mixed $value
-     * @param string $property
+     * @param mixed                $value
+     * @param string               $property
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2155,10 +2155,10 @@ class Assertion
     /**
      * Assert that the value is an object or class, and that the properties all exist.
      *
-     * @param mixed $value
-     * @param array $properties
+     * @param mixed                $value
+     * @param array                $properties
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2190,11 +2190,11 @@ class Assertion
     /**
      * Assert comparison of two versions.
      *
-     * @param string $version1
-     * @param string $operator
-     * @param string $version2
+     * @param string               $version1
+     * @param string               $operator
+     * @param string               $version2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2219,10 +2219,10 @@ class Assertion
     /**
      * Assert on PHP version.
      *
-     * @param string $operator
-     * @param mixed $version
+     * @param string               $operator
+     * @param mixed                $version
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2236,11 +2236,11 @@ class Assertion
     /**
      * Assert that extension is loaded and a specific version is installed.
      *
-     * @param string $extension
-     * @param string $operator
-     * @param mixed $version
+     * @param string               $extension
+     * @param string               $operator
+     * @param mixed                $version
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2254,9 +2254,9 @@ class Assertion
     /**
      * Determines that the provided value is callable.
      *
-     * @param mixed $value
+     * @param mixed                $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2279,10 +2279,10 @@ class Assertion
      *
      * If the callback returns `false` the assertion will fail.
      *
-     * @param mixed $value
-     * @param callable $callback
+     * @param mixed                $value
+     * @param callable             $callback
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2306,10 +2306,10 @@ class Assertion
      * Assert that value is an IPv4 or IPv6 address
      * (using input_filter/FILTER_VALIDATE_IP).
      *
-     * @param string $value
-     * @param null|int $flag
+     * @param string               $value
+     * @param null|int             $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      *
@@ -2333,10 +2333,10 @@ class Assertion
      * Assert that value is an IPv4 address
      * (using input_filter/FILTER_VALIDATE_IP).
      *
-     * @param string $value
-     * @param null|int $flag
+     * @param string               $value
+     * @param null|int             $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      *
@@ -2353,10 +2353,10 @@ class Assertion
      * Assert that value is an IPv6 address
      * (using input_filter/FILTER_VALIDATE_IP).
      *
-     * @param string $value
-     * @param null|int $flag
+     * @param string               $value
+     * @param null|int             $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      *
@@ -2372,9 +2372,9 @@ class Assertion
     /**
      * Assert that a constant is defined.
      *
-     * @param mixed $constant
+     * @param mixed                $constant
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2392,9 +2392,9 @@ class Assertion
     /**
      * Assert that a constant is defined.
      *
-     * @param string $value
+     * @param string               $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
+     * @param string|null          $propertyPath
      *
      * @return bool
      */
@@ -2414,11 +2414,11 @@ class Assertion
      * They are returned from this method so that the stack trace still shows
      * the assertions method.
      *
-     * @param mixed $value
+     * @param mixed           $value
      * @param string|callable $message
-     * @param int $code
-     * @param string|null $propertyPath
-     * @param array $constraints
+     * @param int             $code
+     * @param string|null     $propertyPath
+     * @param array           $constraints
      *
      * @return mixed
      */
@@ -2493,7 +2493,7 @@ class Assertion
                 $message = \call_user_func_array($message, [$parameters]);
             } // @codeCoverageIgnoreStart
             catch (\Throwable $exception) {
-                $message = sprintf('Unable to generate message : %s', $exception->getMessage());
+                $message = \sprintf('Unable to generate message : %s', $exception->getMessage());
             } // @codeCoverageIgnoreEnd
         }
 
