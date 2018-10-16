@@ -141,24 +141,7 @@ class ArrayLazyAssertion extends LazyAssertion
 
         return $this;
     }
-
-    public function set(string $key, $value)
-    {
-        $this->array[$key] = $value;
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function cast2bool(string $key) : bool
-    {
-        $this->array[$key] = array_key_exists($key, $this->array);
-
-        return $this->array[$key];
-    }
-
+    
     /**
      * @param string $key
      */
