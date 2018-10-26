@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 ### Added assertions
 - `Assertion::notRegex()` (Thanks to [Thomas Müller](https://github.com/beberlei/assert/pull/261))
 
+### Other changes
+Upgraded regex and unit tests for `Assert\Assertion::url()` to latest from Symfony/Validator
+
 ## 3.0.0 - 2018-07-04
 
 ### Changes
