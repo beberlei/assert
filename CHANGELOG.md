@@ -1,13 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.1.0 - 2018-10-29
+
+### Other changes
+- Refactor assertion messages for `Assert\Assertion::notEq()`, `Assert\Assertion::notSame()`, and `Assert\Assertion::notInArray()` (Thanks to [Rick Kuipers](https://github.com/beberlei/assert/pull/259))
+
 ## 3.0.1 - 2018-07-04
 
 ### Added assertions
 - `Assertion::notRegex()` (Thanks to [Thomas Müller](https://github.com/beberlei/assert/pull/261))
 
 ### Other changes
-Upgraded regex and unit tests for `Assert\Assertion::url()` to latest from Symfony/Validator
+- Upgraded regex and unit tests for `Assert\Assertion::url()` to latest from Symfony/Validator
 
 ## 3.0.0 - 2018-07-04
 
