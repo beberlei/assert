@@ -74,6 +74,7 @@ use ReflectionClass;
  * @method AssertionChain maxLength(int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars.
  * @method AssertionChain methodExists(mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object.
  * @method AssertionChain min(mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit.
+ * @method AssertionChain minCount(int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements.
  * @method AssertionChain minLength(int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long.
  * @method AssertionChain noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
  * @method AssertionChain notBlank(string|callable $message = null, string $propertyPath = null) Assert that value is not blank.

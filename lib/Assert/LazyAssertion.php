@@ -73,6 +73,7 @@ use LogicException;
  * @method LazyAssertion maxLength(int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars.
  * @method LazyAssertion methodExists(mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object.
  * @method LazyAssertion min(mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit.
+ * @method LazyAssertion minCount(int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements.
  * @method LazyAssertion minLength(int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long.
  * @method LazyAssertion noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
  * @method LazyAssertion notBlank(string|callable $message = null, string $propertyPath = null) Assert that value is not blank.

@@ -233,6 +233,7 @@ Assertion::max(mixed $value, mixed $maxValue);
 Assertion::maxLength(mixed $value, int $maxLength);
 Assertion::methodExists(string $value, mixed $object);
 Assertion::min(mixed $value, mixed $minValue);
+Assertion::minCount(array|\Countable $countable, int $count);
 Assertion::minLength(mixed $value, int $minLength);
 Assertion::noContent(mixed $value);
 Assertion::notBlank(mixed $value);

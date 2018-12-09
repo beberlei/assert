@@ -73,6 +73,7 @@ use BadMethodCallException;
  * @method static bool allMaxLength(mixed $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars for all values.
  * @method static bool allMethodExists(string $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object for all values.
  * @method static bool allMin(mixed $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit for all values.
+ * @method static bool allMinCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for all values.
  * @method static bool allMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for all values.
  * @method static bool allNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
  * @method static bool allNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for all values.
@@ -156,6 +157,7 @@ use BadMethodCallException;
  * @method static bool nullOrMaxLength(mixed $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars or that the value is null.
  * @method static bool nullOrMethodExists(string $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object or that the value is null.
  * @method static bool nullOrMin(mixed $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit or that the value is null.
+ * @method static bool nullOrMinCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements or that the value is null.
  * @method static bool nullOrMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long or that the value is null.
  * @method static bool nullOrNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty or that the value is null.
  * @method static bool nullOrNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank or that the value is null.
@@ -264,6 +266,7 @@ class Assertion
     const INVALID_VERSION = 223;
     const INVALID_PROPERTY = 224;
     const INVALID_RESOURCE = 225;
+    const INVALID_MIN_COUNT = 226;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1777,6 +1780,31 @@ class Assertion
             );
 
             throw static::createException($countable, $message, static::INVALID_COUNT, $propertyPath, ['count' => $count]);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that the countable have at least $count elements.
+     *
+     * @param array|\Countable $countable
+     * @param int              $count
+     * @param string|null      $message
+     * @param string|null      $propertyPath
+     *
+     * @return bool
+     */
+    public static function minCount($countable, $count, $message = null, $propertyPath = null)
+    {
+        if ($count > \count($countable)) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'List should have at least %d elements, but has %d elements.'),
+                static::stringify($count),
+                static::stringify(\count($countable))
+            );
+
+            throw static::createException($countable, $message, static::INVALID_MIN_COUNT, $propertyPath, ['count' => $count]);
         }
 
         return true;
