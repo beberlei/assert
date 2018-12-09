@@ -58,6 +58,7 @@ use LogicException;
  * @method LazyAssertion isArray(string|callable $message = null, string $propertyPath = null) Assert that value is an array.
  * @method LazyAssertion isArrayAccessible(string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method LazyAssertion isCallable(string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable.
+ * @method LazyAssertion isCountable(string|callable $message = null, string $propertyPath = null) Assert that value is countable.
  * @method LazyAssertion isInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name.
  * @method LazyAssertion isJsonString(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string.
  * @method LazyAssertion isObject(string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object.

@@ -1652,6 +1652,21 @@ class AssertTest extends TestCase
         Assertion::isTraversable('not traversable');
     }
 
+    public function testValidCountable()
+    {
+        $this->assertTrue(Assertion::isCountable([]));
+        $this->assertTrue(Assertion::isCountable(new \ArrayObject()));
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_COUNTABLE
+     */
+    public function testInvalidCountable()
+    {
+        Assertion::isCountable('not countable');
+    }
+
     public function testValidArrayAccessible()
     {
         $this->assertTrue(Assertion::isArrayAccessible(new \ArrayObject()));
