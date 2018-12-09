@@ -1412,6 +1412,32 @@ class AssertTest extends TestCase
         Assertion::minCount($countable, $count);
     }
 
+    public function testValidMaxCount()
+    {
+        $this->assertTrue(Assertion::maxCount(['Hi'], 1));
+        $this->assertTrue(Assertion::maxCount(['Hi', 'There'], 2));
+        $this->assertTrue(Assertion::maxCount(new Fixtures\OneCountable(), 1));
+    }
+
+    public static function dataInvalidMaxCount()
+    {
+        return [
+            '2 elements while at most 1 expected' => [['Hi', 'There'], 1],
+            '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0],
+        ];
+    }
+
+    /**
+     * @dataProvider dataInvalidMaxCount
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX_COUNT
+     * @expectedExceptionMessageRegExp /List should have at most \d+ elements, but has \d elements./
+     */
+    public function testInvalidMaxCount($countable, $count)
+    {
+        Assertion::maxCount($countable, $count);
+    }
+
     public function testChoicesNotEmpty()
     {
         $this->assertTrue(
