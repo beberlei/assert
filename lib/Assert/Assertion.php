@@ -76,6 +76,7 @@ use BadMethodCallException;
  * @method static bool allMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for all values.
  * @method static bool allNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
  * @method static bool allNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for all values.
+ * @method static bool allNotContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars for all values.
  * @method static bool allNotEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty for all values.
  * @method static bool allNotEmptyKey(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty for all values.
  * @method static bool allNotEq(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ) for all values.
@@ -159,6 +160,7 @@ use BadMethodCallException;
  * @method static bool nullOrMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long or that the value is null.
  * @method static bool nullOrNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty or that the value is null.
  * @method static bool nullOrNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank or that the value is null.
+ * @method static bool nullOrNotContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars or that the value is null.
  * @method static bool nullOrNotEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty or that the value is null.
  * @method static bool nullOrNotEmptyKey(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty or that the value is null.
  * @method static bool nullOrNotEq(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ) or that the value is null.
@@ -264,6 +266,7 @@ class Assertion
     const INVALID_VERSION = 223;
     const INVALID_PROPERTY = 224;
     const INVALID_RESOURCE = 225;
+    const INVALID_STRING_NOT_CONTAINS = 226;
 
     /**
      * Exception to throw when an assertion failed.
@@ -904,6 +907,34 @@ class Assertion
             );
 
             throw static::createException($string, $message, static::INVALID_STRING_CONTAINS, $propertyPath, ['needle' => $needle, 'encoding' => $encoding]);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that string does not contains a sequence of chars.
+     *
+     * @param mixed                $string
+     * @param string               $needle
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     * @param string               $encoding
+     *
+     * @return bool
+     */
+    public static function notContains($string, $needle, $message = null, $propertyPath = null, $encoding = 'utf8')
+    {
+        static::string($string, $message, $propertyPath);
+
+        if (false !== \mb_strpos($string, $needle, null, $encoding)) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" contains "%s".'),
+                static::stringify($string),
+                static::stringify($needle)
+            );
+
+            throw static::createException($string, $message, static::INVALID_STRING_NOT_CONTAINS, $propertyPath, ['needle' => $needle, 'encoding' => $encoding]);
         }
 
         return true;

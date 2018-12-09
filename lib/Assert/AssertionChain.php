@@ -77,6 +77,7 @@ use ReflectionClass;
  * @method AssertionChain minLength(int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long.
  * @method AssertionChain noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
  * @method AssertionChain notBlank(string|callable $message = null, string $propertyPath = null) Assert that value is not blank.
+ * @method AssertionChain notContains(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars.
  * @method AssertionChain notEmpty(string|callable $message = null, string $propertyPath = null) Assert that value is not empty.
  * @method AssertionChain notEmptyKey(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty.
  * @method AssertionChain notEq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ).
