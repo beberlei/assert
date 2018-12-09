@@ -51,6 +51,11 @@ class AssertionChainFunctionsTest extends TestCase
         $this->assertInstanceOf(AssertionChain::class, \Assert\that([1, 2, 3])->all()->integer());
     }
 
+    public function testThatAssertionChainFunctionsValidateNegativeAssertions()
+    {
+        $this->assertInstanceOf(AssertionChain::class, \Assert\that('foo')->not()->isInstanceOf(\stdClass::class));
+    }
+
     public function testAssertionChainFunctionsThatAllShortcut()
     {
         $this->assertInstanceOf(AssertionChain::class, \Assert\thatAll([1, 2, 3])->integer());
