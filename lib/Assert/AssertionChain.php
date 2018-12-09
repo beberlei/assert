@@ -126,6 +126,13 @@ class AssertionChain
      */
     private $all = false;
 
+    /**
+     * Perform a negative assertion.
+     *
+     * @var bool
+     */
+    private $not = false;
+
     /** @var string|Assertion Class to use for assertion calls */
     private $assertionClassName = 'Assert\Assertion';
 
@@ -174,6 +181,10 @@ class AssertionChain
             }
         }
 
+        if ($this->not) {
+            $methodName = 'not'.$methodName;
+        }
+
         if ($this->all) {
             $methodName = 'all'.$methodName;
         }
@@ -191,6 +202,18 @@ class AssertionChain
     public function all()
     {
         $this->all = true;
+
+        return $this;
+    }
+
+    /**
+     * Switch chain into negative mode.
+     *
+     * @return \Assert\AssertionChain
+     */
+    public function not()
+    {
+        $this->not = true;
 
         return $this;
     }
