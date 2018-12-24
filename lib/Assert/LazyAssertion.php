@@ -79,6 +79,7 @@ use LogicException;
  * @method LazyAssertion minLength(int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long.
  * @method LazyAssertion noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
  * @method LazyAssertion notBlank(string|callable $message = null, string $propertyPath = null) Assert that value is not blank.
+ * @method LazyAssertion notContains(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars.
  * @method LazyAssertion notEmpty(string|callable $message = null, string $propertyPath = null) Assert that value is not empty.
  * @method LazyAssertion notEmptyKey(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty.
  * @method LazyAssertion notEq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ).

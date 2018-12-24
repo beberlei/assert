@@ -495,6 +495,21 @@ class AssertTest extends TestCase
 
     /**
      * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_STRING_NOT_CONTAINS
+     */
+    public function testInvalidNotContains()
+    {
+        Assertion::notContains('foo', 'o');
+    }
+
+    public function testValidNotContains()
+    {
+        $this->assertTrue(Assertion::notContains('foo', 'bar'));
+        $this->assertTrue(Assertion::notContains('foo', 'p'));
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_CHOICE
      */
     public function testInvalidChoice()

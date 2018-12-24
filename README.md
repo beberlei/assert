@@ -239,6 +239,7 @@ Assertion::minCount(array|\Countable|\ResourceBundle|\SimpleXMLElement $countabl
 Assertion::minLength(mixed $value, int $minLength);
 Assertion::noContent(mixed $value);
 Assertion::notBlank(mixed $value);
+Assertion::notContains(mixed $string, string $needle);
 Assertion::notEmpty(mixed $value);
 Assertion::notEmptyKey(mixed $value, string|int $key);
 Assertion::notEq(mixed $value1, mixed $value2);
