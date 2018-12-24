@@ -2589,9 +2589,9 @@ class Assertion
      *
      * @param string|callable $message
      *
-     * @return string|null
+     * @return string
      */
-    protected static function generateMessage($message)
+    protected static function generateMessage($message): string
     {
         if (\is_callable($message)) {
             $traces = \debug_backtrace(0);
@@ -2618,6 +2618,6 @@ class Assertion
             } // @codeCoverageIgnoreEnd
         }
 
-        return \is_null($message) ? null : (string) $message;
+        return (string) $message;
     }
 }
