@@ -109,6 +109,7 @@ use LogicException;
  * @method LazyAssertion version(string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions.
  * @method LazyAssertion writeable(string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable.
  * @method LazyAssertion all() Switch chain into validation mode for an array of values.
+ * @method LazyAssertion not() Switch chain into negative mode.
  * @method LazyAssertion nullOr() Switch chain into mode allowing nulls, ignoring further assertions.
  */
 class LazyAssertion
