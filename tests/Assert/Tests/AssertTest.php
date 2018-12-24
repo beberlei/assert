@@ -19,6 +19,8 @@ use Assert\AssertionFailedException;
 use Assert\Tests\Fixtures\OneCountable;
 use PDO;
 use PHPUnit\Framework\TestCase;
+use ResourceBundle;
+use SimpleXMLElement;
 use stdClass;
 
 class AssertTest extends TestCase
@@ -1087,7 +1089,7 @@ class AssertTest extends TestCase
      */
     public function testFileDoesNotExists()
     {
-        Assertion::file(__DIR__ . '/does-not-exists');
+        Assertion::file(__DIR__.'/does-not-exists');
     }
 
     /**
@@ -1098,7 +1100,7 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::directory(__DIR__));
 
-        Assertion::directory(__DIR__ . '/does-not-exist');
+        Assertion::directory(__DIR__.'/does-not-exist');
     }
 
     /**
@@ -1109,7 +1111,7 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::readable(__FILE__));
 
-        Assertion::readable(__DIR__ . '/does-not-exist');
+        Assertion::readable(__DIR__.'/does-not-exist');
     }
 
     /**
@@ -1120,7 +1122,7 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::writeable(\sys_get_temp_dir()));
 
-        Assertion::writeable(__DIR__ . '/does-not-exist');
+        Assertion::writeable(__DIR__.'/does-not-exist');
     }
 
     /**
@@ -1357,6 +1359,10 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::count(['Hi'], 1));
         $this->assertTrue(Assertion::count(['Hi', 'There'], 2));
         $this->assertTrue(Assertion::count(new Fixtures\OneCountable(), 1));
+        $this->assertTrue(Assertion::count(new SimpleXMLElement('<a><b /><c /></a>'), 2));
+        // Test ResourceBundle counting using resources generated for PHP testing of ResourceBundle
+        // https://github.com/php/php-src/commit/8f4337f2551e28d98290752e9ca99fc7f87d93b5
+        $this->assertTrue(Assertion::count(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 6));
     }
 
     public static function dataInvalidCount()
@@ -1388,6 +1394,8 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::minCount(['Hi'], 1));
         $this->assertTrue(Assertion::minCount(['Hi', 'There'], 1));
         $this->assertTrue(Assertion::minCount(new Fixtures\OneCountable(), 1));
+        $this->assertTrue(Assertion::minCount(new SimpleXMLElement('<a><b /><c /></a>'), 1));
+        $this->assertTrue(Assertion::minCount(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 2));
     }
 
     public static function dataInvalidMinCount()
@@ -1395,6 +1403,8 @@ class AssertTest extends TestCase
         return [
             '2 elements while at least 3 expected' => [['Hi', 'There'], 3],
             '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2],
+            '2 countable while at least 3 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 3],
+            '6 countable while at least 7 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7],
         ];
     }
 
@@ -1417,6 +1427,8 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::maxCount(['Hi'], 1));
         $this->assertTrue(Assertion::maxCount(['Hi', 'There'], 2));
         $this->assertTrue(Assertion::maxCount(new Fixtures\OneCountable(), 1));
+        $this->assertTrue(Assertion::maxCount(new SimpleXMLElement('<a><b /><c /></a>'), 3));
+        $this->assertTrue(Assertion::maxCount(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7));
     }
 
     public static function dataInvalidMaxCount()
@@ -1424,6 +1436,8 @@ class AssertTest extends TestCase
         return [
             '2 elements while at most 1 expected' => [['Hi', 'There'], 1],
             '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0],
+            '2 countable while at most 1 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 1],
+            '6 countable while at most 5 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 5],
         ];
     }
 
@@ -1707,6 +1721,21 @@ class AssertTest extends TestCase
         Assertion::isTraversable('not traversable');
     }
 
+    public function testValidCountable()
+    {
+        $this->assertTrue(Assertion::isCountable([]));
+        $this->assertTrue(Assertion::isCountable(new \ArrayObject()));
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_COUNTABLE
+     */
+    public function testInvalidCountable()
+    {
+        Assertion::isCountable('not countable');
+    }
+
     public function testValidArrayAccessible()
     {
         $this->assertTrue(Assertion::isArrayAccessible(new \ArrayObject()));
@@ -1733,7 +1762,7 @@ class AssertTest extends TestCase
     public function testValidCallable()
     {
         $this->assertTrue(Assertion::isCallable('\is_callable'));
-        $this->assertTrue(Assertion::isCallable(__NAMESPACE__ . '\\Fixtures\\someCallable'));
+        $this->assertTrue(Assertion::isCallable(__NAMESPACE__.'\\Fixtures\\someCallable'));
         $this->assertTrue(Assertion::isCallable([OneCountable::class, 'count']));
         $this->assertTrue(
             Assertion::isCallable(

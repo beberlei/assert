@@ -31,7 +31,7 @@ use BadMethodCallException;
  * @method static bool allChoicesNotEmpty(array $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content for all values.
  * @method static bool allClassExists(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the class exists for all values.
  * @method static bool allContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars for all values.
- * @method static bool allCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count for all values.
+ * @method static bool allCount(array|\Countable|\ResourceBundle|\SimpleXmlElement $countable, int $count, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count for all values.
  * @method static bool allDate(string $value, string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format for all values.
  * @method static bool allDefined(mixed $constant, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
  * @method static bool allDigit(mixed $value, string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit for all values.
@@ -58,6 +58,7 @@ use BadMethodCallException;
  * @method static bool allIsArray(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for all values.
  * @method static bool allIsArrayAccessible(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
  * @method static bool allIsCallable(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for all values.
+ * @method static bool allIsCountable(array|\Countable|\ResourceBundle|\SimpleXMLElement $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for all values.
  * @method static bool allIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for all values.
  * @method static bool allIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for all values.
  * @method static bool allIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
@@ -70,11 +71,11 @@ use BadMethodCallException;
  * @method static bool allLessOrEqualThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less or equal than given limit for all values.
  * @method static bool allLessThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less than given limit for all values.
  * @method static bool allMax(mixed $value, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that a number is smaller as a given limit for all values.
- * @method static bool allMaxCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at most $count elements for all values.
+ * @method static bool allMaxCount(array|\Countable|\ResourceBundle|\SimpleXMLElement $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at most $count elements for all values.
  * @method static bool allMaxLength(mixed $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars for all values.
  * @method static bool allMethodExists(string $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object for all values.
  * @method static bool allMin(mixed $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit for all values.
- * @method static bool allMinCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for all values.
+ * @method static bool allMinCount(array|\Countable|\ResourceBundle|\SimpleXMLElement $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for all values.
  * @method static bool allMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for all values.
  * @method static bool allNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
  * @method static bool allNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for all values.
@@ -116,7 +117,7 @@ use BadMethodCallException;
  * @method static bool nullOrChoicesNotEmpty(array $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content or that the value is null.
  * @method static bool nullOrClassExists(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the class exists or that the value is null.
  * @method static bool nullOrContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars or that the value is null.
- * @method static bool nullOrCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count or that the value is null.
+ * @method static bool nullOrCount(array|\Countable|\ResourceBundle|\SimpleXmlElement $countable, int $count, string $message = null, string $propertyPath = null) Assert that the count of countable is equal to count or that the value is null.
  * @method static bool nullOrDate(string $value, string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format or that the value is null.
  * @method static bool nullOrDefined(mixed $constant, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrDigit(mixed $value, string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit or that the value is null.
@@ -143,6 +144,7 @@ use BadMethodCallException;
  * @method static bool nullOrIsArray(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or that the value is null.
  * @method static bool nullOrIsArrayAccessible(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object or that the value is null.
  * @method static bool nullOrIsCallable(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable or that the value is null.
+ * @method static bool nullOrIsCountable(array|\Countable|\ResourceBundle|\SimpleXMLElement $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable or that the value is null.
  * @method static bool nullOrIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name or that the value is null.
  * @method static bool nullOrIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string or that the value is null.
  * @method static bool nullOrIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object or that the value is null.
@@ -155,11 +157,11 @@ use BadMethodCallException;
  * @method static bool nullOrLessOrEqualThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less or equal than given limit or that the value is null.
  * @method static bool nullOrLessThan(mixed $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less than given limit or that the value is null.
  * @method static bool nullOrMax(mixed $value, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that a number is smaller as a given limit or that the value is null.
- * @method static bool nullOrMaxCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at most $count elements or that the value is null.
+ * @method static bool nullOrMaxCount(array|\Countable|\ResourceBundle|\SimpleXMLElement $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at most $count elements or that the value is null.
  * @method static bool nullOrMaxLength(mixed $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars or that the value is null.
  * @method static bool nullOrMethodExists(string $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object or that the value is null.
  * @method static bool nullOrMin(mixed $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit or that the value is null.
- * @method static bool nullOrMinCount(array|\Countable $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements or that the value is null.
+ * @method static bool nullOrMinCount(array|\Countable|\ResourceBundle|\SimpleXMLElement $countable, int $count, string $message = null, string $propertyPath = null) Assert that the countable have at least $count elements or that the value is null.
  * @method static bool nullOrMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long or that the value is null.
  * @method static bool nullOrNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty or that the value is null.
  * @method static bool nullOrNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank or that the value is null.
@@ -268,8 +270,9 @@ class Assertion
     const INVALID_VERSION = 223;
     const INVALID_PROPERTY = 224;
     const INVALID_RESOURCE = 225;
-    const INVALID_MIN_COUNT = 226;
-    const INVALID_MAX_COUNT = 227;
+    const INVALID_COUNTABLE = 226;
+    const INVALID_MIN_COUNT = 227;
+    const INVALID_MAX_COUNT = 228;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1073,6 +1076,35 @@ class Assertion
     }
 
     /**
+     * Assert that value is countable.
+     *
+     * @param array|\Countable|\ResourceBundle|\SimpleXMLElement $value
+     * @param string|callable|null                               $message
+     * @param string|null                                        $propertyPath
+     *
+     * @return bool
+     */
+    public static function isCountable($value, $message = null, $propertyPath = null)
+    {
+        if (\function_exists('is_countable')) {
+            $assert = is_countable($value);
+        } else {
+            $assert = \is_array($value) || $value instanceof \Countable || $value instanceof \ResourceBundle || $value instanceof \SimpleXmlElement;
+        }
+
+        if (!$assert) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" is not an array and does not implement Countable.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_COUNTABLE, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
      * Assert that key exists in an array.
      *
      * @param mixed                $value
@@ -1766,10 +1798,10 @@ class Assertion
     /**
      * Assert that the count of countable is equal to count.
      *
-     * @param array|\Countable $countable
-     * @param int              $count
-     * @param string|null      $message
-     * @param string|null      $propertyPath
+     * @param array|\Countable|\ResourceBundle|\SimpleXmlElement $countable
+     * @param int                                                $count
+     * @param string|null                                        $message
+     * @param string|null                                        $propertyPath
      *
      * @return bool
      */
@@ -1791,10 +1823,10 @@ class Assertion
     /**
      * Assert that the countable have at least $count elements.
      *
-     * @param array|\Countable $countable
-     * @param int              $count
-     * @param string|null      $message
-     * @param string|null      $propertyPath
+     * @param array|\Countable|\ResourceBundle|\SimpleXMLElement $countable
+     * @param int                                                $count
+     * @param string|null                                        $message
+     * @param string|null                                        $propertyPath
      *
      * @return bool
      */
@@ -1816,10 +1848,10 @@ class Assertion
     /**
      * Assert that the countable have at most $count elements.
      *
-     * @param array|\Countable $countable
-     * @param int              $count
-     * @param string|null      $message
-     * @param string|null      $propertyPath
+     * @param array|\Countable|\ResourceBundle|\SimpleXMLElement $countable
+     * @param int                                                $count
+     * @param string|null                                        $message
+     * @param string|null                                        $propertyPath
      *
      * @return bool
      */

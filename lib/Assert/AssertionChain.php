@@ -59,6 +59,7 @@ use ReflectionClass;
  * @method AssertionChain isArray(string|callable $message = null, string $propertyPath = null) Assert that value is an array.
  * @method AssertionChain isArrayAccessible(string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object.
  * @method AssertionChain isCallable(string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable.
+ * @method AssertionChain isCountable(string|callable $message = null, string $propertyPath = null) Assert that value is countable.
  * @method AssertionChain isInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name.
  * @method AssertionChain isJsonString(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string.
  * @method AssertionChain isObject(string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object.
