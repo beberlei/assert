@@ -1383,6 +1383,61 @@ class AssertTest extends TestCase
         Assertion::count($countable, $count);
     }
 
+    public function testValidMinCount()
+    {
+        $this->assertTrue(Assertion::minCount(['Hi'], 1));
+        $this->assertTrue(Assertion::minCount(['Hi', 'There'], 1));
+        $this->assertTrue(Assertion::minCount(new Fixtures\OneCountable(), 1));
+    }
+
+    public static function dataInvalidMinCount()
+    {
+        return [
+            '2 elements while at least 3 expected' => [['Hi', 'There'], 3],
+            '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2],
+        ];
+    }
+
+    /**
+     * @dataProvider dataInvalidMinCount
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MIN_COUNT
+     * @expectedExceptionMessageRegExp /List should have at least \d+ elements, but has \d elements./
+     *
+     * @param mixed $countable
+     * @param int   $count
+     */
+    public function testInvalidMinCount($countable, $count)
+    {
+        Assertion::minCount($countable, $count);
+    }
+
+    public function testValidMaxCount()
+    {
+        $this->assertTrue(Assertion::maxCount(['Hi'], 1));
+        $this->assertTrue(Assertion::maxCount(['Hi', 'There'], 2));
+        $this->assertTrue(Assertion::maxCount(new Fixtures\OneCountable(), 1));
+    }
+
+    public static function dataInvalidMaxCount()
+    {
+        return [
+            '2 elements while at most 1 expected' => [['Hi', 'There'], 1],
+            '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0],
+        ];
+    }
+
+    /**
+     * @dataProvider dataInvalidMaxCount
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_MAX_COUNT
+     * @expectedExceptionMessageRegExp /List should have at most \d+ elements, but has \d elements./
+     */
+    public function testInvalidMaxCount($countable, $count)
+    {
+        Assertion::maxCount($countable, $count);
+    }
+
     public function testChoicesNotEmpty()
     {
         $this->assertTrue(
