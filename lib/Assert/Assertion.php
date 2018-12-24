@@ -2587,11 +2587,11 @@ class Assertion
     /**
      * Generate the message.
      *
-     * @param string|callable|null $message
+     * @param string|callable $message
      *
      * @return string|null
      */
-    protected static function generateMessage($message = null)
+    protected static function generateMessage($message)
     {
         if (\is_callable($message)) {
             $traces = \debug_backtrace(0);
