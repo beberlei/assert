@@ -191,7 +191,7 @@ Assertion::choice(mixed $value, array $choices);
 Assertion::choicesNotEmpty(array $values, array $choices);
 Assertion::classExists(mixed $value);
 Assertion::contains(mixed $string, string $needle);
-Assertion::count(array|\Countable $countable, int $count);
+Assertion::count(array|\Countable|\ResourceBundle|\SimpleXmlElement $countable, int $count);
 Assertion::date(string $value, string $format);
 Assertion::defined(mixed $constant);
 Assertion::digit(mixed $value);

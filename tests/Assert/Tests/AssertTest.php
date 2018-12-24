@@ -19,6 +19,8 @@ use Assert\AssertionFailedException;
 use Assert\Tests\Fixtures\OneCountable;
 use PDO;
 use PHPUnit\Framework\TestCase;
+use ResourceBundle;
+use SimpleXMLElement;
 use stdClass;
 
 class AssertTest extends TestCase
@@ -1357,6 +1359,10 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::count(['Hi'], 1));
         $this->assertTrue(Assertion::count(['Hi', 'There'], 2));
         $this->assertTrue(Assertion::count(new Fixtures\OneCountable(), 1));
+        $this->assertTrue(Assertion::count(new SimpleXMLElement('<a><b /><c /></a>'), 2));
+        // Test ResourceBundle counting using resources generated for PHP testing of ResourceBundle
+        // https://github.com/php/php-src/commit/8f4337f2551e28d98290752e9ca99fc7f87d93b5
+        $this->assertTrue(Assertion::count(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 6));
     }
 
     public static function dataInvalidCount()
