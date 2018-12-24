@@ -58,6 +58,7 @@ use BadMethodCallException;
  * @method static bool allIsArray(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for all values.
  * @method static bool allIsArrayAccessible(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
  * @method static bool allIsCallable(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for all values.
+ * @method static bool allIsCountable(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for all values.
  * @method static bool allIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for all values.
  * @method static bool allIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for all values.
  * @method static bool allIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
@@ -141,6 +142,7 @@ use BadMethodCallException;
  * @method static bool nullOrIsArray(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or that the value is null.
  * @method static bool nullOrIsArrayAccessible(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object or that the value is null.
  * @method static bool nullOrIsCallable(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable or that the value is null.
+ * @method static bool nullOrIsCountable(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable or that the value is null.
  * @method static bool nullOrIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name or that the value is null.
  * @method static bool nullOrIsJsonString(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string or that the value is null.
  * @method static bool nullOrIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object or that the value is null.
@@ -264,6 +266,7 @@ class Assertion
     const INVALID_VERSION = 223;
     const INVALID_PROPERTY = 224;
     const INVALID_RESOURCE = 225;
+    const INVALID_COUNTABLE = 226;
 
     /**
      * Exception to throw when an assertion failed.
@@ -1061,6 +1064,35 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::INVALID_ARRAY_ACCESSIBLE, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that value is countable.
+     *
+     * @param mixed                $value
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     */
+    public static function isCountable($value, $message = null, $propertyPath = null)
+    {
+        if (function_exists('is_countable')) {
+            $assert = is_countable($value);
+        } else {
+            $assert = is_array($value) || $value instanceof \Countable;
+        }
+
+        if (!$assert) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" is not an array and does not implement Countable.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_COUNTABLE, $propertyPath);
         }
 
         return true;
