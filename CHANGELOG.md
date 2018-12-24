@@ -1,6 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.0 - 2018-12-24
+
+### Added assertions
+- `Assertion::isCountable()` (Thanks to [Baptiste Clavié](https://github.com/beberlei/assert/pull/268))
+- `Assertion::maxCount()` (Thanks to [Baptiste Clavié](https://github.com/beberlei/assert/pull/269))
+- `Assertion::minCount()` (Thanks to [Baptiste Clavié](https://github.com/beberlei/assert/pull/269))
+- `Assertion::nonContains()` (Thanks to [Baptiste Clavié](https://github.com/beberlei/assert/pull/270))
+
+### Other changes
+- Added PHP 7.3 to Travis pipeline
+- Added support for `\ResourceBundle` and `\SimpleXMLElement` to `Assertion::count()`.
+
 ## 3.1.0 - 2018-10-29
 
 ### Other changes
