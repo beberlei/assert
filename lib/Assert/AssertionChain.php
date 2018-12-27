@@ -39,6 +39,7 @@ use ReflectionClass;
  * @method AssertionChain directory(string|callable $message = null, string $propertyPath = null) Assert that a directory exists.
  * @method AssertionChain e164(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method AssertionChain email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
+ * @method AssertionChain empty(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
  * @method AssertionChain endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method AssertionChain eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==).
  * @method AssertionChain eqArraySubset(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset.
@@ -79,7 +80,7 @@ use ReflectionClass;
  * @method AssertionChain min(mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit.
  * @method AssertionChain minCount(int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements.
  * @method AssertionChain minLength(int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long.
- * @method AssertionChain noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
+ * @method AssertionChain noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty. This is an alias of Assertion::empty().
  * @method AssertionChain notBlank(string|callable $message = null, string $propertyPath = null) Assert that value is not blank.
  * @method AssertionChain notContains(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars.
  * @method AssertionChain notEmpty(string|callable $message = null, string $propertyPath = null) Assert that value is not empty.

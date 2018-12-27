@@ -47,6 +47,7 @@ use Traversable;
  * @method static bool allDirectory(string $value, string|callable $message = null, string $propertyPath = null) Assert that a directory exists for all values.
  * @method static bool allE164(string $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
  * @method static bool allEmail(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
+ * @method static bool allEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
  * @method static bool allEndsWith(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
  * @method static bool allEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for all values.
  * @method static bool allEqArraySubset(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset for all values.
@@ -87,7 +88,7 @@ use Traversable;
  * @method static bool allMin(mixed $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit for all values.
  * @method static bool allMinCount(array|Countable|ResourceBundle|SimpleXMLElement $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for all values.
  * @method static bool allMinLength(mixed $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for all values.
- * @method static bool allNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for all values.
+ * @method static bool allNoContent(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty. This is an alias of Assertion::empty() for all values.
  * @method static bool allNotBlank(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for all values.
  * @method static bool allNotContains(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars for all values.
  * @method static bool allNotEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty for all values.
@@ -135,6 +136,7 @@ use Traversable;
  * @method static bool nullOrDirectory(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that a directory exists or that the value is null.
  * @method static bool nullOrE164(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number or that the value is null.
  * @method static bool nullOrEmail(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) or that the value is null.
+ * @method static bool nullOrEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty or that the value is null.
  * @method static bool nullOrEndsWith(mixed|null $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars or that the value is null.
  * @method static bool nullOrEq(mixed|null $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) or that the value is null.
  * @method static bool nullOrEqArraySubset(mixed|null $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset or that the value is null.
@@ -175,7 +177,7 @@ use Traversable;
  * @method static bool nullOrMin(mixed|null $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit or that the value is null.
  * @method static bool nullOrMinCount(array|Countable|ResourceBundle|SimpleXMLElement|null $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements or that the value is null.
  * @method static bool nullOrMinLength(mixed|null $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long or that the value is null.
- * @method static bool nullOrNoContent(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty or that the value is null.
+ * @method static bool nullOrNoContent(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty. This is an alias of Assertion::empty() or that the value is null.
  * @method static bool nullOrNotBlank(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank or that the value is null.
  * @method static bool nullOrNotContains(mixed|null $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars or that the value is null.
  * @method static bool nullOrNotEmpty(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty or that the value is null.
@@ -649,7 +651,7 @@ class Assertion
      *
      * @throws AssertionFailedException
      */
-    public static function noContent($value, $message = null, string $propertyPath = null): bool
+    public static function empty($value, $message = null, string $propertyPath = null): bool
     {
         if (!empty($value)) {
             $message = \sprintf(
@@ -661,6 +663,22 @@ class Assertion
         }
 
         return true;
+    }
+
+    /**
+     * Assert that value is empty.
+     *
+     * This is an alias of {@see empty()}.
+     *
+     * @param mixed                $value
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     */
+    public static function noContent($value, $message = null, string $propertyPath = null): bool
+    {
+        return static::empty($value, $message, $propertyPath);
     }
 
     /**
