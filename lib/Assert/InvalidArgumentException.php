@@ -36,7 +36,7 @@ class InvalidArgumentException extends \InvalidArgumentException implements Asse
      * Useful to transport information about the nature of the error
      * back to higher layers.
      *
-     * @return string
+     * @return string|null
      */
     public function getPropertyPath()
     {
