@@ -83,6 +83,7 @@ use BadMethodCallException;
  * @method static bool allNotEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty for all values.
  * @method static bool allNotEmptyKey(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty for all values.
  * @method static bool allNotEq(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ) for all values.
+ * @method static bool allNotFalse(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not false for all values.
  * @method static bool allNotInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices for all values.
  * @method static bool allNotIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name for all values.
  * @method static bool allNotNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null for all values.
@@ -170,6 +171,7 @@ use BadMethodCallException;
  * @method static bool nullOrNotEmpty(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty or that the value is null.
  * @method static bool nullOrNotEmptyKey(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty or that the value is null.
  * @method static bool nullOrNotEq(mixed $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ) or that the value is null.
+ * @method static bool nullOrNotFalse(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not false or that the value is null.
  * @method static bool nullOrNotInArray(mixed $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices or that the value is null.
  * @method static bool nullOrNotIsInstanceOf(mixed $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name or that the value is null.
  * @method static bool nullOrNotNull(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null or that the value is null.
@@ -276,6 +278,7 @@ class Assertion
     const INVALID_MIN_COUNT = 227;
     const INVALID_MAX_COUNT = 228;
     const INVALID_STRING_NOT_CONTAINS = 229;
+    const INVALID_NOT_FALSE = 230;
 
     /**
      * Exception to throw when an assertion failed.
@@ -644,6 +647,29 @@ class Assertion
             );
 
             throw static::createException($value, $message, static::VALUE_NULL, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that value is not false.
+     *
+     * @param mixed                $value
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     */
+    public static function notFalse($value, $message = null, $propertyPath = null)
+    {
+        if (false === $value) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" is false, but non false value was expected.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_NOT_FALSE, $propertyPath);
         }
 
         return true;

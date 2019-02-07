@@ -83,6 +83,7 @@ use LogicException;
  * @method LazyAssertion notEmpty(string|callable $message = null, string $propertyPath = null) Assert that value is not empty.
  * @method LazyAssertion notEmptyKey(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty.
  * @method LazyAssertion notEq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ).
+ * @method LazyAssertion notFalse(string|callable $message = null, string $propertyPath = null) Assert that value is not false.
  * @method LazyAssertion notInArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices.
  * @method LazyAssertion notIsInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name.
  * @method LazyAssertion notNull(string|callable $message = null, string $propertyPath = null) Assert that value is not null.

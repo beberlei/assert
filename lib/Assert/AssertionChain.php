@@ -84,6 +84,7 @@ use ReflectionClass;
  * @method AssertionChain notEmpty(string|callable $message = null, string $propertyPath = null) Assert that value is not empty.
  * @method AssertionChain notEmptyKey(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty.
  * @method AssertionChain notEq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using == ).
+ * @method AssertionChain notFalse(string|callable $message = null, string $propertyPath = null) Assert that value is not false.
  * @method AssertionChain notInArray(array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices.
  * @method AssertionChain notIsInstanceOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name.
  * @method AssertionChain notNull(string|callable $message = null, string $propertyPath = null) Assert that value is not null.
