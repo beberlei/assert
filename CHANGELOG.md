@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.7 - 2019-02-19
+
+### Fixes
+- Fixed broken regex for `Assert\Assertion::url()` (Thanks to [Menno Holtkamp](https://github.com/beberlei/assert/issues/275))
+
 ## 2.9.6 - 2018-04-16
 
 ### Fixes
