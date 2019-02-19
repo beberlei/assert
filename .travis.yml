@@ -8,16 +8,22 @@ matrix:
   include:
     - php: 7.0
       env:
-      - LINT=true COVERAGE=true
+        - LINT=true COVERAGE=true
     - php: 7.1
       env:
-      - LINT=true
+        - LINT=true
     - php: 7.2
       env:
-      - LINT=true
-    - php: 7.3
+        - LINT=true
+    - php: 7.3.0
       env:
-      - LINT=true
+        - LINT=true
+    - php: 7.3.1
+      env:
+        - LINT=true
+    - php: 7.3.2
+      env:
+        - LINT=true
     - php: nightly
     - php: hhvm-3.9
       sudo: required
