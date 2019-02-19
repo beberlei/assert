@@ -2427,7 +2427,7 @@ class Assertion
      * (using input_filter/FILTER_VALIDATE_IP).
      *
      * @param string               $value
-     * @param null|int             $flag
+     * @param int|null             $flag
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *
@@ -2454,7 +2454,7 @@ class Assertion
      * (using input_filter/FILTER_VALIDATE_IP).
      *
      * @param string               $value
-     * @param null|int             $flag
+     * @param int|null             $flag
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *
@@ -2474,7 +2474,7 @@ class Assertion
      * (using input_filter/FILTER_VALIDATE_IP).
      *
      * @param string               $value
-     * @param null|int             $flag
+     * @param int|null             $flag
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *
