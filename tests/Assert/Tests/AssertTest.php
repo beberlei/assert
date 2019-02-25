@@ -300,6 +300,25 @@ class AssertTest extends TestCase
         Assertion::notNull(null);
     }
 
+    public function testNotFalse()
+    {
+        $this->assertTrue(Assertion::notFalse('1'));
+        $this->assertTrue(Assertion::notFalse(1));
+        $this->assertTrue(Assertion::notFalse(0));
+        $this->assertTrue(Assertion::notFalse([]));
+        $this->assertTrue(Assertion::notFalse(true));
+        $this->assertTrue(Assertion::notFalse(null));
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_NOT_FALSE
+     */
+    public function testInvalidNotFalse()
+    {
+        Assertion::notFalse(false);
+    }
+
     public function testString()
     {
         $this->assertTrue(Assertion::string('test-string'));

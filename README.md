@@ -243,6 +243,7 @@ Assertion::notContains(mixed $string, string $needle);
 Assertion::notEmpty(mixed $value);
 Assertion::notEmptyKey(mixed $value, string|int $key);
 Assertion::notEq(mixed $value1, mixed $value2);
+Assertion::notFalse(mixed $value);
 Assertion::notInArray(mixed $value, array $choices);
 Assertion::notIsInstanceOf(mixed $value, string $className);
 Assertion::notNull(mixed $value);
