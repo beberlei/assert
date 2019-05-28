@@ -1,9 +1,15 @@
 # Assert
 
-[![Travis Status](https://travis-ci.org/beberlei/assert.svg?branch=master)](https://travis-ci.org/beberlei/assert)
-[![Code Coverage](https://scrutinizer-ci.com/g/beberlei/assert/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/beberlei/assert/)
-[![Latest Stable Version](https://poser.pugx.org/beberlei/assert/version.png)](https://packagist.org/packages/beberlei/assert)
-[![Total Downloads](https://poser.pugx.org/beberlei/assert/d/total.png)](https://packagist.org/packages/beberlei/assert)
+[![Build Status](https://img.shields.io/travis/beberlei/assert.svg?style=for-the-badge&logo=travis)](https://travis-ci.org/beberlei/assert)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/beberlei/assert.svg?style=for-the-badge&logo=scrutinizer)](https://scrutinizer-ci.com/g/beberlei/assert/)
+[![GitHub issues](https://img.shields.io/github/issues/beberlei/assert.svg?style=for-the-badge&logo=github)](https://github.com/beberlei/assert/issues)
+
+[![PHP Version](https://img.shields.io/packagist/php-v/beberlei/assert.svg?style=for-the-badge)](https://github.com/beberlei/assert)
+[![Stable Version](https://img.shields.io/packagist/v/beberlei/assert.svg?style=for-the-badge&label=Latest)](https://packagist.org/packages/beberlei/assert)
+
+[![Total Downloads](https://img.shields.io/packagist/dt/beberlei/assert.svg?style=for-the-badge&label=Total+downloads)](https://packagist.org/packages/beberlei/assert)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/beberlei/assert.svg?style=for-the-badge&label=Monthly+downloads)](https://packagist.org/packages/beberlei/assert)
+[![Daily Downloads](https://img.shields.io/packagist/dd/beberlei/assert.svg?style=for-the-badge&label=Daily+downloads)](https://packagist.org/packages/beberlei/assert)
 
 A simple php library which contains assertions and guard methods for input validation (not filtering!) in business-model, libraries and application low-level code.
 The library can be used to implement pre-/post-conditions on input data.
