@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.9.9 - 2019-05-28
+
+### Other changes
+- Removed version number from composer.json to allow tag to provide version number
+
 ## 2.9.8 - 2019-05-28
 
 ### Fixes
