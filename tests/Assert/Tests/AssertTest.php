@@ -789,6 +789,16 @@ class AssertTest extends TestCase
             array('http://symfony.com#'),
             array('http://symfony.com#fragment'),
             array('http://symfony.com/#fragment'),
+            array('http://symfony.com?query[]=1'),
+            array('http://symfony.com/?query[]=1'),
+            array('http://symfony.com?query[1]=1'),
+            array('http://symfony.com/?query[2]=1'),
+            array('http://symfony.com?query[1][]=1'),
+            array('http://symfony.com/?query[2][]=1'),
+            array('http://symfony.com?query[1][3]=1'),
+            array('http://symfony.com/?query[2][4]=1'),
+            array('http://symfony.com?query[1][3]=1&query[5][7]=2'),
+            array('http://symfony.com/?query[2][4]=1&query[6][8]=2'),
         );
     }
 
