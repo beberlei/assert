@@ -1378,10 +1378,6 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null          $propertyPath
      *
-     * @psalm-template ExpectedType of object
-     * @psalm-param class-string<ExpectedType> $className
-     * @psalm-assert ExpectedType $value
-     *
      * @return bool
      */
     public static function subclassOf($value, $className, $message = null, $propertyPath = null)
