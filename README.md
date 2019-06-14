@@ -200,6 +200,7 @@ Assertion::e164(string $value);
 Assertion::email(mixed $value);
 Assertion::endsWith(mixed $string, string $needle);
 Assertion::eq(mixed $value, mixed $value2);
+Assertion::eqArraySubset(mixed $value, mixed $value2);
 Assertion::extensionLoaded(mixed $value);
 Assertion::extensionVersion(string $extension, string $operator, mixed $version);
 Assertion::false(mixed $value);

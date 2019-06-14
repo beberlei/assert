@@ -2209,4 +2209,55 @@ class AssertTest extends TestCase
     {
         Assertion::base64('wrong-content');
     }
+
+    public function invalidEqArraySubsetProvider()
+    {
+        return [
+            'firstArgumentNotArray' => ['notArray', []],
+            'secondArgumentNotArray' => [[], 'notArray'],
+        ];
+    }
+
+    public function testEqArraySubsetValid()
+    {
+        $this->assertTrue(Assertion::eqArraySubset([
+            'a' => [
+                'a1' => 'a2',
+                'a3' => 'a4',
+            ],
+            'b' => [
+                'b1' => 'b2',
+            ],
+        ], [
+            'a' => [
+                'a1' => 'a2',
+            ],
+        ]));
+    }
+
+    /**
+     * @dataProvider invalidEqArraySubsetProvider
+     *
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY
+     */
+    public function testEqArraySubsetInvalid($value, $value2)
+    {
+        Assertion::eqArraySubset($value, $value2);
+    }
+
+    /**
+     * @dataProvider invalidEqArraySubsetProvider
+     *
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_EQ
+     */
+    public function testEqArraySubsetMismatchingSubset()
+    {
+        Assertion::eqArraySubset([
+            'a' => 'b',
+        ], [
+            'c' => 'd',
+        ]);
+    }
 }

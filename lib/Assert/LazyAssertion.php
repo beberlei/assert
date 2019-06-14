@@ -40,6 +40,7 @@ use LogicException;
  * @method $this email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method $this endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method $this eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==).
+ * @method $this eqArraySubset(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset.
  * @method $this extensionLoaded(string|callable $message = null, string $propertyPath = null) Assert that extension is loaded.
  * @method $this extensionVersion(string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed.
  * @method $this false(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False.
