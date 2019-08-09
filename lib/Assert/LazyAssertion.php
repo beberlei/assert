@@ -115,17 +115,17 @@ use LogicException;
  */
 class LazyAssertion
 {
-    private $currentChainFailed = false;
-    private $alwaysTryAll = false;
-    private $thisChainTryAll = false;
-    private $currentChain;
-    private $errors = [];
+    protected $currentChainFailed = false;
+    protected $alwaysTryAll = false;
+    protected $thisChainTryAll = false;
+    protected $currentChain;
+    protected $errors = [];
 
     /** @var string The class to use as AssertionChain factory */
-    private $assertClass = Assert::class;
+    protected $assertClass = Assert::class;
 
     /** @var string|LazyAssertionException The class to use for exceptions */
-    private $exceptionClass = LazyAssertionException::class;
+    protected $exceptionClass = LazyAssertionException::class;
 
     /**
      * @param mixed $value
@@ -143,9 +143,6 @@ class LazyAssertion
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function tryAll()
     {
         if (!$this->currentChain) {
