@@ -18,7 +18,7 @@ use Assert\Assertion;
 
 class PR142_OverrideStringify extends Assertion
 {
-    protected static function stringify($value)
+    protected static function stringify($value): string
     {
         return '***'.parent::stringify($value).'***';
     }
