@@ -40,6 +40,7 @@ use BadMethodCallException;
  * @method static bool allEmail(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
  * @method static bool allEndsWith(mixed $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
  * @method static bool allEq(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for all values.
+ * @method static bool allEqArraySubset(mixed $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset for all values.
  * @method static bool allExtensionLoaded(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
  * @method static bool allExtensionVersion(string $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed for all values.
  * @method static bool allFalse(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False for all values.
@@ -127,6 +128,7 @@ use BadMethodCallException;
  * @method static bool nullOrEmail(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) or that the value is null.
  * @method static bool nullOrEndsWith(mixed|null $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars or that the value is null.
  * @method static bool nullOrEq(mixed|null $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) or that the value is null.
+ * @method static bool nullOrEqArraySubset(mixed|null $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset or that the value is null.
  * @method static bool nullOrExtensionLoaded(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded or that the value is null.
  * @method static bool nullOrExtensionVersion(string|null $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed or that the value is null.
  * @method static bool nullOrFalse(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False or that the value is null.
@@ -305,6 +307,27 @@ class Assertion
 
             throw static::createException($value, $message, static::INVALID_EQ, $propertyPath, ['expected' => $value2]);
         }
+
+        return true;
+    }
+
+    /**
+     * Assert that the array contains the subset.
+     *
+     * @param mixed                $value
+     * @param mixed                $value2
+     * @param string|callable|null $message
+     * @param string|null          $propertyPath
+     *
+     * @return bool
+     */
+    public static function eqArraySubset($value, $value2, $message = null, $propertyPath = null)
+    {
+        static::isArray($value, $message, $propertyPath);
+        static::isArray($value2, $message, $propertyPath);
+
+        $patched = \array_replace_recursive($value, $value2);
+        static::eq($patched, $value, $message, $propertyPath);
 
         return true;
     }
