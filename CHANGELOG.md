@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.3 - 2019-08-23
+
+### Other changes
+- Added type hints and documentation consistency (Thanks to [Andru Cherny](https://github.com/beberlei/assert/pull/286))
+
 ## 3.2.2 - 2019-08-23
 
 ### Added assertions
