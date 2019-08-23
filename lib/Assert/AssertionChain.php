@@ -148,7 +148,7 @@ class AssertionChain
     /**
      * AssertionChain constructor.
      *
-     * @param $value
+     * @param mixed $value
      * @param string|callable|null $defaultMessage
      * @param string|null $defaultPropertyPath
      */
