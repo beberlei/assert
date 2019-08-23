@@ -31,7 +31,7 @@ class CustomAssertion extends Assertion
         return self::$calls;
     }
 
-    public static function string($value, $message = null, $propertyPath = null)
+    public static function string($value, $message = null, string $propertyPath = null): bool
     {
         self::$calls[] = ['string', $value];
 

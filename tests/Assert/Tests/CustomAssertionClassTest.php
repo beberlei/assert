@@ -38,7 +38,7 @@ class CustomAssertionClassTest extends TestCase
      */
     public function testThatCustomAssertionsUsesCustomExceptionForAssertionChains()
     {
-        $string = 's' . \uniqid();
+        $string = 's'.\uniqid();
         Fixtures\CustomAssert::that($string)->string();
         $this->assertSame([['string', $string]], CustomAssertion::getCalls());
 
@@ -52,8 +52,7 @@ class CustomAssertionClassTest extends TestCase
     {
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->integer()
-            ->verifyNow()
-        ;
+            ->verifyNow();
     }
 
     /**
@@ -64,17 +63,15 @@ class CustomAssertionClassTest extends TestCase
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->string()
             ->that('bar', 'bar')->integer()
-            ->verifyNow()
-        ;
+            ->verifyNow();
     }
 
     public function testThatCustomLazyAssertionUsesCustomAssertion()
     {
-        $string = 's' . \uniqid();
+        $string = 's'.\uniqid();
         Fixtures\CustomAssert::lazy()
             ->that($string, 'foo')->string()
-            ->verifyNow()
-        ;
+            ->verifyNow();
 
         $this->assertSame([['string', $string]], CustomAssertion::getCalls());
     }
@@ -84,8 +81,7 @@ class CustomAssertionClassTest extends TestCase
         try {
             Fixtures\CustomAssert::lazy()
                 ->that('foo', 'foo')->integer()
-                ->verifyNow()
-            ;
+                ->verifyNow();
         } catch (LazyAssertionException $ex) {
             $this->assertContainsOnlyInstancesOf(Fixtures\CustomException::class, $ex->getErrorExceptions());
         }
@@ -100,8 +96,7 @@ class CustomAssertionClassTest extends TestCase
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->tryAll()->integer()->isArray()
             ->that(123, 'bar')->tryAll()->string()->isArray()
-            ->verifyNow()
-        ;
+            ->verifyNow();
     }
 
     /**
@@ -114,7 +109,6 @@ class CustomAssertionClassTest extends TestCase
             ->tryAll()
             ->that('foo', 'foo')->integer()->isArray()
             ->that(123, 'bar')->string()->isArray()
-            ->verifyNow()
-        ;
+            ->verifyNow();
     }
 }
