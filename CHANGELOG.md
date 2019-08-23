@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.2 - 2019-08-23
+
+### Added assertions
+- `Assertion::eqArraySubset()` (Thanks to [Anna Filina](https://github.com/beberlei/assert/pull/283))
+
 ## 3.2.1 - 2019-05-28
 
 ### Fixes
