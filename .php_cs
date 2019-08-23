@@ -15,19 +15,31 @@ obtain it through the world-wide-web, please send an email
 to kontakt@beberlei.de so I can send you a copy immediately.
 TXT;
 
-$rules = array(
+$rules = [
     '@PSR2' => true,
     '@Symfony' => true,
-    'concat_space' => false,
-    'native_function_invocation' => true,
+    'cast_spaces' => [
+        'space' => 'none',
+    ],
+    'concat_space' => [
+        'spacing' => 'none',
+    ],
+    'native_function_invocation' => [
+        'scope' => 'namespaced',
+    ],
     'psr4' => true,
-    'phpdoc_align' => true,
-    'array_syntax' => ['syntax' => 'short'],
-    'header_comment' => array(
+    'phpdoc_align' => [
+        'align' => 'left',
+    ],
+    'array_syntax' => [
+        'syntax' => 'short',
+    ],
+    'header_comment' => [
         'header' => $header,
         'commentType' => PhpCsFixer\Fixer\Comment\HeaderCommentFixer::HEADER_PHPDOC,
-    ),
-);
+    ],
+    'yoda_style' => false,
+];
 
 $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 

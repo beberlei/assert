@@ -31,6 +31,12 @@ abstract class Assert
      * The invocation of this method starts an assertion chain
      * that is happening on the passed value.
      *
+     * @param mixed $value
+     * @param string|callable|null $defaultMessage
+     * @param string|null $defaultPropertyPath
+     *
+     * @return AssertionChain
+     *
      * @example
      *
      *  Assert::that($value)->notEmpty()->integer();
@@ -38,14 +44,8 @@ abstract class Assert
      *
      * The assertion chain can be stateful, that means be careful when you reuse
      * it. You should never pass around the chain.
-     *
-     * @param mixed  $value
-     * @param string $defaultMessage
-     * @param string $defaultPropertyPath
-     *
-     * @return \Assert\AssertionChain
      */
-    public static function that($value, $defaultMessage = null, $defaultPropertyPath = null)
+    public static function that($value, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
     {
         $assertionChain = new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
 
@@ -55,13 +55,13 @@ abstract class Assert
     /**
      * Start validation on a set of values, returns {@link AssertionChain}.
      *
-     * @param mixed  $values
-     * @param string $defaultMessage
-     * @param string $defaultPropertyPath
+     * @param mixed $values
+     * @param string|callable|null $defaultMessage
+     * @param string|null $defaultPropertyPath
      *
-     * @return \Assert\AssertionChain
+     * @return AssertionChain
      */
-    public static function thatAll($values, $defaultMessage = null, $defaultPropertyPath = null)
+    public static function thatAll($values, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
     {
         return static::that($values, $defaultMessage, $defaultPropertyPath)->all();
     }
@@ -69,13 +69,13 @@ abstract class Assert
     /**
      * Start validation and allow NULL, returns {@link AssertionChain}.
      *
-     * @param mixed  $value
-     * @param string $defaultMessage
-     * @param string $defaultPropertyPath
+     * @param mixed $value
+     * @param string|callable|null $defaultMessage
+     * @param string|null $defaultPropertyPath
      *
-     * @return \Assert\AssertionChain
+     * @return AssertionChain
      */
-    public static function thatNullOr($value, $defaultMessage = null, $defaultPropertyPath = null)
+    public static function thatNullOr($value, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
     {
         return static::that($value, $defaultMessage, $defaultPropertyPath)->nullOr();
     }
@@ -83,15 +83,14 @@ abstract class Assert
     /**
      * Create a lazy assertion object.
      *
-     * @return \Assert\LazyAssertion
+     * @return LazyAssertion
      */
-    public static function lazy()
+    public static function lazy(): LazyAssertion
     {
         $lazyAssertion = new LazyAssertion();
 
         return $lazyAssertion
             ->setAssertClass(\get_called_class())
-            ->setExceptionClass(static::$lazyAssertionExceptionClass)
-        ;
+            ->setExceptionClass(static::$lazyAssertionExceptionClass);
     }
 }

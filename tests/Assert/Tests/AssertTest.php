@@ -1064,7 +1064,7 @@ class AssertTest extends TestCase
      * @dataProvider dataLengthUtf8Characters
      *
      * @param string $value
-     * @param int    $expected
+     * @param int $expected
      */
     public function testLengthUtf8Characters($value, $expected)
     {
@@ -1407,7 +1407,7 @@ class AssertTest extends TestCase
      * @expectedExceptionMessageRegExp /List does not contain exactly \d+ elements \(\d+ given\)./
      *
      * @param mixed $countable
-     * @param int   $count
+     * @param int $count
      */
     public function testInvalidCount($countable, $count)
     {
@@ -1440,7 +1440,7 @@ class AssertTest extends TestCase
      * @expectedExceptionMessageRegExp /List should have at least \d+ elements, but has \d elements./
      *
      * @param mixed $countable
-     * @param int   $count
+     * @param int $count
      */
     public function testInvalidMinCount($countable, $count)
     {
@@ -1861,7 +1861,7 @@ class AssertTest extends TestCase
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_IP
      *
-     * @param string   $value
+     * @param string $value
      * @param int|null $flag
      */
     public function testInvalidIp($value, $flag = null)
@@ -2220,19 +2220,24 @@ class AssertTest extends TestCase
 
     public function testEqArraySubsetValid()
     {
-        $this->assertTrue(Assertion::eqArraySubset([
-            'a' => [
-                'a1' => 'a2',
-                'a3' => 'a4',
-            ],
-            'b' => [
-                'b1' => 'b2',
-            ],
-        ], [
-            'a' => [
-                'a1' => 'a2',
-            ],
-        ]));
+        $this->assertTrue(
+            Assertion::eqArraySubset(
+                [
+                    'a' => [
+                        'a1' => 'a2',
+                        'a3' => 'a4',
+                    ],
+                    'b' => [
+                        'b1' => 'b2',
+                    ],
+                ],
+                [
+                    'a' => [
+                        'a1' => 'a2',
+                    ],
+                ]
+            )
+        );
     }
 
     /**
@@ -2254,10 +2259,13 @@ class AssertTest extends TestCase
      */
     public function testEqArraySubsetMismatchingSubset()
     {
-        Assertion::eqArraySubset([
-            'a' => 'b',
-        ], [
-            'c' => 'd',
-        ]);
+        Assertion::eqArraySubset(
+            [
+                'a' => 'b',
+            ],
+            [
+                'c' => 'd',
+            ]
+        );
     }
 }

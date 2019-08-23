@@ -26,18 +26,17 @@ class LazyArrayTest extends TestCase
             'password' => 'Some highly secret password',
         ];
 
-        $this->assertTrue(Assert::lazy()
-            ->that($form['email'] ?? null, 'email')
-            ->notEmpty()
-            ->maxLength(255)
-            ->email()
-
-            ->that($form['password'] ?? null, 'password')
-            ->notEmpty()
-            ->minLength(4)
-            ->maxLength(255)
-
-            ->verifyNow()
+        $this->assertTrue(
+            Assert::lazy()
+                ->that($form['email'] ?? null, 'email')
+                ->notEmpty()
+                ->maxLength(255)
+                ->email()
+                ->that($form['password'] ?? null, 'password')
+                ->notEmpty()
+                ->minLength(4)
+                ->maxLength(255)
+                ->verifyNow()
         );
     }
 }

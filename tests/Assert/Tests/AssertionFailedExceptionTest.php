@@ -26,6 +26,7 @@ class AssertionFailedExceptionTest extends TestCase
 {
     /**
      * @param string $exceptionClass
+     *
      * @dataProvider provideExceptionClasses
      */
     public function testFailedExceptionIsAValidThrowable(string $exceptionClass)
