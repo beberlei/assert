@@ -24,7 +24,6 @@
   },
   "require": {
     "php": "^7",
-    "ext-intl": "*",
     "ext-simplexml": "*",
     "ext-mbstring": "*",
     "ext-ctype": "*",

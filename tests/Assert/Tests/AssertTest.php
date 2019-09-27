@@ -1385,6 +1385,13 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::count(['Hi', 'There'], 2));
         $this->assertTrue(Assertion::count(new Fixtures\OneCountable(), 1));
         $this->assertTrue(Assertion::count(new SimpleXMLElement('<a><b /><c /></a>'), 2));
+    }
+
+    /**
+     * @requires extension intl
+     */
+    public function testValidCountWithIntlResourceBundle()
+    {
         // Test ResourceBundle counting using resources generated for PHP testing of ResourceBundle
         // https://github.com/php/php-src/commit/8f4337f2551e28d98290752e9ca99fc7f87d93b5
         $this->assertTrue(Assertion::count(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 6));
@@ -1420,17 +1427,24 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::minCount(['Hi', 'There'], 1));
         $this->assertTrue(Assertion::minCount(new Fixtures\OneCountable(), 1));
         $this->assertTrue(Assertion::minCount(new SimpleXMLElement('<a><b /><c /></a>'), 1));
+    }
+
+    /**
+     * @requires extension intl
+     */
+    public function testValidMinCountWithIntlResourceBundle()
+    {
         $this->assertTrue(Assertion::minCount(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 2));
     }
 
     public static function dataInvalidMinCount()
     {
-        return [
-            '2 elements while at least 3 expected' => [['Hi', 'There'], 3],
-            '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2],
-            '2 countable while at least 3 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 3],
-            '6 countable while at least 7 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7],
-        ];
+        yield '2 elements while at least 3 expected' => [['Hi', 'There'], 3];
+        yield '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2];
+        yield '2 countable while at least 3 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 3];
+        if (extension_loaded('intl')) {
+            yield '6 countable while at least 7 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7];
+        }
     }
 
     /**
@@ -1453,17 +1467,24 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::maxCount(['Hi', 'There'], 2));
         $this->assertTrue(Assertion::maxCount(new Fixtures\OneCountable(), 1));
         $this->assertTrue(Assertion::maxCount(new SimpleXMLElement('<a><b /><c /></a>'), 3));
+    }
+
+    /**
+     * @requires extension intl
+     */
+    public function testValidMaxCountWithIntlResourceBundle()
+    {
         $this->assertTrue(Assertion::maxCount(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7));
     }
 
     public static function dataInvalidMaxCount()
     {
-        return [
-            '2 elements while at most 1 expected' => [['Hi', 'There'], 1],
-            '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0],
-            '2 countable while at most 1 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 1],
-            '6 countable while at most 5 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 5],
-        ];
+        yield '2 elements while at most 1 expected' => [['Hi', 'There'], 1];
+        yield '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0];
+        yield '2 countable while at most 1 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 1];
+        if (extension_loaded('intl')) {
+            yield '6 countable while at most 5 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 5];
+        }
     }
 
     /**
