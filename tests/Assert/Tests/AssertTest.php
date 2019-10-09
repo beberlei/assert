@@ -2268,4 +2268,163 @@ class AssertTest extends TestCase
             ]
         );
     }
+
+    public function validIsbn10Provider()
+    {
+        return [
+            ['2723442284'],
+            ['2723442276'],
+            ['2723455041'],
+            ['2070546810'],
+            ['2711858839'],
+            ['2756406767'],
+            ['2870971648'],
+            ['226623854X'],
+            ['2851806424'],
+            ['0321812700'],
+            ['0-45122-5244'],
+            ['0-4712-92311'],
+            ['0-9752298-0-X'],
+        ];
+    }
+
+    /**
+     * @dataProvider validIsbn10Provider
+     *
+     * @param string $isbn
+     */
+    public function testIsbn10($isbn)
+    {
+        $this->assertTrue(Assertion::isbn10($isbn));
+    }
+
+    public function validIsbn13Provider()
+    {
+        return [
+            ['978-2723442282'],
+            ['978-2723442275'],
+            ['978-2723455046'],
+            ['978-2070546817'],
+            ['978-2711858835'],
+            ['978-2756406763'],
+            ['978-2870971642'],
+            ['978-2266238540'],
+            ['978-2851806420'],
+            ['978-0321812704'],
+            ['978-0451225245'],
+            ['978-0471292319'],
+        ];
+    }
+
+    /**
+     * @dataProvider validIsbn13Provider
+     *
+     * @param string $isbn
+     */
+    public function testIsbn13($isbn)
+    {
+        $this->assertTrue(Assertion::isbn13($isbn));
+    }
+
+    public function validIsbnProvider()
+    {
+        return \array_merge(
+            $this->validIsbn10Provider(),
+            $this->validIsbn13Provider()
+        );
+    }
+
+    /**
+     * @dataProvider validIsbnProvider
+     *
+     * @param string $isbn
+     */
+    public function testIsbn($isbn)
+    {
+        $this->assertTrue(Assertion::isbn($isbn));
+    }
+
+    public function invalidIsbn10Provider()
+    {
+        return [
+            ['27234422841'],
+            ['272344228'],
+            ['0-4712-9231'],
+            ['1234567890'],
+            ['0987656789'],
+            ['7-35622-5444'],
+            ['0-4X19-92611'],
+            ['0_45122_5244'],
+            ['2870#971#648'],
+            ['0-9752298-0-x'],
+            ['1A34567890'],
+            // chr(1) evaluates to 0
+            // 2070546810 is valid
+            ['2'.\chr(1).'70546810'],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidIsbn10Provider
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ISBN10
+     *
+     * @param string $isbn
+     */
+    public function testNotIsbn10($isbn)
+    {
+        Assertion::isbn10($isbn);
+    }
+
+    public function invalidIsbn13Provider()
+    {
+        return [
+            ['978-27234422821'],
+            ['978-272344228'],
+            ['978-2723442-82'],
+            ['978-2723442281'],
+            ['978-0321513774'],
+            ['979-0431225385'],
+            ['980-0474292319'],
+            ['0-4X19-92619812'],
+            ['978_2723442282'],
+            ['978#2723442282'],
+            ['978-272C442282'],
+            // chr(1) evaluates to 0
+            // 978-2070546817 is valid
+            ['978-2'.\chr(1).'70546817'],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidIsbn13Provider
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ISBN13
+     *
+     * @param string $isbn
+     */
+    public function testNotIsbn13($isbn)
+    {
+        Assertion::isbn13($isbn);
+    }
+
+    public function invalidIsbnProvider()
+    {
+        return \array_merge(
+            $this->invalidIsbn10Provider(),
+            $this->invalidIsbn13Provider()
+        );
+    }
+
+    /**
+     * @dataProvider invalidIsbnProvider
+     * @expectedException \Assert\InvalidArgumentException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ISBN
+     *
+     * @param string $isbn
+     */
+    public function testNotIsbn($isbn)
+    {
+        Assertion::isbn($isbn);
+    }
 }

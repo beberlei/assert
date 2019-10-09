@@ -74,6 +74,9 @@ use Traversable;
  * @method static bool allIsObject(mixed $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
  * @method static bool allIsResource(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource for all values.
  * @method static bool allIsTraversable(mixed $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object for all values.
+ * @method static bool allIsbn(string $value, string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10 or an ISBN-13 for all values.
+ * @method static bool allIsbn10(string $value, string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10 for all values.
+ * @method static bool allIsbn13(string $value, string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-13 for all values.
  * @method static bool allKeyExists(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array for all values.
  * @method static bool allKeyIsset(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() for all values.
  * @method static bool allKeyNotExists(mixed $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array for all values.
@@ -162,6 +165,9 @@ use Traversable;
  * @method static bool nullOrIsObject(mixed|null $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object or that the value is null.
  * @method static bool nullOrIsResource(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource or that the value is null.
  * @method static bool nullOrIsTraversable(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object or that the value is null.
+ * @method static bool nullOrIsbn(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10 or an ISBN-13 or that the value is null.
+ * @method static bool nullOrIsbn10(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10 or that the value is null.
+ * @method static bool nullOrIsbn13(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-13 or that the value is null.
  * @method static bool nullOrKeyExists(mixed|null $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array or that the value is null.
  * @method static bool nullOrKeyIsset(mixed|null $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() or that the value is null.
  * @method static bool nullOrKeyNotExists(mixed|null $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array or that the value is null.
@@ -287,6 +293,9 @@ class Assertion
     const INVALID_MIN_COUNT = 227;
     const INVALID_MAX_COUNT = 228;
     const INVALID_STRING_NOT_CONTAINS = 229;
+    const INVALID_ISBN10 = 230;
+    const INVALID_ISBN13 = 231;
+    const INVALID_ISBN = 232;
 
     /**
      * Exception to throw when an assertion failed.
@@ -2727,6 +2736,123 @@ class Assertion
             $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid base64 string.'), $value);
 
             throw static::createException($value, $message, static::INVALID_BASE64, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $value
+     * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @return bool
+     */
+    public static function isbn10($value, $message = null, $propertyPath = null)
+    {
+        $canonical = \str_replace('-', '', $value);
+
+        if (10 !== \strlen($canonical)) {
+            $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid ISBN-10.'), $value);
+
+            throw static::createException($value, $message, static::INVALID_ISBN10, $propertyPath);
+        }
+
+        $checkSum = 0;
+
+        for ($i = 0; $i < 10; ++$i) {
+            if ('X' === $canonical[$i]) {
+                $digit = 10;
+            } elseif (\ctype_digit($canonical[$i])) {
+                $digit = (int)$canonical[$i];
+            } else {
+                $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid ISBN-10.'), $value);
+
+                throw static::createException($value, $message, static::INVALID_ISBN10, $propertyPath);
+            }
+
+            $checkSum += $digit * (10 - $i);
+        }
+
+        if (0 !== $checkSum % 11) {
+            $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid ISBN-10.'), $value);
+
+            throw static::createException($value, $message, static::INVALID_ISBN10, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $value
+     * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @return bool
+     */
+    public static function isbn13($value, $message = null, $propertyPath = null)
+    {
+        $canonical = \str_replace('-', '', $value);
+
+        if (!\ctype_digit($canonical) || 13 !== \strlen($canonical)) {
+            $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid ISBN-13.'), $value);
+
+            throw static::createException($value, $message, static::INVALID_ISBN13, $propertyPath);
+        }
+
+        $checkSum = 0;
+
+        for ($i = 0; $i < 13; $i += 2) {
+            $checkSum += (int)$canonical[$i];
+        }
+
+        for ($i = 1; $i < 12; $i += 2) {
+            $checkSum += ((int)$canonical[$i]) * 3;
+        }
+
+        if (0 !== $checkSum % 10) {
+            $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid ISBN-13.'), $value);
+
+            throw static::createException($value, $message, static::INVALID_ISBN13, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $value
+     * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @return bool
+     */
+    public static function isbn($value, $message = null, $propertyPath = null)
+    {
+        $valid = false;
+        $validators = [
+            static function ($value, $propertyPath) {
+                return static::isbn10($value, null, $propertyPath);
+            },
+            static function ($value, $propertyPath) {
+                return static::isbn13($value, null, $propertyPath);
+            },
+        ];
+
+        foreach ($validators as $validator) {
+            try {
+                $valid = $validator($value, $propertyPath);
+            } catch (\Throwable $e) {
+            }
+
+            if ($valid) {
+                break;
+            }
+        }
+
+        if (!$valid) {
+            $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is neither a valid ISBN-10 nor a valid ISBN-13.'), $value);
+
+            throw static::createException($value, $message, static::INVALID_ISBN, $propertyPath);
         }
 
         return true;

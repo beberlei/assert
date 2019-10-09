@@ -65,6 +65,9 @@ use LogicException;
  * @method $this isObject(string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object.
  * @method $this isResource(string|callable $message = null, string $propertyPath = null) Assert that value is a resource.
  * @method $this isTraversable(string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object.
+ * @method $this isbn(string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10 or an ISBN-13.
+ * @method $this isbn10(string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10.
+ * @method $this isbn13(string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-13.
  * @method $this keyExists(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array.
  * @method $this keyIsset(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
  * @method $this keyNotExists(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array.

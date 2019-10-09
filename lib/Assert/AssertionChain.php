@@ -66,6 +66,9 @@ use ReflectionClass;
  * @method AssertionChain isObject(string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object.
  * @method AssertionChain isResource(string|callable $message = null, string $propertyPath = null) Assert that value is a resource.
  * @method AssertionChain isTraversable(string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object.
+ * @method AssertionChain isbn(string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10 or an ISBN-13.
+ * @method AssertionChain isbn10(string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-10.
+ * @method AssertionChain isbn13(string|callable $message = null, string $propertyPath = null) Assert that value is an ISBN-13.
  * @method AssertionChain keyExists(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array.
  * @method AssertionChain keyIsset(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset().
  * @method AssertionChain keyNotExists(string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array.
