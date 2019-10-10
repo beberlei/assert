@@ -81,6 +81,10 @@ class MethodDocGenerator
                     }
                 }
 
+                if ($prefix === 'all' && strpos($type, 'null') === false && $parameterIndex === 0) {
+                    $type = str_replace('|', '[]|', $type).'[]';
+                }
+
                 if ($prefix === 'nullOr' && strpos($type, 'null') === false && $parameterIndex === 0) {
                     $type .= '|null';
                 }
