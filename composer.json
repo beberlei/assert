@@ -19,21 +19,6 @@
     "assertion",
     "validation"
   ],
-  "config": {
-    "sort-packages": true
-  },
-  "require": {
-    "php": "^7",
-    "ext-simplexml": "*",
-    "ext-mbstring": "*",
-    "ext-ctype": "*",
-    "ext-json": "*"
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "*",
-    "phpstan/phpstan-shim": "*",
-    "phpunit/phpunit": ">=6.0.0 <8"
-  },
   "autoload": {
     "psr-4": {
       "Assert\\": "lib/Assert"
@@ -50,11 +35,29 @@
       "tests/Assert/Tests/Fixtures/functions.php"
     ]
   },
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7",
+    "ext-simplexml": "*",
+    "ext-mbstring": "*",
+    "ext-ctype": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "*",
+    "phpstan/phpstan-shim": "*",
+    "phpunit/phpunit": ">=6.0.0 <8"
+  },
   "scripts": {
     "assert:generate-docs": "php bin/generate_method_docs.php",
     "assert:cs-lint": "php-cs-fixer fix --diff -vvv --dry-run",
     "assert:cs-fix": "php-cs-fixer fix . -vvv || true",
     "assert:sa-code": "vendor/bin/phpstan analyse --configuration=phpstan-code.neon --no-progress --ansi -l 7 bin lib",
     "assert:sa-tests": "vendor/bin/phpstan analyse --configuration=phpstan-tests.neon --no-progress --ansi -l 7 tests"
+  },
+  "suggest": {
+    "ext-intl": "Needed to allow Assertion::count(), Assertion::isCountable(), Assertion::minCount(), and Assertion::maxCount() to operate on ResourceBundles"
   }
 }

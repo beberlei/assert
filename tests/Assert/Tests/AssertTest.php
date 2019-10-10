@@ -14,18 +14,36 @@
 
 namespace Assert\Tests;
 
+use ArrayIterator;
+use ArrayObject;
 use Assert\Assertion;
-use Assert\AssertionFailedException;
 use Assert\Tests\Fixtures\OneCountable;
-use PDO;
+use BadMethodCallException;
+use Countable;
+use DateTime;
+use Exception;
+use Foo;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ResourceBundle;
 use SimpleXMLElement;
+use SplObserver;
 use stdClass;
+use Traversable;
+use function base64_encode;
+use function curl_init;
+use function extension_loaded;
+use function fopen;
+use function is_bool;
+use function is_null;
+use function json_encode;
+use function range;
+use function str_repeat;
+use function sys_get_temp_dir;
 
 class AssertTest extends TestCase
 {
-    public static function dataInvalidFloat()
+    public function dataInvalidFloat(): array
     {
         return [
             [1],
@@ -56,7 +74,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::float(-1.1));
     }
 
-    public static function dataInvalidInteger()
+    public function dataInvalidInteger(): array
     {
         return [
             [1.23],
@@ -65,7 +83,7 @@ class AssertTest extends TestCase
             [null],
             ['1.23'],
             ['10'],
-            [new \DateTime()],
+            [new DateTime()],
         ];
     }
 
@@ -87,7 +105,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::integer(0));
     }
 
-    public function dataValidIntergerish()
+    public function dataValidIntergerish(): array
     {
         return [
             [10],
@@ -117,7 +135,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::integerish($value));
     }
 
-    public static function dataInvalidIntegerish()
+    public function dataInvalidIntegerish(): array
     {
         return [
             'A float' => [1.23],
@@ -127,7 +145,7 @@ class AssertTest extends TestCase
             'A null' => [null],
             'A float in a string' => ['1.23'],
             'A negative float in a string' => ['-1.23'],
-            'A file pointer' => [\fopen(__FILE__, 'r')],
+            'A file pointer' => [fopen(__FILE__, 'r')],
             'A float in a string with a leading space' => [' 1.23'],
             'An integer in a string with a leading space' => [' 123'],
             'A negative integer in a string with a leading space' => [' -123'],
@@ -191,7 +209,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::scalar(false));
     }
 
-    public static function dataInvalidNotEmpty()
+    public function dataInvalidNotEmpty(): array
     {
         return [
             [''],
@@ -230,7 +248,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::noContent([]));
     }
 
-    public static function dataInvalidEmpty()
+    public function dataInvalidEmpty(): array
     {
         return [
             ['foo'],
@@ -253,7 +271,7 @@ class AssertTest extends TestCase
         Assertion::noContent($value);
     }
 
-    public static function dataInvalidNull()
+    public function dataInvalidNull(): array
     {
         return [
             ['foo'],
@@ -318,12 +336,12 @@ class AssertTest extends TestCase
         Assertion::string($invalidString);
     }
 
-    public static function dataInvalidString()
+    public function dataInvalidString(): array
     {
         return [
             [1.23],
             [false],
-            [new \ArrayObject()],
+            [new ArrayObject()],
             [null],
             [10],
             [true],
@@ -552,7 +570,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::numeric(1.23));
     }
 
-    public static function dataInvalidArray()
+    public function dataInvalidArray(): array
     {
         return [
             [null],
@@ -561,7 +579,7 @@ class AssertTest extends TestCase
             [1],
             [1.23],
             [new stdClass()],
-            [\fopen('php://memory', 'r')],
+            [fopen('php://memory', 'r')],
         ];
     }
 
@@ -612,7 +630,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::keyNotExists(['foo' => 'bar'], 'baz'));
     }
 
-    public static function dataInvalidNotBlank()
+    public function dataInvalidNotBlank(): array
     {
         return [
             [''],
@@ -654,7 +672,13 @@ class AssertTest extends TestCase
 
     public function testValidNotIsInstanceOf()
     {
-        $this->assertTrue(Assertion::notIsInstanceOf(new stdClass(), PDO::class));
+        $this->assertTrue(
+            Assertion::notIsInstanceOf(
+                new stdClass(),
+                new class() {
+                }
+            )
+        );
     }
 
     /**
@@ -663,7 +687,15 @@ class AssertTest extends TestCase
      */
     public function testInvalidInstanceOf()
     {
-        Assertion::isInstanceOf(new stdClass(), PDO::class);
+        Assertion::isInstanceOf(
+            new stdClass(),
+            new class() {
+                public function __toString(): string
+                {
+                    return 'Anonymous';
+                }
+            }
+        );
     }
 
     public function testValidInstanceOf()
@@ -677,7 +709,15 @@ class AssertTest extends TestCase
      */
     public function testInvalidSubclassOf()
     {
-        Assertion::subclassOf(new stdClass(), PDO::class);
+        Assertion::subclassOf(
+            new stdClass(),
+            new class() {
+                public function __toString(): string
+                {
+                    return 'Anonymous';
+                }
+            }
+        );
     }
 
     public function testValidSubclassOf()
@@ -729,7 +769,7 @@ class AssertTest extends TestCase
         Assertion::url($url);
     }
 
-    public static function dataInvalidUrl()
+    public function dataInvalidUrl(): array
     {
         return [
             ['google.com'],
@@ -762,7 +802,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::url($url));
     }
 
-    public static function dataValidUrl()
+    public function dataValidUrl(): array
     {
         return [
             ['http://a.pl'],
@@ -903,12 +943,12 @@ class AssertTest extends TestCase
      */
     public function testInvalidClass()
     {
-        Assertion::classExists(\Foo::class);
+        Assertion::classExists(Foo::class);
     }
 
     public function testValidClass()
     {
-        $this->assertTrue(Assertion::classExists(\Exception::class));
+        $this->assertTrue(Assertion::classExists(Exception::class));
     }
 
     /**
@@ -967,10 +1007,10 @@ class AssertTest extends TestCase
      */
     public function testNotInArray()
     {
-        $this->assertTrue(Assertion::notInArray(6, \range(1, 5)));
-        $this->assertTrue(Assertion::notInArray('a', \range('b', 'z')));
+        $this->assertTrue(Assertion::notInArray(6, range(1, 5)));
+        $this->assertTrue(Assertion::notInArray('a', range('b', 'z')));
 
-        Assertion::notInArray(1, \range(1, 5));
+        Assertion::notInArray(1, range(1, 5));
     }
 
     public function testMin()
@@ -994,7 +1034,7 @@ class AssertTest extends TestCase
         Assertion::min($value, $min);
     }
 
-    public function dataInvalidMin()
+    public function dataInvalidMin(): array
     {
         return [
             [0, 1],
@@ -1023,7 +1063,7 @@ class AssertTest extends TestCase
         Assertion::max($value, $min);
     }
 
-    public function dataInvalidMax()
+    public function dataInvalidMax(): array
     {
         return [
             [2, 1],
@@ -1038,7 +1078,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \BadMethodCallException
+     * @expectedException BadMethodCallException
      * @expectedExceptionMessage Missing the first argument.
      */
     public function testNullOrWithNoValueThrows()
@@ -1052,7 +1092,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::length('', 0));
     }
 
-    public static function dataLengthUtf8Characters()
+    public function dataLengthUtf8Characters(): array
     {
         return [
             ['址', 1],
@@ -1145,13 +1185,13 @@ class AssertTest extends TestCase
      */
     public function testWriteable()
     {
-        $this->assertTrue(Assertion::writeable(\sys_get_temp_dir()));
+        $this->assertTrue(Assertion::writeable(sys_get_temp_dir()));
 
         Assertion::writeable(__DIR__.'/does-not-exist');
     }
 
     /**
-     * @expectedException \BadMethodCallException
+     * @expectedException BadMethodCallException
      * @expectedExceptionMessage No assertion
      */
     public function testFailedNullOrMethodCall()
@@ -1165,9 +1205,9 @@ class AssertTest extends TestCase
      */
     public function testImplementsInterface()
     {
-        $this->assertTrue(Assertion::implementsInterface(\ArrayIterator::class, \Traversable::class));
+        $this->assertTrue(Assertion::implementsInterface(ArrayIterator::class, Traversable::class));
 
-        Assertion::implementsInterface(\Exception::class, \Traversable::class);
+        Assertion::implementsInterface(Exception::class, Traversable::class);
     }
 
     /**
@@ -1176,11 +1216,11 @@ class AssertTest extends TestCase
      */
     public function testImplementsInterfaceWithClassObject()
     {
-        $class = new \ArrayObject();
+        $class = new ArrayObject();
 
-        $this->assertTrue(Assertion::implementsInterface($class, \Traversable::class));
+        $this->assertTrue(Assertion::implementsInterface($class, Traversable::class));
 
-        Assertion::implementsInterface($class, \SplObserver::class);
+        Assertion::implementsInterface($class, SplObserver::class);
     }
 
     /**
@@ -1190,9 +1230,9 @@ class AssertTest extends TestCase
      */
     public function testImplementsInterfaceThrowsExceptionForInvalidSubject()
     {
-        $this->assertTrue(Assertion::implementsInterface('not_a_class', \Traversable::class));
+        $this->assertTrue(Assertion::implementsInterface('not_a_class', Traversable::class));
 
-        Assertion::implementsInterface(\Exception::class, \Traversable::class);
+        Assertion::implementsInterface(Exception::class, Traversable::class);
     }
 
     /**
@@ -1205,11 +1245,11 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::isJsonString($content));
     }
 
-    public static function isJsonStringDataprovider()
+    public function isJsonStringDataprovider(): array
     {
         return [
-            '»null« value' => [\json_encode(null)],
-            '»false« value' => [\json_encode(false)],
+            '»null« value' => [json_encode(null)],
+            '»false« value' => [json_encode(false)],
             'array value' => ['["false"]'],
             'object value' => ['{"tux":"false"}'],
         ];
@@ -1227,7 +1267,7 @@ class AssertTest extends TestCase
         Assertion::isJsonString($invalidString);
     }
 
-    public static function isJsonStringInvalidStringDataprovider()
+    public function isJsonStringInvalidStringDataprovider(): array
     {
         return [
             'no json string' => ['invalid json encoded string'],
@@ -1257,7 +1297,7 @@ class AssertTest extends TestCase
         Assertion::uuid($uuid);
     }
 
-    public static function providesValidUuids()
+    public function providesValidUuids(): array
     {
         return [
             ['ff6f8cb0-c57d-11e1-9b21-0800200c9a66'],
@@ -1270,7 +1310,7 @@ class AssertTest extends TestCase
         ];
     }
 
-    public static function providesInvalidUuids()
+    public function providesInvalidUuids(): array
     {
         return [
             ['zf6f8cb0-c57d-11e1-9b21-0800200c9a66'],
@@ -1303,7 +1343,7 @@ class AssertTest extends TestCase
         Assertion::e164($e164);
     }
 
-    public static function providesValidE164s()
+    public function providesValidE164s(): array
     {
         return [
             ['+33626525690'],
@@ -1312,7 +1352,7 @@ class AssertTest extends TestCase
         ];
     }
 
-    public static function providesInvalidE164s()
+    public function providesInvalidE164s(): array
     {
         return [
             ['+3362652569e'],
@@ -1368,11 +1408,17 @@ class AssertTest extends TestCase
      */
     public function testAllWithComplexAssertionThrowsExceptionOnElementThatFailsAssertion()
     {
-        Assertion::allIsInstanceOf([new stdClass(), new stdClass()], PDO::class, 'Assertion failed', 'foos');
+        Assertion::allIsInstanceOf(
+            [new stdClass(), new stdClass()],
+            new class() {
+            },
+            'Assertion failed',
+            'foos'
+        );
     }
 
     /**
-     * @expectedException \BadMethodCallException
+     * @expectedException BadMethodCallException
      */
     public function testAllWithNoValueThrows()
     {
@@ -1397,7 +1443,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::count(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 6));
     }
 
-    public static function dataInvalidCount()
+    public function dataInvalidCount(): array
     {
         return [
             [['Hi', 'There'], 3],
@@ -1437,7 +1483,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::minCount(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 2));
     }
 
-    public static function dataInvalidMinCount()
+    public function dataInvalidMinCount(): \Generator
     {
         yield '2 elements while at least 3 expected' => [['Hi', 'There'], 3];
         yield '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2];
@@ -1477,7 +1523,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::maxCount(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7));
     }
 
-    public static function dataInvalidMaxCount()
+    public function dataInvalidMaxCount(): \Generator
     {
         yield '2 elements while at most 1 expected' => [['Hi', 'There'], 1];
         yield '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0];
@@ -1530,7 +1576,7 @@ class AssertTest extends TestCase
         Assertion::choicesNotEmpty(['tux' => ''], ['invalidChoice']);
     }
 
-    public function invalidChoicesProvider()
+    public function invalidChoicesProvider(): array
     {
         return [
             'empty values' => [[], ['tux'], Assertion::VALUE_EMPTY],
@@ -1572,7 +1618,7 @@ class AssertTest extends TestCase
             Assertion::range(0, 10, 20);
 
             $this->fail('Exception expected');
-        } catch (AssertionFailedException $e) {
+        } catch (\Assert\AssertionFailedException $e) {
             $this->assertEquals(0, $e->getValue());
             $this->assertEquals(['min' => 10, 'max' => 20], $e->getConstraints());
         }
@@ -1583,18 +1629,18 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::lessThan(1, 2));
         $this->assertTrue(Assertion::lessThan('aaa', 'bbb'));
         $this->assertTrue(Assertion::lessThan('aaa', 'aaaa'));
-        $this->assertTrue(Assertion::lessThan(new \DateTime('today'), new \DateTime('tomorrow')));
+        $this->assertTrue(Assertion::lessThan(new DateTime('today'), new DateTime('tomorrow')));
     }
 
-    public function invalidLessProvider()
+    public function invalidLessProvider(): array
     {
         return [
             [2, 1],
             [2, 2],
             ['aaa', 'aaa'],
             ['aaaa', 'aaa'],
-            [new \DateTime('today'), new \DateTime('yesterday')],
-            [new \DateTime('today'), new \DateTime('today')],
+            [new DateTime('today'), new DateTime('yesterday')],
+            [new DateTime('today'), new DateTime('today')],
         ];
     }
 
@@ -1618,16 +1664,16 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::lessOrEqualThan('aaa', 'bbb'));
         $this->assertTrue(Assertion::lessOrEqualThan('aaa', 'aaaa'));
         $this->assertTrue(Assertion::lessOrEqualThan('aaa', 'aaa'));
-        $this->assertTrue(Assertion::lessOrEqualThan(new \DateTime('today'), new \DateTime('tomorrow')));
-        $this->assertTrue(Assertion::lessOrEqualThan(new \DateTime('today'), new \DateTime('today')));
+        $this->assertTrue(Assertion::lessOrEqualThan(new DateTime('today'), new DateTime('tomorrow')));
+        $this->assertTrue(Assertion::lessOrEqualThan(new DateTime('today'), new DateTime('today')));
     }
 
-    public function invalidLessOrEqualProvider()
+    public function invalidLessOrEqualProvider(): array
     {
         return [
             [2, 1],
             ['aaaa', 'aaa'],
-            [new \DateTime('today'), new \DateTime('yesterday')],
+            [new DateTime('today'), new DateTime('yesterday')],
         ];
     }
 
@@ -1649,18 +1695,18 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::greaterThan(2, 1));
         $this->assertTrue(Assertion::greaterThan('bbb', 'aaa'));
         $this->assertTrue(Assertion::greaterThan('aaaa', 'aaa'));
-        $this->assertTrue(Assertion::greaterThan(new \DateTime('tomorrow'), new \DateTime('today')));
+        $this->assertTrue(Assertion::greaterThan(new DateTime('tomorrow'), new DateTime('today')));
     }
 
-    public function invalidGreaterProvider()
+    public function invalidGreaterProvider(): array
     {
         return [
             [1, 2],
             [2, 2],
             ['aaa', 'aaa'],
             ['aaa', 'aaaa'],
-            [new \DateTime('yesterday'), new \DateTime('today')],
-            [new \DateTime('today'), new \DateTime('today')],
+            [new DateTime('yesterday'), new DateTime('today')],
+            [new DateTime('today'), new DateTime('today')],
         ];
     }
 
@@ -1675,7 +1721,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::date($value, $format));
     }
 
-    public function validDateProvider()
+    public function validDateProvider(): array
     {
         return [
             ['2012-03-13', 'Y-m-d'],
@@ -1705,16 +1751,16 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::greaterOrEqualThan('bbb', 'aaa'));
         $this->assertTrue(Assertion::greaterOrEqualThan('aaaa', 'aaa'));
         $this->assertTrue(Assertion::greaterOrEqualThan('aaa', 'aaa'));
-        $this->assertTrue(Assertion::greaterOrEqualThan(new \DateTime('tomorrow'), new \DateTime('today')));
-        $this->assertTrue(Assertion::greaterOrEqualThan(new \DateTime('today'), new \DateTime('today')));
+        $this->assertTrue(Assertion::greaterOrEqualThan(new DateTime('tomorrow'), new DateTime('today')));
+        $this->assertTrue(Assertion::greaterOrEqualThan(new DateTime('today'), new DateTime('today')));
     }
 
-    public function invalidGreaterOrEqualProvider()
+    public function invalidGreaterOrEqualProvider(): array
     {
         return [
             [1, 2],
             ['aaa', 'aaaa'],
-            [new \DateTime('yesterday'), new \DateTime('tomorrow')],
+            [new DateTime('yesterday'), new DateTime('tomorrow')],
         ];
     }
 
@@ -1744,7 +1790,7 @@ class AssertTest extends TestCase
         Assertion::date($value, $format);
     }
 
-    public function invalidDateProvider()
+    public function invalidDateProvider(): array
     {
         return [
             ['this is not the date', 'Y-m-d'],
@@ -1755,7 +1801,7 @@ class AssertTest extends TestCase
 
     public function testValidTraversable()
     {
-        $this->assertTrue(Assertion::isTraversable(new \ArrayObject()));
+        $this->assertTrue(Assertion::isTraversable(new ArrayObject()));
     }
 
     /**
@@ -1770,7 +1816,7 @@ class AssertTest extends TestCase
     public function testValidCountable()
     {
         $this->assertTrue(Assertion::isCountable([]));
-        $this->assertTrue(Assertion::isCountable(new \ArrayObject()));
+        $this->assertTrue(Assertion::isCountable(new ArrayObject()));
     }
 
     /**
@@ -1784,7 +1830,7 @@ class AssertTest extends TestCase
 
     public function testValidArrayAccessible()
     {
-        $this->assertTrue(Assertion::isArrayAccessible(new \ArrayObject()));
+        $this->assertTrue(Assertion::isArrayAccessible(new ArrayObject()));
     }
 
     /**
@@ -1826,8 +1872,8 @@ class AssertTest extends TestCase
     {
         Assertion::satisfy(
             null,
-            function ($value) {
-                return !\is_null($value);
+            function ($value): bool {
+                return !is_null($value);
             }
         );
     }
@@ -1838,8 +1884,8 @@ class AssertTest extends TestCase
         $this->assertTrue(
             Assertion::satisfy(
                 null,
-                function ($value) {
-                    return \is_null($value);
+                function ($value) : bool {
+                    return is_null($value);
                 }
             )
         );
@@ -1848,8 +1894,11 @@ class AssertTest extends TestCase
         $this->assertTrue(
             Assertion::satisfy(
                 true,
+                /**
+                 * @return bool|void
+                 */
                 function ($value) {
-                    if (!\is_bool($value)) {
+                    if (!is_bool($value)) {
                         return false;
                     }
                 }
@@ -1867,7 +1916,7 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::ip($value));
     }
 
-    public function validIpProvider()
+    public function validIpProvider(): array
     {
         return [
             ['0.0.0.0'],
@@ -1890,7 +1939,7 @@ class AssertTest extends TestCase
         Assertion::ip($value, $flag);
     }
 
-    public function invalidIpProvider()
+    public function invalidIpProvider(): array
     {
         return [
             ['invalid ip address'],
@@ -1942,7 +1991,7 @@ class AssertTest extends TestCase
 
     public function testValidInterfaceExists()
     {
-        $this->assertTrue(Assertion::interfaceExists(\Countable::class));
+        $this->assertTrue(Assertion::interfaceExists(Countable::class));
     }
 
     /**
@@ -1959,18 +2008,15 @@ class AssertTest extends TestCase
         Assertion::between($value, $lowerLimit, $upperLimit);
     }
 
-    /**
-     * @return array
-     */
-    public function providerInvalidBetween()
+    public function providerInvalidBetween(): array
     {
         return [
             [1, 2, 3],
             [3, 1, 2],
             ['aaa', 'bbb', 'ccc'],
             ['ddd', 'bbb', 'ccc'],
-            [new \DateTime('yesterday'), new \DateTime('today'), new \DateTime('tomorrow')],
-            [new \DateTime('tomorrow'), new \DateTime('yesterday'), new \DateTime('today')],
+            [new DateTime('yesterday'), new DateTime('today'), new DateTime('tomorrow')],
+            [new DateTime('tomorrow'), new DateTime('yesterday'), new DateTime('today')],
         ];
     }
 
@@ -1986,18 +2032,15 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::between($value, $lowerLimit, $upperLimit));
     }
 
-    /**
-     * @return array
-     */
-    public function providerValidBetween()
+    public function providerValidBetween(): array
     {
         return [
             [2, 1, 3],
             [1, 1, 1],
             ['bbb', 'aaa', 'ccc'],
             ['aaa', 'aaa', 'aaa'],
-            [new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')],
-            [new \DateTime('today'), new \DateTime('today'), new \DateTime('today')],
+            [new DateTime('today'), new DateTime('yesterday'), new DateTime('tomorrow')],
+            [new DateTime('today'), new DateTime('today'), new DateTime('today')],
         ];
     }
 
@@ -2015,18 +2058,15 @@ class AssertTest extends TestCase
         Assertion::betweenExclusive($value, $lowerLimit, $upperLimit);
     }
 
-    /**
-     * @return array
-     */
-    public function providerInvalidBetweenExclusive()
+    public function providerInvalidBetweenExclusive(): array
     {
         return [
             [1, 1, 2],
             [2, 1, 2],
             ['aaa', 'aaa', 'bbb'],
             ['bbb', 'aaa', 'bbb'],
-            [new \DateTime('today'), new \DateTime('today'), new \DateTime('tomorrow')],
-            [new \DateTime('tomorrow'), new \DateTime('today'), new \DateTime('tomorrow')],
+            [new DateTime('today'), new DateTime('today'), new DateTime('tomorrow')],
+            [new DateTime('tomorrow'), new DateTime('today'), new DateTime('tomorrow')],
         ];
     }
 
@@ -2042,15 +2082,12 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::betweenExclusive($value, $lowerLimit, $upperLimit));
     }
 
-    /**
-     * @return array
-     */
-    public function providerValidBetweenExclusive()
+    public function providerValidBetweenExclusive(): array
     {
         return [
             [2, 1, 3],
             ['bbb', 'aaa', 'ccc'],
-            [new \DateTime('today'), new \DateTime('yesterday'), new \DateTime('tomorrow')],
+            [new DateTime('today'), new DateTime('yesterday'), new DateTime('tomorrow')],
         ];
     }
 
@@ -2061,7 +2098,7 @@ class AssertTest extends TestCase
      */
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
     {
-        $string = \str_repeat('1234567890', 11);
+        $string = str_repeat('1234567890', 11);
 
         $this->assertTrue(Assertion::float($string));
     }
@@ -2073,7 +2110,7 @@ class AssertTest extends TestCase
      */
     public function testStringifyReportsResourceType()
     {
-        $this->assertTrue(Assertion::float(\fopen('php://stdin', 'rb')));
+        $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
     }
 
     public function testExtensionLoaded()
@@ -2082,7 +2119,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testExtensionNotLoaded()
     {
@@ -2095,7 +2132,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidConstant()
     {
@@ -2108,7 +2145,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidVersion()
     {
@@ -2116,7 +2153,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidVersionOperator()
     {
@@ -2129,7 +2166,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidPhpVersion()
     {
@@ -2142,7 +2179,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidExtensionVersion()
     {
@@ -2156,7 +2193,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testNotObjectOrClass()
     {
@@ -2165,24 +2202,24 @@ class AssertTest extends TestCase
 
     public function testPropertyExists()
     {
-        self::assertTrue(Assertion::propertyExists(new \Exception(), 'message'));
+        self::assertTrue(Assertion::propertyExists(new Exception(), 'message'));
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
      */
     public function testInvalidPropertyExists()
     {
-        Assertion::propertyExists(new \Exception(), 'invalidProperty');
+        Assertion::propertyExists(new Exception(), 'invalidProperty');
     }
 
     public function testPropertiesExist()
     {
-        self::assertTrue(Assertion::propertiesExist(new \Exception(), ['message', 'code', 'previous']));
+        self::assertTrue(Assertion::propertiesExist(new Exception(), ['message', 'code', 'previous']));
     }
 
-    public function invalidPropertiesExistProvider()
+    public function invalidPropertiesExistProvider(): array
     {
         return [
             [['invalidProperty']],
@@ -2192,23 +2229,23 @@ class AssertTest extends TestCase
 
     /**
      * @dataProvider invalidPropertiesExistProvider
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
      *
      * @param array $properties
      */
     public function testInvalidPropertiesExist($properties)
     {
-        Assertion::propertiesExist(new \Exception(), $properties);
+        Assertion::propertiesExist(new Exception(), $properties);
     }
 
     public function testIsResource()
     {
-        self::assertTrue(Assertion::isResource(\curl_init()));
+        self::assertTrue(Assertion::isResource(curl_init()));
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testIsNotResource()
     {
@@ -2217,13 +2254,13 @@ class AssertTest extends TestCase
 
     public function testBase64()
     {
-        $base64String = \base64_encode('content');
+        $base64String = base64_encode('content');
 
         $this->assertTrue(Assertion::base64($base64String));
     }
 
     /**
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_BASE64
      */
     public function testNotBase64()
@@ -2231,7 +2268,7 @@ class AssertTest extends TestCase
         Assertion::base64('wrong-content');
     }
 
-    public function invalidEqArraySubsetProvider()
+    public function invalidEqArraySubsetProvider(): array
     {
         return [
             'firstArgumentNotArray' => ['notArray', []],
@@ -2264,7 +2301,7 @@ class AssertTest extends TestCase
     /**
      * @dataProvider invalidEqArraySubsetProvider
      *
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY
      */
     public function testEqArraySubsetInvalid($value, $value2)
@@ -2275,7 +2312,7 @@ class AssertTest extends TestCase
     /**
      * @dataProvider invalidEqArraySubsetProvider
      *
-     * @expectedException \Assert\InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_EQ
      */
     public function testEqArraySubsetMismatchingSubset()

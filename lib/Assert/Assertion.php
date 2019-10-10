@@ -2745,7 +2745,7 @@ class Assertion
      *
      * @return mixed
      */
-    protected static function createException($value, $message, $code, string $propertyPath = null, array $constraints = [])
+    protected static function createException($value, $message, $code, $propertyPath = null, array $constraints = [])
     {
         $exceptionClass = static::$exceptionClass;
 
