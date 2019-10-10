@@ -1,7 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 3.2.4 - 2019-10-09 - Fix the broken things release.
+## 3.2.5 - 2019-10-10 - Fix the broken things release.
+
+### Notice
+- Sigh!
+  - Richard Quadling
+
+### Fixes
+- REALLY Removed dependency of the intl extension.
+- Updated the Docblocks for `Assert\Assertion::all()` helper to show that the value is expected to be an array.
+
+## 3.2.4 - 2019-10-10 - Fix the broken things release.
 
 ### Notice
 - It seems I've been slightly lax in verifying the signature changes and expected extensions.
