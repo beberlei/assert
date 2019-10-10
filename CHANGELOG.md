@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.6 - 2019-10-10
+
+### Fixes
+- Make `Assert\Assertion::stringify()` UTF-8 safe (Thanks to [Pedram Azimaei](https://github.com/beberlei/assert/pull/290))
+
 ## 3.2.5 - 2019-10-10 - Fix the broken things release.
 
 ### Notice
