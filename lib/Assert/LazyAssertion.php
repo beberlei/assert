@@ -158,8 +158,8 @@ class LazyAssertion
     }
 
     /**
-     * @param $method
-     * @param $args
+     * @param string $method
+     * @param array $args
      *
      * @return static
      */
