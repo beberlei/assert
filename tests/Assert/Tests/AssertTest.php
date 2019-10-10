@@ -1437,7 +1437,8 @@ class AssertTest extends TestCase
      * @requires extension intl
      */
     public function testValidCountWithIntlResourceBundle()
-    {        // Test ResourceBundle counting using resources generated for PHP testing of ResourceBundle
+    {
+        // Test ResourceBundle counting using resources generated for PHP testing of ResourceBundle
         // https://github.com/php/php-src/commit/8f4337f2551e28d98290752e9ca99fc7f87d93b5
         $this->assertTrue(Assertion::count(new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 6));
     }
