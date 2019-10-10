@@ -1,6 +1,26 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.4 - 2019-10-09 - Fix the broken things release.
+
+### Notice
+- It seems I've been slightly lax in verifying the signature changes and expected extensions.
+  Hopefully, both of these have been fixed in this version.
+  Truly sorry for breaking the internet!
+  - Richard Quadling
+
+### Fixes
+- Restored `\Assert\Assertion::createException()` signature to 3.2.2.
+- Removed dependency of the intl extension. If the extension is available, then `Assert\Assertion::count()`,
+  `Assert\Assertion::isCountable()`, `Assert\Assertion::minCount()`, and `Assert\Assertion::maxCount()` will operate on
+  `ResourceBundles`.
+- Fixed the `@method` return type for `Assert\LazyAssertion` methods to show that the return type is `static` for
+  extensions of `Assert\LazyAssertion`.  
+  *NOTE :* Docblock does not have the ability to differentiate between a non static `@method` whose returns type is of
+  the subclass and a `@method` that is called statically ([PSR-5#899](https://github.com/php-fig/fig-standards/pull/899)).
+  So the use of `static static` is a fudge that sort of works for IDEs that need to know about the method that MAY be
+  overridden in a subclass.
+
 ## 3.2.3 - 2019-08-23
 
 ### Other changes
