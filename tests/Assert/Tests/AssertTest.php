@@ -2106,6 +2106,18 @@ class AssertTest extends TestCase
     /**
      * @expectedException \Assert\AssertionFailedException
      * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
+     * @expectedExceptionMessage ငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟု...
+     */
+    public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriatelyAndIsMultibyteValid()
+    {
+        $string = str_repeat('ငါကနံပါတ်မဟုတ်ဘူး', 11);
+
+        $this->assertTrue(Assertion::float($string));
+    }
+
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_FLOAT
      * @expectedExceptionMessage stream
      */
     public function testStringifyReportsResourceType()

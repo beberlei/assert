@@ -2768,8 +2768,8 @@ class Assertion
         } elseif (\is_scalar($value)) {
             $val = (string)$value;
 
-            if (\strlen($val) > 100) {
-                $val = \substr($val, 0, 97).'...';
+            if (\mb_strlen($val) > 100) {
+                $val = \mb_substr($val, 0, 97).'...';
             }
 
             $result = $val;
