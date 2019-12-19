@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.7 - 2019-12-19
+
+### Fixes
+- Reinstated the `@method` return type for `Assert\LazyAssertion` methods to show that the return type is `LazyAssertion`.
+
 ## 3.2.6 - 2019-10-10
 
 ### Fixes
