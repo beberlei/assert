@@ -65,7 +65,7 @@ class AssertionExceptionCallbackTest extends TestCase
     public function testMessageUsingCallbackForRegexFailingAtTheRegexAssertion()
     {
         Assertion::regex(
-            (string) M_PI,
+            (string)M_PI,
             '`^[0-9]++$`',
             function (array $parameters) {
                 return \sprintf(

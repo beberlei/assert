@@ -73,10 +73,12 @@ class AssertionChainFunctionsTest extends TestCase
     public function testAssertionChainFunctionSatisfyShortcut()
     {
         $this->assertInstanceOf(
-            AssertionChain::class, \Assert\that(null)->satisfy(
-            function ($value) {
-                return \is_null($value);
-            }
-        ));
+            AssertionChain::class,
+            \Assert\that(null)->satisfy(
+                function ($value) {
+                    return \is_null($value);
+                }
+            )
+        );
     }
 }

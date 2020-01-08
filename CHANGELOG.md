@@ -1,6 +1,27 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.2.3 - 2019-08-23
+
+### Other changes
+- Added type hints and documentation consistency (Thanks to [Andru Cherny](https://github.com/beberlei/assert/pull/286))
+
+## 3.2.2 - 2019-08-23
+
+### Added assertions
+- `Assertion::eqArraySubset()` (Thanks to [Anna Filina](https://github.com/beberlei/assert/pull/283))
+
+## 3.2.1 - 2019-05-28
+
+### Fixes
+- Updated regex for `Assert\Assertion::url()` (Thanks to [Christophe Histaesse](https://github.com/beberlei/assert/pull/281))
+- Fixed broken regex for `Assert\Assertion::url()` (Thanks to [Menno Holtkamp](https://github.com/beberlei/assert/issues/275))
+
+### Other changes
+- Added PHP 7.3.0, PHP 7.3.1, and PHP 7.3.2 to Travis pipeline as there are differences in PCRE
+- Updated docblocks for `Assert\Assertion::NullOrXxxx()` to show that the first parameter can be null.
+- Updated docblocks for `Assert\LazyAssertion` to show that the return type is `$this` to aid IDE's static analysis.
+
 ## 3.2.0 - 2018-12-24
 
 ### Added assertions
@@ -33,6 +54,11 @@ All notable changes to this project will be documented in this file.
 
 ### Fixes
 - An `AssertionFailedException` must be a `Throwable` (Thanks to [Marco Pivetta](https://github.com/beberlei/assert/pull/256))
+
+## 2.9.8 - 2019-05-28
+
+### Fixes
+- Updated regex for `Assert\Assertion::url()` (Thanks to [Christophe Histaesse](https://github.com/beberlei/assert/pull/281))
 
 ## 2.9.7 - 2019-02-19
 
