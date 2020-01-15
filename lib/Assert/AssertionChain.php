@@ -106,6 +106,7 @@ use ReflectionClass;
  * @method AssertionChain string(string|callable $message = null, string $propertyPath = null) Assert that value is a string.
  * @method AssertionChain subclassOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name.
  * @method AssertionChain true(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True.
+ * @method AssertionChain uniqueValues(string|callable $message = null, string $propertyPath = null) Assert that values in array are unique (using strict equality).
  * @method AssertionChain url(string|callable $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method AssertionChain uuid(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
  * @method AssertionChain version(string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions.

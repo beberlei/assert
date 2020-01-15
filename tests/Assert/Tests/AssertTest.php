@@ -612,6 +612,20 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::keyNotExists(['foo' => 'bar'], 'baz'));
     }
 
+    /**
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_UNIQUE_VALUES
+     */
+    public function testInvalidUniqueValues()
+    {
+        Assertion::uniqueValues(['foo' => 'bar', 'baz' => 'bar'], 'quux');
+    }
+
+    public function testValidUniqueValues()
+    {
+        $this->assertTrue(Assertion::uniqueValues(['foo' => 0, 'bar' => '0'], 'baz'));
+    }
+
     public static function dataInvalidNotBlank()
     {
         return [
