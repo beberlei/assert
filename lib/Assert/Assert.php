@@ -33,9 +33,6 @@ abstract class Assert
      *
      * @param mixed $value
      * @param string|callable|null $defaultMessage
-     * @param string|null $defaultPropertyPath
-     *
-     * @return AssertionChain
      *
      * @example
      *
@@ -57,9 +54,6 @@ abstract class Assert
      *
      * @param mixed $values
      * @param string|callable|null $defaultMessage
-     * @param string|null $defaultPropertyPath
-     *
-     * @return AssertionChain
      */
     public static function thatAll($values, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
     {
@@ -71,9 +65,6 @@ abstract class Assert
      *
      * @param mixed $value
      * @param string|callable|null $defaultMessage
-     * @param string|null $defaultPropertyPath
-     *
-     * @return AssertionChain
      */
     public static function thatNullOr($value, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
     {
@@ -82,8 +73,6 @@ abstract class Assert
 
     /**
      * Create a lazy assertion object.
-     *
-     * @return LazyAssertion
      */
     public static function lazy(): LazyAssertion
     {

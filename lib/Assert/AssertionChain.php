@@ -150,7 +150,6 @@ class AssertionChain
      *
      * @param mixed $value
      * @param string|callable|null $defaultMessage
-     * @param string|null $defaultPropertyPath
      */
     public function __construct($value, $defaultMessage = null, string $defaultPropertyPath = null)
     {
@@ -164,8 +163,6 @@ class AssertionChain
      *
      * @param string $methodName
      * @param array $args
-     *
-     * @return AssertionChain
      */
     public function __call($methodName, $args): AssertionChain
     {
@@ -208,8 +205,6 @@ class AssertionChain
 
     /**
      * Switch chain into validation mode for an array of values.
-     *
-     * @return AssertionChain
      */
     public function all(): AssertionChain
     {
@@ -220,8 +215,6 @@ class AssertionChain
 
     /**
      * Switch chain into mode allowing nulls, ignoring further assertions.
-     *
-     * @return AssertionChain
      */
     public function nullOr(): AssertionChain
     {

@@ -301,9 +301,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -328,9 +325,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -351,9 +345,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -378,9 +369,6 @@ class Assertion
      * @param mixed $value1
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -404,9 +392,6 @@ class Assertion
      * @param mixed $value1
      * @param mixed $value2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -428,11 +413,7 @@ class Assertion
      * Assert that value is not in array of choices.
      *
      * @param mixed $value
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -455,9 +436,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -480,9 +458,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -505,9 +480,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -530,9 +502,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -568,9 +537,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -593,9 +559,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -618,9 +581,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -643,9 +603,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -668,9 +625,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      */
     public static function null($value, $message = null, string $propertyPath = null): bool
     {
@@ -691,9 +645,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -716,7 +667,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      *
      * @return bool
      *
@@ -743,9 +693,6 @@ class Assertion
      * @param mixed $value
      * @param string $pattern
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -771,9 +718,6 @@ class Assertion
      * @param mixed $value
      * @param string $pattern
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -799,10 +743,7 @@ class Assertion
      * @param mixed $value
      * @param int $length
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -830,10 +771,7 @@ class Assertion
      * @param mixed $value
      * @param int $minLength
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -861,10 +799,7 @@ class Assertion
      * @param mixed $value
      * @param int $maxLength
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -893,10 +828,7 @@ class Assertion
      * @param int $minLength
      * @param int $maxLength
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -915,10 +847,7 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -945,10 +874,7 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -977,10 +903,7 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1007,10 +930,7 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
-     * @param string|null $propertyPath
      * @param string $encoding
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1035,11 +955,7 @@ class Assertion
      * Assert that value is in array of choices.
      *
      * @param mixed $value
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1064,11 +980,7 @@ class Assertion
      * This is an alias of {@see choice()}.
      *
      * @param mixed $value
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1082,9 +994,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1107,9 +1016,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      */
     public static function isResource($value, $message = null, string $propertyPath = null): bool
     {
@@ -1130,9 +1036,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1155,9 +1058,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1180,9 +1080,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1205,9 +1102,6 @@ class Assertion
      *
      * @param array|Countable|ResourceBundle|SimpleXMLElement $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1237,9 +1131,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1265,9 +1156,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1293,9 +1181,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1321,9 +1206,6 @@ class Assertion
      * @param mixed $value
      * @param string|int $key
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1340,9 +1222,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1366,9 +1245,6 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1393,9 +1269,6 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1420,9 +1293,6 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1448,9 +1318,6 @@ class Assertion
      * @param mixed $minValue
      * @param mixed $maxValue
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1478,9 +1345,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $minValue
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1507,9 +1371,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $maxValue
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1535,9 +1396,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1563,9 +1421,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1590,9 +1445,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1617,9 +1469,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1644,9 +1493,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1673,9 +1519,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -1725,9 +1568,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1752,9 +1592,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1777,9 +1614,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1802,9 +1636,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1827,9 +1658,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1853,9 +1681,6 @@ class Assertion
      * @param mixed $class
      * @param string $interfaceName
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1894,9 +1719,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1921,9 +1743,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1954,9 +1773,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1980,9 +1796,6 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2007,9 +1820,6 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2034,9 +1844,6 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2107,12 +1914,7 @@ class Assertion
     /**
      * Determines if the values array has every choice as key and that this choice has content.
      *
-     * @param array $values
-     * @param array $choices
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2133,9 +1935,6 @@ class Assertion
      * @param string $value
      * @param mixed $object
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2160,9 +1959,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2186,9 +1982,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2213,9 +2006,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2240,9 +2030,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2267,9 +2054,6 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2296,8 +2080,6 @@ class Assertion
      * @param mixed $upperLimit
      * @param string|callable|null $message
      * @param string $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2326,8 +2108,6 @@ class Assertion
      * @param string|callable|null $message
      * @param string $propertyPath
      *
-     * @return bool
-     *
      * @throws AssertionFailedException
      */
     public static function betweenExclusive($value, $lowerLimit, $upperLimit, $message = null, string $propertyPath = null): bool
@@ -2351,9 +2131,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2378,9 +2155,6 @@ class Assertion
      * @param string $format supports all of the options date(), except for the following:
      *                       N, w, W, t, L, o, B, a, A, g, h, I, O, P, Z, c, r
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2411,9 +2185,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2432,9 +2203,6 @@ class Assertion
      * @param mixed $value
      * @param string $property
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2459,11 +2227,7 @@ class Assertion
      * Assert that the value is an object or class, and that the properties all exist.
      *
      * @param mixed $value
-     * @param array $properties
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2499,9 +2263,6 @@ class Assertion
      * @param string $operator
      * @param string $version2
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2529,9 +2290,6 @@ class Assertion
      * @param string $operator
      * @param mixed $version
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2549,9 +2307,6 @@ class Assertion
      * @param string $operator
      * @param mixed $version
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2567,9 +2322,6 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2595,9 +2347,6 @@ class Assertion
      * @param mixed $value
      * @param callable $callback
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2624,9 +2373,6 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2653,9 +2399,6 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2675,9 +2418,6 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -2695,9 +2435,6 @@ class Assertion
      *
      * @param mixed $constant
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      */
     public static function defined($constant, $message = null, string $propertyPath = null): bool
     {
@@ -2715,9 +2452,6 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
-     * @param string|null $propertyPath
-     *
-     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2740,8 +2474,6 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      * @param int $code
-     * @param string|null $propertyPath
-     * @param array $constraints
      *
      * @return mixed
      */
@@ -2756,8 +2488,6 @@ class Assertion
      * Make a string version of a value.
      *
      * @param mixed $value
-     *
-     * @return string
      */
     protected static function stringify($value): string
     {
@@ -2790,8 +2520,6 @@ class Assertion
      * Generate the message.
      *
      * @param string|callable|null $message
-     *
-     * @return string
      */
     protected static function generateMessage($message): string
     {
