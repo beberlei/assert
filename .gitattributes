@@ -16,3 +16,5 @@ phpunit.xml.dist export-ignore
 README.md export-ignore
 tests/ export-ignore
 TODO.md export-ignore
+phpstan-code.neon export-ignore
+phpstan-tests.neon export-ignore
