@@ -28,8 +28,5 @@ interface AssertionFailedException extends Throwable
      */
     public function getValue();
 
-    /**
-     * @return array
-     */
     public function getConstraints(): array;
 }

@@ -128,7 +128,6 @@ class LazyAssertion
 
     /**
      * @param mixed $value
-     * @param string|null $propertyPath
      * @param string|callable|null $defaultMessage
      *
      * @return $this
@@ -177,8 +176,6 @@ class LazyAssertion
     }
 
     /**
-     * @return bool
-     *
      * @throws LazyAssertionException
      */
     public function verifyNow(): bool
@@ -191,8 +188,6 @@ class LazyAssertion
     }
 
     /**
-     * @param string $className
-     *
      * @return $this
      */
     public function setAssertClass(string $className): LazyAssertion
@@ -207,8 +202,6 @@ class LazyAssertion
     }
 
     /**
-     * @param string $className
-     *
      * @return $this
      */
     public function setExceptionClass(string $className): LazyAssertion
