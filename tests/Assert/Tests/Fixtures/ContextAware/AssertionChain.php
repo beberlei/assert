@@ -21,9 +21,8 @@ class AssertionChain extends BaseAssertionChain
     /** @var array */
     private $context;
 
-    public function __construct($value, $defaultMessage = null, $defaultPropertyPath = null, array $context = [])
+    public function setContext(array $context)
     {
-        parent::__construct($value, $defaultMessage, $defaultPropertyPath);
         $this->context = $context;
     }
 

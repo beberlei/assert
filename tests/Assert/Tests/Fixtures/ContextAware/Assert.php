@@ -15,6 +15,8 @@
 namespace Assert\Tests\Fixtures\ContextAware;
 
 use Assert\Assert as BaseAssert;
+use Assert\AssertionChain as BaseAssertionChain;
+
 
 class Assert extends BaseAssert
 {
@@ -24,9 +26,9 @@ class Assert extends BaseAssert
     /** @var string */
     protected static $lazyAssertionClass = LazyAssertion::class;
 
-    public static function that($value, $defaultMessage = null, $defaultPropertyPath = null, array $context = [])
+    public static function that($value, $defaultMessage = null, string $defaultPropertyPath = null): BaseAssertionChain
     {
-        $assertionChain = new AssertionChain($value, $defaultMessage, $defaultPropertyPath, $context);
+        $assertionChain = new AssertionChain($value, $defaultMessage, $defaultPropertyPath);
 
         return $assertionChain->setAssertionClassName(static::$assertionClass);
     }

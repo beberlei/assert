@@ -18,17 +18,14 @@ use Assert\LazyAssertion as BaseLazyAssertion;
 
 class LazyAssertion extends BaseLazyAssertion
 {
-    /** @var string The class to use as AssertionChain factory */
-    protected $assertClass = Assert::class;
-    /** @var AssertionChain */
-    protected $currentChain;
-
-    public function that($value, $propertyPath, $defaultMessage = null, array $context = [])
+    public function __construct()
     {
-        $this->currentChainFailed = false;
-        $this->thisChainTryAll = false;
-        $assertClass = $this->assertClass;
-        $this->currentChain = $assertClass::that($value, $defaultMessage, $propertyPath, $context);
+        $this->assertClass = Assert::class;
+    }
+
+    public function withContext(array $context)
+    {
+        $this->currentChain->setContext($context);
 
         return $this;
     }

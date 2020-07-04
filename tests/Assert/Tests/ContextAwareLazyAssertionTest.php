@@ -20,7 +20,7 @@ use Assert\Tests\Fixtures\ContextAware\InvalidArgumentException;
 use Assert\Tests\Fixtures\ContextAware\LazyAssertion;
 use PHPUnit\Framework\TestCase;
 
-class ContextAwareLazyAssertion extends TestCase
+class ContextAwareLazyAssertionTest extends TestCase
 {
     public function testContextIsPassedThroughToExceptions()
     {
@@ -28,7 +28,8 @@ class ContextAwareLazyAssertion extends TestCase
         /** @var LazyAssertion $assertion */
         $assertion = Assert::lazy();
         $assertion->tryAll()
-            ->that(true, '', null, $context)
+            ->that(true, '', null)
+            ->withContext($context)
             ->false()
             ->null();
 
