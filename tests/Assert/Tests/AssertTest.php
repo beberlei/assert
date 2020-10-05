@@ -1832,7 +1832,11 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::isCallable('\is_callable'));
         $this->assertTrue(Assertion::isCallable(__NAMESPACE__.'\\Fixtures\\someCallable'));
-        $this->assertTrue(Assertion::isCallable([OneCountable::class, 'count']));
+        if (PHP_VERSION_ID >= 70400) {
+            $this->assertTrue(Assertion::isCallable([new OneCountable(), 'count']));
+        } else {
+            $this->assertTrue(Assertion::isCallable([OneCountable::class, 'count']));
+        }
         $this->assertTrue(
             Assertion::isCallable(
                 function () {
@@ -2227,7 +2231,7 @@ class AssertTest extends TestCase
 
     public function testIsResource()
     {
-        self::assertTrue(Assertion::isResource(\curl_init()));
+        self::assertTrue(Assertion::isResource(fopen('php://memory', 'w')));
     }
 
     /**
