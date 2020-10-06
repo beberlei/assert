@@ -2229,7 +2229,7 @@ class AssertTest extends TestCase
 
     public function testIsResource()
     {
-        self::assertTrue(Assertion::isResource(fopen('php://memory', 'w')));
+        self::assertTrue(Assertion::isResource(\fopen('php://memory', 'w')));
     }
 
     /**
