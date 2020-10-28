@@ -1103,7 +1103,7 @@ class Assertion
     /**
      * Assert that value is countable.
      *
-     * @param array|Countable|ResourceBundle|SimpleXMLElement $value
+     * @param mixed $value
      * @param string|callable|null $message
      *
      * @throws AssertionFailedException
@@ -1118,7 +1118,7 @@ class Assertion
 
         if (!$assert) {
             $message = \sprintf(
-                static::generateMessage($message ?: 'Value "%s" is not an array and does not implement Countable.'),
+       value` argument         static::generateMessage($message ?: 'Value "%s" is not an array and does not implement Countable.'),
                 static::stringify($value)
             );
 
