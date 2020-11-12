@@ -12,10 +12,10 @@ matrix:
     - php: 7.1
     - php: 7.2
     - php: 7.3
-    - php: 7.3.0
-    - php: 7.3.1
-    - php: 7.3.2
+    - php: 7.4
     - php: nightly
+      env:
+        - IGNORE_PLATFORM_REQ=true
     - php: hhvm-3.9
       sudo: required
       dist: trusty
@@ -36,7 +36,12 @@ before_install:
   - xdebug-disable
 
 before_script:
-  - travis_retry composer update --no-interaction --prefer-source --prefer-stable
+  - if [[ "$IGNORE_PLATFORM_REQ" == "true" ]]; then
+      composer self-update --preview;
+      travis_retry composer update --no-interaction --prefer-stable --ignore-platform-req=php;
+    else
+      travis_retry composer update --no-interaction --prefer-stable;
+    fi
 
 script:
   - if [[ "$LINT" == "true" ]]; then

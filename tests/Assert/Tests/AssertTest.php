@@ -16,6 +16,7 @@ namespace Assert\Tests;
 
 use Assert\Assertion;
 use Assert\AssertionFailedException;
+use Assert\Tests\Fixtures\CustomAssertion;
 use Assert\Tests\Fixtures\OneCountable;
 use PDO;
 use PHPUnit\Framework\TestCase;
@@ -1832,7 +1833,8 @@ class AssertTest extends TestCase
     {
         $this->assertTrue(Assertion::isCallable('\is_callable'));
         $this->assertTrue(Assertion::isCallable(__NAMESPACE__.'\\Fixtures\\someCallable'));
-        $this->assertTrue(Assertion::isCallable([OneCountable::class, 'count']));
+        $this->assertTrue(Assertion::isCallable([new OneCountable(), 'count']));
+        $this->assertTrue(Assertion::isCallable([CustomAssertion::class, 'clearCalls']));
         $this->assertTrue(
             Assertion::isCallable(
                 function () {
@@ -2227,7 +2229,7 @@ class AssertTest extends TestCase
 
     public function testIsResource()
     {
-        self::assertTrue(Assertion::isResource(\curl_init()));
+        self::assertTrue(Assertion::isResource(\fopen('php://memory', 'w')));
     }
 
     /**
