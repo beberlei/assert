@@ -33,7 +33,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "*",
     "phpstan/phpstan": "*",
-    "phpunit/phpunit": ">=6.0.0 <8"
+    "phpunit/phpunit": ">=6.0.0",
+    "yoast/phpunit-polyfills": "^0.1.0"
   },
   "autoload": {
     "psr-4": {

@@ -21,12 +21,10 @@ use PHPUnit\Framework\TestCase;
 
 class LazyAssertionTest extends TestCase
 {
-    /**
-     * @expectedException \Assert\LazyAssertionException
-     * @expectedExceptionMessage The following 3 assertions failed:
-     */
     public function testThatLazyAssertionsCollectsAllErrorsUntilAssertAll()
     {
+        $this->expectException('Assert\LazyAssertionException');
+        $this->expectExceptionMessage('The following 3 assertions failed:');
         Assert::lazy()
             ->that(10, 'foo')->string()
             ->that(null, 'bar')->notEmpty()
@@ -34,12 +32,10 @@ class LazyAssertionTest extends TestCase
             ->verifyNow();
     }
 
-    /**
-     * @expectedException \Assert\LazyAssertionException
-     * @expectedExceptionMessage The following 1 assertions failed:
-     */
     public function testThatLazyAssertionsSkipsAssertionsOfCurrentChainAfterFailure()
     {
+        $this->expectException('Assert\LazyAssertionException');
+        $this->expectExceptionMessage('The following 1 assertions failed:');
         Assert::lazy()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
@@ -101,48 +97,40 @@ class LazyAssertionTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \Assert\LazyAssertionException
-     * @expectedExceptionMessage The following 1 assertions failed:
-     */
     public function testCallsToThatFollowingTryAllSkipAssertionsAfterFailure()
     {
+        $this->expectException('Assert\LazyAssertionException');
+        $this->expectExceptionMessage('The following 1 assertions failed:');
         Assert::lazy()
             ->that(10, 'foo')->tryAll()->integer()
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
 
-    /**
-     * @expectedException \Assert\LazyAssertionException
-     * @expectedExceptionMessage The following 4 assertions failed:
-     */
     public function testCallsToThatWithTryAllWithMultipleAssertionsAllGetReported()
     {
+        $this->expectException('Assert\LazyAssertionException');
+        $this->expectExceptionMessage('The following 4 assertions failed:');
         Assert::lazy()
             ->that(10, 'foo')->tryAll()->float()->greaterThan(100)
             ->that(null, 'foo')->tryAll()->notEmpty()->string()
             ->verifyNow();
     }
 
-    /**
-     * @expectedException \Assert\LazyAssertionException
-     * @expectedExceptionMessage The following 4 assertions failed:
-     */
     public function testCallsToTryAllOnLazyAlwaysReportAllGetReported()
     {
+        $this->expectException('Assert\LazyAssertionException');
+        $this->expectExceptionMessage('The following 4 assertions failed:');
         Assert::lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
 
-    /**
-     * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
-     * @expectedExceptionMessage The following 1 assertions failed:
-     */
     public function testThatLazyAssertionThrowsCustomExceptionWhenSet()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomLazyAssertionException');
+        $this->expectExceptionMessage('The following 1 assertions failed:');
         $lazyAssertion = new LazyAssertion();
         $lazyAssertion->setExceptionClass(Fixtures\CustomLazyAssertionException::class);
 
@@ -153,34 +141,28 @@ class LazyAssertionTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \Assert\InvalidArgumentException
-     * @expectedExceptionMessage The following 4 assertions failed:
-     */
     public function testLazyAssertionExceptionExtendsInvalidArgumentException()
     {
+        $this->expectException('Assert\InvalidArgumentException');
+        $this->expectExceptionMessage('The following 4 assertions failed:');
         Assert::lazy()->tryAll()
             ->that(10, 'foo')->float()->greaterThan(100)
             ->that(null, 'foo')->notEmpty()->string()
             ->verifyNow();
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage stdClass is not (a subclass of) Assert\LazyAssertionException
-     */
     public function testLazyAssertionThrowsExceptionWhenPassingInvalidClassToSetExceptionClass()
     {
+        $this->expectException('LogicException');
+        $this->expectExceptionMessage('stdClass is not (a subclass of) Assert\LazyAssertionException');
         $lazyAssertion = new LazyAssertion();
         $lazyAssertion->setExceptionClass(\stdClass::class);
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage stdClass is not (a subclass of) Assert\Assert
-     */
     public function testLazyAssertionThrowsExceptionWhenPassingInvalidClassToSetAssertClass()
     {
+        $this->expectException('LogicException');
+        $this->expectExceptionMessage('stdClass is not (a subclass of) Assert\Assert');
         $lazyAssertion = new LazyAssertion();
         $lazyAssertion->setAssertClass(\stdClass::class);
     }
