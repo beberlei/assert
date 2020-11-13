@@ -105,6 +105,7 @@ use LogicException;
  * @method $this string(string|callable $message = null, string $propertyPath = null) Assert that value is a string.
  * @method $this subclassOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name.
  * @method $this true(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True.
+ * @method $this uniqueValues(string|callable $message = null, string $propertyPath = null) Assert that values in array are unique (using strict equality).
  * @method $this url(string|callable $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method $this uuid(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
  * @method $this version(string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions.
@@ -128,7 +129,6 @@ class LazyAssertion
 
     /**
      * @param mixed $value
-     * @param string|null $propertyPath
      * @param string|callable|null $defaultMessage
      *
      * @return $this
@@ -177,8 +177,6 @@ class LazyAssertion
     }
 
     /**
-     * @return bool
-     *
      * @throws LazyAssertionException
      */
     public function verifyNow(): bool
@@ -191,8 +189,6 @@ class LazyAssertion
     }
 
     /**
-     * @param string $className
-     *
      * @return $this
      */
     public function setAssertClass(string $className): LazyAssertion
@@ -207,8 +203,6 @@ class LazyAssertion
     }
 
     /**
-     * @param string $className
-     *
      * @return $this
      */
     public function setExceptionClass(string $className): LazyAssertion

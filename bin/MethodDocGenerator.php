@@ -20,6 +20,9 @@ use Assert\AssertionFailedException;
  */
 class MethodDocGenerator
 {
+    /**
+     * @return void
+     */
     public function generateChainDocs()
     {
         $phpFile = __DIR__.'/../lib/Assert/AssertionChain.php';
@@ -34,10 +37,10 @@ class MethodDocGenerator
     /**
      * @param ReflectionMethod[] $methods
      * @param string $format
-     * @param callable|false $skipParameterTest
+     * @param callable|bool $skipParameterTest
      * @param string $prefix
      *
-     * @return array
+     * @return string[]
      *
      * @throws AssertionFailedException
      */
@@ -47,6 +50,7 @@ class MethodDocGenerator
         asort($methods);
         foreach ($methods as $method) {
             $doc = $method->getDocComment();
+            assert($doc !== false);
             list(, $descriptionLine) = explode("\n", $doc);
             $shortDescription = trim(substr($descriptionLine, 7), '.');
             $methodName = $prefix.($prefix ? ucfirst($method->getName()) : $method->getName());
@@ -132,11 +136,15 @@ class MethodDocGenerator
      * @param string $phpFile
      * @param string[] $lines
      * @param string $fileType
+     *
+     * @return void
      */
     private function generateFile($phpFile, $lines, $fileType)
     {
         $phpFile = realpath($phpFile);
+        assert($phpFile !== false);
         $fileContent = file_get_contents($phpFile);
+        assert($fileContent !== false);
 
         switch ($fileType) {
             case 'class':
@@ -162,6 +170,9 @@ class MethodDocGenerator
         }
     }
 
+    /**
+     * @return void
+     */
     public function generateAssertionDocs()
     {
         $phpFile = __DIR__.'/../lib/Assert/Assertion.php';
@@ -177,6 +188,9 @@ class MethodDocGenerator
         $this->generateFile($phpFile, $docs, 'class');
     }
 
+    /**
+     * @return void
+     */
     public function generateReadMe()
     {
         $mdFile = __DIR__.'/../README.md';
@@ -189,6 +203,9 @@ class MethodDocGenerator
         $this->generateFile($mdFile, $docs, 'readme');
     }
 
+    /**
+     * @return void
+     */
     public function generateLazyAssertionDocs()
     {
         $phpFile = __DIR__.'/../lib/Assert/LazyAssertion.php';

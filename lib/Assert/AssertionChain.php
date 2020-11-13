@@ -106,6 +106,7 @@ use ReflectionClass;
  * @method AssertionChain string(string|callable $message = null, string $propertyPath = null) Assert that value is a string.
  * @method AssertionChain subclassOf(string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name.
  * @method AssertionChain true(string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True.
+ * @method AssertionChain uniqueValues(string|callable $message = null, string $propertyPath = null) Assert that values in array are unique (using strict equality).
  * @method AssertionChain url(string|callable $message = null, string $propertyPath = null) Assert that value is an URL.
  * @method AssertionChain uuid(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID.
  * @method AssertionChain version(string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions.
@@ -150,7 +151,6 @@ class AssertionChain
      *
      * @param mixed $value
      * @param string|callable|null $defaultMessage
-     * @param string|null $defaultPropertyPath
      */
     public function __construct($value, $defaultMessage = null, string $defaultPropertyPath = null)
     {
@@ -164,8 +164,6 @@ class AssertionChain
      *
      * @param string $methodName
      * @param array $args
-     *
-     * @return AssertionChain
      */
     public function __call($methodName, $args): AssertionChain
     {
@@ -208,8 +206,6 @@ class AssertionChain
 
     /**
      * Switch chain into validation mode for an array of values.
-     *
-     * @return AssertionChain
      */
     public function all(): AssertionChain
     {
@@ -220,8 +216,6 @@ class AssertionChain
 
     /**
      * Switch chain into mode allowing nulls, ignoring further assertions.
-     *
-     * @return AssertionChain
      */
     public function nullOr(): AssertionChain
     {

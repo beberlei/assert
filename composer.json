@@ -23,7 +23,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7",
+    "php": "^7.0 || ^8.0",
     "ext-intl": "*",
     "ext-simplexml": "*",
     "ext-mbstring": "*",
@@ -32,8 +32,9 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "*",
-    "phpstan/phpstan-shim": "*",
-    "phpunit/phpunit": ">=6.0.0 <8"
+    "phpstan/phpstan": "*",
+    "phpunit/phpunit": ">=6.0.0",
+    "yoast/phpunit-polyfills": "^0.1.0"
   },
   "autoload": {
     "psr-4": {

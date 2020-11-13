@@ -19,12 +19,10 @@ use PHPUnit\Framework\TestCase;
 
 class AssertionExceptionCallbackTest extends TestCase
 {
-    /**
-     * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionMessage The assertion Assert\Assertion::string() failed for 3.1415926535898
-     */
     public function testMessageUsingCallbackForString()
     {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionMessage('The assertion Assert\Assertion::string() failed for 3.1415926535898');
         Assertion::string(
             M_PI,
             function (array $parameters) {
@@ -38,12 +36,10 @@ class AssertionExceptionCallbackTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionMessage The assertion Assert\Assertion::string() failed for 3.1415926535898
-     */
     public function testMessageUsingCallbackForRegexFailingAtTheStringAssertion()
     {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionMessage('The assertion Assert\Assertion::string() failed for 3.1415926535898');
         Assertion::regex(
             M_PI,
             '`[A-Z]++`',
@@ -58,12 +54,10 @@ class AssertionExceptionCallbackTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \Assert\AssertionFailedException
-     * @expectedExceptionMessage The assertion Assert\Assertion::regex() failed for 3.1415926535898 against the pattern `^[0-9]++$`
-     */
     public function testMessageUsingCallbackForRegexFailingAtTheRegexAssertion()
     {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionMessage('The assertion Assert\Assertion::regex() failed for 3.1415926535898 against the pattern `^[0-9]++$`');
         Assertion::regex(
             (string)M_PI,
             '`^[0-9]++$`',
