@@ -31,12 +31,10 @@ class AssertionChainTest extends TestCase
         $this->assertInstanceOf(AssertionChain::class, Assert::that(10)->eq(10));
     }
 
-    /**
-     * @expectedException \Assert\InvalidArgumentException
-     * @expectedExceptionMessage Not Null and such
-     */
     public function testThatAssertionChainKnowsDefaultErrorMessage()
     {
+        $this->expectException('Assert\InvalidArgumentException');
+        $this->expectExceptionMessage('Not Null and such');
         Assert::that(null, 'Not Null and such')->notEmpty();
     }
 
@@ -60,12 +58,10 @@ class AssertionChainTest extends TestCase
         $this->assertInstanceOf(AssertionChain::class, Assert::thatNullOr(null)->integer()->eq(10));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Assertion 'unknownAssertion' does not exist.
-     */
     public function testThatAssertionChainThrowsExceptionForUnknownAssertion()
     {
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Assertion \'unknownAssertion\' does not exist.');
         Assert::that(null)->unknownAssertion();
     }
 
@@ -95,12 +91,12 @@ class AssertionChainTest extends TestCase
 
     /**
      * @dataProvider provideDataToTestThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses
-     * @expectedException \LogicException
      *
      * @param mixed $assertionClassName
      */
     public function testThatSetAssertionClassNameWillNotAcceptInvalidAssertionClasses($assertionClassName)
     {
+        $this->expectException('LogicException');
         $lazyAssertion = new AssertionChain('foo');
 
         $lazyAssertion->setAssertionClassName($assertionClassName);

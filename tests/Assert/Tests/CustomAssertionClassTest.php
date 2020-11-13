@@ -20,24 +20,21 @@ use PHPUnit\Framework\TestCase;
 
 class CustomAssertionClassTest extends TestCase
 {
-    protected function setUp()
+    /** @before */
+    protected function setUpBefore()
     {
         CustomAssertion::clearCalls();
     }
 
-    /**
-     * @expectedException \Assert\Tests\Fixtures\CustomException
-     */
     public function testThatCustomAssertionUsesCustomException()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomException');
         CustomAssertion::integer('foo');
     }
 
-    /**
-     * @expectedException \Assert\Tests\Fixtures\CustomException
-     */
     public function testThatCustomAssertionsUsesCustomExceptionForAssertionChains()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomException');
         $string = 's'.\uniqid();
         Fixtures\CustomAssert::that($string)->string();
         $this->assertSame([['string', $string]], CustomAssertion::getCalls());
@@ -45,21 +42,17 @@ class CustomAssertionClassTest extends TestCase
         Fixtures\CustomAssert::that($string)->integer();
     }
 
-    /**
-     * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
-     */
     public function testThatCustomAssertionsUsesCustomAssertionExceptionForLazyAssertionChains()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomLazyAssertionException');
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->integer()
             ->verifyNow();
     }
 
-    /**
-     * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
-     */
     public function testThatCustomAssertionsUsesCustomAssertionExceptionWhenFirstAssertionDoesNotFail()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomLazyAssertionException');
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->string()
             ->that('bar', 'bar')->integer()
@@ -88,11 +81,11 @@ class CustomAssertionClassTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
      * @expectedExceptionMessageRegex /The following 4 assertions failed:\s+1) foo: Value "foo" is not an integer.\s+2) foo: Value "foo" is not an array.\s+3) bar: Value "123" expected to be string, type integer given.\s+4) bar: Value "123" is not an array./
      */
     public function testThatCustomAssertionsExceptionsForLazyAssertionChainsTryAllTheAssertionsPerChain()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomLazyAssertionException');
         Fixtures\CustomAssert::lazy()
             ->that('foo', 'foo')->tryAll()->integer()->isArray()
             ->that(123, 'bar')->tryAll()->string()->isArray()
@@ -100,11 +93,11 @@ class CustomAssertionClassTest extends TestCase
     }
 
     /**
-     * @expectedException \Assert\Tests\Fixtures\CustomLazyAssertionException
      * @expectedExceptionMessageRegex /The following 4 assertions failed:\s+1) foo: Value "foo" is not an integer.\s+2) foo: Value "foo" is not an array.\s+3) bar: Value "123" expected to be string, type integer given.\s+4) bar: Value "123" is not an array./
      */
     public function testThatCustomAssertionsExceptionsForLazyAssertionChainsTryAllTheAssertions()
     {
+        $this->expectException('Assert\Tests\Fixtures\CustomLazyAssertionException');
         Fixtures\CustomAssert::lazy()
             ->tryAll()
             ->that('foo', 'foo')->integer()->isArray()
