@@ -19,10 +19,10 @@ use Assert\AssertionFailedException;
 use Assert\Tests\Fixtures\CustomAssertion;
 use Assert\Tests\Fixtures\OneCountable;
 use PDO;
-use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 use ResourceBundle;
 use SimpleXMLElement;
 use stdClass;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class AssertTest extends TestCase
 {
