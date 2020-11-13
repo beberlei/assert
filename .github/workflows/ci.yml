@@ -31,34 +31,34 @@ jobs:
     - name: "PHPUnit"
       run: "php vendor/bin/phpunit"
 
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
+# lint:
+#   name: Lint
+#   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+#   steps:
+#   - name: Checkout
+#     uses: actions/checkout@v1
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 7.4
+#   - name: Setup PHP
+#     uses: shivammathur/setup-php@v2
+#     with:
+#       php-version: 7.4
 
-    - name: "Cache dependencies installed with composer"
-      uses: "actions/cache@v1"
-      with:
-        path: "~/.composer/cache"
-        key: "php-${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
-        restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
+#   - name: "Cache dependencies installed with composer"
+#     uses: "actions/cache@v1"
+#     with:
+#       path: "~/.composer/cache"
+#       key: "php-${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
+#       restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
 
-    - name: "Composer"
-      run: "composer update --prefer-stable"
+#   - name: "Composer"
+#     run: "composer update --prefer-stable"
 
-    - name: "assert:cs-lint"
-      run: "composer assert:cs-lint"
+#   - name: "assert:cs-lint"
+#     run: "composer assert:cs-lint"
 
-    - name: "assert:sa-code"
-      run: "composer assert:sa-code"
+#   - name: "assert:sa-code"
+#     run: "composer assert:sa-code"
 
-    - name: "assert:sa-tests"
-      run: "composer assert:sa-tests"
+#   - name: "assert:sa-tests"
+#     run: "composer assert:sa-tests"
