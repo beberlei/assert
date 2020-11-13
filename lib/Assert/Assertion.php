@@ -348,6 +348,13 @@ class Assertion
      * @param mixed $value
      * @param mixed $value2
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-template ExpectedType
+     * @psalm-param ExpectedType $value2
+     * @psalm-assert =ExpectedType $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -395,6 +402,13 @@ class Assertion
      * @param mixed $value1
      * @param mixed $value2
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-template ExpectedType
+     * @psalm-param ExpectedType $value2
+     * @psalm-assert !=ExpectedType $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -439,6 +453,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert int $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -461,6 +480,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert float $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -483,6 +507,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =numeric $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -540,6 +569,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert bool $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -562,6 +596,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert scalar $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -584,6 +623,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert !empty $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -606,6 +650,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert empty $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -628,6 +677,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert null $value
+     *
+     * @return bool
      */
     public static function null($value, $message = null, string $propertyPath = null): bool
     {
@@ -648,6 +702,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert !null $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -670,6 +729,9 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert string $value
      *
      * @return bool
      *
@@ -696,6 +758,11 @@ class Assertion
      * @param mixed $value
      * @param string $pattern
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -721,6 +788,9 @@ class Assertion
      * @param mixed $value
      * @param string $pattern
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert !=string $value
      *
      * @throws AssertionFailedException
      */
@@ -746,7 +816,12 @@ class Assertion
      * @param mixed $value
      * @param int $length
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -774,7 +849,12 @@ class Assertion
      * @param mixed $value
      * @param int $minLength
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -802,7 +882,12 @@ class Assertion
      * @param mixed $value
      * @param int $maxLength
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -831,7 +916,12 @@ class Assertion
      * @param int $minLength
      * @param int $maxLength
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -850,7 +940,12 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -877,7 +972,12 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -906,7 +1006,12 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -933,7 +1038,12 @@ class Assertion
      * @param mixed $string
      * @param string $needle
      * @param string|callable|null $message
+     * @param string|null $propertyPath
      * @param string $encoding
+     *
+     * @psalm-assert =string $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -997,6 +1107,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert numeric $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1019,6 +1134,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert resource $string
+     *
+     * @return bool
      */
     public static function isResource($value, $message = null, string $propertyPath = null): bool
     {
@@ -1039,6 +1159,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert array $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1061,6 +1186,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert iterable $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1105,6 +1235,11 @@ class Assertion
      *
      * @param array|Countable|ResourceBundle|SimpleXMLElement $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert countable $string
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1272,6 +1407,13 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-template ExpectedType of object
+     * @psalm-param class-string<ExpectedType> $className
+     * @psalm-assert ExpectedType $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1296,6 +1438,13 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-template ExpectedType of object
+     * @psalm-param class-string<ExpectedType> $className
+     * @psalm-assert !ExpectedType $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1345,6 +1494,11 @@ class Assertion
      * @param mixed $minValue
      * @param mixed $maxValue
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =numeric $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1372,6 +1526,11 @@ class Assertion
      * @param mixed $value
      * @param mixed $minValue
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =numeric $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1398,6 +1557,11 @@ class Assertion
      * @param mixed $value
      * @param mixed $maxValue
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =numeric $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1520,6 +1684,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1546,6 +1715,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      *
@@ -1619,6 +1793,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert true $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1641,6 +1820,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert false $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1663,6 +1847,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert class-string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1685,6 +1874,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert class-string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1746,6 +1940,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert =string $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1823,6 +2022,11 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert non-empty-countable $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -1986,6 +2190,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert object $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
@@ -2349,6 +2558,11 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert callable $value
+     *
+     * @return bool
      *
      * @throws AssertionFailedException
      */
