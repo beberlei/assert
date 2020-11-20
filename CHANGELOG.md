@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 3.3 - 2020-11-20
+
+### Added assertions
+- `Assert\Assertion::ulid()`
+
 ## 3.2.7 - 2019-12-19
 
 ### Fixes

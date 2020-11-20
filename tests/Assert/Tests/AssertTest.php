@@ -18,28 +18,17 @@ use ArrayIterator;
 use ArrayObject;
 use Assert\Assertion;
 use Assert\Tests\Fixtures\OneCountable;
-use BadMethodCallException;
 use Countable;
 use DateTime;
 use Exception;
 use Foo;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use function range;
 use ResourceBundle;
 use SimpleXMLElement;
 use SplObserver;
 use stdClass;
 use Traversable;
-use function base64_encode;
-use function curl_init;
-use function extension_loaded;
-use function fopen;
-use function is_bool;
-use function is_null;
-use function json_encode;
-use function range;
-use function str_repeat;
-use function sys_get_temp_dir;
 
 class AssertTest extends TestCase
 {
@@ -145,7 +134,7 @@ class AssertTest extends TestCase
             'A null' => [null],
             'A float in a string' => ['1.23'],
             'A negative float in a string' => ['-1.23'],
-            'A file pointer' => [fopen(__FILE__, 'r')],
+            'A file pointer' => [\fopen(__FILE__, 'r')],
             'A float in a string with a leading space' => [' 1.23'],
             'An integer in a string with a leading space' => [' 123'],
             'A negative integer in a string with a leading space' => [' -123'],
@@ -579,7 +568,7 @@ class AssertTest extends TestCase
             [1],
             [1.23],
             [new stdClass()],
-            [fopen('php://memory', 'r')],
+            [\fopen('php://memory', 'r')],
         ];
     }
 
@@ -1007,10 +996,10 @@ class AssertTest extends TestCase
      */
     public function testNotInArray()
     {
-        $this->assertTrue(Assertion::notInArray(6, range(1, 5)));
-        $this->assertTrue(Assertion::notInArray('a', range('b', 'z')));
+        $this->assertTrue(Assertion::notInArray(6, \range(1, 5)));
+        $this->assertTrue(Assertion::notInArray('a', \range('b', 'z')));
 
-        Assertion::notInArray(1, range(1, 5));
+        Assertion::notInArray(1, \range(1, 5));
     }
 
     public function testMin()
@@ -1078,7 +1067,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Missing the first argument.
      */
     public function testNullOrWithNoValueThrows()
@@ -1185,13 +1174,13 @@ class AssertTest extends TestCase
      */
     public function testWriteable()
     {
-        $this->assertTrue(Assertion::writeable(sys_get_temp_dir()));
+        $this->assertTrue(Assertion::writeable(\sys_get_temp_dir()));
 
         Assertion::writeable(__DIR__.'/does-not-exist');
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      * @expectedExceptionMessage No assertion
      */
     public function testFailedNullOrMethodCall()
@@ -1248,8 +1237,8 @@ class AssertTest extends TestCase
     public function isJsonStringDataprovider(): array
     {
         return [
-            '»null« value' => [json_encode(null)],
-            '»false« value' => [json_encode(false)],
+            '»null« value' => [\json_encode(null)],
+            '»false« value' => [\json_encode(false)],
             'array value' => ['["false"]'],
             'object value' => ['{"tux":"false"}'],
         ];
@@ -1272,6 +1261,53 @@ class AssertTest extends TestCase
         return [
             'no json string' => ['invalid json encoded string'],
             'error in json string' => ['{invalid json encoded string}'],
+        ];
+    }
+
+    /**
+     * @dataProvider providesValidUlids
+     *
+     * @param string $ulid
+     */
+    public function testValidUlids($ulid)
+    {
+        $this->assertTrue(Assertion::ulid($ulid));
+    }
+
+    /**
+     * @dataProvider providesInvalidUlids
+     * @expectedException \Assert\AssertionFailedException
+     * @expectedExceptionCode \Assert\Assertion::INVALID_ULID
+     *
+     * @param string $ulid
+     */
+    public function testInvalidUlids($ulid)
+    {
+        Assertion::ulid($ulid);
+    }
+
+    public function providesValidUlids(): array
+    {
+        return [
+            ['01BX5ZZKBKACTAV9WEVGEMMVRY'],
+            ['01BX5ZZKBKACTAV9WEVGEMMVRZ'],
+            ['01BX5ZZKBKACTAV9WEVGEMMVS0'],
+            ['01BX5ZZKBKACTAV9WEVGEMMVS1'],
+            ['01BX5ZZKBKZZZZZZZZZZZZZZZX'],
+            ['01BX5ZZKBKZZZZZZZZZZZZZZZY'],
+            ['01BX5ZZKBKZZZZZZZZZZZZZZZZ'],
+        ];
+    }
+
+    public function providesInvalidUlids(): array
+    {
+        return [
+            'uuid' => ['ff6f8cb0-c57d-11e1-9b21-0800200c9a66'],
+            'too long' => ['0123456789ABCDEFGHJKMNPQRSTVWXYZ'],
+            'contains unallowed I' => ['01BX5ZZKBKICTAV9WEVGEMMVRY'],
+            'contains unallowed L' => ['01BX5ZZKBKLCTAV9WEVGEMMVRY'],
+            'contains unallowed O' => ['01BX5ZZKBKOCTAV9WEVGEMMVRY'],
+            'contains unallowed U' => ['01BX5ZZKBKUCTAV9WEVGEMMVRY'],
         ];
     }
 
@@ -1418,7 +1454,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function testAllWithNoValueThrows()
     {
@@ -1488,7 +1524,7 @@ class AssertTest extends TestCase
         yield '2 elements while at least 3 expected' => [['Hi', 'There'], 3];
         yield '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2];
         yield '2 countable while at least 3 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 3];
-        if (extension_loaded('intl')) {
+        if (\extension_loaded('intl')) {
             yield '6 countable while at least 7 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7];
         }
     }
@@ -1528,7 +1564,7 @@ class AssertTest extends TestCase
         yield '2 elements while at most 1 expected' => [['Hi', 'There'], 1];
         yield '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0];
         yield '2 countable while at most 1 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 1];
-        if (extension_loaded('intl')) {
+        if (\extension_loaded('intl')) {
             yield '6 countable while at most 5 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 5];
         }
     }
@@ -1873,7 +1909,7 @@ class AssertTest extends TestCase
         Assertion::satisfy(
             null,
             function ($value): bool {
-                return !is_null($value);
+                return !\is_null($value);
             }
         );
     }
@@ -1884,8 +1920,8 @@ class AssertTest extends TestCase
         $this->assertTrue(
             Assertion::satisfy(
                 null,
-                function ($value) : bool {
-                    return is_null($value);
+                function ($value): bool {
+                    return \is_null($value);
                 }
             )
         );
@@ -1898,7 +1934,7 @@ class AssertTest extends TestCase
                  * @return bool|void
                  */
                 function ($value) {
-                    if (!is_bool($value)) {
+                    if (!\is_bool($value)) {
                         return false;
                     }
                 }
@@ -2098,7 +2134,7 @@ class AssertTest extends TestCase
      */
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
     {
-        $string = str_repeat('1234567890', 11);
+        $string = \str_repeat('1234567890', 11);
 
         $this->assertTrue(Assertion::float($string));
     }
@@ -2110,7 +2146,7 @@ class AssertTest extends TestCase
      */
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriatelyAndIsMultibyteValid()
     {
-        $string = str_repeat('ငါကနံပါတ်မဟုတ်ဘူး', 11);
+        $string = \str_repeat('ငါကနံပါတ်မဟုတ်ဘူး', 11);
 
         $this->assertTrue(Assertion::float($string));
     }
@@ -2122,7 +2158,7 @@ class AssertTest extends TestCase
      */
     public function testStringifyReportsResourceType()
     {
-        $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
+        $this->assertTrue(Assertion::float(\fopen('php://stdin', 'rb')));
     }
 
     public function testExtensionLoaded()
@@ -2131,7 +2167,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testExtensionNotLoaded()
     {
@@ -2144,7 +2180,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidConstant()
     {
@@ -2157,7 +2193,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidVersion()
     {
@@ -2165,7 +2201,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidVersionOperator()
     {
@@ -2178,7 +2214,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidPhpVersion()
     {
@@ -2191,7 +2227,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidExtensionVersion()
     {
@@ -2205,7 +2241,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testNotObjectOrClass()
     {
@@ -2218,7 +2254,7 @@ class AssertTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
      */
     public function testInvalidPropertyExists()
@@ -2241,7 +2277,7 @@ class AssertTest extends TestCase
 
     /**
      * @dataProvider invalidPropertiesExistProvider
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_PROPERTY
      *
      * @param array $properties
@@ -2253,11 +2289,11 @@ class AssertTest extends TestCase
 
     public function testIsResource()
     {
-        self::assertTrue(Assertion::isResource(curl_init()));
+        self::assertTrue(Assertion::isResource(\curl_init()));
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testIsNotResource()
     {
@@ -2266,13 +2302,13 @@ class AssertTest extends TestCase
 
     public function testBase64()
     {
-        $base64String = base64_encode('content');
+        $base64String = \base64_encode('content');
 
         $this->assertTrue(Assertion::base64($base64String));
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_BASE64
      */
     public function testNotBase64()
@@ -2313,7 +2349,7 @@ class AssertTest extends TestCase
     /**
      * @dataProvider invalidEqArraySubsetProvider
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_ARRAY
      */
     public function testEqArraySubsetInvalid($value, $value2)
@@ -2324,7 +2360,7 @@ class AssertTest extends TestCase
     /**
      * @dataProvider invalidEqArraySubsetProvider
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionCode \Assert\Assertion::INVALID_EQ
      */
     public function testEqArraySubsetMismatchingSubset()

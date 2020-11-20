@@ -66,8 +66,6 @@ class InvalidArgumentException extends \InvalidArgumentException implements Asse
 
     /**
      * Get the constraints that applied to the failed assertion.
-     *
-     * @return array
      */
     public function getConstraints(): array
     {

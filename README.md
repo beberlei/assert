@@ -265,6 +265,7 @@ Assertion::startsWith(mixed $string, string $needle);
 Assertion::string(mixed $value);
 Assertion::subclassOf(mixed $value, string $className);
 Assertion::true(mixed $value);
+Assertion::ulid(string $value);
 Assertion::url(mixed $value);
 Assertion::uuid(string $value);
 Assertion::version(string $version1, string $operator, string $version2);
