@@ -1118,7 +1118,7 @@ class Assertion
 
         if (!$assert) {
             $message = \sprintf(
-       value` argument         static::generateMessage($message ?: 'Value "%s" is not an array and does not implement Countable.'),
+                static::generateMessage($message ?: 'Value "%s" is not an array and does not implement Countable.'),
                 static::stringify($value)
             );
 
