@@ -406,7 +406,7 @@ class Assertion
      *
      * @psalm-template ExpectedType
      * @psalm-param ExpectedType $value2
-     * @psalm-assert !=ExpectedType $value
+     * @psalm-assert !=ExpectedType $value1
      *
      * @return bool
      *
@@ -1109,7 +1109,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @psalm-assert numeric $string
+     * @psalm-assert numeric $value
      *
      * @return bool
      *
@@ -1136,7 +1136,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @psalm-assert resource $string
+     * @psalm-assert resource $value
      *
      * @return bool
      */
@@ -1161,7 +1161,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @psalm-assert array $string
+     * @psalm-assert array $value
      *
      * @return bool
      *
@@ -1188,7 +1188,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @psalm-assert iterable $string
+     * @psalm-assert iterable $value
      *
      * @return bool
      *
@@ -1237,7 +1237,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @psalm-assert countable $string
+     * @psalm-assert countable $value
      *
      * @return bool
      *
@@ -2023,8 +2023,6 @@ class Assertion
      * @param int $count
      * @param string|callable|null $message
      * @param string|null $propertyPath
-     *
-     * @psalm-assert non-empty-countable $value
      *
      * @return bool
      *
