@@ -2024,8 +2024,6 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
-     * @psalm-assert non-empty-countable $value
-     *
      * @return bool
      *
      * @throws AssertionFailedException
