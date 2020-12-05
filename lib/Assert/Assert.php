@@ -14,6 +14,8 @@
 
 namespace Assert;
 
+use LogicException;
+
 /**
  * AssertionChain factory.
  */
@@ -24,6 +26,9 @@ abstract class Assert
 
     /** @var string */
     protected static $assertionClass = Assertion::class;
+
+    /** @var string */
+    protected static $lazyAssertionClass = LazyAssertion::class;
 
     /**
      * Start validation on a value, returns {@link AssertionChain}.
@@ -76,7 +81,15 @@ abstract class Assert
      */
     public static function lazy(): LazyAssertion
     {
-        $lazyAssertion = new LazyAssertion();
+        if (LazyAssertion::class !== static::$lazyAssertionClass
+            && !\is_subclass_of(static::$lazyAssertionClass, LazyAssertion::class)
+        ) {
+            throw new LogicException(static::$lazyAssertionClass.' is not (a subclass of) '.LazyAssertion::class);
+        }
+
+        $lazyAssertionClass = static::$lazyAssertionClass;
+        /** @var LazyAssertion $lazyAssertion */
+        $lazyAssertion = new $lazyAssertionClass();
 
         return $lazyAssertion
             ->setAssertClass(\get_called_class())
