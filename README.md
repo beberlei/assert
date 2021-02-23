@@ -198,6 +198,7 @@ Assertion::digit(mixed $value);
 Assertion::directory(string $value);
 Assertion::e164(string $value);
 Assertion::email(mixed $value);
+Assertion::empty(mixed $value);
 Assertion::endsWith(mixed $string, string $needle);
 Assertion::eq(mixed $value, mixed $value2);
 Assertion::eqArraySubset(mixed $value, mixed $value2);

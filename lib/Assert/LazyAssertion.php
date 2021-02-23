@@ -38,6 +38,7 @@ use LogicException;
  * @method $this directory(string|callable $message = null, string $propertyPath = null) Assert that a directory exists.
  * @method $this e164(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method $this email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
+ * @method $this empty(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
  * @method $this endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
  * @method $this eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==).
  * @method $this eqArraySubset(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset.
@@ -78,7 +79,7 @@ use LogicException;
  * @method $this min(mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit.
  * @method $this minCount(int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements.
  * @method $this minLength(int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long.
- * @method $this noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty.
+ * @method $this noContent(string|callable $message = null, string $propertyPath = null) Assert that value is empty. This is an alias of LazyAssertion::empty().
  * @method $this notBlank(string|callable $message = null, string $propertyPath = null) Assert that value is not blank.
  * @method $this notContains(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars.
  * @method $this notEmpty(string|callable $message = null, string $propertyPath = null) Assert that value is not empty.
