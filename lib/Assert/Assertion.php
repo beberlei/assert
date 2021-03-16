@@ -1775,7 +1775,7 @@ class Assertion
     public static function alnum($value, $message = null, string $propertyPath = null): bool
     {
         try {
-            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
+            static::regex($value, '(^([a-zA-Z0-9]*)$)', $message, $propertyPath);
         } catch (Throwable $e) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.'),
