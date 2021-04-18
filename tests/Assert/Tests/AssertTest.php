@@ -2011,6 +2011,9 @@ class AssertTest extends TestCase
 
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriately()
     {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionCode(\Assert\Assertion::INVALID_FLOAT);
+
         $string = str_repeat('1234567890', 11);
 
         $this->assertTrue(Assertion::float($string));
