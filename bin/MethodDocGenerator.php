@@ -85,6 +85,10 @@ class MethodDocGenerator
                     }
                 }
 
+                if ($prefix === 'all' && strpos($type, 'null') === false && $parameterIndex === 0) {
+                    $type = str_replace('|', '[]|', $type).'[]';
+                }
+
                 if ($prefix === 'nullOr' && strpos($type, 'null') === false && $parameterIndex === 0) {
                     $type .= '|null';
                 }
@@ -214,8 +218,8 @@ class MethodDocGenerator
         };
 
         $docs = array_merge(
-            $this->generateMethodDocs($this->gatherAssertions(), ' * @method $this %s(%s) %s.', $skipParameterTest),
-            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), ' * @method $this %s(%s) %s.', false)
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method LazyAssertion %s(%s) %s.', $skipParameterTest),
+            $this->generateMethodDocs($this->gatherAssertionChainSwitches(), ' * @method LazyAssertion %s(%s) %s.', false)
         );
 
         $this->generateFile($phpFile, $docs, 'class');
