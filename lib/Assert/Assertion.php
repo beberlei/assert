@@ -1233,7 +1233,7 @@ class Assertion
     /**
      * Assert that value is countable.
      *
-     * @param array|Countable|ResourceBundle|SimpleXMLElement $value
+     * @param mixed $value
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
