@@ -953,7 +953,7 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (0 !== \mb_strpos($string, $needle, null, $encoding)) {
+        if (0 !== \mb_strpos($string, $needle, 0, $encoding)) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" does not start with "%s".'),
                 static::stringify($string),
@@ -987,7 +987,7 @@ class Assertion
 
         $stringPosition = \mb_strlen($string, $encoding) - \mb_strlen($needle, $encoding);
 
-        if (\mb_strripos($string, $needle, null, $encoding) !== $stringPosition) {
+        if (\mb_strripos($string, $needle, 0, $encoding) !== $stringPosition) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" does not end with "%s".'),
                 static::stringify($string),
@@ -1019,7 +1019,7 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (false === \mb_strpos($string, $needle, null, $encoding)) {
+        if (false === \mb_strpos($string, $needle, 0, $encoding)) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" does not contain "%s".'),
                 static::stringify($string),
@@ -1051,7 +1051,7 @@ class Assertion
     {
         static::string($string, $message, $propertyPath);
 
-        if (false !== \mb_strpos($string, $needle, null, $encoding)) {
+        if (false !== \mb_strpos($string, $needle, 0, $encoding)) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" contains "%s".'),
                 static::stringify($string),
@@ -2620,7 +2620,12 @@ class Assertion
     public static function ip($value, $flag = null, $message = null, string $propertyPath = null): bool
     {
         static::string($value, $message, $propertyPath);
-        if (!\filter_var($value, FILTER_VALIDATE_IP, $flag)) {
+        if ($flag === null) {
+            $filterVarResult = \filter_var($value, FILTER_VALIDATE_IP);
+        } else {
+            $filterVarResult = \filter_var($value, FILTER_VALIDATE_IP, $flag);
+        }
+        if (!$filterVarResult) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" was expected to be a valid IP address.'),
                 static::stringify($value)
