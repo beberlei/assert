@@ -15,7 +15,6 @@
 namespace Assert;
 
 use LogicException;
-use ReflectionClass;
 
 /**
  * Chaining builder for assertions.
@@ -171,12 +170,11 @@ class AssertionChain
             return $this;
         }
 
-        if (!\method_exists($this->assertionClassName, $methodName)) {
+        try {
+            $method = new \ReflectionMethod($this->assertionClassName, $methodName);
+        } catch (\ReflectionException $exception) {
             throw new \RuntimeException("Assertion '".$methodName."' does not exist.");
         }
-
-        $reflClass = new ReflectionClass($this->assertionClassName);
-        $method = $reflClass->getMethod($methodName);
 
         \array_unshift($args, $this->value);
         $params = $method->getParameters();
@@ -186,12 +184,13 @@ class AssertionChain
                 continue;
             }
 
-            if ('message' == $param->getName()) {
-                $args[$idx] = $this->defaultMessage;
-            }
-
-            if ('propertyPath' == $param->getName()) {
-                $args[$idx] = $this->defaultPropertyPath;
+            switch ($param->getName()) {
+                case 'message':
+                    $args[$idx] = $this->defaultMessage;
+                    break;
+                case 'propertyPath':
+                    $args[$idx] = $this->defaultPropertyPath;
+                    break;
             }
         }
 
