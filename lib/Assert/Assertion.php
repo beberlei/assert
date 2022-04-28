@@ -305,6 +305,8 @@ class Assertion
      * @param mixed $value2
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function eq($value, $value2, $message = null, string $propertyPath = null): bool
@@ -329,6 +331,8 @@ class Assertion
      * @param mixed $value2
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function eqArraySubset($value, $value2, $message = null, string $propertyPath = null): bool
@@ -350,6 +354,7 @@ class Assertion
      * @param string|callable|null $message
      * @param string|null $propertyPath
      *
+     * @psalm-pure
      * @psalm-template ExpectedType
      * @psalm-param ExpectedType $value2
      * @psalm-assert =ExpectedType $value
@@ -380,6 +385,8 @@ class Assertion
      * @param mixed $value2
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function notEq($value1, $value2, $message = null, string $propertyPath = null): bool
@@ -407,6 +414,7 @@ class Assertion
      * @psalm-template ExpectedType
      * @psalm-param ExpectedType $value2
      * @psalm-assert !=ExpectedType $value1
+     * @psalm-pure
      *
      * @return bool
      *
@@ -432,6 +440,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function notInArray($value, array $choices, $message = null, string $propertyPath = null): bool
@@ -456,6 +466,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert int $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -483,6 +494,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert float $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -510,6 +522,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =numeric $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -534,6 +547,8 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -572,6 +587,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert bool $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -599,6 +615,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert scalar $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -626,6 +643,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert !empty $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -653,6 +671,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert empty $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -680,6 +699,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert null $value
+     * @psalm-pure
      *
      * @return bool
      */
@@ -705,6 +725,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert !null $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -732,6 +753,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -761,6 +783,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -791,6 +814,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert !=string $value
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -820,6 +844,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -853,6 +878,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -886,6 +912,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -920,6 +947,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -944,6 +972,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $string
+     * @psalm-pure
      *
      * @return bool
      *
@@ -976,6 +1005,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $string
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1010,6 +1040,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $string
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1042,6 +1073,7 @@ class Assertion
      * @param string $encoding
      *
      * @psalm-assert =string $string
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1070,6 +1102,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function choice($value, array $choices, $message = null, string $propertyPath = null): bool
@@ -1095,6 +1129,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function inArray($value, array $choices, $message = null, string $propertyPath = null): bool
@@ -1110,6 +1146,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert numeric $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1137,6 +1174,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert resource $value
+     * @psalm-pure
      *
      * @return bool
      */
@@ -1162,6 +1200,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert array $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1189,6 +1228,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert iterable $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1214,6 +1254,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function isArrayAccessible($value, $message = null, string $propertyPath = null): bool
@@ -1238,6 +1280,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert countable $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1270,6 +1313,8 @@ class Assertion
      * @param string|int $key
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function keyExists($value, $key, $message = null, string $propertyPath = null): bool
@@ -1295,6 +1340,8 @@ class Assertion
      * @param string|int $key
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function keyNotExists($value, $key, $message = null, string $propertyPath = null): bool
@@ -1318,6 +1365,8 @@ class Assertion
      *
      * @param mixed[] $values
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -1344,6 +1393,8 @@ class Assertion
      * @param string|int $key
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function keyIsset($value, $key, $message = null, string $propertyPath = null): bool
@@ -1369,6 +1420,8 @@ class Assertion
      * @param string|int $key
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function notEmptyKey($value, $key, $message = null, string $propertyPath = null): bool
@@ -1384,6 +1437,8 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -1412,6 +1467,7 @@ class Assertion
      * @psalm-template ExpectedType of object
      * @psalm-param class-string<ExpectedType> $className
      * @psalm-assert ExpectedType $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1443,6 +1499,7 @@ class Assertion
      * @psalm-template ExpectedType of object
      * @psalm-param class-string<ExpectedType> $className
      * @psalm-assert !ExpectedType $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1469,6 +1526,8 @@ class Assertion
      * @param mixed $value
      * @param string $className
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -1497,6 +1556,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =numeric $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1529,6 +1589,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =numeric $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1560,6 +1621,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =numeric $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1588,6 +1650,8 @@ class Assertion
      * @param string $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function file($value, $message = null, string $propertyPath = null): bool
@@ -1613,6 +1677,8 @@ class Assertion
      * @param string $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function directory($value, $message = null, string $propertyPath = null): bool
@@ -1637,6 +1703,8 @@ class Assertion
      * @param string $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function readable($value, $message = null, string $propertyPath = null): bool
@@ -1660,6 +1728,8 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -1687,6 +1757,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1718,6 +1789,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1770,6 +1842,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function alnum($value, $message = null, string $propertyPath = null): bool
@@ -1796,6 +1870,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert true $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1823,6 +1898,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert false $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1850,6 +1926,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert class-string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1877,6 +1954,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert class-string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1902,6 +1980,8 @@ class Assertion
      * @param mixed $class
      * @param string $interfaceName
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -1943,6 +2023,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert =string $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -1969,6 +2050,8 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2000,6 +2083,8 @@ class Assertion
      * @param string $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function e164($value, $message = null, string $propertyPath = null): bool
@@ -2023,6 +2108,8 @@ class Assertion
      * @param int $count
      * @param string|callable|null $message
      * @param string|null $propertyPath
+     *
+     * @psalm-pure
      *
      * @return bool
      *
@@ -2050,6 +2137,8 @@ class Assertion
      * @param int $count
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function minCount($countable, $count, $message = null, string $propertyPath = null): bool
@@ -2073,6 +2162,8 @@ class Assertion
      * @param array|Countable|ResourceBundle|SimpleXMLElement $countable
      * @param int $count
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2098,6 +2189,8 @@ class Assertion
      *
      * @param string $method
      * @param array $args
+     *
+     * @psalm-pure
      *
      * @return bool|mixed
      *
@@ -2145,6 +2238,8 @@ class Assertion
      *
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function choicesNotEmpty(array $values, array $choices, $message = null, string $propertyPath = null): bool
@@ -2164,6 +2259,8 @@ class Assertion
      * @param string $value
      * @param mixed $object
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2191,6 +2288,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert object $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -2217,6 +2315,8 @@ class Assertion
      * @param mixed $limit
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function lessThan($value, $limit, $message = null, string $propertyPath = null): bool
@@ -2240,6 +2340,8 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2265,6 +2367,8 @@ class Assertion
      * @param mixed $limit
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function greaterThan($value, $limit, $message = null, string $propertyPath = null): bool
@@ -2288,6 +2392,8 @@ class Assertion
      * @param mixed $value
      * @param mixed $limit
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2314,6 +2420,8 @@ class Assertion
      * @param mixed $upperLimit
      * @param string|callable|null $message
      * @param string $propertyPath
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2342,6 +2450,8 @@ class Assertion
      * @param string|callable|null $message
      * @param string $propertyPath
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function betweenExclusive($value, $lowerLimit, $upperLimit, $message = null, string $propertyPath = null): bool
@@ -2366,6 +2476,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function extensionLoaded($value, $message = null, string $propertyPath = null): bool
@@ -2389,6 +2501,8 @@ class Assertion
      * @param string $format supports all of the options date(), except for the following:
      *                       N, w, W, t, L, o, B, a, A, g, h, I, O, P, Z, c, r
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      *
@@ -2420,6 +2534,8 @@ class Assertion
      * @param mixed $value
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function objectOrClass($value, $message = null, string $propertyPath = null): bool
@@ -2437,6 +2553,8 @@ class Assertion
      * @param mixed $value
      * @param string $property
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2462,6 +2580,8 @@ class Assertion
      *
      * @param mixed $value
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2498,6 +2618,8 @@ class Assertion
      * @param string $version2
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function version($version1, $operator, $version2, $message = null, string $propertyPath = null): bool
@@ -2525,6 +2647,8 @@ class Assertion
      * @param mixed $version
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function phpVersion($operator, $version, $message = null, string $propertyPath = null): bool
@@ -2541,6 +2665,8 @@ class Assertion
      * @param string $operator
      * @param mixed $version
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2559,6 +2685,7 @@ class Assertion
      * @param string|null $propertyPath
      *
      * @psalm-assert callable $value
+     * @psalm-pure
      *
      * @return bool
      *
@@ -2587,6 +2714,8 @@ class Assertion
      * @param callable $callback
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      */
     public static function satisfy($value, $callback, $message = null, string $propertyPath = null): bool
@@ -2612,6 +2741,8 @@ class Assertion
      * @param string $value
      * @param int|null $flag
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      *
@@ -2644,6 +2775,8 @@ class Assertion
      * @param int|null $flag
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      *
      * @see http://php.net/manual/filter.filters.flags.php
@@ -2663,6 +2796,8 @@ class Assertion
      * @param int|null $flag
      * @param string|callable|null $message
      *
+     * @psalm-pure
+     *
      * @throws AssertionFailedException
      *
      * @see http://php.net/manual/filter.filters.flags.php
@@ -2679,6 +2814,8 @@ class Assertion
      *
      * @param mixed $constant
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      */
     public static function defined($constant, $message = null, string $propertyPath = null): bool
     {
@@ -2696,6 +2833,8 @@ class Assertion
      *
      * @param string $value
      * @param string|callable|null $message
+     *
+     * @psalm-pure
      *
      * @throws AssertionFailedException
      */
@@ -2719,6 +2858,8 @@ class Assertion
      * @param string|callable|null $message
      * @param int $code
      *
+     * @psalm-pure
+     *
      * @return mixed
      */
     protected static function createException($value, $message, $code, $propertyPath = null, array $constraints = [])
@@ -2732,6 +2873,8 @@ class Assertion
      * Make a string version of a value.
      *
      * @param mixed $value
+     *
+     * @psalm-pure
      */
     protected static function stringify($value): string
     {
@@ -2762,6 +2905,8 @@ class Assertion
 
     /**
      * Generate the message.
+     *
+     * @psalm-pure
      *
      * @param string|callable|null $message
      */
