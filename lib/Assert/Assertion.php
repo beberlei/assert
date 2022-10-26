@@ -119,6 +119,95 @@ use Traversable;
  * @method static bool allUuid(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID for all values.
  * @method static bool allVersion(string[] $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
  * @method static bool allWriteable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
+ * @method static bool someAlnum(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for at least one value.
+ * @method static bool someBase64(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for at least one value.
+ * @method static bool someBetween(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for at least one value.
+ * @method static bool someBetweenExclusive(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for at least one value.
+ * @method static bool someBetweenLength(mixed[] $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths for at least one value.
+ * @method static bool someBoolean(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is php boolean for at least one value.
+ * @method static bool someChoice(mixed[] $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices for at least one value.
+ * @method static bool someChoicesNotEmpty(array[] $values, array $choices, string|callable $message = null, string $propertyPath = null) Determines if the values array has every choice as key and that this choice has content for at least one value.
+ * @method static bool someClassExists(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the class exists for at least one value.
+ * @method static bool someContains(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string contains a sequence of chars for at least one value.
+ * @method static bool someCount(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the count of countable is equal to count for at least one value.
+ * @method static bool someDate(string[] $value, string $format, string|callable $message = null, string $propertyPath = null) Assert that date is valid and corresponds to the given format for at least one value.
+ * @method static bool someDefined(mixed[] $constant, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for at least one value.
+ * @method static bool someDigit(mixed[] $value, string|callable $message = null, string $propertyPath = null) Validates if an integer or integerish is a digit for at least one value.
+ * @method static bool someDirectory(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a directory exists for at least one value.
+ * @method static bool someE164(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number for at least one value.
+ * @method static bool someEmail(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for at least one value.
+ * @method static bool someEndsWith(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for at least one value.
+ * @method static bool someEq(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for at least one value.
+ * @method static bool someEqArraySubset(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset for at least one value.
+ * @method static bool someExtensionLoaded(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded for at least one value.
+ * @method static bool someExtensionVersion(string[] $extension, string $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded and a specific version is installed for at least one value.
+ * @method static bool someFalse(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean False for at least one value.
+ * @method static bool someFile(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a file exists for at least one value.
+ * @method static bool someFloat(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php float for at least one value.
+ * @method static bool someGreaterOrEqualThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater or equal than given limit for at least one value.
+ * @method static bool someGreaterThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is greater than given limit for at least one value.
+ * @method static bool someImplementsInterface(mixed[] $class, string $interfaceName, string|callable $message = null, string $propertyPath = null) Assert that the class implements the interface for at least one value.
+ * @method static bool someInArray(mixed[] $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is in array of choices. This is an alias of Assertion::choice() for at least one value.
+ * @method static bool someInteger(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer for at least one value.
+ * @method static bool someIntegerish(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a php integer'ish for at least one value.
+ * @method static bool someInterfaceExists(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the interface exists for at least one value.
+ * @method static bool someIp(string[] $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv4 or IPv6 address for at least one value.
+ * @method static bool someIpv4(string[] $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv4 address for at least one value.
+ * @method static bool someIpv6(string[] $value, int $flag = null, string|callable $message = null, string $propertyPath = null) Assert that value is an IPv6 address for at least one value.
+ * @method static bool someIsArray(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for at least one value.
+ * @method static bool someIsArrayAccessible(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for at least one value.
+ * @method static bool someIsCallable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for at least one value.
+ * @method static bool someIsCountable(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for at least one value.
+ * @method static bool someIsInstanceOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for at least one value.
+ * @method static bool someIsJsonString(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for at least one value.
+ * @method static bool someIsObject(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for at least one value.
+ * @method static bool someIsResource(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a resource for at least one value.
+ * @method static bool someIsTraversable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or a traversable object for at least one value.
+ * @method static bool someKeyExists(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array for at least one value.
+ * @method static bool someKeyIsset(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object using isset() for at least one value.
+ * @method static bool someKeyNotExists(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key does not exist in an array for at least one value.
+ * @method static bool someLength(mixed[] $value, int $length, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string has a given length for at least one value.
+ * @method static bool someLessOrEqualThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less or equal than given limit for at least one value.
+ * @method static bool someLessThan(mixed[] $value, mixed $limit, string|callable $message = null, string $propertyPath = null) Determines if the value is less than given limit for at least one value.
+ * @method static bool someMax(mixed[] $value, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that a number is smaller as a given limit for at least one value.
+ * @method static bool someMaxCount(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at most $count elements for at least one value.
+ * @method static bool someMaxLength(mixed[] $value, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string value is not longer than $maxLength chars for at least one value.
+ * @method static bool someMethodExists(string[] $value, mixed $object, string|callable $message = null, string $propertyPath = null) Determines that the named method is defined in the provided object for at least one value.
+ * @method static bool someMin(mixed[] $value, mixed $minValue, string|callable $message = null, string $propertyPath = null) Assert that a value is at least as big as a given limit for at least one value.
+ * @method static bool someMinCount(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $countable, int $count, string|callable $message = null, string $propertyPath = null) Assert that the countable have at least $count elements for at least one value.
+ * @method static bool someMinLength(mixed[] $value, int $minLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that a string is at least $minLength chars long for at least one value.
+ * @method static bool someNoContent(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is empty for at least one value.
+ * @method static bool someNotBlank(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is not blank for at least one value.
+ * @method static bool someNotContains(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string does not contains a sequence of chars for at least one value.
+ * @method static bool someNotEmpty(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is not empty for at least one value.
+ * @method static bool someNotEmptyKey(mixed[] $value, string|int $key, string|callable $message = null, string $propertyPath = null) Assert that key exists in an array/array-accessible object and its value is not empty for at least one value.
+ * @method static bool someNotEq(mixed[] $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not equal (using ==) for at least one value.
+ * @method static bool someNotInArray(mixed[] $value, array $choices, string|callable $message = null, string $propertyPath = null) Assert that value is not in array of choices for at least one value.
+ * @method static bool someNotIsInstanceOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is not instance of given class-name for at least one value.
+ * @method static bool someNotNull(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is not null for at least one value.
+ * @method static bool someNotRegex(mixed[] $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value does not match a regex for at least one value.
+ * @method static bool someNotSame(mixed[] $value1, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are not the same (using ===) for at least one value.
+ * @method static bool someNull(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is null for at least one value.
+ * @method static bool someNumeric(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is numeric for at least one value.
+ * @method static bool someObjectOrClass(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is an object, or a class that exists for at least one value.
+ * @method static bool somePhpVersion(string[] $operator, mixed $version, string|callable $message = null, string $propertyPath = null) Assert on PHP version for at least one value.
+ * @method static bool somePropertiesExist(mixed[] $value, array $properties, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the properties all exist for at least one value.
+ * @method static bool somePropertyExists(mixed[] $value, string $property, string|callable $message = null, string $propertyPath = null) Assert that the value is an object or class, and that the property exists for at least one value.
+ * @method static bool someRange(mixed[] $value, mixed $minValue, mixed $maxValue, string|callable $message = null, string $propertyPath = null) Assert that value is in range of numbers for at least one value.
+ * @method static bool someReadable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something readable for at least one value.
+ * @method static bool someRegex(mixed[] $value, string $pattern, string|callable $message = null, string $propertyPath = null) Assert that value matches a regex for at least one value.
+ * @method static bool someSame(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are the same (using ===) for at least one value.
+ * @method static bool someSatisfy(mixed[] $value, callable $callback, string|callable $message = null, string $propertyPath = null) Assert that the provided value is valid according to a callback for at least one value.
+ * @method static bool someScalar(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a PHP scalar for at least one value.
+ * @method static bool someStartsWith(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string starts with a sequence of chars for at least one value.
+ * @method static bool someString(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is a string for at least one value.
+ * @method static bool someSubclassOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is subclass of given class-name for at least one value.
+ * @method static bool someTrue(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is boolean True for at least one value.
+ * @method static bool someUniqueValues(array[] $values, string|callable $message = null, string $propertyPath = null) Assert that values in array are unique (using strict equality) for at least one value.
+ * @method static bool someUrl(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an URL for at least one value.
+ * @method static bool someUuid(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid UUID for at least one value.
+ * @method static bool someVersion(string[] $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for at least one value.
+ * @method static bool someWriteable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for at least one value.
  * @method static bool nullOrAlnum(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
  * @method static bool nullOrBase64(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
  * @method static bool nullOrBetween(mixed|null $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
@@ -2135,6 +2224,34 @@ class Assertion
             }
 
             return true;
+        }
+
+        if (0 === \strpos($method, 'some')) {
+            if (!\array_key_exists(0, $args)) {
+                throw new BadMethodCallException('Missing the first argument.');
+            }
+
+            static::isTraversable($args[0]);
+
+            $method = \substr($method, 4);
+            $values = \array_shift($args);
+            $calledClass = \get_called_class();
+
+            foreach ($values as $value) {
+                try {
+                    \call_user_func_array([$calledClass, $method], \array_merge([$value], $args));
+
+                    return true;
+                } catch (\Exception $e) {
+                    if ($e instanceof self::$exceptionClass){
+                        $thrownException = $e;
+                    } else {
+                        throw $e;
+                    }
+                }
+            }
+
+            throw $thrownException;
         }
 
         throw new BadMethodCallException('No assertion Assertion#'.$method.' exists.');
