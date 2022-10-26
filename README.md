@@ -82,13 +82,25 @@ Assertion::nullOrMax(1337, 42); // exception
 ### All helper
 
 The `Assertion::all*` method checks if all provided values hold for the
-assertion. It will throw an exception of the assertion does not hold for one of
+assertion. It will throw an exception if the assertion does not hold for one of
 the values:
 
 ```php
 <?php
 Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'stdClass'); // success
 Assertion::allIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');      // exception
+```
+
+### Some helper
+
+The `Assertion::some*` method checks if at least one of provided values holds
+for the assertion. It will throw an exception if the assertion does not hold for
+all the values:
+
+```php
+<?php
+Assertion::someIsInstanceOf(array(new \Foo\Bar, new \stdClass), 'stdClass'); // success
+Assertion::someIsInstanceOf(array(new \stdClass, new \stdClass), 'PDO');     // exception
 ```
 
 ### Assert::that() Chaining
@@ -103,10 +115,12 @@ on the fluent interface. You only have to specify the `$value` once.
 Assert::that($value)->notEmpty()->integer();
 Assert::that($value)->nullOr()->string()->startsWith("Foo");
 Assert::that($values)->all()->float();
+Assert::that($values)->some()->boolean();
 ```
 
-There are also two shortcut function `Assert::thatNullOr()` and `Assert::thatAll()` enabling
-the "nullOr" or "all" helper respectively.
+There are also shortcut function `Assert::thatNullOr()`, `Assert::thatAll()`
+and `Assert::thatSome()` enabling the "nullOr", "all" or "some" helper
+respectively.
 
 ### Lazy Assertions
 
@@ -167,6 +181,7 @@ The following functions exist as aliases to `Assert` static constructors:
 
 - `Assert\that()`
 - `Assert\thatAll()`
+- `Assert\thatSome()`
 - `Assert\thatNullOr()`
 - `Assert\lazy()`
 
