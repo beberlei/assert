@@ -68,7 +68,7 @@ use Traversable;
  * @method static bool allIsArray(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for all values.
  * @method static bool allIsArrayAccessible(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for all values.
  * @method static bool allIsCallable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for all values.
- * @method static bool allIsCountable(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for all values.
+ * @method static bool allIsCountable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for all values.
  * @method static bool allIsInstanceOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for all values.
  * @method static bool allIsJsonString(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for all values.
  * @method static bool allIsObject(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for all values.
@@ -157,7 +157,7 @@ use Traversable;
  * @method static bool someIsArray(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array for at least one value.
  * @method static bool someIsArrayAccessible(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object for at least one value.
  * @method static bool someIsCallable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable for at least one value.
- * @method static bool someIsCountable(array[]|Countable[]|ResourceBundle[]|SimpleXMLElement[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for at least one value.
+ * @method static bool someIsCountable(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable for at least one value.
  * @method static bool someIsInstanceOf(mixed[] $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name for at least one value.
  * @method static bool someIsJsonString(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string for at least one value.
  * @method static bool someIsObject(mixed[] $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object for at least one value.
@@ -246,7 +246,7 @@ use Traversable;
  * @method static bool nullOrIsArray(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or that the value is null.
  * @method static bool nullOrIsArrayAccessible(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an array or an array-accessible object or that the value is null.
  * @method static bool nullOrIsCallable(mixed|null $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is callable or that the value is null.
- * @method static bool nullOrIsCountable(array|Countable|ResourceBundle|SimpleXMLElement|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable or that the value is null.
+ * @method static bool nullOrIsCountable(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is countable or that the value is null.
  * @method static bool nullOrIsInstanceOf(mixed|null $value, string $className, string|callable $message = null, string $propertyPath = null) Assert that value is instance of given class-name or that the value is null.
  * @method static bool nullOrIsJsonString(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid json string or that the value is null.
  * @method static bool nullOrIsObject(mixed|null $value, string|callable $message = null, string $propertyPath = null) Determines that the provided value is an object or that the value is null.
