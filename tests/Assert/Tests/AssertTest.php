@@ -889,13 +889,14 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::alnum('a1'));
         $this->assertTrue(Assertion::alnum('aasdf1234'));
         $this->assertTrue(Assertion::alnum('a1b2c3'));
+        $this->assertTrue(Assertion::alnum('1234567890'));
     }
 
     public function testInvalidAlnum()
     {
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_ALNUM);
-        Assertion::alnum('1a');
+        Assertion::alnum('_1a');
     }
 
     public function testValidTrue()
