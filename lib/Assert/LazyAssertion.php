@@ -39,6 +39,8 @@ use LogicException;
  * @method LazyAssertion e164(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number.
  * @method LazyAssertion email(string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL).
  * @method LazyAssertion endsWith(string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars.
+ * @method LazyAssertion enumCase(string $enumClass, string|callable $message = null, ?string $propertyPath = null) Assert that the value is a valid backed enum case.
+ * @method LazyAssertion enumExists(string|callable $message = null, ?string $propertyPath = null) Assert that the enum exists.
  * @method LazyAssertion eq(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==).
  * @method LazyAssertion eqArraySubset(mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset.
  * @method LazyAssertion extensionLoaded(string|callable $message = null, string $propertyPath = null) Assert that extension is loaded.
