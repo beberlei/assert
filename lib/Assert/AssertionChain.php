@@ -142,6 +142,13 @@ class AssertionChain
      */
     private $all = false;
 
+    /**
+     * Perform assertion on elements of array or traversable until one that satisfies the assertion is found.
+     *
+     * @var bool
+     */
+    private $some = false;
+
     /** @var string|Assertion Class to use for assertion calls */
     private $assertionClassName = 'Assert\Assertion';
 
@@ -196,6 +203,8 @@ class AssertionChain
 
         if ($this->all) {
             $methodName = 'all'.$methodName;
+        } elseif ($this->some) {
+            $methodName = 'some'.$methodName;
         }
 
         \call_user_func_array([$this->assertionClassName, $methodName], $args);
@@ -209,6 +218,16 @@ class AssertionChain
     public function all(): AssertionChain
     {
         $this->all = true;
+
+        return $this;
+    }
+
+    /**
+     * Switch chain into validation mode for an array of values, requiring at least one of them to be satisfied.
+     */
+    public function some(): AssertionChain
+    {
+        $this->some = true;
 
         return $this;
     }

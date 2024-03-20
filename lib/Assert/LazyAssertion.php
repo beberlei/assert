@@ -112,6 +112,7 @@ use LogicException;
  * @method LazyAssertion writeable(string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable.
  * @method LazyAssertion all() Switch chain into validation mode for an array of values.
  * @method LazyAssertion nullOr() Switch chain into mode allowing nulls, ignoring further assertions.
+ * @method LazyAssertion some() Switch chain into validation mode for an array of values, requiring at least one of them to be satisfied.
  */
 class LazyAssertion
 {

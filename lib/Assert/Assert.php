@@ -61,6 +61,17 @@ abstract class Assert
     }
 
     /**
+     * Start validation on a set of values, requiring at least one of them to be satisfied, returns {@link AssertionChain}.
+     *
+     * @param mixed $values
+     * @param string|callable|null $defaultMessage
+     */
+    public static function thatSome($values, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
+    {
+        return static::that($values, $defaultMessage, $defaultPropertyPath)->some();
+    }
+
+    /**
      * Start validation and allow NULL, returns {@link AssertionChain}.
      *
      * @param mixed $value

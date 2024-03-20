@@ -1350,9 +1350,8 @@ class AssertTest extends TestCase
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_INSTANCE_OF);
         Assertion::allIsInstanceOf(
-            [new stdClass(), new stdClass()],
-            new class() {
-            },
+            [new stdClass(), new Exception()],
+            stdClass::class,
             'Assertion failed',
             'foos'
         );
@@ -1362,6 +1361,35 @@ class AssertTest extends TestCase
     {
         $this->expectException('BadMethodCallException');
         Assertion::allTrue();
+    }
+
+    public function testSomeWithSimpleAssertion()
+    {
+        $this->assertTrue(Assertion::someTrue([false, true, false]));
+    }
+
+    public function testSomeWithSimpleAssertionThrowsExceptionOnIterableThatFailsAssertion()
+    {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionCode(\Assert\Assertion::INVALID_TRUE);
+        Assertion::someTrue([false, false]);
+    }
+
+    public function testSomeWithComplexAssertion()
+    {
+        $this->assertTrue(Assertion::someIsInstanceOf([new Exception(), new stdClass(), new Exception()], stdClass::class));
+    }
+
+    public function testSomeWithComplexAssertionThrowsExceptionOnIterableThatFailsAssertion()
+    {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionCode(\Assert\Assertion::INVALID_INSTANCE_OF);
+        Assertion::allIsInstanceOf(
+            [new Exception(), new Exception()],
+            stdClass::class,
+            'Assertion failed',
+            'foos'
+        );
     }
 
     public function testValidCount()
