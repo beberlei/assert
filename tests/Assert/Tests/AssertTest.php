@@ -14,8 +14,8 @@
 
 namespace Assert\Tests;
 
-use ArrayObject;
 use ArrayIterator;
+use ArrayObject;
 use Assert\Assertion;
 use Assert\AssertionFailedException;
 use Assert\Tests\Fixtures\CustomAssertion;
@@ -28,17 +28,8 @@ use ResourceBundle;
 use SimpleXMLElement;
 use SplObserver;
 use stdClass;
-use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 use Traversable;
-use function base64_encode;
-use function extension_loaded;
-use function fopen;
-use function is_bool;
-use function is_null;
-use function json_encode;
-use function range;
-use function str_repeat;
-use function sys_get_temp_dir;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class AssertTest extends TestCase
 {
@@ -144,7 +135,7 @@ class AssertTest extends TestCase
             'A null' => [null],
             'A float in a string' => ['1.23'],
             'A negative float in a string' => ['-1.23'],
-            'A file pointer' => [fopen(__FILE__, 'r')],
+            'A file pointer' => [\fopen(__FILE__, 'r')],
             'A float in a string with a leading space' => [' 1.23'],
             'An integer in a string with a leading space' => [' 123'],
             'A negative integer in a string with a leading space' => [' -123'],
@@ -540,7 +531,7 @@ class AssertTest extends TestCase
             [1],
             [1.23],
             [new stdClass()],
-            [fopen('php://memory', 'r')],
+            [\fopen('php://memory', 'r')],
         ];
     }
 
@@ -980,10 +971,10 @@ class AssertTest extends TestCase
     {
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_VALUE_IN_ARRAY);
-        $this->assertTrue(Assertion::notInArray(6, range(1, 5)));
-        $this->assertTrue(Assertion::notInArray('a', range('b', 'z')));
+        $this->assertTrue(Assertion::notInArray(6, \range(1, 5)));
+        $this->assertTrue(Assertion::notInArray('a', \range('b', 'z')));
 
-        Assertion::notInArray(1, range(1, 5));
+        Assertion::notInArray(1, \range(1, 5));
     }
 
     public function testMin()
@@ -1142,7 +1133,7 @@ class AssertTest extends TestCase
     {
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_WRITEABLE);
-        $this->assertTrue(Assertion::writeable(sys_get_temp_dir()));
+        $this->assertTrue(Assertion::writeable(\sys_get_temp_dir()));
 
         Assertion::writeable(__DIR__.'/does-not-exist');
     }
@@ -1197,8 +1188,8 @@ class AssertTest extends TestCase
     public function isJsonStringDataprovider(): array
     {
         return [
-            '»null« value' => [json_encode(null)],
-            '»false« value' => [json_encode(false)],
+            '»null« value' => [\json_encode(null)],
+            '»false« value' => [\json_encode(false)],
             'array value' => ['["false"]'],
             'object value' => ['{"tux":"false"}'],
         ];
@@ -1427,7 +1418,7 @@ class AssertTest extends TestCase
         yield '2 elements while at least 3 expected' => [['Hi', 'There'], 3];
         yield '1 countable while at least 2 expected' => [new Fixtures\OneCountable(), 2];
         yield '2 countable while at least 3 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 3];
-        if (extension_loaded('intl')) {
+        if (\extension_loaded('intl')) {
             yield '6 countable while at least 7 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 7];
         }
     }
@@ -1467,7 +1458,7 @@ class AssertTest extends TestCase
         yield '2 elements while at most 1 expected' => [['Hi', 'There'], 1];
         yield '1 countable while at most 0 expected' => [new Fixtures\OneCountable(), 0];
         yield '2 countable while at most 1 expected' => [new SimpleXMLElement('<a><b /><c /></a>'), 1];
-        if (extension_loaded('intl')) {
+        if (\extension_loaded('intl')) {
             yield '6 countable while at most 5 expected' => [new ResourceBundle('en_US', __DIR__.'/_files/ResourceBundle'), 5];
         }
     }
@@ -1797,7 +1788,7 @@ class AssertTest extends TestCase
         Assertion::satisfy(
             null,
             function ($value): bool {
-                return !is_null($value);
+                return !\is_null($value);
             }
         );
     }
@@ -1808,8 +1799,8 @@ class AssertTest extends TestCase
         $this->assertTrue(
             Assertion::satisfy(
                 null,
-                function ($value) : bool {
-                    return is_null($value);
+                function ($value): bool {
+                    return \is_null($value);
                 }
             )
         );
@@ -1822,7 +1813,7 @@ class AssertTest extends TestCase
                  * @return bool|void
                  */
                 function ($value) {
-                    if (!is_bool($value)) {
+                    if (!\is_bool($value)) {
                         return false;
                     }
                 }
@@ -2014,18 +2005,18 @@ class AssertTest extends TestCase
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_FLOAT);
 
-        $string = str_repeat('1234567890', 11);
+        $string = \str_repeat('1234567890', 11);
 
         $this->assertTrue(Assertion::float($string));
     }
 
     public function testStringifyTruncatesStringValuesLongerThan100CharactersAppropriatelyAndIsMultibyteValid()
     {
-	    $this->expectException('Assert\AssertionFailedException');
-	    $this->expectExceptionCode(\Assert\Assertion::INVALID_FLOAT);
-	    $this->expectExceptionMessage('ငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟု...');
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionCode(\Assert\Assertion::INVALID_FLOAT);
+        $this->expectExceptionMessage('ငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟုတ်ဘူးငါကနံပါတ်မဟု...');
 
-        $string = str_repeat('ငါကနံပါတ်မဟုတ်ဘူး', 11);
+        $string = \str_repeat('ငါကနံပါတ်မဟုတ်ဘူး', 11);
 
         $this->assertTrue(Assertion::float($string));
     }
@@ -2035,7 +2026,7 @@ class AssertTest extends TestCase
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_FLOAT);
         $this->expectExceptionMessage('stream');
-        $this->assertTrue(Assertion::float(fopen('php://stdin', 'rb')));
+        $this->assertTrue(Assertion::float(\fopen('php://stdin', 'rb')));
     }
 
     public function testExtensionLoaded()
@@ -2161,7 +2152,7 @@ class AssertTest extends TestCase
 
     public function testBase64()
     {
-        $base64String = base64_encode('content');
+        $base64String = \base64_encode('content');
 
         $this->assertTrue(Assertion::base64($base64String));
     }
