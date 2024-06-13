@@ -43,6 +43,11 @@ class AssertionChainTest extends TestCase
         $this->assertInstanceOf(AssertionChain::class, Assert::that(null)->nullOr()->integer()->eq(10));
     }
 
+    public function testThatAssertionChainDoesANegativeAssert()
+    {
+        $this->assertInstanceOf(AssertionChain::class, Assert::that(1)->not()->eq(10));
+    }
+
     public function testThatAssertionChainValidatesAllInputs()
     {
         $this->assertInstanceOf(AssertionChain::class, Assert::that([1, 2, 3])->all()->integer());
