@@ -23,6 +23,8 @@ class LazyAssertionException extends InvalidArgumentException
 
     /**
      * @param InvalidArgumentException[] $errors
+     *
+     * @return static
      */
     public static function fromErrors(array $errors): self
     {
