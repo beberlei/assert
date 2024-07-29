@@ -24,6 +24,7 @@ use ResourceBundle;
 use SimpleXMLElement;
 use Throwable;
 use Traversable;
+use ValueError;
 
 /**
  * Assert library.
@@ -48,6 +49,8 @@ use Traversable;
  * @method static bool allE164(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number for all values.
  * @method static bool allEmail(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) for all values.
  * @method static bool allEndsWith(mixed[] $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars for all values.
+ * @method static bool allEnumCase(mixed[] $value, string $enumClass, string|callable $message = null, ?string $propertyPath = null) Assert that the value is a valid backed enum case for all values.
+ * @method static bool allEnumExists(mixed[] $value, string|callable $message = null, ?string $propertyPath = null) Assert that the enum exists for all values.
  * @method static bool allEq(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) for all values.
  * @method static bool allEqArraySubset(mixed[] $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset for all values.
  * @method static bool allExtensionLoaded(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded for all values.
@@ -137,6 +140,8 @@ use Traversable;
  * @method static bool nullOrE164(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid E164 Phone Number or that the value is null.
  * @method static bool nullOrEmail(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is an email address (using input_filter/FILTER_VALIDATE_EMAIL) or that the value is null.
  * @method static bool nullOrEndsWith(mixed|null $string, string $needle, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string ends with a sequence of chars or that the value is null.
+ * @method static bool nullOrEnumCase(mixed|null $value, string $enumClass, string|callable $message = null, ?string $propertyPath = null) Assert that the value is a valid backed enum case or that the value is null.
+ * @method static bool nullOrEnumExists(mixed|null $value, string|callable $message = null, ?string $propertyPath = null) Assert that the enum exists or that the value is null.
  * @method static bool nullOrEq(mixed|null $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that two values are equal (using ==) or that the value is null.
  * @method static bool nullOrEqArraySubset(mixed|null $value, mixed $value2, string|callable $message = null, string $propertyPath = null) Assert that the array contains the subset or that the value is null.
  * @method static bool nullOrExtensionLoaded(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that extension is loaded or that the value is null.
@@ -290,6 +295,8 @@ class Assertion
     const INVALID_MAX_COUNT = 228;
     const INVALID_STRING_NOT_CONTAINS = 229;
     const INVALID_UNIQUE_VALUES = 230;
+    const INVALID_ENUM = 231;
+    const INVALID_ENUM_CASE = 232;
 
     /**
      * Exception to throw when an assertion failed.
@@ -2705,6 +2712,77 @@ class Assertion
             $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid base64 string.'), $value);
 
             throw static::createException($value, $message, static::INVALID_BASE64, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that the enum exists.
+     *
+     * @param mixed $value
+     * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert class-string $value
+     *
+     * @return bool
+     *
+     * @throws AssertionFailedException
+     */
+    public static function enumExists($value, $message = null, string $propertyPath = null): bool
+    {
+        if (!function_exists('enum_exists')) {
+            throw new \BadMethodCallException('The "enum_exists" function is not available. Please install the "symfony/polyfill-php81" package.');
+        }
+
+        if (!\enum_exists($value)) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Enum "%s" does not exist.'),
+                static::stringify($value)
+            );
+
+            throw static::createException($value, $message, static::INVALID_ENUM, $propertyPath);
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that the value is a valid backed enum case.
+     *
+     * @param mixed                $value
+     * @param string|callable|null $message
+     * @param string|null $propertyPath
+     *
+     * @psalm-assert class-string $value
+     *
+     * @throws AssertionFailedException
+     */
+    public static function enumCase($value, string $enumClass, $message = null, string $propertyPath = null): bool
+    {
+        static::enumExists($enumClass);
+        static::implementsInterface($enumClass, \BackedEnum::class);
+
+        try {
+            $enumClass::from($value);
+        } catch (\ValueError) {
+            $message = \sprintf(
+                static::generateMessage($message ?: 'Value "%s" is not a valid backing value for enum "%s". Allowed : %s'),
+                static::stringify($value),
+                $enumClass,
+                \implode(
+                    ', ',
+                    \array_map(
+                        function ($case) {
+                            return self::stringify($case->value);
+                        },
+                        $enumClass::cases()
+                    )
+                ),
+            );
+
+            throw static::createException($value, $message, static::INVALID_ENUM_CASE, $propertyPath);
         }
 
         return true;
