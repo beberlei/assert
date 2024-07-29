@@ -195,8 +195,6 @@ class LazyAssertion
     }
 
     /**
-     * @param string $className
-     *
      * @return static
      */
     public function setAssertClass(string $className): LazyAssertion
@@ -211,8 +209,6 @@ class LazyAssertion
     }
 
     /**
-     * @param string $className
-     *
      * @return static
      */
     public function setExceptionClass(string $className): LazyAssertion
