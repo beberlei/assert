@@ -219,7 +219,7 @@ Assertion::ipv6(string $value, int $flag = null);
 Assertion::isArray(mixed $value);
 Assertion::isArrayAccessible(mixed $value);
 Assertion::isCallable(mixed $value);
-Assertion::isCountable(array|Countable|ResourceBundle|SimpleXMLElement $value);
+Assertion::isCountable(mixed $value);
 Assertion::isInstanceOf(mixed $value, string $className);
 Assertion::isJsonString(mixed $value);
 Assertion::isObject(mixed $value);
