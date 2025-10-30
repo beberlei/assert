@@ -1224,6 +1224,13 @@ class AssertTest extends TestCase
         ];
     }
 
+    public function testIsJsonStringNotString()
+    {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionCode(\Assert\Assertion::INVALID_STRING);
+        Assertion::isJsonString(4);
+    }
+
     /**
      * @dataProvider providesValidUuids
      *
