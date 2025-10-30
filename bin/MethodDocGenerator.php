@@ -85,7 +85,7 @@ class MethodDocGenerator
                     }
                 }
 
-                if ($prefix === 'all' && strpos($type, 'null') === false && $parameterIndex === 0) {
+                if (($prefix === 'all' || $prefix === 'some') && strpos($type, 'null') === false && $parameterIndex === 0) {
                     $type = str_replace('|', '[]|', $type).'[]';
                 }
 
@@ -186,6 +186,7 @@ class MethodDocGenerator
 
         $docs = array_merge(
             $this->generateMethodDocs($this->gatherAssertions(), ' * @method static bool %s(%s) %s for all values.', $skipParameterTest, 'all'),
+            $this->generateMethodDocs($this->gatherAssertions(), ' * @method static bool %s(%s) %s for at least one value.', $skipParameterTest, 'some'),
             $this->generateMethodDocs($this->gatherAssertions(), ' * @method static bool %s(%s) %s or that the value is null.', $skipParameterTest, 'nullOr')
         );
 
