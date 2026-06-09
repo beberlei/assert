@@ -1748,7 +1748,7 @@ class Assertion
             (?:/ (?:[\pL\pN\-._\~!$&\'()*+,;=:@]|%%[0-9A-Fa-f]{2})* )*          # a path
             (?:\? (?:[\pL\pN\-._\~!$&\'\[\]()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?   # a query (optional)
             (?:\# (?:[\pL\pN\-._\~!$&\'()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?       # a fragment (optional)
-        $~ixu';
+        $~ixuD';
 
         $pattern = \sprintf($pattern, \implode('|', $protocols));
 
@@ -1775,7 +1775,7 @@ class Assertion
     public static function alnum($value, $message = null, ?string $propertyPath = null): bool
     {
         try {
-            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
+            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)D', $message, $propertyPath);
         } catch (Throwable $e) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.'),
@@ -2004,7 +2004,7 @@ class Assertion
      */
     public static function e164($value, $message = null, ?string $propertyPath = null): bool
     {
-        if (!\preg_match('/^\+?[1-9]\d{1,14}$/', $value)) {
+        if (!\preg_match('/^\+?[1-9]\d{1,14}$/D', $value)) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is not a valid E164.'),
                 static::stringify($value)

@@ -782,6 +782,7 @@ class AssertTest extends TestCase
             ['http://:password@@symfony.com'],
             ['http://username:passwordsymfony.com'],
             ['http://usern@me:password@symfony.com'],
+            ["http://www.google.com\n"],
         ];
     }
 
@@ -896,6 +897,13 @@ class AssertTest extends TestCase
         $this->expectException('Assert\AssertionFailedException');
         $this->expectExceptionCode(\Assert\Assertion::INVALID_ALNUM);
         Assertion::alnum('1a');
+    }
+
+    public function testInvalidAlnumWithTrailingNewline()
+    {
+        $this->expectException('Assert\AssertionFailedException');
+        $this->expectExceptionCode(\Assert\Assertion::INVALID_ALNUM);
+        Assertion::alnum("a1b2c3\n");
     }
 
     public function testValidTrue()
@@ -1306,6 +1314,7 @@ class AssertTest extends TestCase
         return [
             ['+3362652569e'],
             ['+3361231231232652569'],
+            ["+33626525690\n"],
         ];
     }
 
