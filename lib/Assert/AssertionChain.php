@@ -22,7 +22,7 @@ use LogicException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method AssertionChain alnum(string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric.
- * @method AssertionChain base64(string|callable $message = null, string $propertyPath = null) Assert that a constant is defined.
+ * @method AssertionChain base64(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid base64 string.
  * @method AssertionChain between(mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
  * @method AssertionChain betweenExclusive(mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit.
  * @method AssertionChain betweenLength(int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths.
