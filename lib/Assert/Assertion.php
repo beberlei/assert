@@ -31,7 +31,7 @@ use Traversable;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method static bool allAlnum(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for all values.
- * @method static bool allBase64(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
+ * @method static bool allBase64(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid base64 string for all values.
  * @method static bool allBetween(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
  * @method static bool allBetweenExclusive(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
  * @method static bool allBetweenLength(mixed[] $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths for all values.
@@ -120,7 +120,7 @@ use Traversable;
  * @method static bool allVersion(string[] $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
  * @method static bool allWriteable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static bool nullOrAlnum(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
- * @method static bool nullOrBase64(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
+ * @method static bool nullOrBase64(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid base64 string or that the value is null.
  * @method static bool nullOrBetween(mixed|null $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
  * @method static bool nullOrBetweenExclusive(mixed|null $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit or that the value is null.
  * @method static bool nullOrBetweenLength(mixed|null $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths or that the value is null.
@@ -2692,7 +2692,7 @@ class Assertion
     }
 
     /**
-     * Assert that a constant is defined.
+     * Assert that the given string is a valid base64 string.
      *
      * @param string $value
      * @param string|callable|null $message

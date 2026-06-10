@@ -22,7 +22,7 @@ use LogicException;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method LazyAssertion alnum(string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric.
- * @method LazyAssertion base64(string|callable $message = null, string $propertyPath = null) Assert that a constant is defined.
+ * @method LazyAssertion base64(string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid base64 string.
  * @method LazyAssertion between(mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit.
  * @method LazyAssertion betweenExclusive(mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit.
  * @method LazyAssertion betweenLength(int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths.
