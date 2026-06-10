@@ -1974,13 +1974,7 @@ class Assertion
      */
     public static function uuid($value, $message = null, ?string $propertyPath = null): bool
     {
-        $value = \str_replace(['urn:', 'uuid:', '{', '}'], '', $value);
-
-        if ('00000000-0000-0000-0000-000000000000' === $value) {
-            return true;
-        }
-
-        if (!\preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
+        if (!\preg_match('/^(?:urn:)?(?:uuid:)?(\{)?[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}(?(1)\})$/D', $value)) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is not a valid UUID.'),
                 static::stringify($value)
