@@ -1950,6 +1950,8 @@ class Assertion
      */
     public static function isJsonString($value, $message = null, ?string $propertyPath = null): bool
     {
+        static::string($value, $message, $propertyPath);
+
         if (null === \json_decode($value) && JSON_ERROR_NONE !== \json_last_error()) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is not a valid JSON string.'),
