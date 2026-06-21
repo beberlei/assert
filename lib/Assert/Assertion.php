@@ -1857,7 +1857,7 @@ class Assertion
      */
     public static function classExists($value, $message = null, ?string $propertyPath = null): bool
     {
-        if (!\class_exists($value)) {
+        if (!\is_string($value) || !\class_exists($value)) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Class "%s" does not exist.'),
                 static::stringify($value)
