@@ -50,6 +50,18 @@ function thatAll($values, $defaultMessage = null, ?string $defaultPropertyPath =
 }
 
 /**
+ * Start validation on a set of values, requiring at least one of them to be satisfied, returns {@link AssertionChain}.
+ *
+ * @param mixed $values
+ * @param string|callable|null $defaultMessage
+ * @param string $defaultPropertyPath
+ */
+function thatSome($values, $defaultMessage = null, string $defaultPropertyPath = null): AssertionChain
+{
+    return Assert::thatSome($values, $defaultMessage, $defaultPropertyPath);
+}
+
+/**
  * Start validation and allow NULL, returns {@link AssertionChain}.
  *
  * @param mixed $value
