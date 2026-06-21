@@ -440,7 +440,7 @@ class Assertion
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" was not expected to be an element of the values: %s'),
                 static::stringify($value),
-                static::stringify($choices)
+                \implode(', ', \array_map([\get_called_class(), 'stringify'], $choices))
             );
             throw static::createException($value, $message, static::INVALID_VALUE_IN_ARRAY, $propertyPath, ['choices' => $choices]);
         }
