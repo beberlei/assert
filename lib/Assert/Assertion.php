@@ -2396,13 +2396,24 @@ class Assertion
         $dateTime = DateTime::createFromFormat('!'.$format, $value);
 
         if (false === $dateTime || $value !== $dateTime->format($format)) {
-            $message = \sprintf(
-                static::generateMessage($message ?: 'Date "%s" is invalid or does not match format "%s".'),
-                static::stringify($value),
-                static::stringify($format)
-            );
+            // The "!" modifier resets unspecified fields to the Unix epoch
+            // (1970-01-01), which is not a leap year. When the format does not
+            // include a year specifier this causes valid dates such as "29/02"
+            // (format "d/m") to be rejected. Retry by prepending a known leap
+            // year (2000) so that February 29th is validated correctly.
+            if (1 !== preg_match('/[Yyo]/', $format)) {
+                $dateTime = DateTime::createFromFormat('!Y '.$format, '2000 '.$value);
+            }
 
-            throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, ['format' => $format]);
+            if (false === $dateTime || $value !== $dateTime->format($format)) {
+                $message = \sprintf(
+                    static::generateMessage($message ?: 'Date "%s" is invalid or does not match format "%s".'),
+                    static::stringify($value),
+                    static::stringify($format)
+                );
+
+                throw static::createException($value, $message, static::INVALID_DATE, $propertyPath, ['format' => $format]);
+            }
         }
 
         return true;
