@@ -1682,6 +1682,7 @@ class AssertTest extends TestCase
             ['29.02.2012 12:03:36.432563', 'd.m.Y H:i:s.u'],
             ['13.08.2015 17:08:23 Thu Thursday th 224 August Aug 8 15 17 432563 UTC UTC', 'd.m.Y H:i:s D l S z F M n y H u e T'],
             ['1439486158', 'U'],
+            ['29/02', 'd/m'],
         ];
     }
 
@@ -1750,6 +1751,7 @@ class AssertTest extends TestCase
             ['this is not the date', 'Y-m-d'],
             ['2011-02-29', 'Y-m-d'],
             ['2012.02.29 12:60:36.432563', 'Y.m.d H:i:s.u'],
+            ['30/02', 'd/m'],
         ];
     }
 
