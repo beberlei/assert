@@ -1389,7 +1389,8 @@ class Assertion
      */
     public static function notBlank($value, $message = null, ?string $propertyPath = null): bool
     {
-        if (false === $value || (empty($value) && '0' != $value) || (\is_string($value) && '' === \trim($value))) {
+        // PHP 8.6 added "\f" to the default trim() characters, the explicit list keeps the result the same on all versions.
+        if (false === $value || (empty($value) && '0' != $value) || (\is_string($value) && '' === \trim($value, " \n\r\t\v\0"))) {
             $message = \sprintf(
                 static::generateMessage($message ?: 'Value "%s" is blank, but was expected to contain a value.'),
                 static::stringify($value)

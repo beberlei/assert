@@ -662,6 +662,11 @@ class AssertTest extends TestCase
         $this->assertTrue(Assertion::notBlank('foo'));
     }
 
+    public function testFormFeedIsNotBlankOnAllPhpVersions()
+    {
+        $this->assertTrue(Assertion::notBlank("\f"));
+    }
+
     public function testInvalidNotInstanceOf()
     {
         $this->expectException('Assert\AssertionFailedException');

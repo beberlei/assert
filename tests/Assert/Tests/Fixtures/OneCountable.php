@@ -16,7 +16,7 @@ namespace Assert\Tests\Fixtures;
 
 class OneCountable implements \Countable
 {
-    public function count()
+    public function count(): int
     {
         return 1;
     }
