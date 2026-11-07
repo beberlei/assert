@@ -20,6 +20,7 @@ use Countable;
 use DateTime;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionMethod;
 use ResourceBundle;
 use SimpleXMLElement;
 use Throwable;
@@ -2100,6 +2101,25 @@ class Assertion
      */
     public static function __callStatic($method, $args)
     {
+        if (!\array_key_exists(0, $args)) {
+            $assertion = null;
+            if (0 === \strpos($method, 'nullOr')) {
+                $assertion = \substr($method, 6);
+            } elseif (0 === \strpos($method, 'all')) {
+                $assertion = \substr($method, 3);
+            }
+
+            if (null !== $assertion && \method_exists(\get_called_class(), $assertion)) {
+                $parameters = (new ReflectionMethod(\get_called_class(), $assertion))->getParameters();
+                if (isset($parameters[0]) && \array_key_exists($parameters[0]->getName(), $args)) {
+                    $name = $parameters[0]->getName();
+                    $value = $args[$name];
+                    unset($args[$name]);
+                    $args = \array_merge([$value], $args);
+                }
+            }
+        }
+
         if (0 === \strpos($method, 'nullOr')) {
             if (!\array_key_exists(0, $args)) {
                 throw new BadMethodCallException('Missing the first argument.');

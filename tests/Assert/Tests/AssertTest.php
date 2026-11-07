@@ -1070,6 +1070,108 @@ class AssertTest extends TestCase
         Assertion::nullOrMax();
     }
 
+    /**
+     * @dataProvider dataNamedDelegatedArguments
+     */
+    public function testNamedDelegatedArguments($method, array $arguments)
+    {
+        if (\PHP_VERSION_ID < 80000) {
+            $this->markTestSkipped('Named arguments require PHP 8.');
+        }
+
+        $this->assertTrue(\call_user_func_array([Assertion::class, $method], $arguments));
+    }
+
+    public function dataNamedDelegatedArguments(): array
+    {
+        return [
+            ['nullOrString', ['value' => null]],
+            ['nullOrString', ['value' => 'text']],
+            ['nullOrMax', ['maxValue' => 3, 'value' => 2]],
+            ['nullOrCount', ['count' => 2, 'countable' => [1, 2]]],
+            ['nullOrString', ['text', 'propertyPath' => 'name']],
+            ['allString', ['value' => ['first', 'second']]],
+            ['allString', ['value' => []]],
+            ['allMax', ['maxValue' => 3, 'value' => [1, 2]]],
+            ['allCount', ['count' => 2, 'countable' => [[1, 2], [3, 4]]]],
+            ['allString', [['first', 'second'], 'propertyPath' => 'name']],
+            ['allString', ['value' => new ArrayIterator(['first', 'second'])]],
+        ];
+    }
+
+    public function testNamedDelegatedArgumentsPreserveFailureDetails()
+    {
+        if (\PHP_VERSION_ID < 80000) {
+            $this->markTestSkipped('Named arguments require PHP 8.');
+        }
+
+        foreach (['nullOrString' => 1, 'allString' => ['valid', 1]] as $method => $value) {
+            try {
+                \call_user_func_array([Assertion::class, $method], [
+                    'propertyPath' => 'name',
+                    'message' => 'Expected a string',
+                    'value' => $value,
+                ]);
+                $this->fail('Expected the delegated assertion to reject the value.');
+            } catch (AssertionFailedException $exception) {
+                $this->assertSame('Expected a string', $exception->getMessage());
+                $this->assertSame('name', $exception->getPropertyPath());
+                $this->assertSame(1, $exception->getValue());
+            }
+        }
+    }
+
+    public function testNamedDelegatedArgumentsUseSubclassParameterNames()
+    {
+        if (\PHP_VERSION_ID < 80000) {
+            $this->markTestSkipped('Named arguments require PHP 8.');
+        }
+
+        $assertion = new class() extends Assertion {
+            public static function string($text, $message = null, ?string $propertyPath = null): bool
+            {
+                return parent::string($text, $message, $propertyPath);
+            }
+        };
+
+        $this->assertTrue(\call_user_func_array([\get_class($assertion), 'nullOrString'], ['text' => 'valid']));
+        $this->assertTrue(\call_user_func_array([\get_class($assertion), 'allString'], ['text' => ['valid']]));
+    }
+
+    public function testNamedDelegatedArgumentsStillRequireTheValue()
+    {
+        if (\PHP_VERSION_ID < 80000) {
+            $this->markTestSkipped('Named arguments require PHP 8.');
+        }
+
+        $this->expectException('BadMethodCallException');
+        $this->expectExceptionMessage('Missing the first argument.');
+        \call_user_func_array([Assertion::class, 'nullOrString'], ['message' => 'missing']);
+    }
+
+    /**
+     * @dataProvider dataInvalidNamedDelegatedArguments
+     */
+    public function testInvalidNamedDelegatedArguments($method, array $arguments)
+    {
+        if (\PHP_VERSION_ID < 80000) {
+            $this->markTestSkipped('Named arguments require PHP 8.');
+        }
+
+        $this->expectException('Error');
+        \call_user_func_array([Assertion::class, $method], $arguments);
+    }
+
+    public function dataInvalidNamedDelegatedArguments(): array
+    {
+        return [
+            ['nullOrString', ['valid', 'value' => 'duplicate']],
+            ['allString', [['valid'], 'value' => ['duplicate']]],
+            ['nullOrString', ['value' => 'valid', 'unknown' => true]],
+            ['allString', ['value' => ['valid'], 'unknown' => true]],
+        ];
+    }
+
     public function testLength()
     {
         $this->assertTrue(Assertion::length('asdf', 4));
